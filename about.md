@@ -12,7 +12,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ## 🚀 Technical Skills
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
-  <thead style="background-color: #4183C4; color: white;">
+  <thead style="background-color: #c4c2bb; color: white;">
     <tr>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Skill</th>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
@@ -110,6 +110,11 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 📚 Education
 
+### **Master's in Computer Science**
+*Graz University of Technology*  
+📍 Graz, Austria  
+🗓️ 2022 – Present  
+
 ### **Master's in Geodesy**
 *Graz University of Technology*  
 📍 Graz, Austria  
@@ -134,7 +139,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ## 🌍 Languages
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
-  <thead style="background-color: #4183C4; color: white;">
+  <thead style="background-color: #c4c2bb; color: white;">
     <tr>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Language</th>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
