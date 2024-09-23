@@ -23,36 +23,36 @@ layout: default
     color: #000;                 /* Changes text color on hover */
   }
 
-  /* Flexbox container to align categories to the right above the title */
-  .post-header {
-    display: flex;
-    justify-content: space-between;  /* Align title on the left and categories on the right */
-    align-items: flex-start;
-    margin-bottom: 20px;             /* Adds space below the header */
+  /* Style the container holding the categories */
+  .post-categories {
+    text-align: right;     /* Align categories to the right */
+    margin-bottom: 10px;   /* Adds space between the categories and the title */
   }
 
-  .post-categories {
-    margin-top: 10px;                /* Adjust space between categories and title */
+  /* Adds spacing between the title and categories to prevent overlap */
+  h1 {
+    margin-top: 20px;      /* Adds more space above the title */
+    font-size: 30px;
   }
 </style>
 
 <article class="post">
-  <!-- Flexbox container to align categories to the right -->
-  <div class="post-header">
-    <h1>{{ page.title }}</h1>
-    <div class="post-categories">
-      Category: 
-      {% if post %}
-        {% assign categories = post.categories %}
-      {% else %}
-        {% assign categories = page.categories %}
-      {% endif %}
-      {% for category in categories %}
-      <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
-      {% unless forloop.last %}{% endunless %}
-      {% endfor %}
-    </div>
+  <!-- Post Categories positioned above the title -->
+  <div class="post-categories">
+    Category: 
+    {% if post %}
+      {% assign categories = post.categories %}
+    {% else %}
+      {% assign categories = page.categories %}
+    {% endif %}
+    {% for category in categories %}
+    <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
+    {% unless forloop.last %}{% endunless %}
+    {% endfor %}
   </div>
+
+  <!-- Title and content -->
+  <h1>{{ page.title }}</h1>
 
   <div class="entry">
     {{ content }}
@@ -64,5 +64,3 @@ layout: default
 
   {% include disqus.html %}
 </article>
-
-
