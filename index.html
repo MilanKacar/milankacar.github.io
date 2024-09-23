@@ -42,15 +42,16 @@ layout: default
 
       <h1>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+       </h1>
         {% if post.categories %}
           {% for category in post.categories %}
             <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">
               {{category}}
             </a>
-            {% unless forloop.last %}, {% endunless %}
+            {% unless forloop.last %}{% endunless %}
           {% endfor %}
         {% endif %}
-      </h1>
+     
 
       <div class="entry">
         {{ post.excerpt }}
