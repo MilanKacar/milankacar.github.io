@@ -16,15 +16,15 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 | Skill                    | Proficiency        | Skill                    | Proficiency        |
 | ------------------------ | ------------------ | ------------------------ | ------------------ |
-| Python                   | 🟢🟢🟢🟢🟢            | PostgreSQL               | 🟢🟢🟢🟢🟢            |
-| Google Cloud             | 🟢🟢🟢🟢🟢            | MySQL                    | 🟢🟢🟢🟢🟢            |
-| C/C++                    | 🟢🟢🟢🟢🟢            | JavaScript               | 🟢🟢🟢🟢🟢            |
-| GIS                      | 🟢🟢🟢🟢🟢            | PHP                      | 🟢🟢🟢🟢🟢            |
-| Cloud Computing          | 🟢🟢🟢🟢🟢            | Linux                    | 🟢🟢🟢🟢🟢            |
-| GNSS & Signal Processing  | 🟢🟢🟢🟢🟢            | Docker                   | 🟢🟢🟢🟢🟢            |
-| Java                     | 🟢🟢🟢🟢🟢            | Apache Spark             | 🟢🟢🟢🟢🟢            |
-| Data Structures & Algos   | 🟢🟢🟢🟢🟢            | Scala                    | 🟢🟢🟢🟢🟢            |
-| R                        | 🟢🟢🟢🟢🟢            | Navigation               | 🟢🟢🟢🟢🟢            |
+| Python                   | 🟢🟢🟢🟢🟢            |   PostgreSQL               | 🟢🟢🟢🟢🟢            |
+| Google Cloud             | 🟢🟢🟢🟢🟢            |   MySQL                    | 🟢🟢🟢🟢🟢            |
+| C/C++                    | 🟢🟢🟢🟢🟢            |   JavaScript               | 🟢🟢🟢🟢🟢            |
+| GIS                      | 🟢🟢🟢🟢🟢            |   PHP                      | 🟢🟢🟢🟢🟢            |
+| Cloud Computing          | 🟢🟢🟢🟢🟢            |   Linux                    | 🟢🟢🟢🟢🟢            |
+| GNSS & Signal Processing  | 🟢🟢🟢🟢🟢            |   Docker                   | 🟢🟢🟢🟢🟢            |
+| Java                     | 🟢🟢🟢🟢🟢            |   Apache Spark             | 🟢🟢🟢🟢🟢            |
+| Data Structures & Algos   | 🟢🟢🟢🟢🟢            |   Scala                    | 🟢🟢🟢🟢🟢            |
+| R                        | 🟢🟢🟢🟢🟢            |   Navigation               | 🟢🟢🟢🟢🟢            |
 
 ---
 
@@ -80,10 +80,11 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ---
 
 ## 🌍 Languages
-- **Serbian, Croatian, Bosnian**: 🟢🟢🟢🟢🟢
-- **English**: 🟢🟢🟢🟢🟢
-- **German**: 🟢🟢🟢🟢🟢
-- **Russian**: 🟢🟢🟢🟢🟢
+| ------------------------ | ------------------ |
+| **Serbian, Croatian, Bosnian**  | 🟢🟢🟢🟢🟢            |
+| **English**  | 🟢🟢🟢🟢🟢            |
+| **German**   | 🟢🟢🟢🟢🟢            |
+| **Russian**  | 🟢🟢🟢🟢🟢            |
 
 ---
 
