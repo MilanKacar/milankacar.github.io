@@ -14,17 +14,69 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 🚀 Technical Skills
 
-| Skill                    | Proficiency        | Skill                    | Proficiency        |
-| ------------------------ | ------------------ | ------------------------ | ------------------ |
-| Python                   | 🟢🟢🟢🟢🟢            |   PostgreSQL               | 🟢🟢🟢🟢🟢            |
-| Google Cloud             | 🟢🟢🟢🟢🟢            |   MySQL                    | 🟢🟢🟢🟢🟢            |
-| C/C++                    | 🟢🟢🟢🟢🟢            |   JavaScript               | 🟢🟢🟢🟢🟢            |
-| GIS                      | 🟢🟢🟢🟢🟢            |   PHP                      | 🟢🟢🟢🟢🟢            |
-| Cloud Computing          | 🟢🟢🟢🟢🟢            |   Linux                    | 🟢🟢🟢🟢🟢            |
-| GNSS & Signal Processing  | 🟢🟢🟢🟢🟢            |   Docker                   | 🟢🟢🟢🟢🟢            |
-| Java                     | 🟢🟢🟢🟢🟢            |   Apache Spark             | 🟢🟢🟢🟢🟢            |
-| Data Structures & Algos   | 🟢🟢🟢🟢🟢            |   Scala                    | 🟢🟢🟢🟢🟢            |
-| R                        | 🟢🟢🟢🟢🟢            |   Navigation               | 🟢🟢🟢🟢🟢            |
+<table style="border-collapse: collapse; width: 100%;">
+  <tr>
+    <th style="border: 1px solid black; padding: 8px;">Skill</th>
+    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
+    <th style="border: 1px solid black; padding: 8px;">Skill</th>
+    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">Python</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">PostgreSQL</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">Google Cloud</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">MySQL</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">C/C++</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">JavaScript</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">GIS</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">PHP</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">Cloud Computing</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">Linux</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">GNSS & Signal Processing</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">Docker</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">Java</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">Apache Spark</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">Data Structures & Algos</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">Scala</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;">R</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">Navigation</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+</table>
+
 
 ---
 
@@ -80,11 +132,14 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ---
 
 ## 🌍 Languages
-| ------------------------ | ------------------ |
+
+| Language                      | Proficiency        |
+| ------------------------------ | ------------------ |
 | **Serbian, Croatian, Bosnian**  | 🟢🟢🟢🟢🟢            |
-| **English**  | 🟢🟢🟢🟢🟢            |
-| **German**   | 🟢🟢🟢🟢🟢            |
-| **Russian**  | 🟢🟢🟢🟢🟢            |
+| **English**                    | 🟢🟢🟢🟢🟢            |
+| **German**                     | 🟢🟢🟢🟢🟢            |
+| **Russian**                    | 🟢🟢           |
+
 
 ---
 
