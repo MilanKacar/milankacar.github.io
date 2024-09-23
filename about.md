@@ -37,13 +37,13 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
     <td style="border: 1px solid black; padding: 8px;">C/C++</td>
     <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
     <td style="border: 1px solid black; padding: 8px;">JavaScript</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢</td>
   </tr>
   <tr>
     <td style="border: 1px solid black; padding: 8px;">GIS</td>
     <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
     <td style="border: 1px solid black; padding: 8px;">PHP</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢</td>
   </tr>
   <tr>
     <td style="border: 1px solid black; padding: 8px;">Cloud Computing</td>
@@ -59,7 +59,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
   </tr>
   <tr>
     <td style="border: 1px solid black; padding: 8px;">Java</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢</td>
     <td style="border: 1px solid black; padding: 8px;">Apache Spark</td>
     <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
   </tr>
@@ -67,7 +67,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
     <td style="border: 1px solid black; padding: 8px;">Data Structures & Algos</td>
     <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
     <td style="border: 1px solid black; padding: 8px;">Scala</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢</td>
   </tr>
   <tr>
     <td style="border: 1px solid black; padding: 8px;">R</td>
@@ -133,13 +133,28 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 🌍 Languages
 
-| Language                      | Proficiency        |
-| ------------------------------ | ------------------ |
-| **Serbian, Croatian, Bosnian**  | 🟢🟢🟢🟢🟢            |
-| **English**                    | 🟢🟢🟢🟢🟢            |
-| **German**                     | 🟢🟢🟢🟢🟢            |
-| **Russian**                    | 🟢🟢           |
-
+<table style="border-collapse: collapse; width: 100%;">
+  <tr>
+    <th style="border: 1px solid black; padding: 8px;">Language</th>
+    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;"><strong>Serbian, Croatian, Bosnian</strong></td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;"><strong>English</strong></td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;"><strong>German</strong></td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 8px;"><strong>Russian</strong></td>
+    <td style="border: 1px solid black; padding: 8px;">🟢🟢</td>
+  </tr>
+</table>
 
 ---
 
