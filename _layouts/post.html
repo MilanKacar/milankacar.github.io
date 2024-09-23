@@ -3,65 +3,57 @@ layout: default
 ---
 
 <style>
-  /* Style for the category tags */
   .category-tag {
     display: inline-block;
     padding: 8px 12px;
     background: linear-gradient(white, white) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box;
-    border: 2px solid transparent;
-    border-radius: 50px;
+                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
+    border: 2px solid transparent; /* Transparent border to allow background gradient */
+    border-radius: 50px;    /* Full rounded corners */
     font-size: 16px;
-    color: #333;
+    color: #333;           /* Text color */
     text-align: center;
-    text-decoration: none;
+    text-decoration: none; /* Removes underline from the link */
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
   }
 
   .category-tag:hover {
-    background-color: #e0f7e9;
-    color: #000;
+    background-color: #e0f7e9;   /* Light green background on hover */
+    color: #000;                 /* Changes text color on hover */
   }
 
-  /* Category section positioned on the left */
+  /* Flexbox container to align categories to the right above the title */
+  .post-header {
+    display: flex;
+    justify-content: space-between;  /* Align title on the left and categories on the right */
+    align-items: flex-start;
+    margin-bottom: 20px;             /* Adds space below the header */
+  }
+
   .post-categories {
-    position: fixed;       /* Fixes it on the screen */
-    top: 100px;            /* Adjust this value to move it vertically */
-    left: 20px;            /* Distance from the left side of the window */
-    width: 180px;          /* Width of the category section */
-    padding: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;   /* Rounded container */
-  }
-
-  /* Optional: Make it responsive */
-  @media (max-width: 768px) {
-    .post-categories {
-      position: static;
-      width: auto;
-      margin-bottom: 20px;
-    }
+    margin-top: 10px;                /* Adjust space between categories and title */
   }
 </style>
 
-
 <article class="post">
-  <div class="post-categories" style="float: right;">
-    Category: 
-    {% if post %}
-      {% assign categories = post.categories %}
-    {% else %}
-      {% assign categories = page.categories %}
-    {% endif %}
-    {% for category in categories %}
-    <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
-    {% unless forloop.last %}{% endunless %}
-    {% endfor %}
+  <!-- Flexbox container to align categories to the right -->
+  <div class="post-header">
+    <h1>{{ page.title }}</h1>
+    <div class="post-categories">
+      Category: 
+      {% if post %}
+        {% assign categories = post.categories %}
+      {% else %}
+        {% assign categories = page.categories %}
+      {% endif %}
+      {% for category in categories %}
+      <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
+      {% unless forloop.last %}{% endunless %}
+      {% endfor %}
+    </div>
   </div>
-  <br>
-  <h1>{{ page.title }}</h1>
+
   <div class="entry">
     {{ content }}
   </div>
