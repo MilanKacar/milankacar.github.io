@@ -46,7 +46,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
       <td style="border: 1px solid #ddd; padding: 12px;">GIS</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">PHP</td>
-      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢</td>
     </tr>
     <tr style="background-color: #f9f9f9;">
       <td style="border: 1px solid #ddd; padding: 12px;">Cloud Computing</td>
@@ -62,7 +62,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
     </tr>
     <tr style="background-color: #f9f9f9;">
       <td style="border: 1px solid #ddd; padding: 12px;">Java</td>
-      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Apache Spark</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
@@ -70,7 +70,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
       <td style="border: 1px solid #ddd; padding: 12px;">Data Structures & Algos</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Scala</td>
-      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢</td>
     </tr>
     <tr style="background-color: #f9f9f9;">
       <td style="border: 1px solid #ddd; padding: 12px;">R</td>
