@@ -6,36 +6,26 @@ categories: Math Finance
 
 # 📊 Understanding Matrices, Eigenvalues, and Singular Value Decomposition (SVD)
 
-Matrices, Eigenvalues, and Singular Value Decomposition (SVD) are fundamental concepts in linear algebra, with applications ranging from data science to machine learning, physics, finance, and beyond. In this post, we'll break down these topics in a beginner-friendly way, explaining what they are, how they work, and why they're important. By the end, you'll have a solid foundation to build on for more advanced topics. 🎓
-
 ## 1. 🟦 Matrices and Their Operations
 
 ### What is a Matrix? 🤔
-A **matrix** is a way to organize numbers in a rectangular grid format. The numbers are arranged in rows and columns, and each number in the matrix is called an **element**. Think of a matrix like a table where the rows represent one dimension, and the columns represent another.
+A **matrix** is a way to organize numbers in a rectangular grid format. Each number in the matrix is called an **element**. For example, here's a **2x3 matrix** (2 rows and 3 columns):
 
-For example, here's a **2x3 matrix** (2 rows and 3 columns):
-
-\[
+$$[
 \begin{pmatrix}
 1 & 2 & 3 \\
 4 & 5 & 6
 \end{pmatrix}
-\]
-
-Each element can be referred to by its position, like in a spreadsheet. In this case, the number in the first row and second column is 2.
-
-### Why Are Matrices Important? 🌍
-Matrices are incredibly useful for solving systems of equations, representing datasets, performing transformations (rotations, scaling, etc.), and much more. In computer science, they are widely used in machine learning models and graphics rendering, while in finance, matrices help model portfolios, stocks, or any financial system with multiple variables.
+$$]
 
 ### Basic Matrix Operations 🧮
-There are a few operations you can perform on matrices to manipulate them.
 
 #### ➕ Matrix Addition and Subtraction
-You can **add** or **subtract** two matrices, but only if they have the same size (i.e., the same number of rows and columns). You simply add or subtract corresponding elements.
+You can **add** or **subtract** two matrices if they have the same size (i.e., the same number of rows and columns). You add or subtract corresponding elements.
 
 For example:
 
-\[
+$$
 \begin{pmatrix}
 1 & 2 \\
 3 & 4
@@ -50,12 +40,10 @@ For example:
 6 & 8 \\
 10 & 12
 \end{pmatrix}
-\]
+$$
 
 #### ✖️ Scalar Multiplication
-In **scalar multiplication**, you multiply every element of the matrix by a single number (the scalar).
-
-For example, multiplying a matrix by 2:
+In **scalar multiplication**, you multiply every element of the matrix by a single number (the scalar). For example:
 
 \[
 2 \times
@@ -71,7 +59,7 @@ For example, multiplying a matrix by 2:
 \]
 
 #### 🤯 Matrix Multiplication
-This operation is a bit more complicated but extremely useful. You can multiply two matrices together if the number of columns in the first matrix matches the number of rows in the second matrix. The resulting matrix is formed by multiplying the rows of the first matrix by the columns of the second matrix.
+Matrix multiplication is more complicated but extremely useful. You can multiply two matrices if the number of columns in the first matrix equals the number of rows in the second matrix. The resulting matrix is calculated by multiplying rows from the first matrix by columns of the second matrix.
 
 For example:
 
@@ -97,13 +85,8 @@ For example:
 \end{pmatrix}
 \]
 
-Matrix multiplication is fundamental in many fields. For example:
-
-- **Finance** 💰: Portfolio management uses matrices to calculate the performance of multiple investments over time, adjusting weights or values as the portfolio evolves.
-- **Computer Science** 💻: Matrix multiplication is the backbone of neural networks, where layers of neurons are connected via weights (which are stored in matrices), and each forward pass through the network involves matrix operations.
-
 #### 🔄 Transpose of a Matrix
-The **transpose** of a matrix is found by flipping the matrix over its diagonal. This means rows become columns and vice versa.
+The **transpose** of a matrix flips the matrix over its diagonal. This means rows become columns and vice versa.
 
 For example:
 
@@ -121,17 +104,49 @@ For example:
 \end{pmatrix}
 \]
 
-The transpose is useful in many mathematical operations, particularly when working with dot products, projections, and orthogonal transformations.
-
 ---
 
 ## 2. 🔍 Eigenvalues and Eigenvectors
 
 ### What Are Eigenvalues and Eigenvectors? 🎯
 
-In simple terms, **eigenvalues** and **eigenvectors** help us understand how matrices act on vectors (arrows that have both a direction and magnitude). 
+Eigenvalues and eigenvectors help us understand how matrices act on vectors. An **eigenvector** is a vector that, when multiplied by a matrix, only gets scaled and doesn't change direction. The scalar value that represents this scaling is the **eigenvalue**.
 
-Imagine you have a matrix that represents some kind of transformation. For most vectors, when you apply the matrix, the vector changes both in direction and length. But **eigenvectors** are special vectors that only get **stretched or shrunk** when you apply the matrix, without changing direction. The amount they get stretched or shrunk by is the **eigenvalue**.
+For a matrix \( A \), if \( v \) is an eigenvector and \( \lambda \) is its corresponding eigenvalue, the following holds:
 
-So, for a given matrix \( A \), if \( v \) is an eigenvector and
+\[
+A \times v = \lambda \times v
+\]
 
+This means that multiplying \( A \) by \( v \) gives the same result as multiplying \( v \) by \( \lambda \).
+
+---
+
+## 3. 🧑‍💻 Singular Value Decomposition (SVD)
+
+### What is Singular Value Decomposition? 💾
+
+Singular Value Decomposition (SVD) is a matrix factorization technique. It decomposes any matrix \( A \) into three simpler matrices:
+
+\[
+A = U \times \Sigma \times V^T
+\]
+
+Where:
+- \( U \) and \( V \) are orthonormal matrices,
+- \( \Sigma \) is a diagonal matrix containing the singular values of \( A \).
+
+---
+
+### How to Write Mathematical Formulas 📐
+
+To include mathematical formulas with MathJax in Markdown, use the following syntax:
+
+- For an **inline equation**: `$$ V_{sphere} = \frac{4}{3}\pi r^3 $$` will render as \( V_{sphere} = \frac{4}{3}\pi r^3 \).
+  
+- For a **display-style equation**:
+
+```md
+\[
+V_{sphere} = \frac{4}{3}\pi r^3
+\]
