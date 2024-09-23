@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Welcome to My Journey 🚀
-categories: Tech
+categories: Personal Development
 ---
 
 Hello, and welcome to my blog! 🎉 I’m excited to take you through my life journey, not just the professional side of things but also the passions and projects that keep me motivated outside of work. 🌱
