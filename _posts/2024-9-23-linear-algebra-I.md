@@ -193,7 +193,7 @@ Where:
 SVD breaks down any matrix into three components:
 1. **U**: A set of orthogonal vectors that represent the directions in the original space.
 2. **$$ \Sigma $$**: The diagonal matrix of singular values, represents how much the data is stretched or compressed along each direction.
-3. **V^T**: Another set of orthogonal vectors, but for the transformed space.
+3. **$$V^T$$**: Another set of orthogonal vectors, but for the transformed space.
 
 Even though the matrix $$ A $$ might not have an intuitive geometric interpretation (e.g., it’s not a square matrix), SVD gives us a way to break it down into a rotation, a scaling, and another rotation.
 
