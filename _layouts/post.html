@@ -38,7 +38,7 @@ layout: default
     {% endif %}
     {% for category in categories %}
     <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
-    {% unless forloop.last %}&nbsp;{% endunless %}
+    {% unless forloop.last %}{% endunless %}
     {% endfor %}
   </div>
 
