@@ -14,69 +14,72 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 🚀 Technical Skills
 
-<table style="border-collapse: collapse; width: 100%;">
-  <tr>
-    <th style="border: 1px solid black; padding: 8px;">Skill</th>
-    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
-    <th style="border: 1px solid black; padding: 8px;">Skill</th>
-    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">Python</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">PostgreSQL</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">Google Cloud</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">MySQL</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">C/C++</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">JavaScript</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">GIS</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">PHP</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">Cloud Computing</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">Linux</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">GNSS & Signal Processing</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">Docker</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">Java</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">Apache Spark</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">Data Structures & Algos</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">Scala</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;">R</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-    <td style="border: 1px solid black; padding: 8px;">Navigation</td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
+<table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
+  <thead style="background-color: #4CAF50; color: white;">
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Skill</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Skill</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">Python</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">PostgreSQL</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 12px;">Google Cloud</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">MySQL</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">C/C++</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">JavaScript</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 12px;">GIS</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">PHP</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">Cloud Computing</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Linux</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 12px;">GNSS & Signal Processing</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Docker</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">Java</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Apache Spark</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 12px;">Data Structures & Algos</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Scala</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">R</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Navigation</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+  </tbody>
 </table>
-
 
 ---
 
