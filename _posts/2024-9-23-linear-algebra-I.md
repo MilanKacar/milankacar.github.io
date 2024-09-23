@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#1 Linear Algebra 🚀"
+title: "#1 Linear Algebra ako te voli isto isto kao ja srecan ti put ja nisam ljut 🚀"
 categories: Math Finance
 ---
 
