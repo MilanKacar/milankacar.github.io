@@ -131,13 +131,13 @@ In simple terms, **eigenvalues** and **eigenvectors** help us understand how mat
 
 Imagine you have a matrix that represents some kind of transformation. For most vectors, when you apply the matrix, the vector changes both in direction and length. But **eigenvectors** are special vectors that only get **stretched or shrunk** when you apply the matrix, without changing direction. The amount they get stretched or shrunk by is the **eigenvalue**.
 
-So, for a given matrix \( A \), if \( v \) is an eigenvector and \( \lambda \) is its corresponding eigenvalue, the following holds:
+So, for a given matrix $$ A $$, if $$ v $$ is an eigenvector and $$ \lambda $$ is its corresponding eigenvalue, the following holds:
 
 $$
 A \times v = \lambda \times v
 $$
 
-This equation means that multiplying \( A \) by \( v \) gives the same result as multiplying \( v \) by \( \lambda \) (the eigenvalue). The matrix transforms the eigenvector by scaling it.
+This equation means that multiplying $$ A $$ by $$ v $$ gives the same result as multiplying $$ v $$ by $$ \lambda $$ (the eigenvalue). The matrix transforms the eigenvector by scaling it.
 
 ### Why Are Eigenvalues and Eigenvectors Important? 💡
 
@@ -153,16 +153,16 @@ Google's PageRank algorithm, which was crucial in its early success, uses the ei
 
 ### 📊 Diagonalization
 
-One of the most powerful uses of eigenvalues and eigenvectors is in **diagonalizing** matrices. A matrix \( A \) is **diagonalizable** if it can be broken down into three simpler matrices:
+One of the most powerful uses of eigenvalues and eigenvectors is in **diagonalizing** matrices. A matrix $$ A $$ is **diagonalizable** if it can be broken down into three simpler matrices:
 
 $$
 A = U \times D \times U^{-1}
 $$
 
 Where:
-- \( U \) is a matrix whose columns are the eigenvectors of \( A \),
-- \( D \) is a diagonal matrix with the eigenvalues of \( A \) on the diagonal,
-- \( U^{-1} \) is the inverse of \( U \).
+- $$ U $$ is a matrix whose columns are the eigenvectors of $$ A $$,
+- $$ D $$ is a diagonal matrix with the eigenvalues of $$ A $$ on the diagonal,
+- $$ U^{-1} $$ is the inverse of $$ U $$.
 
 Diagonalizing a matrix makes it much easier to work with because diagonal matrices are simpler to manipulate. For example, raising a diagonal matrix to a power is just raising the diagonal elements to that power, rather than performing full matrix multiplication.
 
@@ -184,18 +184,18 @@ A = U \times \Sigma \times V^T
 $$
 
 Where:
-- \( A \) is the matrix you want to decompose,
-- \( U \) and \( V \) are orthonormal matrices (like "rotation" matrices, defining new directions),
-- \( \Sigma \) is a diagonal matrix containing the **singular values** of \( A \) (these are similar to eigenvalues).
+- $$ A $$ is the matrix you want to decompose,
+- $$ U $$ and $$ V $$ are orthonormal matrices (like "rotation" matrices, defining new directions),
+- $$ \Sigma $$ is a diagonal matrix containing the **singular values** of $$ A $$ (these are similar to eigenvalues).
 
 ### How Does SVD Work? 🔧
 
 SVD breaks down any matrix into three components:
 1. **U**: A set of orthogonal vectors that represent the directions in the original space.
-2. **\( \Sigma \)**: The diagonal matrix of singular values, represents how much the data is stretched or compressed along each direction.
+2. **$$ \Sigma $$**: The diagonal matrix of singular values, represents how much the data is stretched or compressed along each direction.
 3. **V^T**: Another set of orthogonal vectors, but for the transformed space.
 
-Even though the matrix \( A \) might not have an intuitive geometric interpretation (e.g., it’s not a square matrix), SVD gives us a way to break it down into a rotation, a scaling, and another rotation.
+Even though the matrix $$ A $$ might not have an intuitive geometric interpretation (e.g., it’s not a square matrix), SVD gives us a way to break it down into a rotation, a scaling, and another rotation.
 
 ### Why Is SVD Important? 🚀
 
@@ -209,7 +209,7 @@ Recommendation systems like those used by Netflix and Amazon often rely on SVD t
 
 ### Example: Image Compression Using SVD 📸
 
-Let’s say you have an image represented as a matrix of pixel intensities. You can apply SVD to this matrix to decompose it into \( U \), \( \Sigma \), and \( V^T \). By keeping only the largest singular values in \( \Sigma \), you can recreate an approximation of the original image, but with a smaller matrix. This process is used in **image compression**, allowing you to store images using less space while retaining most of the important visual information.
+Let’s say you have an image represented as a matrix of pixel intensities. You can apply SVD to this matrix to decompose it into $$ U $$, $$ \Sigma $$, and $$ V^T $$. By keeping only the largest singular values in $$ \Sigma $$, you can recreate an approximation of the original image, but with a smaller matrix. This process is used in **image compression**, allowing you to store images using less space while retaining most of the important visual information.
 
 ### How Does SVD Compare to Eigenvalue Decomposition? 🆚
 
