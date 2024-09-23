@@ -8,7 +8,7 @@ permalink: /about/
 ## 👨‍💻 About Me
 I am a Vienna-based **Software Engineer** and **Survey Engineer** with over 5 years of professional experience. I hold a degree in **Geodesy** from *Graz University of Technology*, where I contributed as a project and teaching assistant. Currently, I work in the e-commerce and fintech sectors as a **Data Scientist, Engineer, and Analyst** at *Niceshops GmbH* and *Gateway Ventures GmbH*.
 
-Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school with a focus on advanced studies in **Mathematics, Logic, and Physics**.
+Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school focusing on advanced studies in **Mathematics, Logic, and Physics**.
 
 ---
 
@@ -75,7 +75,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 - **Pollen Tree Detector**: Automated tree identification using satellite images.  
 - **Stock Prices Predictor**: AI and ML-driven market fluctuation analysis.  
 - **Various GNSS Signal Processing Projects**: Focused on GNSS signals.  
-- **Kalman Filter and Advanced Kalman Filter**: Indoor navigation projects.  
+- **Kalman Filter and Advanced Kalman Filter**: Indoor navigation projects.
 
 ---
 
@@ -103,4 +103,4 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ### Contact me
 
-[email@domain.com](mailto:milankacar@live.com)
+[milankacar@live.com](mailto:milankacar@live.com)
