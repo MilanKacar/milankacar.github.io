@@ -3,25 +3,46 @@ layout: default
 ---
 
 <style>
+  /* Style for the category tags */
   .category-tag {
     display: inline-block;
     padding: 8px 12px;
     background: linear-gradient(white, white) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
-    border: 2px solid transparent; /* Transparent border to allow background gradient */
-    border-radius: 50px;    /* Full rounded corners */
+                linear-gradient(45deg, #ff7e5f, #feb47b) border-box;
+    border: 2px solid transparent;
+    border-radius: 50px;
     font-size: 16px;
-    color: #333;           /* Text color */
+    color: #333;
     text-align: center;
-    text-decoration: none; /* Removes underline from the link */
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
-
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .category-tag:hover {
-    background-color: #e0f7e9;   /* Light green background on hover */
-    color: #000;                 /* Changes text color on hover */
+    background-color: #e0f7e9;
+    color: #000;
+  }
+
+  /* Category section positioned on the left */
+  .post-categories {
+    position: fixed;       /* Fixes it on the screen */
+    top: 100px;            /* Adjust this value to move it vertically */
+    left: 20px;            /* Distance from the left side of the window */
+    width: 180px;          /* Width of the category section */
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;   /* Rounded container */
+  }
+
+  /* Optional: Make it responsive */
+  @media (max-width: 768px) {
+    .post-categories {
+      position: static;
+      width: auto;
+      margin-bottom: 20px;
+    }
   }
 </style>
 
