@@ -133,28 +133,33 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 🌍 Languages
 
-<table style="border-collapse: collapse; width: 100%;">
-  <tr>
-    <th style="border: 1px solid black; padding: 8px;">Language</th>
-    <th style="border: 1px solid black; padding: 8px;">Proficiency</th>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;"><strong>Serbian, Croatian, Bosnian</strong></td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;"><strong>English</strong></td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;"><strong>German</strong></td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢🟢🟢🟢</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black; padding: 8px;"><strong>Russian</strong></td>
-    <td style="border: 1px solid black; padding: 8px;">🟢🟢</td>
-  </tr>
+<table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid black; padding: 12px; text-align: left;">Language</th>
+      <th style="border: 1px solid black; padding: 12px; text-align: left;">Proficiency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid black; padding: 12px;"><strong>Serbian, Croatian, Bosnian</strong></td>
+      <td style="border: 1px solid black; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 12px;"><strong>English</strong></td>
+      <td style="border: 1px solid black; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 12px;"><strong>German</strong></td>
+      <td style="border: 1px solid black; padding: 12px;">🟢🟢🟢🟢🟢</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 12px;"><strong>Russian</strong></td>
+      <td style="border: 1px solid black; padding: 12px;">🟢🟢</td>
+    </tr>
+  </tbody>
 </table>
+
 
 ---
 
