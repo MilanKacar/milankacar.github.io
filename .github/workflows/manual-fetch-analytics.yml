@@ -21,37 +21,30 @@ jobs:
           npm install googleapis@105 @google-cloud/local-auth@2.1.0 --save
           npm install @google-analytics/data
 
-      - name: Fetch Google Analytics 4 Data
+      - name: Set Google Credentials
         env:
-          GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
-          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
         run: |
-          if [ -z "$GA_SERVICE_ACCOUNT_KEY" ]; then
-            echo "GA_SERVICE_ACCOUNT_KEY is empty"
-            exit 1
-          fi
-          
-          echo "$GA_SERVICE_ACCOUNT_KEY" > service-account.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" > service-account.json
           
           # Ensure the JSON is valid
           if ! cat service-account.json | jq empty; then
             echo "Invalid JSON in GA_SERVICE_ACCOUNT_KEY"
             exit 1
           fi
-
+          
+      - name: Fetch Google Analytics 4 Data
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: service-account.json
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
+        run: |
           node -e "
           const fs = require('fs');
           const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
-          const CREDENTIALS_PATH = 'service-account.json';
-
-          // Load credentials from service account JSON file
-          const content = fs.readFileSync(CREDENTIALS_PATH, {encoding:'utf8', flag:'r'});
-          const keys = JSON.parse(content);
+          const analyticsDataClient = new BetaAnalyticsDataClient();
 
           async function runReport(propertyId) {
-              const analyticsDataClient = new BetaAnalyticsDataClient({credentials: keys});
-
               try {
                   const [response] = await analyticsDataClient.runReport({
                       property: 'properties/' + propertyId,
