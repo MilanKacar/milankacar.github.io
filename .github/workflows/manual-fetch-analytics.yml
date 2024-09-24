@@ -73,6 +73,7 @@ jobs:
           rm service-account.json  # Remove the service account file after use
 
 
+
       - name: Commit updated data
         run: |
           git config --global user.name "MilanKacar"
