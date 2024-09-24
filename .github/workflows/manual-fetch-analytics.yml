@@ -57,7 +57,12 @@ jobs:
       - name: Commit updated data
         run: |
           git config --global user.name "MilanKacar"
-          git config --global user.email "milankacar@live.com"
-          git add visits.json
-          git commit -m "Update visit count"
-          git push
+          git config --global user.email "actions@github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add visits.json
+            git commit -m "Update visit count"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
