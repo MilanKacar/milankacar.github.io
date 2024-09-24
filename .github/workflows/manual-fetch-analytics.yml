@@ -1,6 +1,5 @@
-name: Fetch Google Analytics Data (Manual)
+name: Fetch Google Analytics Data (GA4)
 
-# This allows the workflow to be triggered manually from the GitHub Actions tab.
 on:
   workflow_dispatch:
 
@@ -18,7 +17,9 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install googleapis
+        run: |
+          npm install googleapis@105 @google-cloud/local-auth@2.1.0 --save
+          npm install @google-analytics/data
 
       - name: Fetch Google Analytics 4 Data
         env:
@@ -27,52 +28,51 @@ jobs:
         run: |
           echo "$GA_SERVICE_ACCOUNT_KEY" > service-account.json
           node -e "
-          const { google } = require('googleapis');
           const fs = require('fs');
-          async function fetchGA4Data() {
-            const auth = new google.auth.GoogleAuth({
-              keyFile: 'service-account.json',
-              scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
-            });
-            const analyticsdata = google.analyticsdata('v1beta');
+          const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
-            try {
-              // Send a request to the GA4 Data API to retrieve activeUsers
-              const response = await analyticsdata.properties.runReport({
-                property: 'properties/' + process.env.GA_PROPERTY_ID,  // Correct property path
-                requestBody: {
-                  dimensions: [{ name: 'date' }],
-                  metrics: [{ name: 'activeUsers' }],
-                  dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }]
-                }
-              });
+          const CREDENTIALS_PATH = 'service-account.json';
 
-              // Extract the activeUsers data from the response
-              const activeUsers = response.data.rows.map(row => ({
-                date: row.dimensionValues[0].value,
-                activeUsers: row.metricValues[0].value,
-              }));
+          // Load credentials from service account JSON file
+          const content = fs.readFileSync(CREDENTIALS_PATH, {encoding:'utf8', flag:'r'});
+          const keys = JSON.parse(content);
 
-              // Print the fetched data to stdout for debugging
-              console.log('Fetched active users data:', activeUsers);
+          async function runReport(propertyId) {
+              const analyticsDataClient = new BetaAnalyticsDataClient({credentials: keys});
 
-              // Write the data to visits.json
-              fs.writeFileSync('visits.json', JSON.stringify({ data: activeUsers }, null, 2));
+              try {
+                  const [response] = await analyticsDataClient.runReport({
+                      property: 'properties/' + propertyId,
+                      dateRanges: [
+                          { startDate: '30daysAgo', endDate: 'today' },
+                      ],
+                      dimensions: [{ name: 'city' }],
+                      metrics: [{ name: 'activeUsers' }]
+                  });
 
-              // Print the contents of visits.json to stdout for debugging
-              console.log('visits.json content:', JSON.stringify({ data: activeUsers }, null, 2));
+                  // Extract the report data
+                  const reportData = response.rows.map(row => ({
+                      city: row.dimensionValues[0].value,
+                      activeUsers: row.metricValues[0].value
+                  }));
 
-            } catch (error) {
-              console.error('Error fetching GA4 data:', error);
-            }
+                  // Print report to stdout for debugging
+                  console.log('Report result:', reportData);
+
+                  // Save report data to a JSON file
+                  fs.writeFileSync('visits.json', JSON.stringify({ data: reportData }, null, 2));
+
+                  // Print the contents of visits.json to stdout for debugging
+                  console.log('visits.json content:', JSON.stringify({ data: reportData }, null, 2));
+              } catch (error) {
+                  console.error('Error fetching GA4 data:', error);
+              }
           }
 
-          fetchGA4Data();
+          runReport(process.env.GA_PROPERTY_ID);
           "
 
           rm service-account.json  # Remove the service account file after use
-
-
 
       - name: Commit updated data
         run: |
@@ -84,4 +84,4 @@ jobs:
             git push
           else
             echo "No changes to commit"
-          fi
+          "
