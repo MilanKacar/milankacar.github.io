@@ -26,7 +26,19 @@ jobs:
           GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
           GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
         run: |
+          if [ -z "$GA_SERVICE_ACCOUNT_KEY" ]; then
+            echo "GA_SERVICE_ACCOUNT_KEY is empty"
+            exit 1
+          fi
+          
           echo "$GA_SERVICE_ACCOUNT_KEY" > service-account.json
+          
+          # Ensure the JSON is valid
+          if ! cat service-account.json | jq empty; then
+            echo "Invalid JSON in GA_SERVICE_ACCOUNT_KEY"
+            exit 1
+          fi
+
           node -e "
           const fs = require('fs');
           const {BetaAnalyticsDataClient} = require('@google-analytics/data');
