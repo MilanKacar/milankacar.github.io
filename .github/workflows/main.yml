@@ -1,0 +1,27 @@
+name: Display Secrets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  display-secrets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Display Secrets
+        env:
+          BASE64_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
+        run: |
+          echo "Displaying Google Analytics Property ID:"
+          echo "${GA_PROPERTY_ID}"
+
+          echo "Displaying Base64 Encoded Service Account Key:"
+          echo "${BASE64_SERVICE_ACCOUNT_KEY}"
+
+          # Optional: Decode and display part of the decoded secret (caution: sensitive data)
+          echo "Decoding and displaying a sample of the client secret:"
+          echo $(echo "${BASE64_SERVICE_ACCOUNT_KEY}" | base64 --decode | head -c 100)
