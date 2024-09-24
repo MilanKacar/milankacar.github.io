@@ -19,6 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install googleapis
+      - name: Log the entire Service Account Key (For Debugging - Private Repo Only)
+        run: echo "$GA_SERVICE_ACCOUNT_KEY"
+        env:
+          GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
 
       - name: Fetch Google Analytics Data
         env:
