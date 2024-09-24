@@ -61,6 +61,17 @@
 
     {% include analytics.html %}
 
+    <div id="visit-count">Loading visits...</div>
+
+  <script>
+    fetch('/visits.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('visit-count').innerText = `Visits: ${data.visits}`;
+      });
+  </script>
+
+
 
   </body>
 </html>
