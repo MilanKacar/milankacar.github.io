@@ -52,21 +52,21 @@ layout: default
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 4px;
-    overflow-x: auto; /* Make sure long code is scrollable */
-    position: relative;
+    overflow-x: auto; /* Ensure long code can scroll horizontally */
+    position: relative; /* Make it the positioning context for the button */
   }
 
-  /* Position the copy button at the upper-right corner of the code block */
+  /* Position the copy button at the top-right corner of the pre block */
   .copy-button {
     position: absolute;
-    top: 1px; /* Adjust as necessary */
-    right: 12px; /* Keep it on the top-right */
+    top: 2px; /* Adjust as necessary */
+    right: 16px; /* Position at the top-right corner */
     background-color: #007bff;
     color: white;
     border: none;
     padding: 5px 10px;
     font-size: 12px;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
   }
 
@@ -79,19 +79,11 @@ layout: default
 document.addEventListener("DOMContentLoaded", function() {
   const allCodeBlocksElements = document.querySelectorAll("pre");
   allCodeBlocksElements.forEach((codeBlock) => {
-    // Create a container for the code block and the button
-    const container = document.createElement("div");
-    container.className = "code-container";
-    
-    // Wrap the existing code block in the new container
-    codeBlock.parentNode.insertBefore(container, codeBlock);
-    container.appendChild(codeBlock);
-
-    // Create the copy button
+    // Create the copy button and position it inside the pre block
     const copyButton = document.createElement("button");
     copyButton.className = "copy-button";
     copyButton.textContent = "Copy";
-    container.appendChild(copyButton); // Add the button to the container
+    codeBlock.appendChild(copyButton); // Add the button inside the pre block
 
     // Copy button click functionality
     copyButton.addEventListener("click", function() {
@@ -112,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+
 
 
 
