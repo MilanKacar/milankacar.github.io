@@ -51,11 +51,14 @@
     {% include analytics.html %}
 
     <script>
-      function cb(response) {
-          document.getElementById('visits').innerText = response.value;
-      }
+      fetch('https://api.countapi.xyz/hit/milankacar.github.io/visits')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('visits').innerText = data.value;
+        })
+        .catch(error => console.error('Error fetching visit count:', error));
     </script>
-    <script async src="https://api.countapi.xyz/hit/milankacar.github.io/visits?callback=cb"></script>
+  
 
     <p>This page has been viewed <span id="visits">0</span> times.</p>
   </body>
