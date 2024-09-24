@@ -21,49 +21,72 @@ jobs:
           npm install googleapis@105 @google-cloud/local-auth@2.1.0 --save
           npm install @google-analytics/data
 
+      - name: Set Google Credentials
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" > service-account.json
+          
+          # Ensure the JSON is valid
+          if ! cat service-account.json | jq empty; then
+            echo "Invalid JSON in GA_SERVICE_ACCOUNT_KEY"
+            exit 1
+          fi
+          
       - name: Fetch Google Analytics 4 Data
         env:
+          GOOGLE_APPLICATION_CREDENTIALS: service-account.json
           GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
-          BASE64_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
         run: |
           node -e "
-            const fs = require('fs');
-            const { BetaAnalyticsDataClient } = require('@google-analytics/data');
+          const fs = require('fs');
+          const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
-            // Decode the Base64-encoded service account key
-            const base64EncodedKey = process.env.BASE64_SERVICE_ACCOUNT_KEY;
-            const decodedKey = Buffer.from(base64EncodedKey, 'base64').toString('utf8');
-            
-            // Debug: log the decoded key
-            console.log('Decoded SERVICE_ACCOUNT_KEY:', decodedKey);
+          const analyticsDataClient = new BetaAnalyticsDataClient();
 
-            // Parse the decoded service account key into a JSON object
-            const keys = JSON.parse(decodedKey);
-
-            async function runReport(propertyId) {
-              const analyticsDataClient = new BetaAnalyticsDataClient({ credentials: keys });
-
+          async function runReport(propertyId) {
               try {
-                const [response] = await analyticsDataClient.runReport({
-                  property: 'properties/' + propertyId,
-                  dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-                  dimensions: [{ name: 'city' }],
-                  metrics: [{ name: 'activeUsers' }]
-                });
+                  const [response] = await analyticsDataClient.runReport({
+                      property: 'properties/' + propertyId,
+                      dateRanges: [
+                          { startDate: '30daysAgo', endDate: 'today' },
+                      ],
+                      dimensions: [{ name: 'city' }],
+                      metrics: [{ name: 'activeUsers' }]
+                  });
 
-                // Extract the report data
-                const reportData = response.rows.map(row => ({
-                  city: row.dimensionValues[0].value,
-                  activeUsers: row.metricValues[0].value
-                }));
+                  // Extract the report data
+                  const reportData = response.rows.map(row => ({
+                      city: row.dimensionValues[0].value,
+                      activeUsers: row.metricValues[0].value
+                  }));
 
-                console.log('Report result:', reportData);
-                fs.writeFileSync('visits.json', JSON.stringify({ data: reportData }, null, 2));
-                console.log('visits.json content:', JSON.stringify({ data: reportData }, null, 2));
+                  // Print report to stdout for debugging
+                  console.log('Report result:', reportData);
+
+                  // Save report data to a JSON file
+                  fs.writeFileSync('visits.json', JSON.stringify({ data: reportData }, null, 2));
+
+                  // Print the contents of visits.json to stdout for debugging
+                  console.log('visits.json content:', JSON.stringify({ data: reportData }, null, 2));
               } catch (error) {
-                console.error('Error fetching GA4 data:', error);
+                  console.error('Error fetching GA4 data:', error);
               }
-            }
+          }
 
-            runReport(process.env.GA_PROPERTY_ID);
+          runReport(process.env.GA_PROPERTY_ID);
+          "
+
+          rm service-account.json  # Remove the service account file after use
+
+      - name: Commit updated data
+        run: |
+          git config --global user.name "MilanKacar"
+          git config --global user.email "milankacar@live.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add visits.json
+            git commit -m "Update visit count"
+            git push
+          else
+            echo "No changes to commit"
           "
