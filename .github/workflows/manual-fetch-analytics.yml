@@ -45,12 +45,23 @@ jobs:
                 }]
               }
             });
+
+            // Extract the session data
             const sessions = response.data.reports[0].data.totals[0].values[0];
+
+            // Print the fetched session data to stdout for debugging
+            console.log('Fetched sessions:', sessions);
+
+            // Write the session data to visits.json
             fs.writeFileSync('visits.json', JSON.stringify({ visits: sessions }));
+
+            // Print the contents of visits.json to stdout for debugging
+            console.log('visits.json content:', JSON.stringify({ visits: sessions }));
           }
 
           fetchData();
           "
+
           rm service-account.json  # Remove the service account file after use
 
 
