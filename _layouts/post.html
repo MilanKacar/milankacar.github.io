@@ -40,22 +40,39 @@ layout: default
     font-size: 30px;
   }
 
-.code-container {
-}
+  .code-container {
+    display: flex;
+    justify-content: space-between; /* Space between button and code */
+    align-items: center;
+    position: relative; /* Needed for absolute positioning if needed */
+    margin-bottom: 1em;
+  }
 
-.copy-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 12px;
-}
+  /* Style the code block */
+  pre {
+    margin: 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    overflow-x: auto; /* Keep code block scrollable */
+    flex-grow: 1; /* Makes sure the code block takes available space */
+  }
 
-.copy-button:hover {
-  background-color: #0056b3;
-}
+  /* Style the copy button */
+  .copy-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* Add some space between the code and button */
+  }
+
+  .copy-button:hover {
+    background-color: #0056b3;
+  }
 
 </style>
 
@@ -63,13 +80,21 @@ layout: default
 document.addEventListener("DOMContentLoaded", function() {
   const allCodeBlocksElements = document.querySelectorAll("pre");
   allCodeBlocksElements.forEach((codeBlock) => {
+    // Create a container for the code block and the button
+    const container = document.createElement("div");
+    container.className = "code-container";
+    
+    // Wrap the existing code block in the new container
+    codeBlock.parentNode.insertBefore(container, codeBlock);
+    container.appendChild(codeBlock);
+
+    // Create the copy button
     const copyButton = document.createElement("button");
     copyButton.className = "copy-button";
     copyButton.textContent = "Copy";
+    container.appendChild(copyButton); // Add the button to the container
 
-    // Insert the button above the code block
-    codeBlock.parentNode.insertBefore(copyButton, codeBlock);
-
+    // Copy button click functionality
     copyButton.addEventListener("click", function() {
       const code = codeBlock.textContent;
       const tempTextArea = document.createElement("textarea");
@@ -88,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
-
 
 
 
