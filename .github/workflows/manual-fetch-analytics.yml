@@ -36,30 +36,35 @@ jobs:
             });
             const analyticsdata = google.analyticsdata('v1beta');
 
-            // Send a request to the GA4 Data API to retrieve activeUsers
-            const response = await analyticsdata.properties.runReport({
-              property: 'properties/' + process.env.GA_PROPERTY_ID,
-              requestBody: {
-                dimensions: [{ name: 'date' }],
-                metrics: [{ name: 'activeUsers' }],
-                dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }]
-              }
-            });
+            try {
+              // Send a request to the GA4 Data API to retrieve activeUsers
+              const response = await analyticsdata.properties.runReport({
+                property: 'properties/' + process.env.GA_PROPERTY_ID,  // Correct property path
+                requestBody: {
+                  dimensions: [{ name: 'date' }],
+                  metrics: [{ name: 'activeUsers' }],
+                  dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }]
+                }
+              });
 
-            // Extract the activeUsers data from the response
-            const activeUsers = response.data.rows.map(row => ({
-              date: row.dimensionValues[0].value,
-              activeUsers: row.metricValues[0].value,
-            }));
+              // Extract the activeUsers data from the response
+              const activeUsers = response.data.rows.map(row => ({
+                date: row.dimensionValues[0].value,
+                activeUsers: row.metricValues[0].value,
+              }));
 
-            // Print the fetched data to stdout for debugging
-            console.log('Fetched active users data:', activeUsers);
+              // Print the fetched data to stdout for debugging
+              console.log('Fetched active users data:', activeUsers);
 
-            // Write the data to visits.json
-            fs.writeFileSync('visits.json', JSON.stringify({ data: activeUsers }, null, 2));
+              // Write the data to visits.json
+              fs.writeFileSync('visits.json', JSON.stringify({ data: activeUsers }, null, 2));
 
-            // Print the contents of visits.json to stdout for debugging
-            console.log('visits.json content:', JSON.stringify({ data: activeUsers }, null, 2));
+              // Print the contents of visits.json to stdout for debugging
+              console.log('visits.json content:', JSON.stringify({ data: activeUsers }, null, 2));
+
+            } catch (error) {
+              console.error('Error fetching GA4 data:', error);
+            }
           }
 
           fetchGA4Data();
