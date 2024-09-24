@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#4 Understanding the Balance Sheet 📊"
+title: " #4 Understanding the Balance Sheet 📊 "
 categories: Finance
 ---
 
