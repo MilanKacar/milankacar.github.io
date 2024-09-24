@@ -64,7 +64,7 @@ layout: default
   .copy-button {
     position: absolute;
     top: 2px; /* Adjust as necessary */
-    right: 16px; /* Position at the top-right corner */
+    right: 12px; /* Position at the top-right corner */
     background-color: #007bff;
     color: white;
     border: none;
@@ -83,6 +83,7 @@ layout: default
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const allCodeBlocksElements = document.querySelectorAll("pre");
+  
   allCodeBlocksElements.forEach((codeBlock) => {
     // Create the copy button and position it inside the pre block
     const copyButton = document.createElement("button");
@@ -92,7 +93,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Copy button click functionality
     copyButton.addEventListener("click", function() {
-      const code = codeBlock.textContent;
+      // Select all the text content in <pre> except for the button
+      const code = Array.from(codeBlock.childNodes)
+                        .filter(node => node.nodeType === Node.TEXT_NODE || node.nodeName === "CODE")
+                        .map(node => node.textContent)
+                        .join("");
+
       const tempTextArea = document.createElement("textarea");
       tempTextArea.value = code;
       document.body.appendChild(tempTextArea);
@@ -109,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+
 
 
 
