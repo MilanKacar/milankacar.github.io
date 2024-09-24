@@ -20,45 +20,49 @@ jobs:
       - name: Install dependencies
         run: npm install googleapis
 
-      - name: Fetch Google Analytics Data
+      - name: Fetch Google Analytics 4 Data
         env:
           GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
-          GA_VIEW_ID: ${{ secrets.GA_VIEW_ID }}
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
         run: |
           echo "$GA_SERVICE_ACCOUNT_KEY" > service-account.json
           node -e "
           const { google } = require('googleapis');
           const fs = require('fs');
-          async function fetchData() {
+          async function fetchGA4Data() {
             const auth = new google.auth.GoogleAuth({
               keyFile: 'service-account.json',
               scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
             });
-            const analytics = google.analyticsreporting({ version: 'v4', auth });
-            const response = await analytics.reports.batchGet({
+            const analyticsdata = google.analyticsdata('v1beta');
+
+            // Send a request to the GA4 Data API to retrieve activeUsers
+            const response = await analyticsdata.properties.runReport({
+              property: 'properties/' + process.env.GA_PROPERTY_ID,
               requestBody: {
-                reportRequests: [{
-                  viewId: process.env.GA_VIEW_ID,
-                  dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-                  metrics: [{ expression: 'ga:sessions' }]
-                }]
+                dimensions: [{ name: 'date' }],
+                metrics: [{ name: 'activeUsers' }],
+                dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }]
               }
             });
 
-            // Extract the session data
-            const sessions = response.data.reports[0].data.totals[0].values[0];
+            // Extract the activeUsers data from the response
+            const activeUsers = response.data.rows.map(row => ({
+              date: row.dimensionValues[0].value,
+              activeUsers: row.metricValues[0].value,
+            }));
 
-            // Print the fetched session data to stdout for debugging
-            console.log('Fetched sessions:', sessions);
+            // Print the fetched data to stdout for debugging
+            console.log('Fetched active users data:', activeUsers);
 
-            // Write the session data to visits.json
-            fs.writeFileSync('visits.json', JSON.stringify({ visits: sessions }));
+            // Write the data to visits.json
+            fs.writeFileSync('visits.json', JSON.stringify({ data: activeUsers }, null, 2));
 
             // Print the contents of visits.json to stdout for debugging
-            console.log('visits.json content:', JSON.stringify({ visits: sessions }));
+            console.log('visits.json content:', JSON.stringify({ data: activeUsers }, null, 2));
           }
 
-          fetchData();
+          fetchGA4Data();
           "
 
           rm service-account.json  # Remove the service account file after use
@@ -75,4 +79,3 @@ jobs:
           else
             echo "No changes to commit"
           fi
-
