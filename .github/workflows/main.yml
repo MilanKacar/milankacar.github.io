@@ -13,8 +13,8 @@ jobs:
 
       - name: Display Secrets
         env:
-          BASE64_SERVICE_ACCOUNT_KEY: ${{ secrets.ga4.GA_SERVICE_ACCOUNT_KEY }}
-          GA_PROPERTY_ID: ${{ secrets.ga4.GA_PROPERTY_ID }}
+          BASE64_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
         run: |
           echo "Displaying Google Analytics Property ID:"
           echo "${GA_PROPERTY_ID}"
