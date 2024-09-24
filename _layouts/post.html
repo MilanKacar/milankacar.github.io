@@ -40,11 +40,9 @@ layout: default
     font-size: 30px;
   }
 
+  /* Ensure the preformatted code block container has relative positioning */
   .code-container {
-    display: flex;
-    justify-content: space-between; /* Space between button and code */
-    align-items: center;
-    position: relative; /* Needed for absolute positioning if needed */
+    position: relative;
     margin-bottom: 1em;
   }
 
@@ -54,12 +52,15 @@ layout: default
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 4px;
-    overflow-x: auto; /* Keep code block scrollable */
-    flex-grow: 1; /* Makes sure the code block takes available space */
+    overflow-x: auto; /* Make sure long code is scrollable */
+    position: relative;
   }
 
-  /* Style the copy button */
+  /* Position the copy button at the upper-right corner of the code block */
   .copy-button {
+    position: absolute;
+    top: 10px; /* Adjust as necessary */
+    right: 10px; /* Keep it on the top-right */
     background-color: #007bff;
     color: white;
     border: none;
@@ -67,13 +68,11 @@ layout: default
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px; /* Add some space between the code and button */
   }
 
   .copy-button:hover {
     background-color: #0056b3;
   }
-
 </style>
 
 <script>
