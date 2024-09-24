@@ -24,17 +24,21 @@ jobs:
       - name: Fetch Google Analytics 4 Data
         env:
           GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
-          SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
+          BASE64_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
         run: |
           node -e "
             const fs = require('fs');
             const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 
-            // Debug: log the SERVICE_ACCOUNT_KEY
-            console.log('SERVICE_ACCOUNT_KEY:', process.env.SERVICE_ACCOUNT_KEY);
+            // Decode the Base64-encoded service account key
+            const base64EncodedKey = process.env.BASE64_SERVICE_ACCOUNT_KEY;
+            const decodedKey = Buffer.from(base64EncodedKey, 'base64').toString('utf8');
+            
+            // Debug: log the decoded key
+            console.log('Decoded SERVICE_ACCOUNT_KEY:', decodedKey);
 
-            // Retrieve and parse the service account key from the environment variable
-            const keys = JSON.parse(process.env.SERVICE_ACCOUNT_KEY);
+            // Parse the decoded service account key into a JSON object
+            const keys = JSON.parse(decodedKey);
 
             async function runReport(propertyId) {
               const analyticsDataClient = new BetaAnalyticsDataClient({ credentials: keys });
