@@ -23,50 +23,40 @@ jobs:
 
       - name: Fetch Google Analytics 4 Data
         env:
-          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }}
+          GA_PROPERTY_ID: ${{ secrets.GA_PROPERTY_ID }},
+          SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
         run: |
           node -e "
-          const fs = require('fs');
-          const { BetaAnalyticsDataClient } = require('@google-analytics/data');
+            const fs = require('fs');
+            const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 
-          const keys = {
-            \"type\": \"service_account\",
-            \"project_id\": \"milankacar\",
-            \"private_key_id\": \"a0cf43fdbc2d5153c526eec39696597aca279ce5\",
-            \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5xtKTCouOU3bB\\nq0eHMtoJyoH02Qn3IHN/NrTJyedcfRGnCBljcCZpr86PMRM1WtQQlgIGKfd4viZk\\nXXcyJGpDdHjyMWw0Sv2vNIiF+X+S7KJg8D8V6Epje4KVQUuQWfzb+fxsalOAbBI1\\nu31t3BFn9YO1+PtoIch7k0vBD79KIGel8286Jw5n5xE1dOwB9vcaUOHtIrrkfc4x\\npJc4giFA4fYbPFjYMjDEccwpO9EasYCugwFBJcgYUHrYlpM5K0pVlIn3UUlJkL8Q\\nU4jbglX2XjXgp3TsiKNQqQ8NfUt/Wq511TRWbLini4WTAuw+TKRfKpju9CvuXh2L\\n4tLXag/9AgMBAAECggEAEfKD9AdNcCnetoW7hUjZCPUdakVwJwW64raq7zZS5FEu\\nMWV2PnBekFCXCKevDrUq+Oc6ZCoNvwZvuGZ8gMWagSXGwW8bivnBBE9zmQMqMKGC\\na7xfUS3THJqZWkin6iwnYiuxF9rgckRT215flwtu9bd29U+LyjA+qWGTgfU+1QRI\\n6TDG/4LiT8e0oiIg7PDMuGozMA5Ejz1g2uM2x+pRcAHImKyBnKet08gU9IRhjDyU\\nHHmI0FYPIhs43KIRH49XkJ2ECHI+IFaPgsWn8qHY8C52nY2eMDni6WutCqa+lTUv\\n4aABLqqqrDDCsul03KY5Y40BjiUqQVnWJyM9vuJZqQKBgQDiyICfNQgCNcU3hQpt\\nUvYbZesfncQItVeB9Gexaan2N4FfI/IItuS9qrqmtVdSmZ/EZcTyalBcmYCZALzT\\nZG2rRQqIwX0OiI6iyBjcYbpJtHA4X1GjeTXDVq6KxfRKo7csU4MtFAma5k14tohR\\nJfsa1mXoqt5++9MQymCCUtz4ywKBgQDRtePN0y1Cs2KOAOcD4h9wnR/TF9zg6ytc\\nlza8+mM7kwunf5aq3tumOwlb4R4fimQSVrFj+JnebbUoH30coNTyVUKEusOny0Ar\\nRQc2emjiUCH0t4i4qEn8xDRtHHD9Wwqf3EstBjpOBm8gvbBkV+P1xW4WptlOH2vG\\nLEdhVUspVwKBgQC5y4J07MGO7faRMdIFFv7CG5Gx6VL9v3Pd6Bo741F3gqnfBFf6\\ng7yLFyCsC81qwql+AdKEuEz2UFxm/Y+1sIWY14t11u9ZxM721fBoPTidwdJenNkJ\\nkPhW/OEqmFs3+0DKc/D4MX5dBWlbCFBOC0vaBOSg5bw7VJzrGKJQowqeWQKBgFWu\\nEtzNIvjVgbay96/Ge0HvcEk2vq/GZXj27w5W3qRAd8p/fndhhixsgm5fk4cfa7Ny\\naBeIQpV2DUXPV7aSn25DF2JTTA0KJbWIBmJjsOaGBtmNAvcvCsuS/jh2HlPlFnop\\n7yz+FmQ6jLy7w427uw93Ent+v9oDTG0zOhayWnsRAoGAKdkFoNgPRJ+6RRRBa7PN\\ncZggiH/W35gqIZhgXnT7M3HroJEyQabr4tWsVdckjV59mql2SjeqrSMtkeBhai7X\\nz0aHQPW7Y89haQjp4sNVHmbcLopzxqLNRWYM64guk9l1k0X3qSmBZJAkRcCrtLTi\\nsQtIPTJ5oUoCNvJZLi5BNMk=\\n-----END PRIVATE KEY-----\",
-            \"client_email\": \"views-counter@milankacar.iam.gserviceaccount.com\",
-            \"client_id\": \"101147472817638845269\",
-            \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",
-            \"token_uri\": \"https://oauth2.googleapis.com/token\",
-            \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",
-            \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/views-counter%40milankacar.iam.gserviceaccount.com\",
-            \"universe_domain\": \"googleapis.com\"
-          };
+            // Parse the service account key from the secret
+            const keys = JSON.parse(process.env.SERVICE_ACCOUNT_KEY);
 
-          async function runReport(propertyId) {
-            const analyticsDataClient = new BetaAnalyticsDataClient({ credentials: keys });
+            async function runReport(propertyId) {
+              const analyticsDataClient = new BetaAnalyticsDataClient({ credentials: keys });
 
-            try {
-              const [response] = await analyticsDataClient.runReport({
-                property: 'properties/' + propertyId,
-                dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-                dimensions: [{ name: 'city' }],
-                metrics: [{ name: 'activeUsers' }]
-              });
+              try {
+                const [response] = await analyticsDataClient.runReport({
+                  property: 'properties/' + propertyId,
+                  dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+                  dimensions: [{ name: 'city' }],
+                  metrics: [{ name: 'activeUsers' }]
+                });
 
-              // Extract the report data
-              const reportData = response.rows.map(row => ({
-                city: row.dimensionValues[0].value,
-                activeUsers: row.metricValues[0].value
-              }));
+                // Extract the report data
+                const reportData = response.rows.map(row => ({
+                  city: row.dimensionValues[0].value,
+                  activeUsers: row.metricValues[0].value
+                }));
 
-              console.log('Report result:', reportData);
-              fs.writeFileSync('visits.json', JSON.stringify({ data: reportData }, null, 2));
-              console.log('visits.json content:', JSON.stringify({ data: reportData }, null, 2));
-            } catch (error) {
-              console.error('Error fetching GA4 data:', error);
+                console.log('Report result:', reportData);
+                fs.writeFileSync('visits.json', JSON.stringify({ data: reportData }, null, 2));
+                console.log('visits.json content:', JSON.stringify({ data: reportData }, null, 2));
+              } catch (error) {
+                console.error('Error fetching GA4 data:', error);
+              }
             }
-          }
 
-          runReport(Number(process.env.GA_PROPERTY_ID));
+            runReport(Number(process.env.GA_PROPERTY_ID));
           "
