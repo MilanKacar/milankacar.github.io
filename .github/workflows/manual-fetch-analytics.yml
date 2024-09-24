@@ -91,10 +91,16 @@ jobs:
         run: |
           git config --global user.name "MilanKacar"
           git config --global user.email "milankacar@live.com"
+
+          # Show git status for debugging
+          git status
+
+          # Check for any changes in the repository
           if [ -n "$(git status --porcelain)" ]; then
             git add visits.json
             git commit -m "Update visit count"
             git push
           else
             echo "No changes to commit"
-          "
+          fi
+
