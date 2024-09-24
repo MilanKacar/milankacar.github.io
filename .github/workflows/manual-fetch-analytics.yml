@@ -68,5 +68,5 @@ jobs:
             }
           }
 
-          runReport(process.env.GA_PROPERTY_ID);
+          runReport(Number(process.env.GA_PROPERTY_ID));
           "
