@@ -29,7 +29,7 @@ jobs:
           node -e "
           const { google } = require('googleapis');
           const fs = require('fs');
-
+          echo "GA_SERVICE_ACCOUNT_KEY starts with: ${GA_SERVICE_ACCOUNT_KEY:0:50}"
           async function fetchData() {
             const auth = new google.auth.GoogleAuth({
               keyFile: 'service-account.json',
