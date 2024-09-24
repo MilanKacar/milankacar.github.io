@@ -50,5 +50,18 @@
 
     {% include analytics.html %}
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          fetch('https://api.countapi.xyz/hit/milankacar.github.io/')
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('visits').innerText = data.value;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
+
+    <div>Total Visits: <span id="visits"></span></div>
+
   </body>
 </html>
