@@ -52,7 +52,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-          fetch('https://api.countapi.xyz/hit/milankacar.github.io/')
+          fetch('https://api.countapi.xyz/hit/milankacar.github.io')
             .then(response => response.json())
             .then(data => {
               document.getElementById('visits').innerText = data.value;
