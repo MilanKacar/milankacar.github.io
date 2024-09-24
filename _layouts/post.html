@@ -53,14 +53,6 @@ layout: default
     color: #0056b3;
   }
   
-  .copy-button svg {
-    fill: #007bff;
-  }
-  
-  .copy-button:hover svg {
-    fill: #0056b3;
-  }
-  
   pre {
     padding-top: 10px;
   }
@@ -73,17 +65,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const copyButton = document.createElement("button");
     copyButton.className = "copy-button";
     copyButton.textContent = "Copy";
-    
-    // Adding an icon for the copy button
-    copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-    <path d="M10 1.5v1H6v-1a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5z"/>
-    <path d="M9.5 0a1.5 1.5 0 0 1 1.415 1H13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h2.085A1.5 1.5 0 0 1 6.5 0h3zm3.5 3a1 1 0 0 0-1-1h-2v.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3z"/>
-    </svg>`;
 
-    // Insert the button inside the code block container
+    // Insert the button above the code block
     codeBlock.parentNode.insertBefore(copyButton, codeBlock);
 
-    // Copy code to clipboard logic
     copyButton.addEventListener("click", function() {
       const code = codeBlock.textContent;
       const tempTextArea = document.createElement("textarea");
@@ -93,18 +78,16 @@ document.addEventListener("DOMContentLoaded", function() {
       document.execCommand("copy");
       document.body.removeChild(tempTextArea);
 
-      // Change button icon to indicate a successful copy
-      copyButton.innerHTML = "&#10004;"; // Checkmark icon after copying
+      // Change button text after copying
+      copyButton.textContent = "Copied!";
       setTimeout(() => {
-        copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-        <path d="M10 1.5v1H6v-1a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5z"/>
-        <path d="M9.5 0a1.5 1.5 0 0 1 1.415 1H13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h2.085A1.5 1.5 0 0 1 6.5 0h3zm3.5 3a1 1 0 0 0-1-1h-2v.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3z"/>
-        </svg>`;
+        copyButton.textContent = "Copy";
       }, 2000);
     });
   });
 });
 </script>
+
 
 
 
