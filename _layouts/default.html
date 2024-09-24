@@ -49,5 +49,16 @@
     </div>
 
     {% include analytics.html %}
+
+  <script>
+    // Replace `your_namespace` and `your_key` with your custom values or leave the default
+    fetch('https://api.countapi.xyz/hit/milankacar.github.io/visits')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('page-views').innerText = data.value;
+      });
+  </script>
+
+    <p>This page has been viewed <span id="page-views">0</span> times.</p>
   </body>
 </html>
