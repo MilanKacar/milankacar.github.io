@@ -29,7 +29,8 @@ Assets are resources owned by the company that are expected to provide future ec
 
   The total current assets for "MG Corp." are calculated as follows:
   $$
-  \text{Total Current Assets} = \text{Cash} + \text{Accounts Receivable} + \text{Inventory} = 50,000 + 20,000 + 30,000 = 100,000
+    \text{Total Current Assets} = \text{Cash} + \text{Accounts Receivable} + \text{Inventory} \\
+    = 50,000 + 20,000 + 30,000 = 100,000
   $$
 
 - **Non-Current (Long-Term) Assets**: Assets that are not expected to be converted into cash within one year. This category includes:
@@ -39,7 +40,8 @@ Assets are resources owned by the company that are expected to provide future ec
 
   For "MG Corp.," total non-current assets are calculated as:
   $$
-  \text{Total Non-Current Assets} = \text{PP&E} + \text{Intangible Assets} = 150,000 + 10,000 = 160,000
+  \text{Total Non-Current Assets} = \text{PP&E} + \text{Intangible Assets} \\
+   = 150,000 + 10,000 = 160,000
   $$
 
 ### 2. **Liabilities**
@@ -53,7 +55,8 @@ Liabilities represent obligations the company owes to outside parties. Similar t
 
   The total current liabilities for "MG Corp." add up to:
   $$
-  \text{Total Current Liabilities} = \text{Accounts Payable} + \text{Short-Term Debt} = 25,000 + 15,000 = 40,000
+  \text{Total Current Liabilities} = \text{Accounts Payable} + \text{Short-Term Debt} \\
+   = 25,000 + 15,000 = 40,000
   $$
 
 - **Non-Current Liabilities**: Obligations that are due beyond one year. This includes:
@@ -63,7 +66,8 @@ Liabilities represent obligations the company owes to outside parties. Similar t
 
   Total liabilities for "MG Corp." can be summarized as:
   $$
-  \text{Total Liabilities} = \text{Total Current Liabilities} + \text{Total Non-Current Liabilities} = 40,000 + 60,000 = 100,000
+  \text{Total Liabilities} = \text{Total Current Liabilities} + \text{Total Non-Current Liabilities} \\
+   = 40,000 + 60,000 = 100,000
   $$
 
 ### 3. **Shareholders' Equity**
@@ -77,7 +81,8 @@ Shareholders’ equity represents the owners' residual interest in the company a
 
 The total equity for "MG Corp." is calculated as:
 $$
-\text{Total Equity} = \text{Common Stock} + \text{Retained Earnings} = 50,000 + 110,000 = 160,000
+\text{Total Equity} = \text{Common Stock} + \text{Retained Earnings} \\
+= 50,000 + 110,000 = 160,000
 $$
 
 ### 4. **Summary of MG Corp. Balance Sheet 📃**
