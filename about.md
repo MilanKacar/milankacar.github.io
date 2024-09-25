@@ -190,7 +190,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function() {
   // Fetch the JSON data
-  fetch('visits.json')
+  fetch('./visits.json')
     .then(response => response.json())
     .then(data => {
       // Extract the active users from the JSON
