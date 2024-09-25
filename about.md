@@ -195,9 +195,14 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetching the JSON file
-    fetch('visits.json')
-        .then(response => response.json())
+    // Update the relative path of visits.json if necessary
+    fetch('./visits.json') // Ensure this path is correct relative to your .md file
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             const activeUsers = parseInt(data.data[0].activeUsers, 10);
             const counterElement = document.getElementById('counter');
@@ -214,12 +219,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     incrementCounter(counterElement, activeUsers);
                 }
             });
-        });
-
+        })
+        .catch(error => console.error('Error fetching JSON data:', error));
+    
     // Function to increment number dynamically
     function incrementCounter(element, targetNumber) {
         let start = 0;
-        const duration = 2000;
+        const duration = 2000; // Adjust this duration to control speed
         const stepTime = Math.abs(Math.floor(duration / targetNumber));
         const timer = setInterval(() => {
             start += 1;
