@@ -194,9 +194,8 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
     inherits: false;
   }
   
-  div.nr {
-    animation: counter 5s infinite alternate ease-in-out;
-    counter-reset: num var(--num);
+  div {
+    animation: counter 3s infinite alternate ease-in-out;
     font: 800 40px system-ui;
     padding: 2rem;
   }
