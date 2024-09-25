@@ -17,9 +17,9 @@ Eigenvectors and eigenvalues become critical when analyzing **covariance matrice
 ### Math Breakdown 🧮
 Let’s say you have a covariance matrix **A**, representing how three assets (A1, A2, A3) are correlated with each other. If **v** is an eigenvector of matrix **A**, and **λ** (lambda) is its corresponding eigenvalue, the relationship is described by this equation:
 
-\[
+$$
 A \times v = \lambda \times v
-\]
+$$
 
 Here, **A** transforms **v** (a combination of assets) by stretching or shrinking it, without changing its direction. The scaling factor, **λ**, tells us how much risk (variance) is associated with that particular eigenvector.
 
@@ -33,14 +33,14 @@ Investors often want to balance risk and reward by constructing a portfolio that
 
 Suppose you have three assets in your portfolio. Here’s what a simple covariance matrix **A** might look like:
 
-\[
+$$
 A = 
 \begin{pmatrix}
 0.04 & 0.01 & 0.02 \\
 0.01 & 0.09 & 0.03 \\
 0.02 & 0.03 & 0.16 \\
 \end{pmatrix}
-\]
+$$
 
 - **Diagonal values (0.04, 0.09, 0.16)** are the variances of assets A1, A2, and A3.
 - **Off-diagonal values (0.01, 0.02, 0.03)** are covariances between the assets.
@@ -49,7 +49,7 @@ A =
 
 When you calculate the eigenvectors of matrix **A**, they might look like this:
 
-\[
+$$
 v_1 = 
 \begin{pmatrix}
 0.5 \\
@@ -68,7 +68,7 @@ v_1 =
 -0.4 \\
 0.7 \\
 \end{pmatrix}
-\]
+$$
 
 Each eigenvector represents a combination of assets that move together in a unique way. For example, **v₁** suggests that Assets 1, 2, and 3 share a similar risk profile. **Eigenvalue λ₁** tells you how much risk is associated with this combination.
 
