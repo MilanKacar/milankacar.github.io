@@ -1,7 +1,7 @@
 ---
 layout: post
 title: " #5 2416. Sum of Prefix Scores of Strings 🚀 "
-categories: LeetCode Programing
+categories: LeetCode Programming
 ---
 
 Certainly! Here's the updated blog post with the time complexities added at the end.
