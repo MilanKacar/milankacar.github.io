@@ -64,7 +64,7 @@
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
       // Fetch the JSON data from your GitHub Pages URL
-      fetch('https://milankacar.github.io/visits.json')
+      fetch('{{ site.baseurl }}/visits.json')
         .then(response => response.json())
         .then(data => {
           // Extract the active users from the JSON
