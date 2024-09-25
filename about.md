@@ -185,31 +185,82 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 [milankacar@live.com](mailto:milankacar@live.com)
 
-<style>
-  @property --num {
-    syntax: "<integer>";
-    initial-value: 0;
-    inherits: false;
-  }
-  
-  div.visitors {
-    animation: counter 5s infinite alternate ease-in-out;
-    /* counter-reset: num var(--num); */
-    font: 700 40px system-ui;
-    padding: 2rem;
-  }
-  div::after {
-    content: counter(num);
-  }
-  
-  @keyframes counter {
-    from {
-      --num: 0;
-    }
-    to {
-      --num: 100;
-    }
-  }
-</style>
+<!-- The visit counter at the end -->
+<div class="counter-section" id="counter-section">
+    <div class="counter-container">
+        <p>Blog visits from Austria:</p>
+        <h1 id="counter">0</h1>
+    </div>
+</div>
 
-<div class="visitors">Number of visitors: </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Fetching the JSON file
+    fetch('visits.json')
+        .then(response => response.json())
+        .then(data => {
+            const activeUsers = parseInt(data.data[0].activeUsers, 10);
+            const counterElement = document.getElementById('counter');
+            let started = false;
+
+            // Detect scroll to the counter-section
+            window.addEventListener('scroll', () => {
+                const counterSection = document.getElementById('counter-section');
+                const sectionPosition = counterSection.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight;
+
+                if (sectionPosition < screenPosition && !started) {
+                    started = true;
+                    incrementCounter(counterElement, activeUsers);
+                }
+            });
+        });
+
+    // Function to increment number dynamically
+    function incrementCounter(element, targetNumber) {
+        let start = 0;
+        const duration = 2000;
+        const stepTime = Math.abs(Math.floor(duration / targetNumber));
+        const timer = setInterval(() => {
+            start += 1;
+            element.textContent = start;
+            if (start === targetNumber) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+});
+</script>
+
+<style>
+/* Counter Section Styling */
+.counter-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f5f7fa;
+}
+
+.counter-container {
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.counter-container p {
+    font-size: 24px;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.counter-container h1 {
+    font-size: 72px;
+    color: #4CAF50;
+    margin: 0;
+    font-weight: bold;
+}
+</style>
