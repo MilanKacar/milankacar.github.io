@@ -20,40 +20,104 @@ Here’s a breakdown of FinPile:
 
 Here is a more representative summary of what tokens are used to train the model:
 
-| Dataset                | Docs (x10^4) | Avg Chars/Doc (x10^8) | Avg Chars/Token (x10^8) | % of Total Tokens |
-|------------------------|--------------|-----------------------|-------------------------|-------------------|
-| **FinPile**             | 175,886      | 1,017                 | 4.92                    | 51.27%            |
-| ├── Web                | 158,250      | 933                   | 4.96                    | 42.01%            |
-| ├── News               | 10,040       | 1,665                 | 4.44                    | 5.31%             |
-| ├── Filings            | 3,335        | 2,340                 | 5.39                    | 2.04%             |
-| ├── Press              | 1,265        | 3,443                 | 5.06                    | 1.21%             |
-| └── Bloomberg          | 2,996        | 758                   | 4.60                    | 0.70%             |
-| **Public Datasets**     | 50,744       | 3,314                 | 4.87                    | 48.73%            |
-| ├── C4                 | 34,832       | 2,206                 | 5.56                    | 19.48%            |
-| ├── Pile-CC            | 5,255        | 4,401                 | 5.42                    | 6.02%             |
-| ├── GitHub             | 1,428        | 5,364                 | 3.38                    | 3.20%             |
-| ├── Books3             | 19           | 552,398               | 4.97                    | 3.02%             |
-| ├── PubMed Central     | 294          | 32,181                | 4.51                    | 2.96%             |
-| ├── ArXiv              | 124          | 47,819                | 3.56                    | 2.35%             |
-| ├── OpenWebText2       | 1,684        | 3,850                 | 5.07                    | 1.80%             |
-| ├── FreeLaw            | 349          | 15,381                | 4.99                    | 1.52%             |
-| ├── StackExchange      | 1,538        | 2,201                 | 4.17                    | 1.15%             |
-| └── Wikipedia (en)     | 590          | 2,988                 | 4.65                    | 0.53%             |
-| **Other Datasets**      |              |                       |                         |                   |
-| ├── USPTO Backgrounds  | 517          | 4,339                 | 6.18                    | 0.51%             |
-| ├── PubMed Abstracts   | 1,527        | 1,333                 | 5.77                    | 0.50%             |
-| ├── OpenSubtitles      | 38           | 31,055                | 4.90                    | 0.34%             |
-| ├── Gutenberg (PG-19)  | 3            | 399,351               | 4.89                    | 0.32%             |
-| ├── Ubuntu IRC         | 1            | 539,222               | 3.16                    | 0.25%             |
-| ├── EuroParl           | 7            | 65,053                | 2.93                    | 0.21%             |
-| ├── YouTubeSubtitles   | 17           | 19,831                | 2.54                    | 0.19%             |
-| ├── BookCorpus2        | 2            | 370,384               | 5.36                    | 0.17%             |
-| ├── HackerNews         | 82           | 5,009                 | 4.87                    | 0.12%             |
-| ├── PhilPapers         | 3            | 74,827                | 4.21                    | 0.08%             |
-| ├── NIH ExPorter       | 92           | 2,165                 | 6.65                    | 0.04%             |
-| ├── Enron Emails       | 24           | 1,882                 | 3.90                    | 0.02%             |
-| └── Wikipedia (7/1/22) | 2,218        | 3,271                 | 3.06                    | 3.35%             |
-| **Total**              | 226,631      | 34,701                | 4.89                    | 100%              |
+<table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="padding: 12px; border-bottom: 1px solid #ddd;">Dataset</th>
+      <th style="padding: 12px; border-bottom: 1px solid #ddd;">Docs (x10^4)</th>
+      <th style="padding: 12px; border-bottom: 1px solid #ddd;">Avg Chars/Doc (x10^8)</th>
+      <th style="padding: 12px; border-bottom: 1px solid #ddd;">Avg Chars/Token (x10^8)</th>
+      <th style="padding: 12px; border-bottom: 1px solid #ddd;">% of Total Tokens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;"><strong>FinPile</strong></td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">175,886</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">1,017</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.92</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">51.27%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Web</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">158,250</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">933</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.96</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">42.01%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">News</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">10,040</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">1,665</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.44</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5.31%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Filings</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3,335</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2,340</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5.39</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2.04%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Press</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">1,265</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3,443</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5.06</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">1.21%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Bloomberg</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2,996</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">758</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.60</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">0.70%</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;"><strong>Public Datasets</strong></td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">50,744</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3,314</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.87</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">48.73%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">C4</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">34,832</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2,206</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5.56</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">19.48%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Pile-CC</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5,255</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4,401</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5.42</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">6.02%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">GitHub</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">1,428</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">5,364</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3.38</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3.20%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Books3</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">19</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">552,398</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.97</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">3.02%</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;"><strong>Total</strong></td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">226,631</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">34,701</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.89</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">100%</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 Such a specialized dataset ensures that BloombergGPT doesn’t just understand finance—it *excels* in it.
