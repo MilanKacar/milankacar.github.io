@@ -184,3 +184,21 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ### Contact me
 
 [milankacar@live.com](mailto:milankacar@live.com)
+
+- **Active Users in Austria**: <span id="activeUsers"></span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  // Fetch the JSON data
+  fetch('./visits.json')
+    .then(response => response.json())
+    .then(data => {
+      // Extract the active users from the JSON
+      const activeUsers = data.data[0].activeUsers;
+      // Insert the active users into the placeholder in about.md
+      document.getElementById('activeUsers').textContent = activeUsers;
+    })
+    .catch(error => {
+      console.error('Error fetching the JSON data:', error);
+    });
+});
+</script>
