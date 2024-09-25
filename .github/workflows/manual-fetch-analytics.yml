@@ -51,8 +51,8 @@ jobs:
                       dateRanges: [
                           { startDate: '30daysAgo', endDate: 'today' },
                       ],
-                      
-                      metrics: [{ name: 'sessions' }]
+                      dimensions: [{ name: 'country' }],
+                      metrics: [{ name: 'eventCount' }]
                   });
 
                   // Extract the report data, check if it's empty
