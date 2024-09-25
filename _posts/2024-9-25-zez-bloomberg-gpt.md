@@ -184,6 +184,3 @@ In a world increasingly driven by data, BloombergGPT stands out as a specialized
 - **Performance**: Outperforms existing models in financial NLP tasks without sacrificing general NLP capabilities.
 - **Ethics first**: Strong focus on data quality, ethical use, and minimizing bias.
 
----
-
-_Read time: 10 minutes_ ⏳
