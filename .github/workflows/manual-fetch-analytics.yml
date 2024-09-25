@@ -52,7 +52,7 @@ jobs:
                           { startDate: '30daysAgo', endDate: 'today' },
                       ],
                       
-                      metrics: [{ name: 'page_view' }]
+                      metrics: [{ name: 'sessions' }]
                   });
 
                   // Extract the report data, check if it's empty
