@@ -1,3 +1,8 @@
 {
-  "visits": 0
+  "data": [
+    {
+      "city": "Vienna",
+      "activeUsers": "3"
+    }
+  ]
 }
