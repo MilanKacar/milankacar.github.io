@@ -22,7 +22,7 @@ Here is a more representative summary of what tokens are used to train the model
 
 <table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif;">
   <thead>
-    <tr style="background-color: #f2f2f2;">
+    <tr style="background-color: #f2f2f2; text-align: left;">
       <th style="padding: 12px; border-bottom: 1px solid #ddd;">Dataset</th>
       <th style="padding: 12px; border-bottom: 1px solid #ddd;">Docs (x10^4)</th>
       <th style="padding: 12px; border-bottom: 1px solid #ddd;">Avg Chars/Doc (x10^8)</th>
@@ -107,6 +107,20 @@ Here is a more representative summary of what tokens are used to train the model
       <td style="padding: 12px; border-bottom: 1px solid #ddd;">552,398</td>
       <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.97</td>
       <td style="padding: 12px; border-bottom: 1px solid #ddd;">3.02%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">PubMed Central</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">294</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">32,181</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.51</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2.96%</td>
+    </tr>
+    <tr>
+      <td style="padding-left: 20px; border-bottom: 1px solid #ddd;">Wikipedia (en)</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">590</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">2,988</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">4.65</td>
+      <td style="padding: 12px; border-bottom: 1px solid #ddd;">0.53%</td>
     </tr>
     <tr>
       <td style="padding: 12px; border-bottom: 1px solid #ddd;"><strong>Total</strong></td>
