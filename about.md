@@ -181,8 +181,35 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 - **📈 Trading**: Enthusiastic about market analysis and trading strategies
 
 
-
-
 ### Contact me
 
 [milankacar@live.com](mailto:milankacar@live.com)
+
+<style>
+  @property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+  
+  div.visitors {
+    animation: counter 5s infinite alternate ease-in-out;
+    /* counter-reset: num var(--num); */
+    font: 700 40px system-ui;
+    padding: 2rem;
+  }
+  div::after {
+    content: counter(num);
+  }
+  
+  @keyframes counter {
+    from {
+      --num: 0;
+    }
+    to {
+      --num: 100;
+    }
+  }
+</style>
+
+<div class="visitors">Number of visitors: </div>
