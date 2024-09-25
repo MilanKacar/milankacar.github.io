@@ -220,16 +220,3 @@ By counting the prefixes in the Trie, we can efficiently calculate the sum of pr
   - Querying the prefix score of each word also takes O(k) time.
   - Total: O(n * k).
 
----
-
-## Conclusion 🎉
-
-This problem demonstrates the power of using the **Trie** data structure to efficiently solve problems related to **prefixes**. The brute-force solution is a good starting point, but when dealing with larger inputs, the Trie-based solution provides significant performance improvements.
-
-If you're tackling similar problems involving strings and prefixes, always consider whether a Trie might be the optimal tool for the job!
-
-Happy coding! 😄
-
----
-
-I hope this blog post helps you understand both the brute-force and optimized solutions for this problem. If you have any questions, feel free to drop a comment below! 👇
