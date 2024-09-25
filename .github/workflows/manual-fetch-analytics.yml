@@ -51,8 +51,8 @@ jobs:
                       dateRanges: [
                           { startDate: '30daysAgo', endDate: 'today' },
                       ],
-                      dimensions: [{ name: 'city' }],
-                      metrics: [{ name: 'activeUsers' }]
+                      
+                      metrics: [{ name: 'page_view' }]
                   });
 
                   // Extract the report data, check if it's empty
