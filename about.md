@@ -185,4 +185,4 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 [milankacar@live.com](mailto:milankacar@live.com)
 
-**Active Users**: <span id="activeUsers"><div class="spinner"></div></span>
+**📈 Active Users**: <span id="activeUsers"></span>
