@@ -186,33 +186,3 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 ### Contact me
 
 [milankacar@live.com](mailto:milankacar@live.com)
-
-<style>
-  @property --num {
-    syntax: "<integer>";
-    initial-value: 0;
-    inherits: false;
-  }
-  
-  div {
-    animation: counter 3s infinite alternate ease-in-out;
-    font: 800 40px system-ui;
-    padding: 2rem;
-  }
-  div::after {
-    content: counter(num);
-  }
-  
-  @keyframes counter {
-    from {
-      --num: 0;
-    }
-    to {
-      --num: 100;
-    }
-  }
-</style>
-<div id="user-count">
-  Number of users:
-  <div class="nr"></div>
-</div>
