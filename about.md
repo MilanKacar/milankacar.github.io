@@ -189,26 +189,27 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 <div class="counter-section" id="counter-section">
     <div class="counter-container">
         <p>Blog visits from Austria:</p>
-        <h1 id="counter">0</h1>
+        <div id="counter">0</div>
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Update the relative path of visits.json if necessary
-    fetch('./visits.json') // Ensure this path is correct relative to your .md file
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
+    // Fetch visits.json file
+    fetch('./visits.json') // Make sure the path to visits.json is correct
+        .then(response => response.json())
         .then(data => {
             const activeUsers = parseInt(data.data[0].activeUsers, 10);
             const counterElement = document.getElementById('counter');
+            const style = document.documentElement.style;
+
+            // Set the CSS variable --target-num to the activeUsers from JSON
+            style.setProperty('--target-num', activeUsers);
+
+            // Animate the number using CSS and JavaScript
             let started = false;
 
-            // Detect scroll to the counter-section
+            // Trigger animation when user scrolls to the counter-section
             window.addEventListener('scroll', () => {
                 const counterSection = document.getElementById('counter-section');
                 const sectionPosition = counterSection.getBoundingClientRect().top;
@@ -216,29 +217,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (sectionPosition < screenPosition && !started) {
                     started = true;
-                    incrementCounter(counterElement, activeUsers);
+
+                    // Use JavaScript to increment the number
+                    let start = 0;
+                    const duration = 2000;
+                    const stepTime = Math.abs(Math.floor(duration / activeUsers));
+
+                    const timer = setInterval(() => {
+                        start += 1;
+                        counterElement.textContent = start;
+
+                        // Update the CSS variable for each increment
+                        style.setProperty('--num', start);
+
+                        if (start === activeUsers) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
                 }
             });
         })
         .catch(error => console.error('Error fetching JSON data:', error));
-    
-    // Function to increment number dynamically
-    function incrementCounter(element, targetNumber) {
-        let start = 0;
-        const duration = 2000; // Adjust this duration to control speed
-        const stepTime = Math.abs(Math.floor(duration / targetNumber));
-        const timer = setInterval(() => {
-            start += 1;
-            element.textContent = start;
-            if (start === targetNumber) {
-                clearInterval(timer);
-            }
-        }, stepTime);
-    }
 });
 </script>
 
 <style>
+:root {
+    --num: 0;
+    --target-num: 100; /* Default target number */
+}
+
 /* Counter Section Styling */
 .counter-section {
     display: flex;
@@ -263,10 +271,30 @@ document.addEventListener('DOMContentLoaded', () => {
     color: #333;
 }
 
-.counter-container h1 {
+.counter-container div {
     font-size: 72px;
     color: #4CAF50;
-    margin: 0;
     font-weight: bold;
+    padding: 2rem;
+    font: 800 40px system-ui;
+    counter-reset: num var(--num);
+}
+
+.counter-container div::after {
+    content: counter(num);
+}
+
+@keyframes counter {
+    from {
+        --num: 0;
+    }
+    to {
+        --num: var(--target-num);
+    }
+}
+
+div {
+    animation: counter 5s infinite alternate ease-in-out;
 }
 </style>
+
