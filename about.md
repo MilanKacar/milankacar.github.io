@@ -178,9 +178,42 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 - **📚 Reading**: Aiming for a book a week  
 - **🏋️‍♂️ Fitness**: Passionate about fitness and healthy living  
 - **✈️ Traveling**: An avid traveler always looking for new adventures  
-- **📈 Trading**: Enthusiastic about market analysis and trading strategies  
+- **📈 Trading**: Enthusiastic about market analysis and trading strategies
+
+
 
 
 ### Contact me
 
 [milankacar@live.com](mailto:milankacar@live.com)
+
+<style>
+  @property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+  
+  div.nr {
+    animation: counter 5s infinite alternate ease-in-out;
+    counter-reset: num var(--num);
+    font: 800 40px system-ui;
+    padding: 2rem;
+  }
+  div::after {
+    content: counter(num);
+  }
+  
+  @keyframes counter {
+    from {
+      --num: 0;
+    }
+    to {
+      --num: 100;
+    }
+  }
+</style>
+<div id="user-count">
+  Number of users:
+  <div class="nr"></div>
+</div>
