@@ -185,8 +185,9 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 [milankacar@live.com](mailto:milankacar@live.com)
 
-- **Active Users**: <span id="activeUsers"></span>
-<script type="text/jsx">
+- **Active Users**: <span id="activeUsers">Loading...</span>
+
+<script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function() {
   // Fetch the JSON data
   fetch('visits.json')
