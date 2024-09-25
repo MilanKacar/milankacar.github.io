@@ -185,4 +185,21 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 [milankacar@live.com](mailto:milankacar@live.com)
 
-- **Active Users**: <span id="activeUsers">Loading...</span>
+- **Active Users**: <span id="activeUsers"><div class="spinner"></div></span>
+
+<style>
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #00aaff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+
