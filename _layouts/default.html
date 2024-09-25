@@ -61,6 +61,24 @@
 
     {% include analytics.html %}
 
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    // Fetch the JSON data from your GitHub Pages URL
+    fetch('https://milankacar.github.io/visits.json')
+      .then(response => response.json())
+      .then(data => {
+        // Extract the active users from the JSON
+        const activeUsers = data.data[0].activeUsers;
+        // Insert the active users into the placeholder in about.md
+        document.getElementById('activeUsers').textContent = activeUsers;
+      })
+      .catch(error => {
+        console.error('Error fetching the JSON data:', error);
+      });
+  });
+</script>
+
+
 
   </body>
 </html>
