@@ -66,6 +66,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
   });
 </script>
 
+--- 
 
 ## 🚀 Technical Skills
 
