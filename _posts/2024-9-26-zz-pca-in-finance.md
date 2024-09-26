@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#10 PCA as a Superpower in Finance 🚀 "
-categories: Finance MAth
+categories: Finance Math
 ---
 
 In finance, we’re often overwhelmed by the sheer number of variables we need to track. Whether it’s stock returns, risk indicators, or macroeconomic factors, the amount of data can be daunting. Principal Component Analysis (PCA) is a powerful tool that helps us reduce this complexity by transforming correlated variables into a smaller set of uncorrelated ones, without losing essential information.
