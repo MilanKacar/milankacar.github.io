@@ -11,7 +11,7 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 ## 🚀 About this blog:
 
-In this blog, we'll explore a variety of topics. The chart below highlights my personal interests, showing which subjects I’m most passionate about:
+In this blog, we'll explore a variety of topics. The chart below highlights my personal interests, showing which subjects I’m most passionate about 📊💡:
 <!-- Add a canvas element to display the radial chart -->
 <canvas id="radialChart" width="400" height="400"></canvas>
 
@@ -65,6 +65,8 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
     }
   });
 </script>
+
+At the outset, I expect most topics will revolve around software development. However, as this journey unfolds, I’m excited to see how my interests evolve and where this blog takes us. 🚀
 
 --- 
 
