@@ -2,6 +2,8 @@ name: Fetch Google Analytics Data (GA4)
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
 
 jobs:
   fetch-analytics:
