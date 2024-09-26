@@ -152,5 +152,5 @@ PCA simplifies complex datasets by transforming correlated variables into a smal
 
 
 
-By reducing dimensionality, PCA allows portfolio managers and analysts to focus on the most important factors driving asset performance, enabling better decision-making. Whether you’re analyzing stock returns, bond prices, or constructing a risk model, PCA equips you with the tools to cut through the noise and focus on what matters most. 🌟
+By reducing dimensionality, PCA allows portfolio managers and analysts to focus on the most important factors driving asset performance, enabling better decision-making. Whether you’re analyzing stock returns, bond prices, or constructing a risk model, PCA equips you with the tools to cut through the noise and focus on what matters most.
 
