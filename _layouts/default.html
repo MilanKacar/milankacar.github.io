@@ -67,15 +67,16 @@
       fetch('{{ site.baseurl }}/visits.json')
         .then(response => response.json())
         .then(data => {
-          // Extract the active users from the JSON
-          const activeUsers = data.data[0].activeUsers;
-          // Insert the active users into the placeholder in about.md
-          document.getElementById('activeUsers').textContent = activeUsers;
+          // Sum all activeUsers from the JSON data
+          let totalActiveUsers = data.data.reduce((sum, entry) => sum + parseInt(entry.activeUsers), 0);
+          // Insert the total active users into the placeholder in about.md
+          document.getElementById('activeUsers').textContent = totalActiveUsers;
         })
         .catch(error => {
           console.error('Error fetching the JSON data:', error);
         });
     });
   </script>
+
   </body>
 </html>
