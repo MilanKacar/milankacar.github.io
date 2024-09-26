@@ -1,7 +1,7 @@
 ---
 layout: post
 title: " #7 🚀 BloombergGPT: A Giant Leap for Finance NLP 💸"
-categories: Finance AI
+categories: Finance AI LLM
 ---
 
 In the world of **NLP (Natural Language Processing)**, general models like GPT-3 and PaLM have been leading the way with their versatility in tasks ranging from answering questions to generating creative text. But what about specialized domains like **Finance**? Enter **BloombergGPT** — a groundbreaking language model designed specifically to tackle the complexities of the financial industry. 🌍
