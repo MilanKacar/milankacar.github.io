@@ -109,7 +109,7 @@ $$
 Where **λ₁, λ₂, ...** are the eigenvalues, and **v₁, v₂, ...** are the eigenvectors.
 - The **eigenvectors** represent the principal components, and the **eigenvalues** provide their corresponding magnitudes of risk contribution.
 
-PCA helps us reduce the dimensionality of our data, allowing us to express the entire 50x50 covariance matrix in terms of a smaller set of **principal components**.
+PCA helps us reduce the dimensionality of our data, allowing us to express the entire 50x50 covariance matrix in terms of a smaller set of **principal components**. You can find more about it [here](). 
 
 ---
 
