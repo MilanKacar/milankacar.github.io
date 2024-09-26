@@ -37,20 +37,48 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
         label: 'Number of Posts',
         data: postCounts,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 99, 132, 0.2)',   // Red
+          'rgba(54, 162, 235, 0.2)',   // Blue
+          'rgba(255, 206, 86, 0.2)',   // Yellow
+          'rgba(75, 192, 192, 0.2)',   // Teal
+          'rgba(153, 102, 255, 0.2)',  // Purple
+          'rgba(255, 159, 64, 0.2)',   // Orange
+          'rgba(100, 181, 246, 0.2)',  // Light Blue
+          'rgba(240, 98, 146, 0.2)',   // Pink
+          'rgba(255, 183, 77, 0.2)',   // Amber
+          'rgba(77, 182, 172, 0.2)',   // Aqua
+          'rgba(126, 87, 194, 0.2)',   // Deep Purple
+          'rgba(189, 189, 189, 0.2)',  // Grey
+          'rgba(255, 238, 88, 0.2)',   // Lime
+          'rgba(255, 87, 34, 0.2)',    // Deep Orange
+          'rgba(66, 165, 245, 0.2)',   // Sky Blue
+          'rgba(38, 198, 218, 0.2)',   // Cyan
+          'rgba(102, 187, 106, 0.2)',  // Green
+          'rgba(255, 193, 7, 0.2)',    // Golden Yellow
+          'rgba(156, 204, 101, 0.2)',  // Light Green
+          'rgba(255, 112, 67, 0.2)',   // Coral Orange
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(255, 99, 132, 1)',   // Red
+          'rgba(54, 162, 235, 1)',   // Blue
+          'rgba(255, 206, 86, 1)',   // Yellow
+          'rgba(75, 192, 192, 1)',   // Teal
+          'rgba(153, 102, 255, 1)',  // Purple
+          'rgba(255, 159, 64, 1)',   // Orange
+          'rgba(100, 181, 246, 1)',  // Light Blue
+          'rgba(240, 98, 146, 1)',   // Pink
+          'rgba(255, 183, 77, 1)',   // Amber
+          'rgba(77, 182, 172, 1)',   // Aqua
+          'rgba(126, 87, 194, 1)',   // Deep Purple
+          'rgba(189, 189, 189, 1)',  // Grey
+          'rgba(255, 238, 88, 1)',   // Lime
+          'rgba(255, 87, 34, 1)',    // Deep Orange
+          'rgba(66, 165, 245, 1)',   // Sky Blue
+          'rgba(38, 198, 218, 1)',   // Cyan
+          'rgba(102, 187, 106, 1)',  // Green
+          'rgba(255, 193, 7, 1)',    // Golden Yellow
+          'rgba(156, 204, 101, 1)',  // Light Green
+          'rgba(255, 112, 67, 1)',   // Coral Orange
         ],
         borderWidth: 1
       }]
@@ -65,6 +93,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
     }
   });
 </script>
+
 
 At the outset, I expect most topics will revolve around software development. However, as this journey unfolds, I’m excited to see how my interests evolve and where this blog takes us. 🚀
 
