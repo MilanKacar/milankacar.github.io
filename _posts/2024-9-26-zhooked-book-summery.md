@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#9 How to Build Habit-Forming Products: Lessons from *Hooked* by Nir Eyal 🚀"
+title: "#9 How to Build Habit-Forming Products: Lessons from Hooked by Nir Eyal 🚀"
 categories: Self-development
 ---
 
