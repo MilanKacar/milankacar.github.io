@@ -2,7 +2,11 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "118"
+      "activeUsers": "863"
+    },
+    {
+      "city": "(not set)",
+      "activeUsers": "9"
     }
   ]
 }
