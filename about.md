@@ -68,6 +68,8 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
 
 At the outset, I expect most topics will revolve around software development. However, as this journey unfolds, I’m excited to see how my interests evolve and where this blog takes us. 🚀
 
+*📈 Active Users according to Google Analytics: <span id="activeUsers"></span>*
+
 --- 
 
 ## 🚀 Technical Skills
@@ -245,5 +247,3 @@ At the outset, I expect most topics will revolve around software development. Ho
 ### Contact me
 
 [milankacar@live.com](mailto:milankacar@live.com)
-
-**📈 Active Users**: <span id="activeUsers"></span>
