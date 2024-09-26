@@ -213,6 +213,7 @@ At the outset, I expect most topics will revolve around software development. Ho
 - Focus on electric vehicle testing and automation
   
 *overlaping with Teaching Assistant position*
+
 ---
 
 ## 📚 Education
