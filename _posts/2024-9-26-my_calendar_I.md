@@ -1,10 +1,10 @@
 ---
 layout: post
-title: " #8 729. My Calendar I 🚀 "
+title: "#8 729. My Calendar I 🚀 "
 categories: LeetCode Programming
 ---
 
-In this post, we will tackle the problem of implementing a **simple calendar** that allows booking events without causing a **double booking**. We'll explore the solution and discuss the time complexity involved. Let's dive into it!
+In this post, we will tackle the problem of implementing a **simple calendar** that allows booking events without causing a **double booking**. After exploring a basic solution, we'll introduce an **optimized solution using a balanced binary search tree (BST)** to improve efficiency for large datasets. Let’s dive in!
 
 ## 📋 Problem Statement
 
@@ -31,17 +31,11 @@ Explanation:
 
 ---
 
-## 🐢 Solution
+## 🐢 Basic Solution
 
-A **simple approach** is to maintain a list of booked intervals and check for overlaps every time a new event is requested. If no overlap is found, the new event is added.
+A **basic approach** is to maintain a list of booked intervals and check for overlaps every time a new event is requested. While simple, this approach has a time complexity of **O(n²)** because it checks every existing event, making it inefficient for large inputs.
 
-### Approach 💡
-
-1. **Initialize an empty list** to store the events.
-2. **Check for Overlaps**: For each new booking request, iterate through the existing events and check if it overlaps with any of them.
-3. **Add the Event**: If no overlap is found, add the event to the calendar.
-
-### 🧑‍💻 Code Implementation
+### Code Implementation
 
 ```python
 class MyCalendar:
@@ -57,24 +51,84 @@ class MyCalendar:
         return True
 ```
 
-### Explanation:
+### 🕰️ Time Complexity
 
-- **Initialization**: We create an empty list `self.calendar` to hold all booked intervals.
-- **Checking Overlaps**: For each new booking request, we iterate through the already booked intervals and check if the new event overlaps with any existing one. This is done by checking if the new event ends before the start of an existing event or starts after the end of an existing event. If neither of these conditions holds, an overlap occurs, and the booking request is rejected.
-- **Booking**: If no overlap is found, we append the new event to the list of booked events.
+- For each booking, we check for overlaps with all previously booked events, leading to **O(n)** time for each booking.
+- After `n` bookings, the total time complexity is **O(n²)**.
+
+This approach works for small input sizes but can be slow when dealing with larger datasets.
 
 ---
 
-## 🕰️ Time Complexity
+## ⚡ Optimized Solution: Using Balanced BST (TreeMap)
 
-- **For each booking**, we need to check for overlaps with all previously booked events. Since there are `n` bookings, and we compare the new event against all of them, the **time complexity** for each booking is **O(n)**.
+To improve efficiency, we can use a **balanced binary search tree (BST)** to store events in a sorted manner and efficiently check for overlaps. In Python, we can use the `SortedDict` from the `sortedcontainers` module, which mimics a balanced BST and supports **O(log n)** time complexity for insertion and search operations.
+
+### Optimized Approach 💡
+
+1. **Use a BST**: Store the events in a balanced binary search tree, sorted by their start times.
+2. **Check for Overlaps Efficiently**: For each new booking, we only need to check the event that comes just before and just after the new event, as they are the only ones that could potentially overlap.
+
+### 🚀 Code Implementation
+
+```python
+from sortedcontainers import SortedDict
+
+class MyCalendar:
+
+    def __init__(self):
+        self.calendar = SortedDict()
+
+    def book(self, start: int, end: int) -> bool:
+        # Find the nearest event before the new event
+        idx = self.calendar.bisect_right(start)
+        
+        # Check if the previous event overlaps with the new one
+        if idx > 0 and self.calendar.peekitem(idx - 1)[1] > start:
+            return False
+        
+        # Check if the next event overlaps with the new one
+        if idx < len(self.calendar) and self.calendar.peekitem(idx)[0] < end:
+            return False
+        
+        # No overlaps found, insert the new event
+        self.calendar[start] = end
+        return True
+```
+
+### Explanation:
+
+- **Initialization**: We use `SortedDict` to store the calendar events. This data structure automatically keeps the events sorted by their start time.
+- **Checking Overlaps**:
+  - We first find the nearest event **before** the new event using the `bisect_right` method.
+  - If the previous event ends after the new event starts, or the next event starts before the new event ends, there is an overlap.
+  - If no overlap is found, we add the new event to the calendar.
   
-- Therefore, the total time complexity for making `n` bookings is **O(n²)**. This can be inefficient as the number of bookings increases, especially for large inputs. But in this case this is not the problem since the day has only 24 hours and our granularity is `HH:MM`.
+### 📝 Example Walkthrough
+
+Let's say we want to book events with the following times: `[10, 20]`, `[15, 25]`, and `[20, 30]`.
+
+1. **First booking**: `[10, 20]` – No events yet, so it’s booked successfully.
+2. **Second booking**: `[15, 25]` – The previous event `[10, 20]` overlaps because `15 < 20`. Hence, booking is rejected.
+3. **Third booking**: `[20, 30]` – No overlap with previous or next event, so it’s booked successfully.
+
+---
+
+## 🕰️ Time Complexity of Optimized Solution
+
+- **Insertion and Search**: Both operations take **O(log n)** due to the use of a balanced BST (`SortedDict`).
+- **Overall Complexity**: Since each booking operation is **O(log n)**, for `n` bookings, the total time complexity is **O(n log n)**, which is much faster than the basic solution for large inputs.
 
 ---
 
 ## 📝 Conclusion
 
-The **simple solution** discussed here is clear and easy to implement. While it has a **time complexity of O(n²)**, it works well for small to moderate inputs. For larger datasets, you might consider optimizing the solution by using data structures like balanced binary search trees (BST) to reduce the complexity to **O(log n)** for each booking.
+### 🐢 Basic Solution:
+- **Time Complexity**: O(n²)  
+  Simple but inefficient for larger datasets.
 
-This problem showcases how even simple logic can become inefficient as input sizes grow, highlighting the importance of time complexity considerations when designing algorithms. Happy coding! 😄
+### ⚡ Optimized Solution (Using BST):
+- **Time Complexity**: O(n log n)  
+  By using a balanced binary search tree (BST), we can efficiently check for overlaps and insert new bookings, making this solution much more suitable for large datasets.
+
+The optimized approach significantly reduces the complexity from **O(n²)** to **O(n log n)**, making it ideal for applications with a large number of events. When working with large-scale systems, it's important to consider such optimizations to improve performance. Happy coding! 😄
