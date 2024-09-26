@@ -181,6 +181,7 @@ At the outset, I expect most topics will revolve around software development. Ho
 - Financial analysis and cloud computing
 - AI & ML tasks: demand forecasting, dynamic pricing
 - Course instruction and research development
+*overlaping with Data Engineer / Team Lead position*
 
 ### **Data Engineer / Team Lead**  
 *Gateway Ventures GmbH*  
@@ -188,7 +189,17 @@ At the outset, I expect most topics will revolve around software development. Ho
 🗓️ Aug 2023 – Present  
 - Startup valuation models and pitch deck analysis  
 - Data mining, lake construction, and management  
-- Leading data scraping projects  
+- Leading data scraping projects
+*overlaping with Data Scientist & Engineer position*
+
+### **Teaching Assistant**  
+*TU Graz*  
+📍 Graz, Austria  
+🗓️ Mar 2021 – Jan 2022  
+- Integrated navigation
+- Sensor fusion
+- Indoor navigation
+*overlaping with Software Engineering position*
 
 ### **Software Engineer**  
 *TU Graz*  
@@ -197,7 +208,7 @@ At the outset, I expect most topics will revolve around software development. Ho
 - Software architecture and data analysis  
 - Project management and ML forecasting  
 - Focus on electric vehicle testing and automation  
-
+*overlaping with Teaching Assistant position*
 ---
 
 ## 📚 Education
