@@ -2,11 +2,15 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "863"
+      "activeUsers": "1833"
     },
     {
       "city": "(not set)",
       "activeUsers": "9"
+    },
+    {
+      "city": "Germany",
+      "activeUsers": "3"
     }
   ]
 }
