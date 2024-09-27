@@ -287,8 +287,3 @@ At the outset, I expect most topics will revolve around software development. Ho
 - **🏋️‍♂️ Fitness**: Passionate about fitness and healthy living  
 - **✈️ Traveling**: An avid traveler always looking for new adventures  
 - **📈 Trading**: Enthusiastic about market analysis and trading strategies
-
-
-### Contact me
-
-[milankacar@live.com](mailto:milankacar@live.com)
