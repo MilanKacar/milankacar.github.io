@@ -22,8 +22,8 @@ In this challenge, we need to create a histogram that shows how many tweets user
 
 **Example Input**:
 
-<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
-  <thead>
+<table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
+  <thead style="background-color: #c4c2bb; color: black;">
     <tr style="background-color: #f2f2f2;">
       <th style="border: 1px solid black; padding: 8px;">tweet_id</th>
       <th style="border: 1px solid black; padding: 8px;">user_id</th>
@@ -88,8 +88,8 @@ This challenge involves finding candidates who are proficient in **Python**, **T
 **Example Input**:
 
 
-<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
-  <thead>
+<table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
+  <thead style="background-color: #c4c2bb; color: black;">
     <tr style="background-color: #f2f2f2;">
       <th style="border: 1px solid black; padding: 8px;">candidate_id</th>
       <th style="border: 1px solid black; padding: 8px;">skill</th>
@@ -150,8 +150,8 @@ Here, we need to find Facebook pages that have received **zero** likes. The task
 **Example Input**:
 
 
-<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
-  <thead>
+<table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
+  <thead style="background-color: #c4c2bb; color: black;">
     <tr style="background-color: #f2f2f2;">
       <th style="border: 1px solid black; padding: 8px;">page_id</th>
       <th style="border: 1px solid black; padding: 8px;">page_name</th>
