@@ -4,14 +4,14 @@ title: "#12 Tackling DataLemur SQL Challenges for Data Science Interviews 🧠�
 categories: [Data Science]
 ---
 
-Data Science interviews often test your SQL skills, and being prepared can make all the difference. In this post, we’ll break down three SQL interview questions from Twitter, LinkedIn, and Facebook! Let’s dive into the problems and their solutions. 🚀
+Mastering SQL is a crucial skill for data science interviews. Today, we’re diving into three SQL challenges from **DataLemur**. These problems not only help you sharpen your SQL skills but also give you practical insights into real-world data science scenarios. Let’s explore the solutions! 🚀
 
 ---
 
 ### 1. Histogram of Tweets [Twitter SQL Interview Question] 🐦
 
 **Description**  
-For this question, you need to calculate a histogram of tweets posted per user in 2022. This means you’ll group users by the number of tweets they posted and return the count of users in each group.
+In this challenge, we need to create a histogram that shows how many tweets users posted in 2022. The goal is to group users based on their tweet count and return the number of users in each group.
 
 **Schema**:  
 - **tweets** table:
@@ -21,12 +21,45 @@ For this question, you need to calculate a histogram of tweets posted per user i
   - `tweet_date` (timestamp)
 
 **Example Input**:
-| tweet_id | user_id | msg                                              | tweet_date        |
-|----------|---------|--------------------------------------------------|-------------------|
-| 214252   | 111     | Am considering taking Tesla private at $420...   | 12/30/2021 00:00:00|
-| 739252   | 111     | Despite the constant negative press covfefe      | 01/01/2022 00:00:00|
-| 846402   | 111     | Following @NickSinghTech changed my life!        | 02/14/2022 00:00:00|
-| 241425   | 254     | If the salary is so competitive...               | 03/01/2022 00:00:00|
+
+```html
+<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid black; padding: 8px;">tweet_id</th>
+      <th style="border: 1px solid black; padding: 8px;">user_id</th>
+      <th style="border: 1px solid black; padding: 8px;">msg</th>
+      <th style="border: 1px solid black; padding: 8px;">tweet_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">214252</td>
+      <td style="border: 1px solid black; padding: 8px;">111</td>
+      <td style="border: 1px solid black; padding: 8px;">Am considering taking Tesla private at $420...</td>
+      <td style="border: 1px solid black; padding: 8px;">12/30/2021 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">739252</td>
+      <td style="border: 1px solid black; padding: 8px;">111</td>
+      <td style="border: 1px solid black; padding: 8px;">Despite the constant negative press covfefe</td>
+      <td style="border: 1px solid black; padding: 8px;">01/01/2022 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">846402</td>
+      <td style="border: 1px solid black; padding: 8px;">111</td>
+      <td style="border: 1px solid black; padding: 8px;">Following @NickSinghTech changed my life!</td>
+      <td style="border: 1px solid black; padding: 8px;">02/14/2022 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">241425</td>
+      <td style="border: 1px solid black; padding: 8px;">254</td>
+      <td style="border: 1px solid black; padding: 8px;">If the salary is so competitive...</td>
+      <td style="border: 1px solid black; padding: 8px;">03/01/2022 00:00:00</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 **Solution**:
 ```sql
@@ -41,15 +74,12 @@ GROUP BY tweet_count
 ORDER BY tweet_count;
 ```
 
-**Explanation**:  
-We first filter tweets from 2022, group by `user_id` to get each user's tweet count, and then group by tweet count to get the number of users in each bucket. The final result gives the tweet histogram. 📊
-
 ---
 
 ### 2. Data Science Skills [LinkedIn SQL Interview Question] 🧑‍💻
 
 **Description**  
-Your task is to find candidates who are proficient in **Python**, **Tableau**, and **PostgreSQL**. Let’s identify those perfect candidates! 🔥
+This challenge involves finding candidates who are proficient in **Python**, **Tableau**, and **PostgreSQL**. We're tasked with listing candidates who have all these skills and ordering them by candidate ID.
 
 **Schema**:  
 - **candidates** table:
@@ -57,13 +87,39 @@ Your task is to find candidates who are proficient in **Python**, **Tableau**, a
   - `skill` (varchar)
 
 **Example Input**:
-| candidate_id | skill        |
-|--------------|--------------|
-| 123          | Python       |
-| 123          | Tableau      |
-| 123          | PostgreSQL   |
-| 234          | R            |
-| 345          | Python       |
+
+```html
+<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid black; padding: 8px;">candidate_id</th>
+      <th style="border: 1px solid black; padding: 8px;">skill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">123</td>
+      <td style="border: 1px solid black; padding: 8px;">Python</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">123</td>
+      <td style="border: 1px solid black; padding: 8px;">Tableau</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">123</td>
+      <td style="border: 1px solid black; padding: 8px;">PostgreSQL</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">234</td>
+      <td style="border: 1px solid black; padding: 8px;">R</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">345</td>
+      <td style="border: 1px solid black; padding: 8px;">Python</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 **Solution**:
 ```sql
@@ -75,15 +131,12 @@ HAVING COUNT(DISTINCT skill) = 3
 ORDER BY candidate_id;
 ```
 
-**Explanation**:  
-We use a `WHERE` clause to filter out the candidates who have the required skills. Then, we group by `candidate_id` and ensure each candidate has all three distinct skills by using `HAVING COUNT(DISTINCT skill) = 3`. 🎯
-
 ---
 
 ### 3. Page With No Likes [Facebook SQL Interview Question] 👍❌
 
 **Description**  
-In this task, you’ll query the pages that have **zero** likes. It’s time to figure out which pages need a little more love on Facebook! ❤️
+Here, we need to find Facebook pages that have received **zero** likes. The task is to return the IDs of these pages, sorted in ascending order.
 
 **Schema**:  
 - **pages** table:
@@ -96,11 +149,31 @@ In this task, you’ll query the pages that have **zero** likes. It’s time to 
   - `liked_date` (datetime)
 
 **Example Input**:
-| page_id | page_name         |
-|---------|-------------------|
-| 20001   | SQL Solutions      |
-| 20045   | Brain Exercises    |
-| 20701   | Tips for Data Analysts|
+
+```html
+<table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid black; padding: 8px;">page_id</th>
+      <th style="border: 1px solid black; padding: 8px;">page_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">20001</td>
+      <td style="border: 1px solid black; padding: 8px;">SQL Solutions</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">20045</td>
+      <td style="border: 1px solid black; padding: 8px;">Brain Exercises</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">20701</td>
+      <td style="border: 1px solid black; padding: 8px;">Tips for Data Analysts</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 **Solution**:
 ```sql
@@ -111,11 +184,8 @@ WHERE page_likes.page_id IS NULL
 ORDER BY page_id;
 ```
 
-**Explanation**:  
-We use a `LEFT JOIN` to join the `pages` table with `page_likes`. Pages with no likes will have `NULL` values for `page_likes.page_id`, so we filter those out with the `WHERE` clause. The result is a list of page IDs with no likes! 🚫
-
 ---
 
 ### Wrapping Up 🎉
 
-These SQL challenges test essential skills for data science interviews. Whether it's analyzing tweet patterns, matching candidates to job requirements, or identifying unpopular Facebook pages, understanding how to approach and solve these problems can give you an edge. Good luck on your data science journey! 🌟
+These DataLemur SQL challenges are a great way to test your skills and prepare for data science interviews. Whether it’s creating histograms of user activity, identifying top candidates, or filtering data with joins, these exercises cover key SQL concepts. Stay tuned for more data science insights! 💪
