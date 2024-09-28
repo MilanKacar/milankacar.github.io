@@ -24,40 +24,41 @@ In this challenge, we need to create a histogram that shows how many tweets user
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
   <thead style="background-color: #c4c2bb; color: black;">
-    <tr style="background-color: #f2f2f2;">
-      <th style="border: 1px solid black; padding: 8px;">tweet_id</th>
-      <th style="border: 1px solid black; padding: 8px;">user_id</th>
-      <th style="border: 1px solid black; padding: 8px;">msg</th>
-      <th style="border: 1px solid black; padding: 8px;">tweet_date</th>
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">tweet_id</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">user_id</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">msg</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">tweet_date</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">214252</td>
-      <td style="border: 1px solid black; padding: 8px;">111</td>
-      <td style="border: 1px solid black; padding: 8px;">Am considering taking Tesla private at $420...</td>
-      <td style="border: 1px solid black; padding: 8px;">12/30/2021 00:00:00</td>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">214252</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">111</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Am considering taking Tesla private at $420...</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">12/30/2021 00:00:00</td>
     </tr>
     <tr>
-      <td style="border: 1px solid black; padding: 8px;">739252</td>
-      <td style="border: 1px solid black; padding: 8px;">111</td>
-      <td style="border: 1px solid black; padding: 8px;">Despite the constant negative press covfefe</td>
-      <td style="border: 1px solid black; padding: 8px;">01/01/2022 00:00:00</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">739252</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">111</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Despite the constant negative press covfefe</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">01/01/2022 00:00:00</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">846402</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">111</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Following @NickSinghTech changed my life!</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">02/14/2022 00:00:00</td>
     </tr>
     <tr>
-      <td style="border: 1px solid black; padding: 8px;">846402</td>
-      <td style="border: 1px solid black; padding: 8px;">111</td>
-      <td style="border: 1px solid black; padding: 8px;">Following @NickSinghTech changed my life!</td>
-      <td style="border: 1px solid black; padding: 8px;">02/14/2022 00:00:00</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">241425</td>
-      <td style="border: 1px solid black; padding: 8px;">254</td>
-      <td style="border: 1px solid black; padding: 8px;">If the salary is so competitive...</td>
-      <td style="border: 1px solid black; padding: 8px;">03/01/2022 00:00:00</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">241425</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">254</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">If the salary is so competitive...</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">03/01/2022 00:00:00</td>
     </tr>
   </tbody>
 </table>
+
 
 
 **Solution**:
@@ -90,34 +91,35 @@ This challenge involves finding candidates who are proficient in **Python**, **T
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
   <thead style="background-color: #c4c2bb; color: black;">
-    <tr style="background-color: #f2f2f2;">
-      <th style="border: 1px solid black; padding: 8px;">candidate_id</th>
-      <th style="border: 1px solid black; padding: 8px;">skill</th>
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">candidate_id</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">skill</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">123</td>
-      <td style="border: 1px solid black; padding: 8px;">Python</td>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">123</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Python</td>
     </tr>
     <tr>
-      <td style="border: 1px solid black; padding: 8px;">123</td>
-      <td style="border: 1px solid black; padding: 8px;">Tableau</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">123</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Tableau</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">123</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">PostgreSQL</td>
     </tr>
     <tr>
-      <td style="border: 1px solid black; padding: 8px;">123</td>
-      <td style="border: 1px solid black; padding: 8px;">PostgreSQL</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">234</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">R</td>
     </tr>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">234</td>
-      <td style="border: 1px solid black; padding: 8px;">R</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">345</td>
-      <td style="border: 1px solid black; padding: 8px;">Python</td>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">345</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Python</td>
     </tr>
   </tbody>
 </table>
+
 
 
 **Solution**:
@@ -152,26 +154,27 @@ Here, we need to find Facebook pages that have received **zero** likes. The task
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
   <thead style="background-color: #c4c2bb; color: black;">
-    <tr style="background-color: #f2f2f2;">
-      <th style="border: 1px solid black; padding: 8px;">page_id</th>
-      <th style="border: 1px solid black; padding: 8px;">page_name</th>
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">page_id</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">page_name</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">20001</td>
-      <td style="border: 1px solid black; padding: 8px;">SQL Solutions</td>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">20001</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">SQL Solutions</td>
     </tr>
     <tr>
-      <td style="border: 1px solid black; padding: 8px;">20045</td>
-      <td style="border: 1px solid black; padding: 8px;">Brain Exercises</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">20045</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Brain Exercises</td>
     </tr>
-    <tr>
-      <td style="border: 1px solid black; padding: 8px;">20701</td>
-      <td style="border: 1px solid black; padding: 8px;">Tips for Data Analysts</td>
+    <tr style="background-color: #f9f9f9;">
+      <td style="border: 1px solid #ddd; padding: 12px;">20701</td>
+      <td style="border: 1px solid #ddd; padding: 12px;">Tips for Data Analysts</td>
     </tr>
   </tbody>
 </table>
+
 
 
 **Solution**:
