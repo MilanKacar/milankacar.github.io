@@ -22,7 +22,6 @@ In this challenge, we need to create a histogram that shows how many tweets user
 
 **Example Input**:
 
-```html
 <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
   <thead>
     <tr style="background-color: #f2f2f2;">
@@ -59,7 +58,7 @@ In this challenge, we need to create a histogram that shows how many tweets user
     </tr>
   </tbody>
 </table>
-```
+
 
 **Solution**:
 ```sql
@@ -88,7 +87,7 @@ This challenge involves finding candidates who are proficient in **Python**, **T
 
 **Example Input**:
 
-```html
+
 <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
   <thead>
     <tr style="background-color: #f2f2f2;">
@@ -119,7 +118,7 @@ This challenge involves finding candidates who are proficient in **Python**, **T
     </tr>
   </tbody>
 </table>
-```
+
 
 **Solution**:
 ```sql
@@ -150,7 +149,7 @@ Here, we need to find Facebook pages that have received **zero** likes. The task
 
 **Example Input**:
 
-```html
+
 <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
   <thead>
     <tr style="background-color: #f2f2f2;">
@@ -173,7 +172,7 @@ Here, we need to find Facebook pages that have received **zero** likes. The task
     </tr>
   </tbody>
 </table>
-```
+
 
 **Solution**:
 ```sql
