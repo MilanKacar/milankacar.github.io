@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#12 Tackling DataLemur SQL Challenges for Data Science Interviews 🧠💡"
+title: "#14 432. All O`one Data Structure 🧠💡"
 categories: [LeetCode, Programming]
 ---
 
