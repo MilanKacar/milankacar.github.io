@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#12 Tackling DataLemur SQL Challenges for Data Science Interviews 🧠💡"
-categories: LeetCode
+categories: [LeetCode, Programming]
 ---
 
 ## 🚀 Designing an All O(1) Data Structure with Python 🐍
