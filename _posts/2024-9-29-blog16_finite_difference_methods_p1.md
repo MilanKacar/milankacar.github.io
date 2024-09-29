@@ -213,6 +213,8 @@ plt.show()
 - **Visualization:**
   The plot showcases how the option price varies with different stock prices at the initial time ($$ t = 0 $$), offering insights into the option's sensitivity to the underlying asset's price.
 
+![image info](/images/finite_difference.png)
+
 ---
 
 ### 📈 **Real-World Finance Example: Hedging an Options Portfolio**
