@@ -31,36 +31,36 @@ S_T = S_0 \times \exp\left(\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T
 $$
 
 Where:
-- \( S_T $$: Stock price at time \( T $$
-- \( S_0 $$: Current stock price (at \( T = 0 $$)
-- \( r $$: Risk-free interest rate (annualized)
-- \( \sigma $$: Volatility of the stock (annualized)
-- \( T $$: Time to maturity (in years)
-- \( Z $$: Random variable drawn from the standard normal distribution (i.e., \( Z \sim N(0,1) $$)
+- $$ S_T $$: Stock price at time $$ T $$
+- $$ S_0 $$: Current stock price (at $$ T = 0 $$)
+- $$ r $$: Risk-free interest rate (annualized)
+- $$ \sigma $$: Volatility of the stock (annualized)
+- $$ T $$: Time to maturity (in years)
+- $$ Z $$: Random variable drawn from the standard normal distribution (i.e., $$ Z \sim N(0,1) $$)
 
-This formula essentially simulates the future price of a stock by incorporating both **deterministic growth** (through the risk-free rate \( r $$) and **random shocks** (through volatility \( \sigma $$ and random normal variable \( Z $$).
+This formula essentially simulates the future price of a stock by incorporating both **deterministic growth** (through the risk-free rate $$ r $$) and **random shocks** (through volatility $$ \sigma $$ and random normal variable $$ Z $$).
 
 ---
 
 ### Step-by-Step Monte Carlo Simulation Process 🔄
 
 1. **Simulate Stock Price Paths** 🎲  
-   Using the GBM formula, simulate the stock price at time \( T $$ for each path (or iteration) based on different values of \( Z $$ drawn from a normal distribution. Each simulation represents a potential future path that the stock price might follow.
+   Using the GBM formula, simulate the stock price at time $$ T $$ for each path (or iteration) based on different values of $$ Z $$ drawn from a normal distribution. Each simulation represents a potential future path that the stock price might follow.
 
    $$
    S_T^{(i)} = S_0 \times \exp\left(\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} Z^{(i)} \right)
    $$
-   - \( S_T^{(i)} $$ represents the simulated stock price for the \( i $$-th simulation.
+   - $$ S_T^{(i)} $$ represents the simulated stock price for the $$ i $$-th simulation.
 
 2. **Calculate the Payoff** 💵  
-   For each simulation, calculate the payoff at time \( T $$ for the option. In the case of a **European call option**, the payoff is the positive difference between the stock price and the strike price:
+   For each simulation, calculate the payoff at time $$ T $$ for the option. In the case of a **European call option**, the payoff is the positive difference between the stock price and the strike price:
 
    $$
    \text{Payoff}^{(i)} = \max(S_T^{(i)} - K, 0)
    $$
 
 3. **Discount to Present Value** ⏳  
-   The payoff is at time \( T $$, so we need to discount it to the present using the risk-free interest rate:
+   The payoff is at time $$ T $$, so we need to discount it to the present using the risk-free interest rate:
 
    $$
    \text{Discounted Payoff}^{(i)} = \frac{\text{Payoff}^{(i)}}{(1 + r)^T}
@@ -73,7 +73,7 @@ This formula essentially simulates the future price of a stock by incorporating 
    $$
 
 4. **Repeat for Multiple Simulations** 🔁  
-   Repeat the above steps \( N $$ times (e.g., 10,000 or 100,000 simulations) to generate a large set of possible outcomes.
+   Repeat the above steps $$ N $$ times (e.g., 10,000 or 100,000 simulations) to generate a large set of possible outcomes.
 
 5. **Calculate the Average Payoff** 📊  
    After running all simulations, compute the **average** of the discounted payoffs. This average represents the estimated price of the option:
@@ -87,11 +87,11 @@ This formula essentially simulates the future price of a stock by incorporating 
 ### Real-World Example: Pricing a European Call Option on Tesla Stock 🚗⚡
 
 Let’s say you want to price a European call option for **Tesla (TSLA)** stock, with the following details:
-- Current stock price: \( S_0 = 250 $$ USD
-- Strike price: \( K = 260 $$ USD
-- Time to maturity: \( T = 1 $$ year
-- Risk-free rate: \( r = 0.04 $$ (4%)
-- Volatility: \( \sigma = 0.3 $$ (30%)
+- Current stock price: $$ S_0 = 250 $$ USD
+- Strike price: $$ K = 260 $$ USD
+- Time to maturity: $$ T = 1 $$ year
+- Risk-free rate: $$ r = 0.04 $$ (4%)
+- Volatility: $$ \sigma = 0.3 $$ (30%)
 
 Using Monte Carlo simulation, you can estimate what the option might be worth based on a range of potential future stock prices for Tesla.
 
@@ -128,11 +128,11 @@ Estimated European Call Option Price: 15.58 USD
 Let's break down the example output from the Python code used for **pricing a European call option** on Tesla’s stock.
 
 ### Recap of the Parameters:
-- **Current Stock Price (\(S_0\))**: $250  
-- **Strike Price (\(K\))**: $260  
-- **Time to Maturity (\(T\))**: 1 year  
-- **Risk-free Interest Rate (\(r\))**: 4% (0.04)  
-- **Volatility (\(\sigma\))**: 30% (0.3)  
+- **Current Stock Price ($$S_0\))**: $250  
+- **Strike Price ($$K\))**: $260  
+- **Time to Maturity ($$T\))**: 1 year  
+- **Risk-free Interest Rate ($$r\))**: 4% (0.04)  
+- **Volatility ($$\sigma\))**: 30% (0.3)  
 - **Number of Simulations**: 10,000
 
 The Python function `monte_carlo_option_price` simulates 10,000 different potential paths for Tesla’s stock price over one year, using a random draw for each simulation based on the **Geometric Brownian Motion (GBM)** model.
@@ -156,10 +156,10 @@ Estimated European Call Option Price: 15.58 USD
 
 ### Why This Price? 🤔
 
-- **Volatility (\( \sigma \))**:  
+- **Volatility ($$ \sigma \))**:  
    Tesla is a highly volatile stock (30%), meaning its price can fluctuate significantly. Higher volatility tends to **increase option prices** because the likelihood of hitting higher payoffs increases with greater uncertainty.
   
-- **Risk-Free Rate (\( r \))**:  
+- **Risk-Free Rate ($$ r \))**:  
    The risk-free rate is 4%, and this influences the discount factor applied to future payoffs. Higher interest rates **decrease** the present value of future payoffs, but 4% is relatively moderate.
 
 - **Simulations**:  
@@ -180,7 +180,7 @@ Monte Carlo simulations, while powerful, can require millions of iterations to r
 1. **Antithetic Variates** 🌀  
    Use pairs of random numbers, where one is the opposite (negative) of the other. This technique helps reduce variance by canceling out some of the randomness.
 
-   For each \( Z $$, you also simulate using \( -Z $$ and take the average of both results:
+   For each $$ Z $$, you also simulate using $$ -Z $$ and take the average of both results:
    $$
    S_T^{(i)} = S_0 \times \exp\left(\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} Z^{(i)} \right)
    $$
@@ -196,10 +196,10 @@ Monte Carlo simulations, while powerful, can require millions of iterations to r
 ### Time Complexity of Monte Carlo Simulations ⏱️
 
 - **Basic Monte Carlo Simulation**:  
-   The time complexity of a Monte Carlo simulation is \( O(N) $$, where \( N $$ is the number of simulations. Each simulation requires drawing random numbers, calculating the future stock price, and discounting the payoff.
+   The time complexity of a Monte Carlo simulation is $$ O(N) $$, where $$ N $$ is the number of simulations. Each simulation requires drawing random numbers, calculating the future stock price, and discounting the payoff.
 
 - **With Variance Reduction**:  
-   Even though the theoretical complexity is still \( O(N) $$, variance reduction techniques reduce the number of simulations needed for a certain accuracy, effectively speeding up the process.
+   Even though the theoretical complexity is still $$ O(N) $$, variance reduction techniques reduce the number of simulations needed for a certain accuracy, effectively speeding up the process.
 
 ---
 
