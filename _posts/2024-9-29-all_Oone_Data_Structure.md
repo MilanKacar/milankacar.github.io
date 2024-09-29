@@ -4,8 +4,6 @@ title: "#14 432. All O`one Data Structure 🧠💡"
 categories: [LeetCode, Programming]
 ---
 
-## 🚀 Designing an All O(1) Data Structure with Python 🐍
-
 Hello, fellow coders! 👋 Today, we’re diving into a powerful data structure challenge: implementing an **All O(1) Data Structure**. The goal is to support operations to manage and query key counts efficiently, all in constant time **O(1)**. Let's break it down step by step! 🧠
 
 ### Problem Statement 📜
