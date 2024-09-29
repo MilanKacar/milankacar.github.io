@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#14 🎲 Monte Carlo Simulation in Finance: A Deep Dive 🚀 "
+title: "#15 🎲 Monte Carlo Simulation in Finance: A Deep Dive 🚀 "
 categories: [Finance, Math]
 ---
 
