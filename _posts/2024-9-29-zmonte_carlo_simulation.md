@@ -128,11 +128,11 @@ Estimated European Call Option Price: 15.58 USD
 Let's break down the example output from the Python code used for **pricing a European call option** on Tesla’s stock.
 
 ### Recap of the Parameters:
-- **Current Stock Price ($$S_0\))**: $250  
-- **Strike Price ($$K\))**: $260  
-- **Time to Maturity ($$T\))**: 1 year  
-- **Risk-free Interest Rate ($$r\))**: 4% (0.04)  
-- **Volatility ($$\sigma\))**: 30% (0.3)  
+- **Current Stock Price ($$S_0$$)**: $250  
+- **Strike Price ($$K$$)**: $260  
+- **Time to Maturity ($$T$$)**: 1 year  
+- **Risk-free Interest Rate ($$r$$)**: 4% (0.04)  
+- **Volatility ($$\sigma$$)**: 30% (0.3)  
 - **Number of Simulations**: 10,000
 
 The Python function `monte_carlo_option_price` simulates 10,000 different potential paths for Tesla’s stock price over one year, using a random draw for each simulation based on the **Geometric Brownian Motion (GBM)** model.
@@ -156,10 +156,10 @@ Estimated European Call Option Price: 15.58 USD
 
 ### Why This Price? 🤔
 
-- **Volatility ($$ \sigma \))**:  
+- **Volatility ($$ \sigma $$)**:  
    Tesla is a highly volatile stock (30%), meaning its price can fluctuate significantly. Higher volatility tends to **increase option prices** because the likelihood of hitting higher payoffs increases with greater uncertainty.
   
-- **Risk-Free Rate ($$ r \))**:  
+- **Risk-Free Rate ($$ r $$)**:  
    The risk-free rate is 4%, and this influences the discount factor applied to future payoffs. Higher interest rates **decrease** the present value of future payoffs, but 4% is relatively moderate.
 
 - **Simulations**:  
