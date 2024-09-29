@@ -207,17 +207,10 @@ plt.show()
 
 **🔍 Interpretation:**
 
-- **Option Price Extraction:**
-  The interpolated option price at $$ S_0 = \$150 $$ provides the estimated value of the European call option based on the Crank-Nicolson FDM.
-
 - **Visualization:**
   The plot showcases how the option price varies with different stock prices at the initial time ($$ t = 0 $$), offering insights into the option's sensitivity to the underlying asset's price.
 
 ![finite difference](/images/finite_difference.png)
-
-Here’s a write-up you can add below your plot in the blog, with some emojis for added engagement:
-
----
 
 
 This plot demonstrates the relationship between the **European call option price** and the **stock price** at \( t = 0 \), or the present time.
