@@ -215,6 +215,34 @@ plt.show()
 
 ![finite difference](/images/finite_difference.png)
 
+Here’s a write-up you can add below your plot in the blog, with some emojis for added engagement:
+
+---
+
+
+This plot demonstrates the relationship between the **European call option price** and the **stock price** at \( t = 0 \), or the present time.
+
+#### 🔍 **Key Observations:**
+
+1. **Low Stock Prices (< $100):** 
+   - The option price is close to zero. This is expected since the option is **out of the money** in this region. When the stock price is far below the strike price, it doesn’t make sense to exercise the option, so the price remains low.
+   
+2. **Mid-range Stock Prices ($100 - $200):**
+   - The option price increases sharply here. This region represents where the option is **moving into the money**, meaning the stock price is approaching the strike price, making the call option profitable to exercise.
+
+3. **High Stock Prices ($200 - $250):**
+   - We reach the peak option price in this area. The stock price is now well above the strike price, and the call option provides the most profit potential here.
+
+4. **Beyond $250:** 
+   - Surprisingly, we observe a sudden **decline** in the option price followed by a sharp spike near $300. This is likely a result of numerical artifacts from the finite difference method, possibly due to how the **boundary conditions** were set up in the calculation. 🛠️
+
+#### ⚠️ **What Might Cause the Behavior Beyond $250?**
+   - **Numerical Instabilities:** This sudden behavior at large stock prices could be a result of boundary conditions or grid resolution issues. In theory, as the stock price rises, the option price should level out or continue increasing slowly. The spike at the far right suggests that the boundary condition isn't behaving as expected.
+   
+#### 🔧 **Next Steps:**
+   - To smooth out this behavior at large stock prices, we might need to **refine the grid** or adjust the **boundary conditions**. This will ensure that the model behaves more naturally as the stock price increases indefinitely.
+
+
 ---
 
 ### 📈 **Real-World Finance Example: Hedging an Options Portfolio**
