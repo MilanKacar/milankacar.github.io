@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#16 📊 **Finite Difference Methods in Finance: Pricing Stock Options with Python** 🐍💹 "
+title: "#16 📊 Finite Difference Methods in Finance: Pricing Stock Options with Python 🐍💹 "
 categories: [Finance, Math]
 ---
 
