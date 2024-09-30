@@ -1,13 +1,10 @@
 ---
 layout: post
-title: "#17 641. Design Circular Deque 🚀 "
+title: "#17 1381. Design a Stack With Increment Operation 🚀 "
 categories: [LeetCode, Programming]
 ---
 
-
-## 📚 1381. Design a Stack With Increment Operation 🚀
-
-Hey, fellow coders! 😄 Today, we'll be solving an interesting stack problem: designing a stack that supports **increment operations** in addition to the usual `push` and `pop`. Ready? Let’s dive in!
+Hey 😄 Today, we'll be solving an interesting stack problem: designing a stack that supports **increment operations** in addition to the usual `push` and `pop`. Ready? Let’s dive in!
 
 ### Problem Statement 📝
 
