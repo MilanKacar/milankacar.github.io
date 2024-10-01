@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#16 1497. Check If Array Pairs Are Divisible by k 🚀"
-categories: [LeetCode]
+categories: [LeetCode, Programming]
 ---
 
 
