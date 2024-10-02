@@ -6,6 +6,8 @@ categories: [Self-development]
 
 Today, I had the pleasure of attending the **Google Cloud Summit in Vienna**, a day packed with insights, networking, and hands-on experiences focused on **AI and Cloud technologies**. The event, titled **"Lernen Sie die Vorteile von KI und Cloud kennen"**, was all about discovering the benefits of AI and how Google Cloud can empower businesses to tackle their challenges head-on and stay ahead in the competitive landscape.
 
+![]({{ site.baseurl }}/images/gcsummit.jpeg)
+
 ### A Packed Agenda Full of Inspiration 📅✨
 
 The summit was divided into **two main tracks**—the **Business Track** and the **Technical Track**—giving attendees the chance to customize their experience. Whether you were a business leader looking to modernize your company's IT landscape or a developer wanting to dive into the technical details of AI frameworks, there was something for everyone. With over 350 attendees from all over Austria and the DACH region, the event offered the perfect opportunity to learn about **AI-driven solutions** and how cloud technologies are transforming industries.
