@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "#19 1331. Rank Transform of an Array 🚀"
