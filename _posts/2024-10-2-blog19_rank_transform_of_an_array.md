@@ -22,10 +22,10 @@ Given an array of integers `arr`, replace each element with its **rank**. The ra
   Input: arr = [40, 10, 20, 30]
   Output: [4, 1, 2, 3]
   Explanation: 
-    - 40 is the largest → rank 4.
-    - 10 is the smallest → rank 1.
-    - 20 is the second smallest → rank 2.
-    - 30 is the third smallest → rank 3.
+  40 is the largest → rank 4.
+  10 is the smallest → rank 1.
+  20 is the second smallest → rank 2.
+  30 is the third smallest → rank 3.
   ```
 
 - **Example 2**:
