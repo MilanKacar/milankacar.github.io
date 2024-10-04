@@ -45,15 +45,15 @@ It’s impossible to divide the players into teams with equal total skill. No va
 
 This problem of dividing players into teams based on skill sums is reminiscent of a story from Carl Friedrich Gauss' childhood. When Gauss was a young student, his teacher asked the class to sum all the integers from 1 to 100, expecting it to be a time-consuming task. Instead, Gauss quickly found the answer by pairing the smallest and largest numbers:
 
-\[
+$$
 1 + 100, \, 2 + 99, \, 3 + 98, \dots, 50 + 51
-\]
+$$
 
 He realized that each pair had the same sum, 101. There were 50 pairs, so the total sum was simply:
 
-\[
+$$
 50 \times 101 = 5050
-\]
+$$
 
 Just like how Gauss paired numbers to find the sum, we’re pairing players in this problem to ensure that the total skill of each pair is the same! By sorting the array and pairing the smallest skill with the largest, we follow a similar logic to solve the problem efficiently.
 
