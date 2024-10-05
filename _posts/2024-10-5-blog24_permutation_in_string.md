@@ -64,7 +64,7 @@ To optimize this, we use the fact that **two strings are permutations if and onl
 2. The arrays will track the occurrence of each character (from 'a' to 'z') by using their positions (i.e., index `0` for 'a', `1` for 'b', etc.).
 3. Slide the window of size `len(s1)` across `s2`, updating the frequency array for `s2` and checking if it matches the frequency array of `s1`.
 
-### 📜 Python Code for Optimized Solution (Without `Counter`):
+### 📜 Python Code for Optimized Solution:
 
 ```python
 def checkInclusion(s1: str, s2: str) -> bool:
