@@ -88,10 +88,6 @@ Both the basic and optimized solutions have the same time complexity, but the op
 
 ---
 
-Ah, a **recursive solution**—got it! Here's how you can incorporate a recursive approach to the blog post:
-
----
-
 ### Recursive Solution 🔄
 
 We can also solve this problem recursively by reducing the string each time we encounter "AB" or "CD." The idea is to look for these substrings, remove them, and call the function recursively on the updated string until no more removals are possible.
