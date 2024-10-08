@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#27 1963. Minimum Number of Swaps to Make the String Balanced 🧠🚀"
+title: "#28 1963. Minimum Number of Swaps to Make the String Balanced 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
