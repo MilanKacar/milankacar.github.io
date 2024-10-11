@@ -178,6 +178,6 @@ Now that we’ve successfully tokenized our dataset, we’re ready to start buil
 
 Stay tuned for more exciting insights into AI and language models! 🚀
 
-That’s the end of **Part 1**. This lays the foundation for understanding the **Transformer architecture** and how ChatGPT works. In **Part 2**, we’ll explore the details of training the model, focusing on **loss functions**, **optimization**, and generating text. 
+That’s the end of [Part 1](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_I/). This lays the foundation for understanding the **Transformer architecture** and how ChatGPT works. In [Part 2](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_II/), we’ll explore the details of training the model, focusing on **loss functions**, **optimization**, and generating text. 
 
 Stay tuned! 🌟
