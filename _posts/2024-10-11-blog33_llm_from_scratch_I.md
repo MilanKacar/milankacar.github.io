@@ -120,6 +120,18 @@ To make things simpler, we’ll start by building a character-level language mod
 
 We’ll use a popular toy dataset called **Tiny Shakespeare**, which is a collection of Shakespeare’s works. This dataset is relatively small (about 1MB), so it’s perfect for experimenting with language models. Let’s get started!
 
+To reference **Tiny Shakespeare** as a file, here’s the adjusted section including a direct link to the dataset in file form:
+
+---
+
+### **What Is the Tiny Shakespeare Dataset?** 📜
+
+The **Tiny Shakespeare dataset** is a concatenated collection of William Shakespeare’s works, and it’s often used as a toy dataset in natural language processing (NLP) tasks because of its manageable size (around 1MB). This makes it perfect for experimenting with **character-level language models** like the one we’ll build. 🎭✨
+
+You can download the **Tiny Shakespeare** dataset as a plain text file from [this GitHub repository](https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt). Once you have it, save it as `tiny_shakespeare.txt` and use it in the Python code we’ll walk through below.
+
+Now, let's move forward and tokenize this dataset to prepare it for our model.
+
 ---
 
 ### **Step 1: Tokenizing the Text** 🔡➡️🔢
