@@ -4,13 +4,9 @@ title: "#33 Understanding ChatGPT and Building Language Models from Scratch - Pa
 categories: [AI, LLM]
 ---
 
-Alright, let’s dive deeper into **Part 1**, ensuring that we expand the explanations, add more context, and make this a detailed introduction to **ChatGPT** and **language models**. We’ll thoroughly explain concepts, build more foundational knowledge, and provide plenty of content for a long read, approximately 5000 words. This will make sure you have a solid first part to your blog. Here’s the full extended version:
-
----
+Hey everyone! 👋 Have you ever wondered what powers **ChatGPT**? It’s the technology behind some of the most fascinating AI conversations today, and it has captivated the world with its seemingly human-like responses. But how exactly does it work? 🤔 Why is it so good at understanding and generating text? 🚀
 
 ## **Part 1: Understanding ChatGPT and Building Language Models** 🌐🤖
-
-Hey everyone! 👋 Have you ever wondered what powers **ChatGPT**? It’s the technology behind some of the most fascinating AI conversations today, and it has captivated the world with its seemingly human-like responses. But how exactly does it work? 🤔 Why is it so good at understanding and generating text? 🚀
 
 In this first part, we’ll dive into the concepts behind **language models**, walk through how they process text, and lay the foundation for you to understand how to build a basic version from scratch. By the end of this part, you’ll have a deeper grasp of how ChatGPT works and be ready to roll up your sleeves and try building something similar. 🛠️ Let’s get started!
 
