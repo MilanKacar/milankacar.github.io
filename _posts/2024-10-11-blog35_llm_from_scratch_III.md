@@ -356,4 +356,4 @@ With this knowledge, you now have the tools to not only build and train Transfor
 In the coming years, **Transformer models** will continue to evolve and revolutionize industries worldwide. Stay curious, keep experimenting, and remember—you're at the forefront of AI innovation! 🚀
 
 
-This concludes [Part 3](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_III/) of the blog series. We've gone beyond the basics, exploring advanced optimization techniques, regularization, transfer learning, and real-world applications. The journey of mastering Transformer models continues, but you now have a comprehensive understanding of their full potential. 🌟
+This concludes [Part 3](https://milankacar.github.io/ai/llm/blog35_llm_from_scratch_III/) of the blog series. We've gone beyond the basics, exploring advanced optimization techniques, regularization, transfer learning, and real-world applications. The journey of mastering Transformer models continues, but you now have a comprehensive understanding of their full potential. 🌟
