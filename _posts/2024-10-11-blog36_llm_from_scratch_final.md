@@ -79,7 +79,7 @@ This sets up the **Transformer model** with a basic architecture. Now, let’s m
 
 ### **2. Data Preprocessing and Tokenization**
 
-We’ll work with the **Tiny Shakespeare** dataset, which is a compact text file containing Shakespeare's works. We need to tokenize the data, convert it to numerical representations, and split it into input-output sequences for training.
+We’ll work with the **Tiny Shakespeare** dataset, which is a compact text file containing Shakespeare's works. We need to tokenize the data, convert it to numerical representations, and split it into input-output sequences for training. You can download the **Tiny Shakespeare** dataset as a plain text file from [this GitHub repository](https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt).
 
 ```python
 import torch
