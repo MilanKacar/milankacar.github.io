@@ -4,7 +4,7 @@ title: "#34 Understanding ChatGPT and Building Language Models from Scratch - Pa
 categories: [AI, LLM]
 ---
 
-In [Part 1](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_I/), we discussed the foundational concepts behind **ChatGPT** and **language models**. We explored how they work, what powers them, and why they are essential for Natural Language Processing (NLP). We also tokenized the **Tiny Shakespeare** dataset and laid the groundwork for building our own language model.
+In [Part 1](https://milankacar.github.io/ai/llm/blog33_llm_from_scratch_I/), we discussed the foundational concepts behind **ChatGPT** and **language models**. We explored how they work, what powers them, and why they are essential for Natural Language Processing (NLP). We also tokenized the **Tiny Shakespeare** dataset and laid the groundwork for building our own language model.
 
 Now, it's time to take a **deep dive** into building and training a **Transformer-based model** from scratch. We will cover:
 
@@ -21,7 +21,7 @@ This is going to be an extensive read, but by the end, you'll not only have a wo
 
 ### **The Core Transformer Architecture** 🧠⚡
 
-In [Part 1](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_I/), we briefly touched on the **Transformer architecture**, but let's now take a more **in-depth look** at the individual components that make this model so revolutionary. The key innovation of Transformers is the use of **self-attention** mechanisms, which allow the model to weigh the importance of different words in a sentence, enabling better understanding of **context** and **relationships** within the input.
+In [Part 1](https://milankacar.github.io/ai/llm/blog33_llm_from_scratch_I/), we briefly touched on the **Transformer architecture**, but let's now take a more **in-depth look** at the individual components that make this model so revolutionary. The key innovation of Transformers is the use of **self-attention** mechanisms, which allow the model to weigh the importance of different words in a sentence, enabling better understanding of **context** and **relationships** within the input.
 
 #### **Why Are Transformers Revolutionary?** 💡
 
@@ -126,7 +126,7 @@ class PositionalEncoding(nn.Module):
 
 ### **Step 2: Preparing the Data for Training** 📚
 
-To train our model, we need to prepare the dataset in a format that the model can process. In [Part 1](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_I/), we tokenized the **Tiny Shakespeare** dataset, converting each character into a corresponding numerical representation. Now, we need to **batch** the data and format it into sequences of input and target tokens.
+To train our model, we need to prepare the dataset in a format that the model can process. In [Part 1](https://milankacar.github.io/ai/llm/blog33_llm_from_scratch_I/), we tokenized the **Tiny Shakespeare** dataset, converting each character into a corresponding numerical representation. Now, we need to **batch** the data and format it into sequences of input and target tokens.
 
 #### **Why Batch the Data?**
 
@@ -342,6 +342,6 @@ By fine-tuning the model on specific datasets, you can adapt the Transformer arc
 
 Congratulations! 🎉 In this part, we took a deep dive into the **Transformer architecture**, built a complete **language model**, trained it on the **Tiny Shakespeare** dataset, and generated **Shakespearean text** from scratch. You now have the knowledge to build more complex models and apply them to real-world tasks.
 
-In [Part 3](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_III/), we’ll explore **advanced optimization techniques**, fine-tune the model further, and dive into the practical applications of Transformer models in modern NLP systems.
+In [Part 3](https://milankacar.github.io/ai/llm/blog35_llm_from_scratch_III/), we’ll explore **advanced optimization techniques**, fine-tune the model further, and dive into the practical applications of Transformer models in modern NLP systems.
 
 This concludes [Part 2](https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_II/) of the series. In the next part, we’ll explore **advanced optimization techniques**, such as adjusting the learning rate dynamically, applying **gradient clipping**, and implementing **batch normalization**. Stay tuned! 🌟
