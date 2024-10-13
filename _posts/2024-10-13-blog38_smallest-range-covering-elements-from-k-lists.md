@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#38 LeetCode #632: Smallest Range Covering Elements from K Lists 🧠🚀"
+title: "#38 LeetCode 632. Smallest Range Covering Elements from K Lists 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
