@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#43 🌳 427. Construct Quad Tree - LeetCode 🧠🚀"
+title: "#43 🌳 427. Construct Quad Tree 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
