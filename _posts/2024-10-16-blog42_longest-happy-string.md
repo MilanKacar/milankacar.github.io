@@ -53,8 +53,8 @@ def longestHappyString_basic(a: int, b: int, c: int) -> str:
 
 ### Time Complexity ⏱️
 
-- **Time Complexity**: \(O(n)\), where \(n = a + b + c\) is the total number of characters.
-- **Space Complexity**: \(O(n)\), for storing the result string.
+- **Time Complexity**: $$O(n)$$, where $$n = a + b + c$$ is the total number of characters.
+- **Space Complexity**: $$O(n)$$, for storing the result string.
 
 #### Example Walkthrough 🛣️
 
@@ -126,8 +126,8 @@ def longestHappyString(a: int, b: int, c: int) -> str:
 ```
 
 ### Time Complexity ⏱️
-- **Time Complexity**: \(O(n \log 3)\), which simplifies to \(O(n)\), where \(n = a + b + c\) is the total number of characters. We only work with three possible characters at any given time, so heap operations are constant-time with respect to character count.
-- **Space Complexity**: \(O(n)\) for the result string and the heap.
+- **Time Complexity**: $$O(n \log 3)$$, which simplifies to $$O(n)$$, where $$n = a + b + c$$ is the total number of characters. We only work with three possible characters at any given time, so heap operations are constant-time with respect to character count.
+- **Space Complexity**: $$O(n)$$ for the result string and the heap.
 
 ---
 
