@@ -248,11 +248,11 @@ The **bottom-right quadrant** is:
 We now combine the results from all four quadrants:
 
 ```
-       [Internal, 1]  -> Root node
-        /    |   |   \
-   [1]       [Internal]   [1]   [0]
+             [Internal, 1]  -> Root node
+          /    |            |   \
+       [1]    [Internal]   [1]   [0]
             /   |   |   \
-       [0] [0]  [1]  [1]
+         [0]   [0]  [1]  [1]
 ```
 
 - The root node is an **internal node** because the entire grid has mixed values.
