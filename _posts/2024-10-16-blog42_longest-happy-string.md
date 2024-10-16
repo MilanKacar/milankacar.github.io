@@ -91,7 +91,7 @@ def longestHappyString(a: int, b: int, c: int) -> str:
     max_heap = []
     
     # Push all characters with their counts into a max heap (negative counts for max behavior)
-    for count, char in [(-a, 'a'), (-b, 'b'), (-c', 'c')]:
+    for count, char in [(-a, 'a'), (-b, 'b'), (-c, 'c')]:
         if count != 0:  # Only consider non-zero counts
             heapq.heappush(max_heap, (count, char))
     
