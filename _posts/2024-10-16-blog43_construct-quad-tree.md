@@ -124,75 +124,165 @@ In this example, the grid has mixed values, so it will require several levels of
 
 ### Steps to Construct the Quad-Tree
 
-1. **Check Entire Grid**: The grid has mixed values (both `0` and `1`), so it's not a leaf node. We'll divide it into 4 equal parts (top-left, top-right, bottom-left, bottom-right).
+Let’s walk through the code step by step with the complex example we’ve already discussed, breaking down each step and what happens at each recursive call.
 
-2. **Divide into 4 Sub-Grids**:
-    - **Top-Left (4x4 grid)**:
-      ```
-      [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1]
-      ]
-      ```
-      All values are `1`, so this is a **leaf node** with `val = 1`.
+### Input Grid
 
-    - **Top-Right (4x4 grid)**:
-      ```
-      [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1]
-      ]
-      ```
-      Mixed values, so it needs further division into 4 sub-grids:
-      
-        - **Top-Left**: All `0`, leaf node with `val = 0`.
-        - **Top-Right**: All `0`, leaf node with `val = 0`.
-        - **Bottom-Left**: All `1`, leaf node with `val = 1`.
-        - **Bottom-Right**: All `1`, leaf node with `val = 1`.
+We'll use the following grid:
 
-    - **Bottom-Left (4x4 grid)**:
-      ```
-      [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1]
-      ]
-      ```
-      All values are `1`, so this is a **leaf node** with `val = 1`.
+```python
+grid = [
+    [1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0]
+]
+```
 
-    - **Bottom-Right (4x4 grid)**:
-      ```
-      [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-      ]
-      ```
-      All values are `0`, so this is a **leaf node** with `val = 0`.
+### Step-by-Step Walkthrough
+
+#### Step 1: Initial Call
+
+We start by calling `construct(grid)` where the entire grid is processed.
+
+- The grid has mixed values (`1`'s and `0`'s), so we divide it into four quadrants.
+- We recursively call `construct()` on each of the four quadrants.
+
+#### Step 2: Top-Left Quadrant
+
+The **top-left quadrant** is:
+```
+[
+ [1, 1, 1, 1],
+ [1, 1, 1, 1],
+ [1, 1, 1, 1],
+ [1, 1, 1, 1]
+]
+```
+
+- This sub-grid has all `1`'s.
+- Therefore, it is a **leaf node** with `val = 1` and `isLeaf = True`.
+
+#### Step 3: Top-Right Quadrant
+
+The **top-right quadrant** is:
+```
+[
+ [0, 0, 0, 0],
+ [0, 0, 0, 0],
+ [1, 1, 1, 1],
+ [1, 1, 1, 1]
+]
+```
+
+- This sub-grid has mixed values (`0`'s and `1`'s), so we divide it into four sub-quadrants.
+
+  - **Top-Left**: 
+    ```
+    [0, 0],
+    [0, 0]
+    ```
+    All `0`'s, so it's a leaf node with `val = 0` and `isLeaf = True`.
+
+  - **Top-Right**: 
+    ```
+    [0, 0],
+    [0, 0]
+    ```
+    All `0`'s, so it's a leaf node with `val = 0` and `isLeaf = True`.
+
+  - **Bottom-Left**: 
+    ```
+    [1, 1],
+    [1, 1]
+    ```
+    All `1`'s, so it's a leaf node with `val = 1` and `isLeaf = True`.
+
+  - **Bottom-Right**: 
+    ```
+    [1, 1],
+    [1, 1]
+    ```
+    All `1`'s, so it's a leaf node with `val = 1` and `isLeaf = True`.
+
+- Since all four sub-quadrants are leaf nodes, we return an **internal node** representing the **top-right quadrant** with these four children.
+
+#### Step 4: Bottom-Left Quadrant
+
+The **bottom-left quadrant** is:
+```
+[
+ [1, 1, 1, 1],
+ [1, 1, 1, 1],
+ [1, 1, 1, 1],
+ [1, 1, 1, 1]
+]
+```
+
+- This sub-grid has all `1`'s.
+- Therefore, it is a **leaf node** with `val = 1` and `isLeaf = True`.
+
+#### Step 5: Bottom-Right Quadrant
+
+The **bottom-right quadrant** is:
+```
+[
+ [0, 0, 0, 0],
+ [0, 0, 0, 0],
+ [0, 0, 0, 0],
+ [0, 0, 0, 0]
+]
+```
+
+- This sub-grid has all `0`'s.
+- Therefore, it is a **leaf node** with `val = 0` and `isLeaf = True`.
 
 ---
 
-### Quad-Tree Structure in Markdown
+### Final Quad-Tree Structure
 
-Here’s a graphical representation of the Quad-Tree constructed from this grid. Each node has either 4 children (if it's not a leaf) or no children (if it's a leaf).
+We now combine the results from all four quadrants:
 
-#### Root Node:
 ```
-       [Internal, 1]
-        /   |   |   \
-       /    |   |    \
-      /     |   |     \
-   [1]    [Internal]  [1]   [0]
-         /   |   |   \
-        /    |   |    \
-       [0]  [0]  [1]  [1]
+       [Internal, 1]  -> Root node
+        /    |   |   \
+   [1]       [Internal]   [1]   [0]
+            /   |   |   \
+       [0] [0]  [1]  [1]
 ```
+
+- The root node is an **internal node** because the entire grid has mixed values.
+- The **top-left** and **bottom-left** quadrants are **leaf nodes** with all `1`'s.
+- The **bottom-right** quadrant is a **leaf node** with all `0`'s.
+- The **top-right quadrant** is an **internal node** with four children:
+  - **Top-Left**: Leaf node with `val = 0`.
+  - **Top-Right**: Leaf node with `val = 0`.
+  - **Bottom-Left**: Leaf node with `val = 1`.
+  - **Bottom-Right**: Leaf node with `val = 1`.
+
+### Output
+
+The resulting Quad-Tree can be serialized as:
+
+```python
+[
+    [0, 1],                    # Root node: internal node (not a leaf), value 1
+    [1, 1],                    # Top-Left: leaf node, value 1
+    [0, 1],                    # Top-Right: internal node (not a leaf), value 1
+    [1, 1],                    # Bottom-Left: leaf node, value 1
+    [1, 0],                    # Bottom-Right: leaf node, value 0
+    [1, 0],                    # Top-Right -> Top-Left: leaf node, value 0
+    [1, 0],                    # Top-Right -> Top-Right: leaf node, value 0
+    [1, 1],                    # Top-Right -> Bottom-Left: leaf node, value 1
+    [1, 1]                     # Top-Right -> Bottom-Right: leaf node, value 1
+]
+```
+
+This is the serialized representation of the Quad-Tree. Each pair `[isLeaf, val]` represents a node, where `isLeaf` is 0 for internal nodes and 1 for leaf nodes.
 
 #### Explanation:
 
