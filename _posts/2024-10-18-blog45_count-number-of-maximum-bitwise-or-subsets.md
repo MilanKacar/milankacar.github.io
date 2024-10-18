@@ -4,6 +4,13 @@ title: "#45 2044. Count Number of Maximum Bitwise-OR Subsets 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
+Here’s the improved version with the cooler introduction, more emojis, and LaTeX formatting, including the complete content such as example walkthrough and the conclusion.
+
+---
+
+## ⚫⚪ Count Number of Maximum Bitwise-OR Subsets
+
+### 🚀 Introduction
 Ever wanted to unlock the **maximum power** from an array using just bitwise operations? 💡 Well, today’s problem gives us exactly that opportunity! In this exciting challenge, we need to find the **maximum possible bitwise OR** from all the non-empty subsets of an array, and count how many subsets can achieve that value! 🚀
 
 It’s like assembling a powerful weapon 🔧 by combining different elements of the array in the most efficient way possible! ⚡ If you love bitwise magic or just want to solve problems smartly, then let’s dive in together! 🧠
@@ -47,7 +54,7 @@ The simplest approach is to:
 3. **Count** the number of subsets whose OR matches the maximum OR we can obtain.
 
 #### Time Complexity
-Since we are generating all possible subsets, the time complexity is  O(n \cdot 2^n) , where  n  is the number of elements in the array.
+Since we are generating all possible subsets, the time complexity is $$ O(n \cdot 2^n) $$, where $$ n $$ is the number of elements in the array.
 
 ---
 
@@ -77,7 +84,7 @@ def countMaxOrSubsets(nums):
 ```
 
 ### 🕒 Time Complexity of Basic Solution
-- **Time Complexity**:  O(n \cdot 2^n) , because we generate  2^n  subsets and then for each subset, we perform the bitwise OR operation.
+- **Time Complexity**: $$ O(n \cdot 2^n) $$, because we generate $$ 2^n $$ subsets and then for each subset, we perform the bitwise OR operation.
   
 ---
 
@@ -85,7 +92,7 @@ def countMaxOrSubsets(nums):
 We can optimize the approach using **Depth-First Search (DFS)**. Instead of generating all subsets directly, we traverse through the array while maintaining the current OR value. This reduces redundant recalculations and helps us explore subsets more efficiently.
 
 #### Time Complexity
-Even though we still explore all subsets, we avoid recalculating the OR for each subset from scratch. Thus, the time complexity remains  O(n \cdot 2^n) , but the optimized DFS reduces computational overhead.
+Even though we still explore all subsets, we avoid recalculating the OR for each subset from scratch. Thus, the time complexity remains \( O(n \cdot 2^n) \), but the optimized DFS reduces computational overhead.
 
 ---
 
@@ -118,7 +125,7 @@ def countMaxOrSubsets(nums):
 ```
 
 ### 🕒 Time Complexity of Optimized Solution
-- **Time Complexity**:  O(n \cdot 2^n) , due to subset exploration, but DFS minimizes redundant OR recalculations.
+- **Time Complexity**: $$ O(n \cdot 2^n) $$, due to subset exploration, but DFS minimizes redundant OR recalculations.
 
 ---
 
@@ -129,29 +136,31 @@ Let’s break down an example step-by-step:
 **Input**: `[3, 2, 1, 5]`
 
 1. **Step 1: Calculate Maximum OR**:  
-   - Initial OR:  0 
-   - After  3 :  0 \,|\, 3 = 3 
-   - After  2 :  3 \,|\, 2 = 3  
-   - After  1 :  3 \,|\, 1 = 3 
-   - After  5 :  3 \,|\, 5 = 7   
-   So, the **maximum OR** is  7 .
+   - Initial OR: \( 0 \)
+   - After \( 3 \): \( 0 \,|\, 3 = 3 \)
+   - After \( 2 \): \( 3 \,|\, 2 = 3 \) 
+   - After \( 1 \): \( 3 \,|\, 1 = 3 \)
+   - After \( 5 \): \( 3 \,|\, 5 = 7 \)  
+   So, the **maximum OR** is \( 7 \).
 
 2. **Step 2: Find Subsets with OR = 7**:  
    We now explore subsets that yield this maximum OR:
-   - Subset `[3,5]` has OR  7 
-   - Subset `[3,1,5]` has OR  7 
-   - Subset `[3,2,5]` has OR  7 
-   - Subset `[3,2,1,5]` has OR  7 
-   - Subset `[2,5]` has OR  7 
-   - Subset `[2,1,5]` has OR  7   
+   - Subset `[3,5]` has OR \( 7 \)
+   - Subset `[3,1,5]` has OR \( 7 \)
+   - Subset `[3,2,5]` has OR \( 7 \)
+   - Subset `[3,2,1,5]` has OR \( 7 \)
+   - Subset `[2,5]` has OR \( 7 \)
+   - Subset `[2,1,5]` has OR \( 7 \)  
    
-   There are **6 subsets** with an OR of  7 .
+   There are **6 subsets** with an OR of \( 7 \).
 
 ---
 
 ### 🏁 Conclusion
 - The **basic solution** works by brute-forcing all possible subsets and checking their OR values, but it’s slower for larger inputs. ⌛
-- The **optimized DFS solution** improves efficiency by avoiding unnecessary OR recalculations, though the overall time complexity  O(n \cdot 2^n)  remains the same due to the need to explore all subsets.
+- The **optimized DFS solution** improves efficiency by avoiding unnecessary OR recalculations, though the overall time complexity $$ O(n \cdot 2^n) $$ remains the same due to the need to explore all subsets.
   
 In the end, we’ve successfully counted the number of subsets with the **maximum bitwise OR**—and used both brute force 💪 and smart DFS 🔥 to get there!
+
+
 
