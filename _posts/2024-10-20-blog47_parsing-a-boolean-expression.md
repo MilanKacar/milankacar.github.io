@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#46 1106. Parsing A Boolean Expression 🧠🚀"
+title: "#47 1106. Parsing A Boolean Expression 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
