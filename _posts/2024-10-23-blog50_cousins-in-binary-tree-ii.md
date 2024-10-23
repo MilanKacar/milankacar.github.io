@@ -228,9 +228,7 @@ Let's walk through a larger example to understand the solution in action.
 
 ```plaintext
         0
-      
-
- / \
+       / \
       0   0
      / \    \
     20  15   7
