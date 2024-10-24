@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#51 🌞 Harnessing the Power of AI for Solar Panel Detection from Satellite Imagery 🌍"
+title: "#52 🌞 Harnessing the Power of AI for Solar Panel Detection from Satellite Imagery 🌍"
 categories: [AI, Self-development]
 ---
 
