@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#52 📂✨ 1233. Remove Sub-Folders from the Filesystem 🧠🚀"
+title: "#53 📂✨ 1233. Remove Sub-Folders from the Filesystem 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
