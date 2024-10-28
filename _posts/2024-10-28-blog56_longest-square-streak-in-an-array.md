@@ -86,9 +86,9 @@ def longestSquareStreak(nums):
 
 #### **Time Complexity**
 
-- **Sorting**: \(O(n \log n)\)
-- **Square Checking Loop**: In the worst case, we might check squares repeatedly for every number, which could approach \(O(n)\) within the constraints.
-- **Overall Complexity**: \(O(n \log n + n)\), which is efficient given our constraints.
+- **Sorting**: $$O(n \log n)$$
+- **Square Checking Loop**: In the worst case, we might check squares repeatedly for every number, which could approach $$O(n)$$ within the constraints.
+- **Overall Complexity**: $$O(n \log n + n)$$, which is efficient given our constraints.
 
 ---
 
