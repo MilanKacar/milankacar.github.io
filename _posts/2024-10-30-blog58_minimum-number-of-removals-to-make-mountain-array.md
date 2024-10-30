@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#57 ⛰️ 1671. Minimum Number of Removals to Make Mountain Array 🧠🚀"
+title: "#58 ⛰️ 1671. Minimum Number of Removals to Make Mountain Array 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
