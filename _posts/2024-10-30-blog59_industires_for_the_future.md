@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#59 📈💹 Top Industries to Consider for Future Investments 🧠🚀"
-categories: [LeetCode, Programming]
+categories: [Finance]
 ---
 
 
