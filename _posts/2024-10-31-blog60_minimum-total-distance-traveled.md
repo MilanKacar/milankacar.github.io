@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#60 🏁 2463. Minimum Total Distance Traveled 🧠🚀"
-categories: [Finance]
+categories: [LeetCode, Programming]
 ---
 
 Imagine you’re managing a repair line where broken robots 🛠️ keep moving along a straight road to reach their assigned factories 🏭. The goal? To minimize the total distance that all the robots need to travel to get repaired! This problem is challenging, but by breaking it down, you can use Dynamic Programming (DP) to achieve an optimal solution. Let’s get into it! 🧑‍💻👇
