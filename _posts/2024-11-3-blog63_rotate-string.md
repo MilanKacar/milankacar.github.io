@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#64 🔄 796. Rotate String 🧠🚀"
+title: "#63 🔄 796. Rotate String 🧠🚀"
 categories: [LeetCode, Programming]
 ---
 
