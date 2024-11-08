@@ -1,7 +1,7 @@
 ---
-layout: post
-title: "#68 0️⃣0️⃣1️⃣0️⃣ 1829. Maximum XOR for Each Query 🧠🚀"
-categories: [LeetCode, Programming]
+layout: post  
+title: "#68 0️⃣0️⃣1️⃣0️⃣ 1829. Maximum XOR for Each Query 🧠🚀"  
+categories: [LeetCode, Programming]  
 ---
 
 Hey, coding enthusiasts! 😃 Let's dive into a unique problem that brings together **bitwise manipulation** and **array queries**. XOR operations are at the core of this challenge, and with a little understanding of binary numbers, we can quickly see how to solve it effectively. This post will not only explain the problem but will also show you the power of bitwise tricks in competitive programming. Let's get started!
@@ -12,15 +12,15 @@ Hey, coding enthusiasts! 😃 Let's dive into a unique problem that brings toget
 
 You're given a **sorted array `nums`** of `n` non-negative integers and a value called `maximumBit`. You need to answer `n` queries, each involving a different subset of the array, where the subset changes by **removing the last element** from the array with each query.
 
-For each query, you need to find an integer `k` that maximizes the XOR result when we XOR together:
+For each query, you need to find an integer `k` that maximizes the XOR result when XORing together:
 - The elements of the current array subset, and
 - The integer `k`.
 
 ### Constraints
 
 1. `nums.length == n`
-2. $$1 \leq n \leq 10^5$$
-3. $$1 \leq \text{maximumBit} \leq 20$$
+2. `1 <= n <= 10^5`
+3. `1 <= maximumBit <= 20`
 4. `nums[i] < 2^maximumBit`
 
 ---
@@ -31,16 +31,16 @@ To solve this problem, we’ll need to make use of binary representations and pr
 
 ### 🔍 Insight #1: Maximizing XOR with `k`
 
-For any XOR operation, the result is maximized when the two operands have opposite bits. To make the XOR operation produce the maximum possible value, we should XOR our cumulative XOR value with a binary number that has **all bits set to 1** within the limit of `maximumBit`.
+For any XOR operation, the result is maximized when the two operands have opposite bits. To maximize the XOR result, we should XOR our cumulative XOR value with a binary number that has **all bits set to 1** within the limit of `maximumBit`.
 
 So, what’s the maximum possible number we can achieve with `maximumBit` bits?
 
-- The largest number represented with `maximumBit` bits is $$2^{\text{maximumBit}} - 1$$.
+- The largest number represented with `maximumBit` bits is `2^maximumBit - 1`.
 - This number has all bits set to 1 up to `maximumBit`. For example:
-  - If `maximumBit = 3`, then $$2^3 - 1 = 7$$, which is `111` in binary.
-  - If `maximumBit = 4`, then $$2^4 - 1 = 15$$, which is `1111` in binary.
+  - If `maximumBit = 3`, then `2^3 - 1 = 7`, which is `111` in binary.
+  - If `maximumBit = 4`, then `2^4 - 1 = 15`, which is `1111` in binary.
 
-Let’s call this number `max_xor`. 
+Let’s call this number `max_xor`.
 
 By XORing our cumulative XOR with `max_xor`, we “flip” all bits, maximizing the result for each query.
 
@@ -57,7 +57,7 @@ Rather than recalculating the XOR from scratch in each query, we can use a **cum
 
 Let’s walk through the solution, incorporating binary representations to help clarify each step.
 
-1. **Calculate `max_xor`:** Since we’re given `maximumBit`, our goal for each query will be to achieve a result that is as close as possible to `max_xor`, which is $$2^{\text{maximumBit}} - 1$$. In binary, this value has all bits set to 1, maximizing the XOR potential for each query.
+1. **Calculate `max_xor`:** Since we’re given `maximumBit`, our goal for each query will be to achieve a result that is as close as possible to `max_xor`, which is `2^maximumBit - 1`. In binary, this value has all bits set to 1, maximizing the XOR potential for each query.
 
 2. **Compute Initial Cumulative XOR:** Start by XORing all elements in the array to get the cumulative XOR value for the entire array. Let’s store this in a variable, `cumulative_xor`.
 
@@ -115,7 +115,7 @@ Output: [5, 2, 6, 5]
 
 1. **Calculate `max_xor`:**
    - `maximumBit = 3`
-   - $$2^3 - 1 = 7$$, which is `111` in binary.
+   - `2^3 - 1 = 7`, which is `111` in binary.
 
 2. **Initial Cumulative XOR Calculation:**
    - `nums = [2, 3, 4, 7]`
@@ -158,7 +158,7 @@ Final output: `[5, 2, 6, 5]`
 
 1. **Single Element Array**: If `nums` contains only one element, the solution should handle it without recalculating multiple XORs.
 2. **All Zeros in `nums`**: If every element is `0`, the `cumulative_xor` remains zero.
-3. **Large Input Size**: Make sure the solution operates within $$O(n)$$ complexity for large arrays.
+3. **Large Input Size**: Make sure the solution operates within `O(n)` complexity for large arrays.
 
 ---
 
