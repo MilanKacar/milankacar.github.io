@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#68 0️⃣0️⃣1️⃣0️⃣ 3133. Minimum Array End 🧠🚀"  
+title: "#69 0️⃣0️⃣1️⃣0️⃣ 3133. Minimum Array End 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
