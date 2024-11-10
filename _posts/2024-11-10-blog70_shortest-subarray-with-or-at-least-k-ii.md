@@ -20,9 +20,9 @@ We are given:
 A subarray is called **special** if the bitwise OR of all elements in the subarray is at least `k`. We want to find the **length of the shortest special subarray**. If no such subarray exists, return `-1`.
 
 #### Constraints
-- \( 1 \leq \text{nums.length} \leq 200,000 \)
-- \( 0 \leq \text{nums}[i] \leq 10^9 \)
-- \( 0 \leq k \leq 10^9 \)
+- $$ 1 \leq \text{nums.length} \leq 200,000 $$
+- $$ 0 \leq \text{nums}[i] \leq 10^9 $$
+- $$ 0 \leq k \leq 10^9 $$
 
 ---
 
