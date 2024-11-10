@@ -64,6 +64,127 @@ To solve this problem, we can use a **sliding window approach** paired with **bi
 
 ---
 
+### 🔍 Bitwise Walkthrough Example: `nums = [2, 1, 8]`, `k = 10`
+
+#### Initial Setup
+- **Goal**: Find the shortest subarray where the OR of elements is at least `10` (binary `1010`).
+- **Binary for `k = 10`**: `1010`
+
+Let’s keep a **bitwise OR** tracker `s` (initially `0`) and update it as we expand the window. Additionally, we have an array `cnt` of size 32 (to track each bit position) initialized to `0`.
+
+#### Step-by-Step Execution
+
+1. **First Element: `2`**
+   - **Binary of `2`**: `0010`
+   - Update `s` by OR-ing it with `2`: `s = s | 2 = 0 | 2 = 2` (binary `0010`)
+   - **Update `cnt`**:
+     - For `2`, only the 1st bit (from the right, `0010`) is set, so increment `cnt[1]` by `1`.
+     - Updated `cnt`: `[0, 1, 0, 0, ..., 0]`
+
+   - **Current OR of the subarray `[2]`**: `2` (binary `0010`)
+   - **Check**: `2 < 10` (binary `0010 < 1010`), so the subarray doesn’t meet the requirement. Continue expanding.
+
+2. **Second Element: `1`**
+   - **Binary of `1`**: `0001`
+   - Update `s` by OR-ing it with `1`: `s = s | 1 = 2 | 1 = 3` (binary `0011`)
+   - **Update `cnt`**:
+     - For `1`, only the 0th bit (from the right, `0001`) is set, so increment `cnt[0]` by `1`.
+     - Updated `cnt`: `[1, 1, 0, 0, ..., 0]`
+
+   - **Current OR of the subarray `[2, 1]`**: `3` (binary `0011`)
+   - **Check**: `3 < 10` (binary `0011 < 1010`), so the subarray doesn’t meet the requirement. Continue expanding.
+
+3. **Third Element: `8`**
+   - **Binary of `8`**: `1000`
+   - Update `s` by OR-ing it with `8`: `s = s | 8 = 3 | 8 = 11` (binary `1011`)
+   - **Update `cnt**:
+     - For `8`, only the 3rd bit (from the right, `1000`) is set, so increment `cnt[3]` by `1`.
+     - Updated `cnt`: `[1, 1, 0, 1, ..., 0]`
+
+   - **Current OR of the subarray `[2, 1, 8]`**: `11` (binary `1011`)
+   - **Check**: `11 >= 10` (binary `1011 >= 1010`), so this subarray meets the requirement! 
+
+   - **Update Result**: The length of `[2, 1, 8]` is `3`, so set `ans = 3`.
+
+4. **Shrink the Window to Minimize Length**
+   - We have found a valid subarray `[2, 1, 8]`. Now, we try to minimize the length by moving the start pointer `i`.
+
+   **Remove `nums[i] = 2`**:
+   - Adjust `s` by removing the effect of `2` (binary `0010`).
+   - Decrement `cnt[1]` by `1` (because `2` contributes to the 1st bit).
+   - Since `cnt[1]` becomes `0`, we remove the 1st bit from `s` using XOR: `s = s ^ (1 << 1)`.
+   - **Updated `s`**: `9` (binary `1001`)
+
+   - **Check**: `s = 9 < 10`, so the subarray `[1, 8]` doesn’t meet the requirement anymore. Stop shrinking.
+
+   Final result for this example is `3`, which is the length of the shortest subarray `[2, 1, 8]` with OR at least `10`.
+
+---
+
+### 🧩 Additional Example with Bits: `nums = [5, 1, 4, 2, 8]`, `k = 7`
+
+#### Initial Setup
+- **Goal**: Find the shortest subarray where the OR is at least `7` (binary `0111`).
+- **Binary for `k = 7`**: `0111`
+
+#### Step-by-Step Execution
+
+1. **First Element: `5`**
+   - **Binary of `5`**: `0101`
+   - Update `s = s | 5 = 0 | 5 = 5` (binary `0101`)
+   - **Update `cnt`**:
+     - Set bits are in the 0th and 2nd positions, so increment `cnt[0]` and `cnt[2]`.
+     - `cnt`: `[1, 0, 1, 0, ..., 0]`
+
+   - **Current OR of the subarray `[5]`**: `5` (binary `0101`)
+   - **Check**: `5 < 7` (binary `0101 < 0111`), continue expanding.
+
+2. **Second Element: `1`**
+   - **Binary of `1`**: `0001`
+   - Update `s = s | 1 = 5 | 1 = 5` (binary `0101`)
+   - **Update `cnt**:
+     - Only the 0th bit is set for `1`, so increment `cnt[0]`.
+     - `cnt`: `[2, 0, 1, 0, ..., 0]`
+
+   - **Current OR of `[5, 1]`**: `5` (binary `0101`)
+   - **Check**: `5 < 7`, continue expanding.
+
+3. **Third Element: `4`**
+   - **Binary of `4`**: `0100`
+   - Update `s = s | 4 = 5 | 4 = 5` (binary `0101`)
+   - **Update `cnt**:
+     - Only the 2nd bit is set for `4`, so increment `cnt[2]`.
+     - `cnt`: `[2, 0, 2, 0, ..., 0]`
+
+   - **Current OR of `[5, 1, 4]`**: `5` (binary `0101`)
+   - **Check**: `5 < 7`, continue expanding.
+
+4. **Fourth Element: `2`**
+   - **Binary of `2`**: `0010`
+   - Update `s = s | 2 = 5 | 2 = 7` (binary `0111`)
+   - **Update `cnt**:
+     - Only the 1st bit is set for `2`, so increment `cnt[1]`.
+     - `cnt`: `[2, 1, 2, 0, ..., 0]`
+
+   - **Current OR of `[5, 1, 4, 2]`**: `7` (binary `0111`)
+   - **Check**: `7 >= 7` (binary `0111 >= 0111`), so we found a valid subarray `[5, 1, 4, 2]` with OR `7`.
+
+   - **Update Result**: Length of `[5, 1, 4, 2]` is `4`, so set `ans = 4`.
+
+5. **Shrink the Window to Minimize Length**
+   - Try removing `nums[i] = 5` from the OR calculation.
+
+   **Remove `nums[i] = 5`**:
+   - Update `cnt` for `5` by decrementing `cnt[0]` and `cnt[2]`.
+   - Since `cnt[0]` and `cnt[2]` remain non-zero, `s` remains `7`.
+
+   - **Update Result**: The new subarray `[1, 4, 2]` also has an OR of `7` and a length of `3`. Update `ans = 3`.
+
+Final result for this example is `3`, the length of `[1, 4, 2]`, the shortest subarray with OR at least `7`.
+
+---
+
+
 ### ✨ Optimized Solution
 
 The provided solution leverages a **sliding window with bitwise tracking**. We maintain a bit counter to track set bits within the window and modify the OR result dynamically. This allows efficient updates when expanding or shrinking the window.
