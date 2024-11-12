@@ -51,7 +51,7 @@ For each query:
 
 #### 🕰️ Time Complexity
 
-- **Worst-case Time Complexity**: \(O(n \times m)\), where \(n\) is the length of `queries` and \(m\) is the length of `items`.
+- **Worst-case Time Complexity**: $$O(n \times m)$$, where $$n$$ is the length of `queries` and $$m$$ is the length of `items`.
 - This is inefficient for large inputs as it involves re-checking each item for every query.
 
 #### 🔥 Code Implementation (Brute Force)
@@ -83,7 +83,7 @@ To improve efficiency, let's leverage sorting and prefix maximums.
 
 #### 🕰️ Time Complexity
 
-- **Optimized Time Complexity**: \(O(m \log m + n \log n)\), where \(m\) and \(n\) are the lengths of `items` and `queries`, respectively.
+- **Optimized Time Complexity**: $$O(m \log m + n \log n)$$, where $$m$$ and $$n$$ are the lengths of `items` and `queries`, respectively.
 - This is feasible for large input sizes due to reduced re-checks by leveraging sorted data.
 
 ---
