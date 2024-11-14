@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#73 🚚📦 2064. Minimized Maximum of Products Distributed to Any Store 🧠🚀"  
+title: "#74 🚚📦 2064. Minimized Maximum of Products Distributed to Any Store 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
