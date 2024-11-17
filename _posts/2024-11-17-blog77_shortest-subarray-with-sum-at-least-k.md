@@ -1,204 +1,216 @@
 ---
 layout: post  
-title: "#77 🔢 862. Shortest Subarray with Sum at Least K 🧠🚀"  
+title: "#77 🔢📏 862. Shortest Subarray with Sum at Least K 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
-Welcome to another exciting blog post! 🚀 In this problem, we're exploring the **power of subarrays**. It’s all about finding whether elements are sorted and consecutive while dealing with dynamic arrays of size `k`. Along the way, you'll enhance your problem-solving skills and coding mastery! Let’s jump into it! 💻🤓
+Finding the shortest subarray with a sum of at least \( k \) is a tricky but highly rewarding challenge. This problem merges concepts like prefix sums, sliding windows, and deques, making it an absolute gem for algorithm enthusiasts! Let’s solve it step by step while keeping it fun and engaging with loads of examples and insights! 🌟
 
 ---
 
-## 🧩 Problem Statement  
-You are given:  
-1️⃣ An array of integers `nums` of length `n`.  
-2️⃣ A positive integer `k`.
+### Problem Statement 📜
 
-The **power of an array** is defined as:  
-- Its **maximum element** if all elements are consecutive integers and sorted in ascending order.  
-- `-1` otherwise.  
+You are given:
+- An integer array `nums`
+- An integer `k`
 
-Your goal is to find the power of **all subarrays of size `k`** and return the results as an array of size `n - k + 1`.  
+Your task is to return the **length of the shortest non-empty subarray** of `nums` whose sum is **at least \( k \)**.  
+If no such subarray exists, return `-1`.  
+
+A **subarray** is a contiguous part of an array.
 
 ---
 
-## 🌟 Examples  
+### Examples 📊
 
-### Example 1  
+#### Example 1:
 **Input**:  
-```python
-nums = [1, 2, 3, 4, 3, 2, 5]  
-k = 3
-```  
+`nums = [1]`, `k = 1`  
 **Output**:  
-```python
-[3, 4, -1, -1, -1]
-```  
-
+`1`  
 **Explanation**:  
-- Subarray `[1, 2, 3]`: Consecutive, max = 3 ✅  
-- Subarray `[2, 3, 4]`: Consecutive, max = 4 ✅  
-- Subarray `[3, 4, 3]`: Not consecutive ❌  
-- Subarray `[4, 3, 2]`: Not sorted ❌  
-- Subarray `[3, 2, 5]`: Not consecutive ❌  
+The single element `[1]` meets the condition \( \geq k \).
 
-### Example 2  
+#### Example 2:
 **Input**:  
-```python
-nums = [2, 2, 2, 2, 2]  
-k = 4
-```  
+`nums = [1, 2]`, `k = 4`  
 **Output**:  
-```python
-[-1, -1]
-```  
-
+`-1`  
 **Explanation**:  
-- Subarray `[2, 2, 2, 2]`: Not consecutive ❌  
-- Subarray `[2, 2, 2, 2]`: Not consecutive ❌  
+No subarray has a sum \( \geq 4 \).
 
-### Example 3  
+#### Example 3:
 **Input**:  
-```python
-nums = [3, 2, 3, 2, 3, 2]  
-k = 2
-```  
+`nums = [2, -1, 2]`, `k = 3`  
 **Output**:  
+`3`  
+**Explanation**:  
+The entire array `[2, -1, 2]` has a sum of \( 3 \), which satisfies the condition. It is the shortest subarray possible.
+
+---
+
+### Constraints 🔐
+
+- \( 1 \leq \text{nums.length} \leq 10^5 \)
+- \( -10^5 \leq \text{nums[i]} \leq 10^5 \)
+- \( 1 \leq k \leq 10^9 \)
+
+---
+
+### 🧩 Edge Cases to Consider:
+1. **Array with one element**:
+   - If the element is \( \geq k \), return 1. Otherwise, return -1.
+2. **All elements negative**:
+   - No subarray can satisfy \( \geq k \). Return -1.
+3. **All elements positive**:
+   - The shortest subarray with a sum \( \geq k \) will be valid.
+4. **Array contains zeros**:
+   - Zeros contribute nothing to the sum but impact subarray lengths.
+5. **Large \( k \)**:
+   - If \( k \) is larger than the sum of all elements, return -1.
+
+---
+
+### Brute-Force Solution 🛠️
+
+The brute-force approach is simple to understand:
+1. Try every possible subarray.
+2. Calculate its sum.
+3. Check if it satisfies the condition \( \geq k \).
+
+---
+
+#### Code:
 ```python
-[-1, 3, -1, 3, -1]
-```  
+def shortestSubarray_bruteforce(nums, k):
+    n = len(nums)
+    min_length = float('inf')
+    
+    for start in range(n):
+        current_sum = 0
+        for end in range(start, n):
+            current_sum += nums[end]
+            if current_sum >= k:
+                min_length = min(min_length, end - start + 1)
+                break
+
+    return -1 if min_length == float('inf') else min_length
+```
 
 ---
 
-## 🛠️ Constraints  
-- $$ 1 \leq n = \text{nums.length} \leq 500 $$  
-- $$ 1 \leq \text{nums}[i] \leq 10^5 $$  
-- $$ 1 \leq k \leq n $$  
+#### Time Complexity:
+- **Outer Loop**: Runs \( n \) times.
+- **Inner Loop**: Runs up to \( n \) times for each iteration.
+- **Total**: \( O(n^2) \). Too slow for large inputs. 🚨
+
+#### Space Complexity:
+- **Memory**: \( O(1) \).
 
 ---
 
-## 💡 Approach  
+### Optimized Solution 💡
 
-The problem asks us to analyze consecutive subarrays of size `k` to determine their "power." This involves:  
-1️⃣ Checking if the subarray is **sorted in ascending order**.  
-2️⃣ Verifying if elements are **consecutive integers**.  
-3️⃣ Returning the **maximum element** if conditions are met; otherwise, return `-1`.  
+The brute-force solution is too slow for large arrays. We need an efficient approach that combines **prefix sums** and a **deque**.
+
+#### Key Insights:
+1. **Prefix Sums**:
+   - Calculate cumulative sums of the array.
+   - \( \text{prefix\_sums}[i] \) gives the sum of the first \( i \) elements.
+   - A subarray sum \( \geq k \) can be expressed as:  
+     \( \text{prefix\_sums}[j] - \text{prefix\_sums}[i] \geq k \).
+
+2. **Using a Deque**:
+   - Use a **monotonic deque** to efficiently find the shortest subarray.
+   - Remove elements from the deque if they are no longer useful.
 
 ---
 
-### 🚀 Basic Solution: Brute Force  
-
-In the brute force approach:  
-1. Iterate through all subarrays of size `k`.  
-2. For each subarray, check if it's sorted and consecutive.  
-3. Return the maximum element if valid; else, return `-1`.
+#### Algorithm:
+1. Compute prefix sums.
+2. Maintain a deque of indices of useful prefix sums.
+3. Iterate through prefix sums and:
+   - Update the shortest subarray length when possible.
+   - Remove unhelpful indices from the deque.
+4. Return the result.
 
 ---
 
-### 💻 Code for Brute Force Solution  
+#### Code:
 ```python
+from collections import deque
+from itertools import accumulate
+
 class Solution:
-    def resultsArray(self, nums: List[int], k: int) -> List[int]:
-        n = len(nums)
-        results = []
-        
-        for i in range(n - k + 1):
-            subarray = nums[i:i + k]
-            sorted_subarray = sorted(subarray)
+    def shortestSubarray(self, nums, k):
+        # Compute prefix sums
+        prefix_sums = list(accumulate(nums, initial=0))
+        deque_indices = deque()
+        min_length = float("inf")
+
+        for current_index, current_sum in enumerate(prefix_sums):
+            # Check if deque front provides a valid subarray
+            while deque_indices and current_sum - prefix_sums[deque_indices[0]] >= k:
+                min_length = min(min_length, current_index - deque_indices.popleft())
             
-            # Check if sorted and consecutive
-            if sorted_subarray == list(range(sorted_subarray[0], sorted_subarray[0] + k)):
-                results.append(max(subarray))
-            else:
-                results.append(-1)
+            # Remove indices from deque back if not useful
+            while deque_indices and prefix_sums[deque_indices[-1]] >= current_sum:
+                deque_indices.pop()
+
+            # Add current index to deque
+            deque_indices.append(current_index)
         
-        return results
+        return -1 if min_length == float("inf") else min_length
 ```
 
 ---
 
-### ⏳ Time Complexity of Brute Force  
-- Sorting each subarray of size `k`: $$ O(k \log k) $$  
-- For $$ n - k + 1 $$ subarrays: $$ O((n - k + 1) \cdot k \log k) $$.  
-- **Overall Time Complexity**: $$ O(n \cdot k \log k) $$.  
+#### Time Complexity:
+- **Prefix Sums**: \( O(n) \)
+- **Deque Operations**: Each index is added/removed once \( O(n) \).
+- **Total**: \( O(n) \). 🎉
+
+#### Space Complexity:
+- \( O(n) \) for prefix sums and deque.
 
 ---
 
-### 🌟 Optimized Solution  
+### Walkthrough Example 🔍
 
-Using an **efficient prefix-based approach**, we can track if numbers are consecutive:  
-1. Use a prefix array `f`, where `f[i]` indicates if the current number is part of a consecutive sequence.  
-2. Traverse the array only once, making the solution linear.
+#### Input:
+`nums = [2, -1, 2], k = 3`
 
----
+#### Steps:
+1. **Prefix Sums**:  
+   `prefix_sums = [0, 2, 1, 3]`
 
-### 💻 Code for Optimized Solution  
-```python
-class Solution:
-    def resultsArray(self, nums: List[int], k: int) -> List[int]:
-        n = len(nums)
-        f = [1] * n  # Prefix array to track consecutive sequence
-        
-        # Build the prefix array
-        for i in range(1, n):
-            if nums[i] == nums[i - 1] + 1:
-                f[i] = f[i - 1] + 1
-        
-        # Determine results for subarrays of size k
-        return [nums[i] if f[i] >= k else -1 for i in range(k - 1, n)]
-```
+2. **Iteration**:
+   - \( i = 0 \): Add index \( 0 \) to deque.
+   - \( i = 1 \): Add index \( 1 \) to deque.
+   - \( i = 2 \): Remove index \( 1 \) (no longer useful). Add \( 2 \).
+   - \( i = 3 \): Subarray \([2, -1, 2]\) satisfies condition. Update `min_length = 3`.
+
+#### Output:
+`3`
 
 ---
 
-### ⏳ Time Complexity of Optimized Solution  
-- Building the prefix array: $$ O(n) $$  
-- Constructing the results array: $$ O(n) $$.  
-- **Overall Time Complexity**: $$ O(n) $$.  
+### Edge Case Walkthrough 🌟
+
+#### Input:
+`nums = [-5, -4, -3], k = 1`
+
+**Explanation**:
+- All elements are negative. No subarray can satisfy \( \geq k \).  
+
+**Output**: `-1`
 
 ---
 
-### 📖 Example Walkthrough  
+### Conclusion ✨
 
-#### Input:  
-```python
-nums = [1, 2, 3, 4, 3, 2, 5]
-k = 3
-```
+This problem showcases how combining **prefix sums** with a **deque** can optimize sliding-window-like challenges.  
+- **Brute-Force Approach**: Simple but inefficient (\( O(n^2) \)).
+- **Optimized Approach**: Elegant and efficient (\( O(n) \)).
 
-#### Step 1: Build Prefix Array  
-- Initialize `f = [1, 1, 1, 1, 1, 1, 1]`.  
-- Traverse `nums` to check consecutive elements:  
-  - $$ f[1] = 2 $$ since $$ nums[1] = nums[0] + 1 $$.  
-  - $$ f[2] = 3 $$ since $$ nums[2] = nums[1] + 1 $$.  
-  - $$ f[3] = 4 $$ since $$ nums[3] = nums[2] + 1 $$.  
-  - $$ f[4] = 1 $$ since $$ nums[4] \neq nums[3] + 1 $$.  
-
-#### Step 2: Construct Results Array  
-- For $$ i = 2 $$ (subarray `[1, 2, 3]`): Power = 3.  
-- For $$ i = 3 $$ (subarray `[2, 3, 4]`): Power = 4.  
-- For $$ i = 4 $$ (subarray `[3, 4, 3]`): Power = -1.  
-
-**Final Output**:  
-```python
-[3, 4, -1, -1, -1]
-```
-
----
-
-## 📚 Edge Cases  
-
-1️⃣ **Smallest Inputs**:  
-- $$ nums = [1], k = 1 $$: Always return `nums`.  
-
-2️⃣ **No Consecutive Elements**:  
-- $$ nums = [10, 20, 30], k = 2 $$: All elements will return `-1`.  
-
-3️⃣ **All Same Elements**:  
-- $$ nums = [5, 5, 5], k = 2 $$: Always return `-1`.  
-
----
-
-## 🎉 Conclusion  
-
-In this post, we explored how to efficiently compute the power of $$ k $$-size subarrays. By leveraging prefix arrays, we reduced the time complexity from $$ O(n \cdot k \log k) $$ to $$ O(n) $$. Whether you're preparing for an interview or just expanding your coding arsenal, this problem is a great way to practice **sliding window**, **prefix arrays**, and **array manipulation**! 🚀✨  
-
-Happy coding! 💻🎉
+Mastering this technique will empower you to tackle similar hard-level problems in arrays. Happy coding! 😊
