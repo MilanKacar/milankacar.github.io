@@ -100,36 +100,139 @@ def decrypt(code, k):
 
 ---
 
-### 🔍 Example Walkthrough
+### 🔥 Optimal Solution: Sliding Window Magic! 🔥
 
-#### Input: `code = [5, 7, 1, 4, 6]`, `k = 3`  
-1. **Initial Setup**:  
-   - Start: $$1$$, End: $$3$$, Step: $$1$$  
-   - Initial Window Sum: $$7 + 1 + 4 = 12$$.  
+To efficiently solve the "Defuse the Bomb" problem, we can use the **sliding window technique**, which reduces redundant computations and leverages the circular nature of the array. This method is faster and more elegant compared to directly iterating over every possible sum.
 
-2. **Decryption Process**:  
-   - **Index 0**: Replace with $$12$$. Update window: Add $$6$$, Remove $$7$$. New sum: $$1 + 4 + 6 = 11$$.  
-   - **Index 1**: Replace with $$11$$. Update window: Add $$5$$, Remove $$1$$. New sum: $$4 + 6 + 5 = 15$$.  
-   - **Index 2**: Replace with $$15$$.  
+---
 
-**Final Result**: `[12, 11, 15, 13, ...]`  
+### 🛠️ Implementation
+
+Here’s the Python implementation of the sliding window solution:
+
+```python
+def decrypt(code, k):
+    n = len(code)
+    result = [0] * n  # Initialize the result array with zeros
+
+    if k == 0:
+        return result  # If k == 0, all values are replaced with 0
+
+    # Create an extended array to handle the circular nature
+    extended_code = code + code
+
+    # Define the window range
+    start, end = (1, k) if k > 0 else (n + k, n - 1)
+    
+    # Compute the initial sum for the sliding window
+    window_sum = sum(extended_code[start:end + 1])
+    
+    for i in range(n):
+        result[i] = window_sum
+        # Slide the window by updating the sum
+        window_sum -= extended_code[start]
+        start += 1
+        end += 1
+        window_sum += extended_code[end]
+
+    return result
+```
+
+---
+
+### 💡 How It Works
+
+1. **Handle Circular Array with `extended_code`**:
+   - Instead of manually wrapping around the array using modular arithmetic, we extend the array by concatenating it with itself. This simplifies accessing circular elements.
+
+2. **Sliding Window Technique**:
+   - Compute the initial sum of the range `[start:end + 1]`.
+   - Slide the window by:
+     - Subtracting the element leaving the window.
+     - Adding the element entering the window.
+   - This avoids recalculating the sum from scratch for each index.
+
+3. **Adjusting Indices for `k > 0` and `k < 0`**:
+   - When `k > 0`, the window includes the next `k` elements (`start=1`, `end=k`).
+   - When `k < 0`, the window includes the previous `|k|` elements (`start=n+k`, `end=n-1`).
+
+---
+
+### 🧮 Example Walkthrough: `code = [2, 4, 9, 3], k = -2`
+
+#### Step-by-Step:
+
+1. **Setup**:
+   - `n = 4`, `extended_code = [2, 4, 9, 3, 2, 4, 9, 3]`.
+   - `start = 2` (n + k), `end = 3` (n - 1).
+   - Initial window: `[9, 3]`, `window_sum = 12`.
+
+2. **Iteration**:
+   - **Index 0**:
+     - `result[0] = 12`.
+     - Slide the window:
+       - Subtract `9`, add `2`.
+       - `window_sum = 12 - 9 + 2 = 5`.
+
+   - **Index 1**:
+     - `result[1] = 5`.
+     - Slide the window:
+       - Subtract `3`, add `4`.
+       - `window_sum = 5 - 3 + 4 = 6`.
+
+   - **Index 2**:
+     - `result[2] = 6`.
+     - Slide the window:
+       - Subtract `2`, add `9`.
+       - `window_sum = 6 - 2 + 9 = 13`.
+
+   - **Index 3**:
+     - `result[3] = 13`.
+     - Slide the window:
+       - Subtract `4`, add `3`.
+       - `window_sum = 13 - 4 + 3 = 12`.
+
+#### Final Output:
+- `result = [12, 5, 6, 13]`.
+
+---
+
+### 🕒 Time Complexity
+
+- **Window Initialization**: $$O(|k|)\) to compute the initial sum of the window.
+- **Sliding Window**: $$O(n)\), as each index is processed exactly once.
+- **Overall**: $$O(n + |k|)\).
+
+### 🧠 Space Complexity
+
+- **Extended Array**: $$O(n)\), due to the concatenation.
+- **Result Array**: $$O(n)\).
+- **Overall**: $$O(n)\).
 
 ---
 
 ### 🔍 Edge Cases
 
-1. **Empty Array**: Return an empty array.  
-2. **Single Element**: If `n = 1`, the output depends on `k`:
-   - If $$k = 0$$: `[0]`
-   - If $$k > 0$$: Repeat the element `k` times.
-3. **Large $$k$$**: Ensure modular arithmetic handles wrapping.  
+1. **`k = 0`**:
+   - Input: `code = [1, 2, 3], k = 0`
+   - Output: `[0, 0, 0]` (all values are replaced with 0).
+
+2. **Single Element Array**:
+   - Input: `code = [10], k = 1`
+   - Output: `[0]` (no other elements to sum).
+
+3. **Negative `k`**:
+   - Input: `code = [1, 2, 3, 4], k = -1`
+   - Output: `[4, 1, 2, 3]`.
+
+4. **Maximum `k`**:
+   - Input: `code = [1, 2, 3, 4], k = 3`
+   - Output: `[9, 9, 9, 9]`.
 
 ---
 
-### 🏁 Conclusion
+### 🔥 Conclusion
 
-This problem highlights the importance of understanding circular arrays and optimizing solutions for efficiency.  
-
-- The **basic solution** is easy to implement but scales poorly for larger arrays, but that is exactly what we need since the constrains are optimal for the easy solution.
+The sliding window approach significantly optimizes the problem by avoiding redundant computations and leveraging the circular array property effectively. It ensures optimal performance and handles all edge cases gracefully.
 
 Keep learning and happy coding! 🚀
