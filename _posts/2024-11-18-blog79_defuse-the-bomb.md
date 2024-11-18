@@ -130,7 +130,6 @@ def decrypt(code, k):
 
 This problem highlights the importance of understanding circular arrays and optimizing solutions for efficiency.  
 
-- The **basic solution** is easy to implement but scales poorly for larger arrays.  
-- The **optimized solution** leverages a sliding window approach to significantly improve performance.  
+- The **basic solution** is easy to implement but scales poorly for larger arrays, but that is exactly what we need since the constrains are optimal for the easy solution.
 
 Keep learning and happy coding! 🚀
