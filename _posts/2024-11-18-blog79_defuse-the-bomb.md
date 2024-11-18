@@ -100,47 +100,6 @@ def decrypt(code, k):
 
 ---
 
-### ⚡ Optimized Solution
-
-The basic solution works but is not efficient for larger values of `n` and `|k|`. To optimize:
-
-1. Use a **sliding window** approach:
-   - Maintain a running sum of the required elements.
-   - Update the running sum efficiently as you move through the array.
-2. Handle the circular array using modular arithmetic.
-
----
-
-#### 🐍 Python Code for the Optimized Solution
-
-```python
-def decrypt(code, k):
-    n = len(code)
-    result = [0] * n
-    
-    if k == 0:
-        return result
-    
-    start, end, step = (1, k, 1) if k > 0 else (n - 1, n + k - 1, -1)
-    window_sum = sum(code[i % n] for i in range(start, end + 1, step))
-    
-    for i in range(n):
-        result[i] = window_sum
-        window_sum -= code[(start + i * step) % n]
-        window_sum += code[(end + 1 + i * step) % n]
-    
-    return result
-```
-
----
-
-#### ⏱ Time Complexity
-
-- **Time Complexity**: $$O(n)$$, as the sliding window reduces redundant calculations.  
-- **Space Complexity**: $$O(n)$$, for the result array.
-
----
-
 ### 🔍 Example Walkthrough
 
 #### Input: `code = [5, 7, 1, 4, 6]`, `k = 3`  
