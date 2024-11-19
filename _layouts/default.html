@@ -70,47 +70,33 @@
 
     <script>
       // Utility functions to handle cookies
-      function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000); // Expiry in days
-        document.cookie = `${name}=${value};path=/;expires=${date.toUTCString()}`;
-      }
-
-      function getCookie(name) {
-        const cookies = document.cookie.split("; ");
-        for (let cookie of cookies) {
-          const [key, val] = cookie.split("=");
-          if (key === name) return val;
-        }
-        return null;
-      }
-
       document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("toggle-mode");
-
-        if (!toggleButton) {
-          console.error("Toggle button not found!");
-          return;
-        }
-
-        // Add event listener for toggling dark mode
-        toggleButton.addEventListener("click", () => {
-          const isDarkMode = document.body.classList.toggle("dark-mode");
-
-          // Save dark mode preference in a cookie
-          setCookie("darkMode", isDarkMode ? "enabled" : "disabled", 30); // Cookie valid for 30 days
-          console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
-        });
-
-        // Load the dark mode preference from cookies
-        const savedMode = getCookie("darkMode");
-        if (savedMode === "enabled") {
-          document.body.classList.add("dark-mode");
-          console.log("Dark mode restored from cookies.");
-        } else {
-          console.log("Light mode restored from cookies.");
-        }
+          const toggleButton = document.getElementById("toggle-mode");
+      
+          if (!toggleButton) {
+              console.error("Toggle button not found!");
+              return;
+          }
+      
+          // Add event listener for toggling dark mode
+          toggleButton.addEventListener("click", () => {
+              const isDarkMode = document.body.classList.toggle("dark-mode");
+      
+              // Save dark mode preference in localStorage
+              localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+              console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
+          });
+      
+          // Load the dark mode preference from localStorage
+          const savedMode = localStorage.getItem("darkMode");
+          if (savedMode === "enabled") {
+              document.body.classList.add("dark-mode");
+              console.log("Dark mode restored from localStorage.");
+          } else {
+              console.log("Light mode restored from localStorage.");
+          }
       });
+
     </script>
     
     <script type="text/javascript">
