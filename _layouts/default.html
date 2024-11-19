@@ -115,19 +115,18 @@
     
     <script type="text/javascript">
 
-        // Fetch JSON data from GitHub Pages URL
-        fetch('{{ site.baseurl }}/visits.json')
-          .then(response => response.json())
-          .then(data => {
-            // Sum all activeUsers from the JSON data
-            const totalActiveUsers = data.data.reduce((sum, entry) => sum + parseInt(entry.activeUsers), 0);
-            // Insert the total active users into the placeholder in about.md
-            document.getElementById('activeUsers').textContent = totalActiveUsers;
-          })
-          .catch(error => {
-            console.error('Error fetching the JSON data:', error);
-          });
-      });
+      // Fetch JSON data from GitHub Pages URL
+      fetch('{{ site.baseurl }}/visits.json')
+        .then(response => response.json())
+        .then(data => {
+          // Sum all activeUsers from the JSON data
+          const totalActiveUsers = data.data.reduce((sum, entry) => sum + parseInt(entry.activeUsers), 0);
+          // Insert the total active users into the placeholder in about.md
+          document.getElementById('activeUsers').textContent = totalActiveUsers;
+        })
+        .catch(error => {
+          console.error('Error fetching the JSON data:', error);
+        });
     </script>
   </body>
 </html>
