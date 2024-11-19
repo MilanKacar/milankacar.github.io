@@ -13,6 +13,33 @@
 /* BASE RULES */
 /**************/
 
+// Style for toggle
+#dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $lightGray;
+  color: $darkGray;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $darkGray;
+    color: $white;
+  }
+}
+
+body.dark-mode #dark-mode-toggle {
+  background-color: $dark-border;
+  color: $dark-text;
+}
+
+
+
 html {
   font-size: 100%;
 }
