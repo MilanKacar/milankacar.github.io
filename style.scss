@@ -351,6 +351,7 @@ body.dark-mode #toggle-mode .icon-moon {
     background: $dark-background;
     font: 18px/1.4 $helvetica;
     color: $dark-text;
+    background-color: $dark-background; // Ensure this matches your dark mode variable
   }
 
   .container {
