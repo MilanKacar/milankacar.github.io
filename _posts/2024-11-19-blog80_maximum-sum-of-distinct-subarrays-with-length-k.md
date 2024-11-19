@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#79 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"  
+title: "#80 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
