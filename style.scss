@@ -31,33 +31,6 @@ body {
   color: $darkGray;
 }
 
-// Dark Mode 
-body.dark-mode {
-  background: $dark-background;
-  color: $dark-text;
-}
-
-body.dark-mode a {
-  color: $dark-link;
-}
-
-body.dark-mode .masthead {
-  border-bottom: 1px solid $dark-border;
-}
-
-body.dark-mode .wrapper-footer {
-  background-color: $dark-footer;
-}
-
-body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
-  color: $dark-text;
-}
-
-body.dark-mode .post blockquote {
-  border-left: 2px solid $dark-border;
-  color: $dark-text;
-}
-
 .container {
   margin: 0 auto;
   max-width: 740px;
