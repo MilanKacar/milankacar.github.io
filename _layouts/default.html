@@ -54,6 +54,9 @@
       {{ content }}
     </div>
 
+    <button class="dark-mode-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">Toggle Dark Mode</button>
+
+    
     <div class="wrapper-footer" style="background-color: white;">
       <div class="container">
         <footer class="footer">
@@ -63,6 +66,32 @@
     </div>
 
     {% include analytics.html %}
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        // Load saved preference from localStorage
+        const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+
+        // Apply the saved mode
+        if (isDarkMode) {
+          body.classList.add('dark-mode');
+        }
+
+        // Add event listener to toggle dark mode
+        toggleButton.addEventListener('click', () => {
+          // Toggle the dark-mode class on the body
+          body.classList.toggle('dark-mode');
+          
+          // Save the current mode in localStorage
+          const isDarkModeEnabled = body.classList.contains('dark-mode');
+          localStorage.setItem('dark-mode', isDarkModeEnabled);
+        });
+      });
+    </script>
 
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
