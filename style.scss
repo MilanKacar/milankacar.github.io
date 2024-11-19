@@ -283,6 +283,61 @@ footer {
   text-align: center;
 }
 
+
+/**************/
+/* DARK MODE TOGGLE */
+/**************/
+
+.dark-mode-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+#toggle-mode {
+  background: $lightGray;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#toggle-mode .icon-sun,
+#toggle-mode .icon-moon {
+  font-size: 24px;
+  display: none;
+  pointer-events: none;
+}
+
+#toggle-mode .icon-sun {
+  display: inline-block;
+}
+
+body.dark-mode #toggle-mode {
+  background: $dark-background;
+}
+
+body.dark-mode #toggle-mode .icon-sun {
+  display: none;
+}
+
+body.dark-mode #toggle-mode .icon-moon {
+  display: inline-block;
+}
+
+
+
 /**************/
 /* DARK MODE  */
 /**************/
