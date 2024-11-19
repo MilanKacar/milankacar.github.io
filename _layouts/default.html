@@ -25,7 +25,7 @@
     gtag('config', 'G-1FBB6CV6WE');
   </script>
 
-  <body style="background-color: #121212">
+  <body>
     <div class="wrapper-masthead">
       <div class="container">
         <header class="masthead clearfix">
@@ -71,21 +71,38 @@
     <script type="text/javascript">
       document.addEventListener("DOMContentLoaded", function () {
         const toggleButton = document.getElementById("toggle-mode");
-
+      
+        if (!toggleButton) {
+          console.error("Toggle button not found!");
+          return;
+        }
+      
         // Add event listener for toggling dark mode
         toggleButton.addEventListener("click", () => {
           document.body.classList.toggle("dark-mode");
-
+      
+          // Debugging: Log the current mode
+          console.log(
+            "Dark mode toggled. Current class list:",
+            document.body.classList
+          );
+      
           // Save the user's preference in localStorage
           const isDarkMode = document.body.classList.contains("dark-mode");
           localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
+          console.log("Dark mode status saved in localStorage:", isDarkMode);
         });
-
+      
         // Load the user's preference from localStorage
         const savedMode = localStorage.getItem("dark-mode");
         if (savedMode === "enabled") {
           document.body.classList.add("dark-mode");
+          console.log("Dark mode restored from localStorage.");
+        } else {
+          console.log("Light mode restored from localStorage.");
         }
+      });
+
 
         // Fetch JSON data from GitHub Pages URL
         fetch('{{ site.baseurl }}/visits.json')
