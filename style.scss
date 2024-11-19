@@ -23,6 +23,10 @@ body {
   color: $darkGray; 
 }
 
+body.dark-mode {
+  background-color: #121212 !important; /* Ensure dark mode applies */
+}
+
 .container {
   margin: 0 auto;
   max-width: 740px;
