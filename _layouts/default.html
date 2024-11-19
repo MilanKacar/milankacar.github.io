@@ -68,30 +68,25 @@
 
     {% include analytics.html %}
 
-    <script type="text/javascript">
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         const toggleButton = document.getElementById("toggle-mode");
-      
+
         if (!toggleButton) {
           console.error("Toggle button not found!");
           return;
         }
-      
+
         // Add event listener for toggling dark mode
         toggleButton.addEventListener("click", () => {
           document.body.classList.toggle("dark-mode");
-      
-          // Debugging: Log the current mode
-          console.log(
-            "Dark mode toggled. Current class list:",
-            document.body.classList
-          );
-      
+
           // Save the user's preference in localStorage
           const isDarkMode = document.body.classList.contains("dark-mode");
           localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
-          console.log("Dark mode status saved in localStorage:", isDarkMode);
-      
+          console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
+        });
+
         // Load the user's preference from localStorage
         const savedMode = localStorage.getItem("dark-mode");
         if (savedMode === "enabled") {
@@ -101,7 +96,9 @@
           console.log("Light mode restored from localStorage.");
         }
       });
+    </script>
 
+    <script type="text/javascript">
 
         // Fetch JSON data from GitHub Pages URL
         fetch('{{ site.baseurl }}/visits.json')
