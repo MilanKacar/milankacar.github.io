@@ -13,19 +13,22 @@
 /* BASE RULES */
 /**************/
 
+
+
 html {
   font-size: 100%;
+}
+
+body {
+	background: $white;
+  font: 18px/1.4 $helvetica;
+  color: $darkGray;
 }
 
 body {
   background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
-}
-
-body.dark-mode {
-  background: $dark-background;
-  color: $dark-text;
 }
 
 .container {
@@ -35,10 +38,12 @@ body.dark-mode {
   width: 100%;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
   font-weight: bold;
+
   line-height: 1.7;
   margin: 1em 0 15px;
   padding: 0;
@@ -46,15 +51,6 @@ h1, h2, h3, h4, h5, h6 {
   @include mobile {
     line-height: 1.4;
   }
-}
-
-body.dark-mode h1, 
-body.dark-mode h2, 
-body.dark-mode h3, 
-body.dark-mode h4, 
-body.dark-mode h5, 
-body.dark-mode h6 {
-  color: $dark-text;
 }
 
 h1 {
@@ -77,10 +73,6 @@ h4 {
   color: $gray;
 }
 
-body.dark-mode h4 {
-  color: $dark-link;
-}
-
 p {
   margin: 15px 0;
 }
@@ -88,18 +80,9 @@ p {
 a {
   color: $blue;
   text-decoration: none;
-  cursor: pointer;
-
+	cursor: pointer;
   &:hover, &:active {
     color: $blue;
-  }
-}
-
-body.dark-mode a {
-  color: $dark-link;
-
-  &:hover, &:active {
-    color: lighten($dark-link, 10%);
   }
 }
 
@@ -146,40 +129,26 @@ img {
   color: $gray;
 }
 
-body.dark-mode .date {
-  color: $dark-text;
-}
-
 // Specify the color of the selection
 ::-moz-selection {
   color: $darkerGray;
   background: $lightGray;
 }
-
-body.dark-mode ::-moz-selection {
-  color: $dark-text;
-  background: $dark-header;
-}
-
 ::selection {
   color: $darkerGray;
   background: $lightGray;
 }
 
-body.dark-mode ::selection {
-  color: $dark-text;
-  background: $dark-header;
-}
-
 // Nicolas Gallagher's micro clearfix hack
+// http://nicolasgallagher.com/micro-clearfix-hack/
 .clearfix:before,
 .clearfix:after {
-  content: " ";
-  display: table;
+    content: " ";
+    display: table;
 }
 
 .clearfix:after {
-  clear: both;
+    clear: both;
 }
 
 /*********************/
@@ -201,10 +170,6 @@ body.dark-mode ::selection {
   @include mobile {
     text-align: center;
   }
-}
-
-body.dark-mode .masthead {
-  border-bottom: 1px solid $dark-header;
 }
 
 .site-avatar {
@@ -244,10 +209,6 @@ body.dark-mode .masthead {
   letter-spacing: 1px;
 }
 
-body.dark-mode .site-name {
-  color: $dark-text;
-}
-
 .site-description {
   margin: -5px 0 0 0;
   color: $gray;
@@ -258,13 +219,9 @@ body.dark-mode .site-name {
   }
 }
 
-body.dark-mode .site-description {
-  color: $dark-text;
-}
-
 nav {
   float: right;
-  margin-top: 23px;
+  margin-top: 23px; // @TODO: Vertically middle align
   font-family: $helveticaNeue;
   font-size: 18px;
 
@@ -289,41 +246,70 @@ nav {
   }
 }
 
-body.dark-mode nav a {
-  color: $dark-link;
+//
+// .main
+//
+
+.posts > .post {
+  padding-bottom: 2em;
+  border-bottom: 1px solid $lightGray;
 }
 
-//
-// Dark Mode Toggle
-//
+.posts > .post:last-child {
+  padding-bottom: 1em;
+  border-bottom: none;
+}
 
-.dark-mode-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: $gray;
-  color: $white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-family: $helveticaNeue;
+.post {
+  blockquote {
+    margin: 1.8em .8em;
+    border-left: 2px solid $gray;
+    padding: 0.1em 1em;
+    color: $gray;
+    font-size: 22px;
+    font-style: italic;
+  }
 
-  &:hover {
-    background-color: $darkGray;
+  .comments {
+    margin-top: 10px;
+  }
+
+  .read-more {
+    text-transform: uppercase;
+    font-size: 15px;
   }
 }
 
-body.dark-mode .dark-mode-toggle {
-  background-color: $dark-header;
-  color: $dark-text;
-
-  &:hover {
-    background-color: lighten($dark-header, 10%);
-  }
+.wrapper-footer {
+  margin-top: 50px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: $lightGray;
 }
 
-// Add the rest of your styles
+footer {
+  padding: 20px 0;
+  text-align: center;
+}
 
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #00aaff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+// Settled on moving the import of syntax highlighting to the bottom of the CSS
+// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "svg-icons";
+
+
