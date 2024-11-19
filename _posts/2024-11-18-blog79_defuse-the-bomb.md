@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#77 🔢📏 1652. Defuse the Bomb 🧠🚀"  
+title: "#79 💣 1652. Defuse the Bomb 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
