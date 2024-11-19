@@ -69,10 +69,10 @@
     {% include analytics.html %}
 
     <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function() {
-        // Dark mode toggle functionality
+      document.addEventListener("DOMContentLoaded", function () {
         const toggleButton = document.getElementById("toggle-mode");
 
+        // Add event listener for toggling dark mode
         toggleButton.addEventListener("click", () => {
           document.body.classList.toggle("dark-mode");
 
@@ -81,18 +81,18 @@
           localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
         });
 
-        // Load the user's preference on page load
+        // Load the user's preference from localStorage
         const savedMode = localStorage.getItem("dark-mode");
         if (savedMode === "enabled") {
           document.body.classList.add("dark-mode");
         }
 
-        // Fetch the JSON data from your GitHub Pages URL
+        // Fetch JSON data from GitHub Pages URL
         fetch('{{ site.baseurl }}/visits.json')
           .then(response => response.json())
           .then(data => {
             // Sum all activeUsers from the JSON data
-            let totalActiveUsers = data.data.reduce((sum, entry) => sum + parseInt(entry.activeUsers), 0);
+            const totalActiveUsers = data.data.reduce((sum, entry) => sum + parseInt(entry.activeUsers), 0);
             // Insert the total active users into the placeholder in about.md
             document.getElementById('activeUsers').textContent = totalActiveUsers;
           })
