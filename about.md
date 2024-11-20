@@ -19,6 +19,91 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoryData = {
+      {% for category in site.categories %}
+        "{{ category | first }}": {{ category[1].size }},
+      {% endfor %}
+    };
+
+    const ctx = document.getElementById('radialChart').getContext('2d');
+    const categories = Object.keys(categoryData);
+    const postCounts = Object.values(categoryData);
+
+    const getChartOptions = (isDarkMode) => ({
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: isDarkMode ? '#fff' : '#333',
+          },
+        },
+      },
+      scales: {
+        r: {
+          grid: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(128, 128, 128, 0.5)',
+          },
+          angleLines: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(128, 128, 128, 0.7)',
+          },
+          ticks: {
+            color: isDarkMode ? '#fff' : '#000',
+            backdropColor: 'rgba(255, 255, 255, 0)',
+          },
+        },
+      },
+    });
+
+    let radialChart = null;
+
+    const createChart = () => {
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      if (radialChart) radialChart.destroy();
+
+      radialChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+          labels: categories,
+          datasets: [{
+            label: 'Number of Posts',
+            data: postCounts,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 2,
+          }],
+        },
+        options: getChartOptions(isDarkMode),
+      });
+    };
+
+    // Initialize the chart
+    createChart();
+
+    // Update chart on toggle
+    const toggleButton = document.getElementById("toggle-mode");
+    if (toggleButton) {
+      toggleButton.addEventListener("click", createChart);
+    }
+  });
+</script>
+
+
+<script>
   const categoryData = {
     {% for category in site.categories %}
       "{{ category | first }}": {{ category[1].size }},
