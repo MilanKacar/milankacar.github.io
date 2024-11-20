@@ -28,7 +28,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
     const categories = Object.keys(categoryData);
     const postCounts = Object.values(categoryData);
 
-    // Chart options dependent on dark mode
+    // Define chart options based on dark mode
     const getChartOptions = (isDarkMode) => ({
       responsive: true,
       plugins: {
@@ -89,7 +89,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
       });
     };
 
-    // Function to initialize dark mode based on saved preference
+    // Function to initialize dark mode on page load
     const initializeDarkMode = () => {
       const savedMode = localStorage.getItem("darkMode");
       if (savedMode === "enabled") {
@@ -98,7 +98,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
       createChart(document.body.classList.contains("dark-mode"));
     };
 
-    // Toggle dark mode
+    // Function to toggle dark mode
     const toggleDarkMode = () => {
       const isDarkMode = document.body.classList.toggle("dark-mode");
       localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
@@ -108,7 +108,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
     // Initialize dark mode on page load
     initializeDarkMode();
 
-    // Listen for dark mode toggle
+    // Add event listener for dark mode toggle button
     const toggleButton = document.getElementById("toggle-mode");
     if (toggleButton) {
       toggleButton.addEventListener("click", toggleDarkMode);
