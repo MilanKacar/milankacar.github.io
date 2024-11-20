@@ -99,20 +99,35 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
     };
 
     // Function to toggle dark mode
-    const toggleDarkMode = () => {
-      const isDarkMode = document.body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-      createChart(isDarkMode); // Update chart for dark mode
-    };
+
+      const toggleButton = document.getElementById("toggle-mode");
+  
+      if (!toggleButton) {
+          console.error("Toggle button not found!");
+          return;
+      }
+  
+      // Add event listener for toggling dark mode
+      toggleButton.addEventListener("click", () => {
+          const isDarkMode = document.body.classList.toggle("dark-mode");
+  
+          // Save dark mode preference in localStorage
+          localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+          console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
+      });
+  
+      // Load the dark mode preference from localStorage
+      const savedMode = localStorage.getItem("darkMode");
+      if (savedMode === "enabled") {
+          document.body.classList.add("dark-mode");
+          console.log("Dark mode restored from localStorage.");
+      } else {
+          console.log("Light mode restored from localStorage.");
+      }
 
     // Initialize dark mode on page load
     initializeDarkMode();
 
-    // Add event listener for dark mode toggle button
-    const toggleButton = document.getElementById("toggle-mode");
-    if (toggleButton) {
-      toggleButton.addEventListener("click", toggleDarkMode);
-    }
   });
 </script>
 
