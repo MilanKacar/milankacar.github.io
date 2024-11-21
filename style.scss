@@ -358,11 +358,13 @@ body.dark-mode #toggle-mode .icon-moon {
     background-color: $dark-background  !important; ;
     font: 18px/1.4 $helvetica;
     color: $dark-text !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .container {
     background: $dark-background;
     color: $dark-text;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -427,11 +429,13 @@ body.dark-mode #toggle-mode .icon-moon {
 
   .masthead {
     padding: 20px 0;
-    border-bottom: 1px solid darken($dark-background, 10%);
+    border-bottom: 1px solid darken($dark-background, 10%); 
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .posts > .post {
     border-bottom: 1px solid darken($dark-background, 10%);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   blockquote {
