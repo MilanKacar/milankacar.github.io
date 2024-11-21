@@ -20,11 +20,14 @@ html {
 body {
   background: $white;
   font: 18px/1.4 $helvetica;
-  color: $darkGray; 
+  color: $darkGray;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 body.dark-mode {
   background-color: #121212 !important; /* Ensure dark mode applies */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
