@@ -79,6 +79,8 @@
           return;
         }
     
+        let radialChart = null;
+    
         // Function to set chart options based on dark mode
         function updateChartOptions(isDarkMode) {
           const ctx = document.getElementById('radialChart').getContext('2d');
@@ -89,8 +91,6 @@
           };
           const categories = Object.keys(categoryData);
           const postCounts = Object.values(categoryData);
-    
-          let radialChart = null;
     
           // Destroy the existing chart if present
           if (radialChart) radialChart.destroy();
@@ -173,20 +173,8 @@
           localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
           console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
     
-          // Update chart options based on new theme
+          // Reinitialize chart with the updated theme
           updateChartOptions(isDarkMode);
-        });
-    
-        // Observe theme changes to update the chart
-        const observer = new MutationObserver((mutationsList, observer) => {
-          // If body classList has changed, update the chart
-          const isDarkMode = document.body.classList.contains("dark-mode");
-          updateChartOptions(isDarkMode);
-        });
-    
-        observer.observe(document.body, {
-          attributes: true, // Observe class attribute changes
-          attributeFilter: ['class']
         });
     
         // Initialize theme and chart options on page load
