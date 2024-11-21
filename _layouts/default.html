@@ -69,116 +69,110 @@
     {% include analytics.html %}
 
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("toggle-mode");
-
-        // Function to set a cookie
-        function setCookie(name, value, days) {
-          const date = new Date();
-          date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-          document.cookie = `${name}=${value};path=/;expires=${date.toUTCString()};SameSite=Strict`;
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButton = document.getElementById("toggle-mode");
+  
+      // Function to set localStorage item
+      function setLocalStorage(name, value) {
+        localStorage.setItem(name, value);
+      }
+  
+      // Function to get localStorage item
+      function getLocalStorage(name) {
+        return localStorage.getItem(name);
+      }
+  
+      // Function to initialize the theme based on localStorage
+      function initializeTheme() {
+        const savedTheme = getLocalStorage("theme");
+        if (savedTheme === "dark") {
+          document.body.classList.add("dark-mode");
         }
-
-        // Function to get a cookie value
-        function getCookie(name) {
-          const cookies = document.cookie.split("; ");
-          for (const cookie of cookies) {
-            const [key, value] = cookie.split("=");
-            if (key === name) return value;
-          }
-          return null;
-        }
-
-        // Function to initialize the theme based on the cookie
-        function initializeTheme() {
-          const savedTheme = getCookie("theme");
-          if (savedTheme === "dark") {
-            document.body.classList.add("dark-mode");
-          }
-          updateChartOptions(document.body.classList.contains("dark-mode"));
-        }
-
-        // Function to toggle dark mode
-        toggleButton.addEventListener("click", () => {
-          const isDarkMode = document.body.classList.toggle("dark-mode");
-          setCookie("theme", isDarkMode ? "dark" : "light", 365);
-          updateChartOptions(isDarkMode);
-        });
-
-        // Chart.js configuration
-        const categoryData = {
-          {% for category in site.categories %}
-            "{{ category | first }}": {{ category[1].size }},
-          {% endfor %}
-        };
-        const ctx = document.getElementById('radialChart').getContext('2d');
-        const categories = Object.keys(categoryData);
-        const postCounts = Object.values(categoryData);
-
-        let radialChart = null;
-
-        // Function to update chart options based on theme
-        function updateChartOptions(isDarkMode) {
-          if (radialChart) radialChart.destroy();
-          radialChart = new Chart(ctx, {
-            type: 'polarArea',
-            data: {
-              labels: categories,
-              datasets: [{
-                label: 'Number of Posts',
-                data: postCounts,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)',
-                ],
-                borderWidth: 2,
-              }]
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  labels: {
-                    color: isDarkMode ? '#fff' : '#333',
-                  }
+        updateChartOptions(document.body.classList.contains("dark-mode"));
+      }
+  
+      // Function to toggle dark mode
+      toggleButton.addEventListener("click", () => {
+        const isDarkMode = document.body.classList.toggle("dark-mode");
+        setLocalStorage("theme", isDarkMode ? "dark" : "light");
+        updateChartOptions(isDarkMode);
+      });
+  
+      // Chart.js configuration
+      const categoryData = {
+        {% for category in site.categories %}
+          "{{ category | first }}": {{ category[1].size }},
+        {% endfor %}
+      };
+      const ctx = document.getElementById('radialChart').getContext('2d');
+      const categories = Object.keys(categoryData);
+      const postCounts = Object.values(categoryData);
+  
+      let radialChart = null;
+  
+      // Function to update chart options based on theme
+      function updateChartOptions(isDarkMode) {
+        if (radialChart) radialChart.destroy();
+        radialChart = new Chart(ctx, {
+          type: 'polarArea',
+          data: {
+            labels: categories,
+            datasets: [{
+              label: 'Number of Posts',
+              data: postCounts,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+              ],
+              borderWidth: 2,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                labels: {
+                  color: isDarkMode ? '#fff' : '#333',
                 }
-              },
-              scales: {
-                r: {
-                  grid: {
-                    color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(128, 128, 128, 0.5)',
-                  },
-                  angleLines: {
-                    color: isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(128, 128, 128, 0.7)',
-                  },
-                  ticks: {
-                    color: isDarkMode ? '#fff' : '#000',
-                    backdropColor: 'rgba(255, 255, 255, 0)',
-                  }
+              }
+            },
+            scales: {
+              r: {
+                grid: {
+                  color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(128, 128, 128, 0.5)',
+                },
+                angleLines: {
+                  color: isDarkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(128, 128, 128, 0.7)',
+                },
+                ticks: {
+                  color: isDarkMode ? '#fff' : '#000',
+                  backdropColor: 'rgba(255, 255, 255, 0)',
                 }
               }
             }
-          });
-        }
+          }
+        });
+      }
+  
+      // Initialize the theme and chart
+      initializeTheme();
+    });
+  </script>
 
-        // Initialize the theme and chart
-        initializeTheme();
-      });
-    </script>
 
     
     <script type="text/javascript">
