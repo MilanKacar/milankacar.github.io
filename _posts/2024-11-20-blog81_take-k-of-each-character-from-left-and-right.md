@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#81 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"  
+title: "#81 📏🧮 2516. Take K of Each Character From Left and Right 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
