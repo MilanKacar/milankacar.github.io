@@ -213,17 +213,21 @@
             });
           }
       
-          // Function to load and apply dark mode from localStorage
-          function initializeTheme() {
-            const savedMode = localStorage.getItem("darkMode");
-            const isDarkMode = savedMode === "enabled";
-      
-            // Apply the mode immediately
-            document.body.classList.toggle("dark-mode", isDarkMode);
-      
-            // Initialize chart options based on dark mode
-            updateChartOptions(isDarkMode);
-          }
+        // Function to load and apply dark mode from localStorage
+        function initializeTheme() {
+          const savedMode = localStorage.getItem("darkMode");
+          const isDarkMode = savedMode === "enabled";
+    
+          // Apply the mode immediately
+          document.body.classList.toggle("dark-mode", isDarkMode);
+    
+          // Set the toggle button state based on the dark mode
+          toggleButton.checked = isDarkMode;
+    
+          // Initialize chart options based on dark mode
+          updateChartOptions(isDarkMode);
+        }
+
       
           // Add event listener for toggling dark mode
           toggleButton.addEventListener("click", () => {
