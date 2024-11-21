@@ -18,6 +18,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // Prepare category data
     const categoryData = {
       {% for category in site.categories %}
         "{{ category | first }}": {{ category[1].size }},
@@ -58,7 +59,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
 
     // Function to create or update the chart
     const createChart = (isDarkMode) => {
-      if (radialChart) radialChart.destroy();
+      if (radialChart) radialChart.destroy(); // Destroy existing chart if it exists
       radialChart = new Chart(ctx, {
         type: 'polarArea',
         data: {
@@ -89,45 +90,30 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
       });
     };
 
-    // Function to initialize dark mode on page load
+    // Function to initialize dark mode and chart on page load
     const initializeDarkMode = () => {
       const savedMode = localStorage.getItem("darkMode");
-      if (savedMode === "enabled") {
+      const isDarkMode = savedMode === "enabled";
+      if (isDarkMode) {
         document.body.classList.add("dark-mode");
       }
-      createChart(document.body.classList.contains("dark-mode"));
+      createChart(isDarkMode);
     };
 
-    // Function to toggle dark mode
-
-      const toggleButton = document.getElementById("toggle-mode");
-  
-      if (!toggleButton) {
-          console.error("Toggle button not found!");
-          return;
-      }
-  
-      // Add event listener for toggling dark mode
+    // Add event listener for toggling dark mode
+    const toggleButton = document.getElementById("toggle-mode");
+    if (toggleButton) {
       toggleButton.addEventListener("click", () => {
-          const isDarkMode = document.body.classList.toggle("dark-mode");
-  
-          // Save dark mode preference in localStorage
-          localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-          console.log("Dark mode toggled. Current mode:", isDarkMode ? "Dark" : "Light");
+        const isDarkMode = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+        createChart(isDarkMode); // Update the chart when toggling dark mode
       });
-  
-      // Load the dark mode preference from localStorage
-      const savedMode = localStorage.getItem("darkMode");
-      if (savedMode === "enabled") {
-          document.body.classList.add("dark-mode");
-          console.log("Dark mode restored from localStorage.");
-      } else {
-          console.log("Light mode restored from localStorage.");
-      }
+    } else {
+      console.error("Toggle button not found!");
+    }
 
-    // Initialize dark mode on page load
-    // initializeDarkMode();
-
+    // Initialize dark mode and chart on page load
+    initializeDarkMode();
   });
 </script>
 
