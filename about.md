@@ -126,7 +126,7 @@ In this blog, we'll explore a variety of topics. The chart below highlights my p
       }
 
     // Initialize dark mode on page load
-    initializeDarkMode();
+    // initializeDarkMode();
 
   });
 </script>
