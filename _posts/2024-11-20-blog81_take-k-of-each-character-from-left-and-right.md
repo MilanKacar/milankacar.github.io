@@ -8,16 +8,6 @@ You are given a string `s` containing only the characters `'a'`, `'b'`, and `'c'
 
 You can only remove **one character per minute**, and the removal must be either from the **leftmost** or the **rightmost** side of the string. If it is **impossible** to meet the condition, return `-1`.
 
----
-
-Certainly! Writing 4,000+ words on this problem requires in-depth exploration of the concepts, examples, edge cases, optimization strategies, and theoretical insights. Here's the expanded post:
-
----
-
-# 🌟 LeetCode #2516: Take K of Each Character From Left and Right 🌟  
-
----
-
 ### **🛠️ Problem Details**  
 
 - **Difficulty:** Medium  
