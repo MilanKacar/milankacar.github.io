@@ -21,58 +21,63 @@ layout: default
 </script>
 
 <style>
-  h1 {
-    margin-top: 20px; /* Adds more space above the title */
-    font-size: 30px;
-  }
-  
-  .custom-category-tag {
+  .category-tag {
     display: inline-block;
     padding: 8px 12px;
     background: linear-gradient(white, white) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box;
-    border: 2px solid transparent;
-    border-radius: 50px;
+                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
+    border: 2px solid transparent; /* Transparent border to allow background gradient */
+    border-radius: 50px;    /* Full rounded corners */
     font-size: 16px;
-    color: #333;
+    color: #333;           /* Text color */
     text-align: center;
-    text-decoration: none;
+    text-decoration: none; /* Removes underline from the link */
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
   }
 
-  .custom-category-tag:hover {
-    background-color: #e0f7e9;
-    color: #000;
+  .category-tag:hover {
+    background-color: #e0f7e9;   /* Light green background on hover */
+    color: #000;                 /* Changes text color on hover */
   }
 
-  .custom-post-categories {
-    text-align: right;
-    margin-bottom: 10px;
+  /* Style the container holding the categories */
+  .post-categories {
+    text-align: right;     /* Align categories to the right */
+    margin-bottom: 10px;   /* Adds space between the categories and the title */
   }
 
-  .custom-code-container {
+  /* Adds spacing between the title and categories to prevent overlap */
+  h1 {
+    margin-top: 20px;      /* Adds more space above the title */
+    font-size: 30px;
+  }
+
+  /* Ensure the preformatted code block container has relative positioning */
+  .code-container {
     position: relative;
     margin-bottom: 1em;
   }
 
-  .custom-highlight {
+  div.highlight {
     display: contents;
   }
 
-  .custom-pre {
+  /* Style the code block */
+  pre {
     margin: 0;
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 4px;
-    overflow-x: auto;
-    position: relative;
+    overflow-x: auto; /* Ensure long code can scroll horizontally */
+    position: relative; /* Make it the positioning context for the button */
   }
 
-  .custom-copy-button {
+  /* Position the copy button at the top-right corner of the pre block */
+  .copy-button {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 2px; /* Adjust as necessary */
+    right: 2px; /* Position at the top-right corner */
     background-color: #007bff;
     color: white;
     border: none;
@@ -82,57 +87,30 @@ layout: default
     cursor: pointer;
   }
 
-  .custom-copy-button:hover {
+  .copy-button:hover {
     background-color: #0056b3;
   }
 
-  .custom-code {
+  code {
     font-size: 14px;
   }
 
-  .dark-mode .custom-category-tag {
-    background: linear-gradient(#333, #333) padding-box, 
-                linear-gradient(45deg, #4e4376, #2b5876) border-box;
-    color: #ddd;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-  }
-
-  .dark-mode .custom-category-tag:hover {
-    background-color: #2a2a2a;
-    color: #fff;
-  }
-
-  .dark-mode .custom-pre {
-    background-color: #2a2a2a;
-    color: #ddd;
-  }
-
-  .dark-mode .custom-copy-button {
-    background-color: #555;
-    color: #fff;
-  }
-
-  .dark-mode .custom-copy-button:hover {
-    background-color: #777;
-  }
-
-  .dark-mode .custom-code {
-    color: #ddd;
-  }
 </style>
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const allCodeBlocksElements = document.querySelectorAll(".custom-pre");
+  const allCodeBlocksElements = document.querySelectorAll("pre");
   
   allCodeBlocksElements.forEach((codeBlock) => {
+    // Create the copy button and position it inside the pre block
     const copyButton = document.createElement("button");
-    copyButton.className = "custom-copy-button";
+    copyButton.className = "copy-button";
     copyButton.textContent = "Copy";
-    codeBlock.appendChild(copyButton);
+    codeBlock.appendChild(copyButton); // Add the button inside the pre block
 
+    // Copy button click functionality
     copyButton.addEventListener("click", function() {
+      // Select all the text content in <pre> except for the button
       const code = Array.from(codeBlock.childNodes)
                         .filter(node => node.nodeType === Node.TEXT_NODE || node.nodeName === "CODE")
                         .map(node => node.textContent)
@@ -145,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
       document.execCommand("copy");
       document.body.removeChild(tempTextArea);
 
+      // Change button text after copying
       copyButton.textContent = "Copied!";
       setTimeout(() => {
         copyButton.textContent = "Copy";
@@ -161,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <article class="post">
   <!-- Post Categories positioned above the title -->
-  <div class="custom-post-categories">
+  <div class="post-categories">
     Category: 
     {% if post %}
       {% assign categories = post.categories %}
@@ -169,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
       {% assign categories = page.categories %}
     {% endif %}
     {% for category in categories %}
-    <a class="custom-category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
+    <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
     {% unless forloop.last %}{% endunless %}
     {% endfor %}
   </div>
