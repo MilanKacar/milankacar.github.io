@@ -25,6 +25,14 @@ body {
 
 }
 
+article {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+posts {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body.dark-mode {
   background-color: #121212 !important; /* Ensure dark mode applies */
   transition: background-color 0.3s ease, color 0.3s ease;
