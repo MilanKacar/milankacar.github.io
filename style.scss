@@ -442,6 +442,26 @@ body.dark-mode #toggle-mode .icon-moon {
 }
 
 
+/* Default styles for the light mode icons */
+.icon-light {
+  color: black; /* Light mode icon color */
+}
+
+/* Styles for the dark mode icons */
+body.dark-mode .icon-dark {
+  color: white; /* Dark mode icon color */
+}
+
+body.dark-mode .icon-light {
+  color: #6c757d; /* Optional: a less saturated color for icons in dark mode */
+}
+
+/* Adjust icon color for hover (both modes) */
+.icon-light:hover, .icon-dark:hover {
+  color: #007bff; /* A highlight color for hover state */
+  transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
