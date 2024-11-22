@@ -24,7 +24,7 @@ At the outset, I expect most topics will revolve around software development. Ho
 ## 🚀 Technical Skills
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
-  <thead style="background-color: #c4c2bb; color: black;">
+  <thead>
     <tr>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Skill</th>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
@@ -33,7 +33,7 @@ At the outset, I expect most topics will revolve around software development. Ho
     </tr>
   </thead>
   <tbody>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;">Python</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">PostgreSQL</td>
@@ -45,7 +45,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;">MySQL</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;">C/C++</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">JavaScript</td>
@@ -57,7 +57,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;">PHP</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢</td>
     </tr>
-    <tr style="background-color: #f9f9f9;">
+    <tr">
       <td style="border: 1px solid #ddd; padding: 12px;">Cloud Computing</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Linux</td>
@@ -69,7 +69,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;">Docker</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;">Java</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Apache Spark</td>
@@ -81,7 +81,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;">Scala</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢</td>
     </tr>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;">R</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Navigation</td>
@@ -205,14 +205,14 @@ At the outset, I expect most topics will revolve around software development. Ho
 ## 🌍 Languages
 
 <table style="border-collapse: collapse; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);">
-  <thead style="background-color: #c4c2bb; color: black;">
+  <thead>
     <tr>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Language</th>
       <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Proficiency</th>
     </tr>
   </thead>
   <tbody>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;"><strong>Serbian, Croatian, Bosnian</strong></td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
@@ -220,7 +220,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;"><strong>English</strong></td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
-    <tr style="background-color: #f9f9f9;">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;"><strong>German</strong></td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
     </tr>
