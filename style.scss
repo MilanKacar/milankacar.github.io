@@ -25,6 +25,10 @@ body {
 
 }
 
+button {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 pre {
  background: $light-code-surface;
@@ -418,6 +422,10 @@ body.dark-mode #toggle-mode .icon-moon {
     background-color: $dark-background  !important;
     font: 18px/1.4 $helvetica;
     color: $dark-text !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  button {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
