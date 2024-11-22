@@ -25,6 +25,7 @@ body {
 
 }
 
+
 pre {
  background: $light-code-surface;
 }
@@ -223,7 +224,7 @@ img {
   letter-spacing: 1px;
 }
 /* Position the copy button at the top-right corner of the pre block */
-button.copy-button {
+.copy-button {
   position: absolute;
   top: 2px; /* Adjust as necessary */
   right: 2px; /* Position at the top-right corner */ 
@@ -236,7 +237,7 @@ button.copy-button {
   cursor: pointer;
 }
 
-button.copy-button:hover {
+.copy-button:hover {
   background-color: #0056b3;
 }
 
@@ -495,25 +496,27 @@ body.dark-mode #toggle-mode .icon-moon {
     font-size: 22px;
     font-style: italic;
   }
+
+ /* Position the copy button at the top-right corner of the pre block */
+ .copy-button {
+   position: absolute;
+   top: 2px; /* Adjust as necessary */
+   right: 2px; /* Position at the top-right corner */ 
+   background-color: #0056b3;
+   color: white;
+   border: none;
+   padding: 5px 10px;
+   font-size: 12px;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+
+ .copy-button:hover {
+   background-color: #007bff;
+ }
+
 }
 
-/* Position the copy button at the top-right corner of the pre block */
-.copy-button {
-  position: absolute;
-  top: 2px; /* Adjust as necessary */
-  right: 2px; /* Position at the top-right corner */ 
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.copy-button:hover {
-  background-color: #007bff;
-}
 
 
 
