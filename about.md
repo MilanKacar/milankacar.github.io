@@ -57,7 +57,7 @@ At the outset, I expect most topics will revolve around software development. Ho
       <td style="border: 1px solid #ddd; padding: 12px;">PHP</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢</td>
     </tr>
-    <tr">
+    <tr>
       <td style="border: 1px solid #ddd; padding: 12px;">Cloud Computing</td>
       <td style="border: 1px solid #ddd; padding: 12px;">🟢🟢🟢🟢🟢</td>
       <td style="border: 1px solid #ddd; padding: 12px;">Linux</td>
