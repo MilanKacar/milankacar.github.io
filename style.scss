@@ -222,6 +222,23 @@ img {
   font-size: 28px;
   letter-spacing: 1px;
 }
+/* Position the copy button at the top-right corner of the pre block */
+.copy-button {
+  position: absolute;
+  top: 2px; /* Adjust as necessary */
+  right: 2px; /* Position at the top-right corner */ 
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
 
 .site-description {
   margin: -5px 0 0 0;
@@ -479,6 +496,25 @@ body.dark-mode #toggle-mode .icon-moon {
     font-style: italic;
   }
 }
+
+/* Position the copy button at the top-right corner of the pre block */
+.copy-button {
+  position: absolute;
+  top: 2px; /* Adjust as necessary */
+  right: 2px; /* Position at the top-right corner */ 
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #007bff;
+}
+
 
 
 /* Default styles for the light mode icons */
