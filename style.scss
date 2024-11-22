@@ -26,10 +26,12 @@ body {
 }
 
 div {
+  background: $white;
   transition: background-color 0.3s ease, color 0.3s ease;	
 }
 
 article {
+  background: $white;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -367,9 +369,19 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   body {
-    background-color: $dark-background  !important; ;
+    background-color: $dark-background  !important;
     font: 18px/1.4 $helvetica;
     color: $dark-text !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  div {
+    background: $dark-background  !important;
+    transition: background-color 0.3s ease, color 0.3s ease;	
+  }
+
+   article {
+    background: $dark-background  !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
