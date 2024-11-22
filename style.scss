@@ -255,7 +255,7 @@ img {
 
   .category-tag:hover {
     background-color: #e0f7e9;   /* Light green background on hover */
-    color: #000;                 /* Changes text color on hover */
+    color: $dark-link;                 /* Changes text color on hover */
   }
 
 .copy-button:hover {
@@ -558,7 +558,7 @@ body.dark-mode #toggle-mode .icon-moon {
 
   .category-tag:hover {
     background-color: #b8e4d6;   /* Light green background on hover */
-    color: #000;                 /* Changes text color on hover */
+    color: $dark-link;                 /* Changes text color on hover */
   }
 
 }
