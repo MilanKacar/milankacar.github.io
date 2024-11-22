@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#830 0️⃣1️⃣→1️⃣0️⃣ 1072. Flip Columns For Maximum Number of Equal Rows 🧠🚀"  
+title: "#83 0️⃣1️⃣→1️⃣0️⃣ 1072. Flip Columns For Maximum Number of Equal Rows 🧠🚀"  
 categories: [LeetCode, Programming]  
 ---
 
