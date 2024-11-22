@@ -25,6 +25,10 @@ body {
 
 }
 
+pre {
+ background: $light-code-surface;
+}
+
 div {
   background: $white;
   transition: background-color 0.3s ease, color 0.3s ease;	
@@ -37,7 +41,7 @@ article {
 
 
 body.dark-mode {
-  background-color: #121212 !important; /* Ensure dark mode applies */
+  background-color: $dark-background !important; /* Ensure dark mode applies */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -366,6 +370,10 @@ body.dark-mode #toggle-mode .icon-moon {
 .dark-mode {
   html {
     font-size: 100%;
+  }
+
+  pre {
+    background: $dark-code-surface;
   }
 
   body {
