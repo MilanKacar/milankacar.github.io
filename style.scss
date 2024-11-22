@@ -235,6 +235,7 @@ img {
   font-size: 12px;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .copy-button:hover {
