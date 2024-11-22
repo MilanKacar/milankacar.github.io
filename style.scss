@@ -223,7 +223,7 @@ img {
   letter-spacing: 1px;
 }
 /* Position the copy button at the top-right corner of the pre block */
-.copy-button {
+button.copy-button {
   position: absolute;
   top: 2px; /* Adjust as necessary */
   right: 2px; /* Position at the top-right corner */ 
@@ -236,7 +236,7 @@ img {
   cursor: pointer;
 }
 
-.copy-button:hover {
+button.copy-button:hover {
   background-color: #0056b3;
 }
 
