@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#42 2938. Longest Happy String 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [String, Greedy, Heap (Priority Queue)]
 ---
 
 In today's problem, we need to create the **longest happy string** using three letters: `'a'`, `'b'`, and `'c'`. A happy string avoids repeating any letter more than twice in a row. The challenge lies in constructing the longest string while respecting this rule, and we'll explore both a **basic approach** and an **optimized approach**!
