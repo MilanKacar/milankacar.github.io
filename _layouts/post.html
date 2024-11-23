@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function() {
       {% assign categories = page.categories %}
     {% endif %}
     {% for category in categories | slugify %}
-    <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">{{category}}</a>
+    <a class="category-tag" href="{{site.baseurl}}/categories/#{{ category | slugify }}">{{category}}</a>
     {% unless forloop.last %}{% endunless %}
     {% endfor %}
   </div>
