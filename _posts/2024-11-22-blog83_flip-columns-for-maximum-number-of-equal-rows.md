@@ -10,7 +10,7 @@ This problem takes us into the world of binary matrices and challenges us to fli
 
 ### 📝 Problem Statement  
 
-We are given a **binary matrix** of dimensions \( m \times n \), where each cell contains either `0` or `1`. You can flip any column, i.e., change all `0`s in the column to `1`s and all `1`s to `0`s.  
+We are given a **binary matrix** of dimensions $$ m \times n $$, where each cell contains either `0` or `1`. You can flip any column, i.e., change all `0`s in the column to `1`s and all `1`s to `0`s.  
 
 Your goal is to determine the **maximum number of rows** that can have all values equal (all `0`s or all `1`s) after flipping some columns.  
 
@@ -162,9 +162,9 @@ matrix = [[0, 1, 0],
 
 ### ⏱ Time Complexity  
 
-- **Row Standardization**: \( O(m \times n) \), where \( m \) is the number of rows and \( n \) is the number of columns.  
-- **Counting Rows**: \( O(m) \).  
-- **Overall**: \( O(m \times n) \).  
+- **Row Standardization**: $$ O(m \times n) $$, where $$ m $$ is the number of rows and $$ n $$ is the number of columns.  
+- **Counting Rows**: $$ O(m) $$.  
+- **Overall**: $$ O(m \times n) $$.  
 
 ---
 
