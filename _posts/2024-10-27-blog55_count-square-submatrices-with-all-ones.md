@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#55 📐📏 1277. Count Square Submatrices with All Ones 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Dynamic Programming, Matrix]
 ---
 
 Counting square submatrices with all ones in a binary matrix challenges our understanding of matrix traversal and dynamic programming! In this problem, we want to find how many square submatrices consist entirely of ones. We’ll explore a brute-force solution, understand its limitations, and then optimize it with dynamic programming. Ready to uncover all the squares? Let’s dive in! 🎉🔍
