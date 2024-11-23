@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#45 2044. Count Number of Maximum Bitwise-OR Subsets 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Backtracking, Bit Manipulation, Enumeration]
 ---
 
 Ever wanted to unlock the **maximum power** from an array using just bitwise operations? 💡 Well, today’s problem gives us exactly that opportunity! In this exciting challenge, we need to find the **maximum possible bitwise OR** from all the non-empty subsets of an array, and count how many subsets can achieve that value! 🚀
