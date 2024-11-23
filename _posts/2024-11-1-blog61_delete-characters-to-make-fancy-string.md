@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#61 1957. Delete Characters to Make Fancy String 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [String]
 ---
 
 
