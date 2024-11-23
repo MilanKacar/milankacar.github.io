@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#54 🌳 2458. Height of Binary Tree After Subtree Removal Queries 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, Tree, Depth-First Search, Breadth-First Search, Binary Tree]
 ---
 
 Hello, algorithm lovers! 👋 Today, we’re going to solve a fascinating problem that involves removing subtrees from a binary tree and calculating the tree’s height afterward. The challenge in this problem lies in managing multiple independent queries efficiently. By the end, we’ll be equipped with a fast, optimized solution that can handle even the most extensive trees! Let’s dive in! 🚀
