@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "#32 Unraveling the Architectures of Large Language Models (LLMs) 🧠🤖"
+difficulty: Hard
 categories: [AI, LLM]
 ---
 
