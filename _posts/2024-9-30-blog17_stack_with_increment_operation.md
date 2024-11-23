@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#17 1381. Design a Stack With Increment Operation 🚀 "
+layout: post  
+title: "#17 1381. Design a Stack With Increment Operation 🚀"  
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Stack, Design]
 ---
 
 Hey 😄 Today, we'll be solving an interesting stack problem: designing a stack that supports **increment operations** in addition to the usual `push` and `pop`. Ready? Let’s dive in!
