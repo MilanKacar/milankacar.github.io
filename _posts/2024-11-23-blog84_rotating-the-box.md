@@ -2,7 +2,7 @@
 layout: post  
 title: "#84 🔄 1861. Rotating the Box 🧠🚀"  
 categories: [LeetCode, Programming]
-difficulty: [Medium]
+difficulty: Medium
 tags: [Array, Two Pointers, Matrix]
 ---
 
