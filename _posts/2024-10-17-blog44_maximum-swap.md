@@ -1,8 +1,11 @@
 ---
-layout: post
+layout: post  
 title: "#44 670. Maximum Swap 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Math, Greedy]
 ---
+
 
 
 Ever wonder how swapping two digits can make a huge difference? Here's how to do it efficiently! 
