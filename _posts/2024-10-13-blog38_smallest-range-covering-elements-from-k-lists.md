@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#38 LeetCode 632. Smallest Range Covering Elements from K Lists 🧠🚀"
+layout: post  
+title: "#38 632. Smallest Range Covering Elements from K Lists 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, HashTable, Greedy, Sliding Window, Sorting, Heap (Priority Queue)]
 ---
 
 In this post, we'll tackle a hard problem from LeetCode: **Smallest Range Covering Elements from K Lists**. The challenge is to find the smallest range that includes at least one number from each of the given `k` lists of sorted integers. This problem is a fantastic way to practice using heaps or a sliding window technique with pointers.
