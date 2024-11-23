@@ -3,7 +3,6 @@ layout: page
 permalink: /categories/
 title: Categories
 ---
-
 <div id="archives">
   {% for category in site.categories %}
     <div class="archive-group">
@@ -24,7 +23,7 @@ title: Categories
         <div class="difficulty-group">
           {% for post in posts_without_difficulty %}
             <article class="archive-item">
-              <h5><a href="#{{ category_name | slugify }}">{{ post.title }}</a></h5>
+              <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
             </article>
           {% endfor %}
         </div>
@@ -52,7 +51,7 @@ title: Categories
                 {% for post in posts_in_difficulty %}
                   {% if post.tags contains tag %}
                     <article class="archive-item">
-                      <h5><a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}-{{ tag | slugify }}">{{ post.title }}</a></h5>
+                      <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
                     </article>
                   {% endif %}
                 {% endfor %}
@@ -64,7 +63,7 @@ title: Categories
           {% for post in posts_in_difficulty %}
             {% if post.tags.size == 0 %}
               <article class="archive-item">
-                <h5><a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}">{{ post.title }}</a></h5>
+                <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
               </article>
             {% endif %}
           {% endfor %}
@@ -73,3 +72,4 @@ title: Categories
     </div>
   {% endfor %}
 </div>
+
