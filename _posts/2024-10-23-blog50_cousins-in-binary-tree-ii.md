@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#50 🔍🌳 2641. Cousins in Binary Tree II 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [HashTable, Tree, Depth-First Search, Breadth-First Search, Binary Tree]
 ---
 
 
