@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#11 731. My Calendar II 🚀 "
+layout: post  
+title: "#11 731. My Calendar II 🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Binary Search, Design, Segment Tree, Prefix Sum, Ordered Set]
 ---
 
 In this post, we will tackle the problem of implementing a **calendar** that allows booking events without causing a **triple booking**. After exploring a basic solution, we'll introduce an **optimized solution using a sweep line algorithm** to improve efficiency for large datasets. Let’s dive in!
