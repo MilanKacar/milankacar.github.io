@@ -2,6 +2,7 @@
 layout: post
 title: "#3 🚨 Why Early Data Management is Crucial: Common Mistakes and How to Avoid Them 🚀"
 categories: [Data Governance, Business Operations]
+difficulty: Easy
 ---
 
 In the early stages of any company, regardless of size or industry, data can be both an asset and a liability. As teams focus on growth, product development, and customer acquisition, data management often gets pushed aside—leading to headaches down the road. 
