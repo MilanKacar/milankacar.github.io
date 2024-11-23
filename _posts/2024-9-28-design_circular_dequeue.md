@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#13 641. Design Circular Deque 🚀 "
+layout: post  
+title: "#13 641. Design Circular Deque 🚀" 
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Linked List, Design, Queue]
 ---
 
 Hey there! 🎉 Today, we're diving into an exciting problem: designing a Circular Deque (double-ended queue) from scratch! The challenge requires implementing the deque and its fundamental operations like insertion, deletion, and fetching elements from the front or rear in a circular manner.
