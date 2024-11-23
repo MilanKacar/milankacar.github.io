@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#79 💣 1652. Defuse the Bomb 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#79 💣 1652. Defuse the Bomb 🧠🚀"   
+categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [Array, Sliding Window]
 ---
 
 In a world filled with codes and secrets, you are the chosen one to *defuse the bomb*! 🕵️‍♂️💣 Your informer has passed you a **circular array** of numbers and a mysterious key. Can you decode it and save the day? 🌍🔥
