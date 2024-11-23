@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#46 1545. Find Kth Bit in Nth Binary String 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [String, Recursion, Simulation]
 ---
 
 In this problem, we explore a fascinating sequence of binary strings where each new string is built recursively by combining the previous string, a "1", and the reversed and inverted version of the previous string. Our goal is to efficiently determine the `k`th bit of the `n`th binary string, without explicitly constructing the entire string.
