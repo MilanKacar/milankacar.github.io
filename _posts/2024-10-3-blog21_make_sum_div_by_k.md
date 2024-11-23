@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#21 1590. 🧮 Make Sum Divisible by P Using the Smallest Subarray Removal 🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Prefix Sum]
 ---
 
 In this blog post, we’ll solve an interesting problem where the goal is to remove the smallest subarray from a list of integers such that the remaining sum is divisible by a given number, `p`. We'll explore both the problem and its optimized solution using a hash map.
