@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#76 🔢 3254. Find the Power of K-Size Subarrays I 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#76 🔢 3254. Find the Power of K-Size Subarrays I 🧠🚀"   
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Sliding Window]
 ---
 
 Welcome to another exciting blog post! 🚀 In this problem, we're exploring the **power of subarrays**. It’s all about finding whether elements are sorted and consecutive while dealing with dynamic arrays of size `k`. Along the way, you'll enhance your problem-solving skills and coding mastery! Let’s jump into it! 💻🤓
