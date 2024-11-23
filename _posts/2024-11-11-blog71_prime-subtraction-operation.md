@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#71 🔢 2601. Prime Subtraction Operation 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#84 🔄 1861. Rotating the Box 🧠🚀"  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Math, Binary Search, Greedy, Number Theory]
 ---
 
 Imagine you’re given an array of numbers, and you need to make it strictly increasing by subtracting prime numbers from each element. Sounds like a math puzzle, right? 🤔 Let’s dive into how we can achieve this efficiently using an optimized approach with prime numbers! 🌟
