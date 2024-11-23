@@ -6,8 +6,6 @@ difficulty: Medium
 tags: [Array, Greedy, Heap (Priority Queue)]
 ---
 
-Are you rea
-
 In this problem, we are tasked with maximizing the score by applying operations to an array. The goal is to select the maximum possible element, increase the score, and then replace it with its ceiling after dividing by 3. Let's break this down and find an efficient approach! 🚀
 
 ---
