@@ -2,6 +2,7 @@
 layout: post
 title: "#34 Understanding ChatGPT and Building Language Models from Scratch - Part II 🌐🤖"
 categories: [AI, LLM]
+difficulty: Hard
 ---
 
 In [Part 1](https://milankacar.github.io/ai/llm/blog33_llm_from_scratch_I/), we discussed the foundational concepts behind **ChatGPT** and **language models**. We explored how they work, what powers them, and why they are essential for Natural Language Processing (NLP). We also tokenized the **Tiny Shakespeare** dataset and laid the groundwork for building our own language model.
