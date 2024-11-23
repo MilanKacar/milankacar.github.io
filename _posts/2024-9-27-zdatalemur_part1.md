@@ -2,6 +2,7 @@
 layout: post
 title: "#12 Tackling DataLemur SQL Challenges for Data Science Interviews 🧠💡"
 categories: [Data Science]
+difficulty: Medium
 ---
 
 Mastering SQL is a crucial skill for data science interviews. Today, we’re diving into three SQL challenges from **DataLemur**. These problems not only help you sharpen your SQL skills but also give you practical insights into real-world data science scenarios. Let’s explore the solutions! 🚀
