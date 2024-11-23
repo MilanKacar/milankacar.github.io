@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#49 🔍🌳 1106. Parsing A Boolean Expression 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [String, Stack, Recursion]
 ---
 
 In this post, we'll tackle an exciting problem: finding the **Kth largest level sum** in a binary tree. 🌲 Each level of a binary tree contains nodes with specific values, and our goal is to compute the sum of these nodes for every level, then pick out the Kth largest sum. Whether you're into **BFS**, **DFS**, or both, you'll love diving deep into this one! 😎
