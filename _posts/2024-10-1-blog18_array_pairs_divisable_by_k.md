@@ -1,8 +1,11 @@
 ---
-layout: post
+layout: post  
 title: "#18 1497. Check If Array Pairs Are Divisible by k 🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Counting]
 ---
+
 
 
 Hello, problem solvers! 👋 Today, we’re going to tackle a **cool problem** that involves dividing an array into pairs, ensuring the sum of each pair is divisible by a given number `k`. Let’s explore how to solve it efficiently! 🚀
