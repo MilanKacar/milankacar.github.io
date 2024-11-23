@@ -17,7 +17,7 @@ title: Categories
         {% capture category_name %}{{ category | first }}{% endcapture %}
         <div id="{{ category_name | slugify }}"></div>
         <h3 class="category-head">
-          <a href="#{{ category_name | slugify }}">{{ category_name }}</a>
+          <a href="#category/{{ category_name | slugify }}">{{ category_name }}</a>
         </h3>
 
         {% assign posts_in_category = site.categories[category_name] %}
@@ -36,7 +36,9 @@ title: Categories
     {% for difficulty in all_difficulties %}
       {% if difficulty %}
         <div class="difficulty-group" id="difficulty-{{ difficulty | slugify }}">
-          <h4 class="difficulty-head">{{ difficulty | capitalize }}</h4>
+          <h4 class="difficulty-head">
+            <a href="#difficulty/difficulty-{{ difficulty | slugify }}">{{ difficulty | capitalize }}</a>
+          </h4>
           {% assign posts_with_difficulty = site.posts | where: 'difficulty', difficulty %}
           {% for post in posts_with_difficulty %}
             <article class="archive-item">
@@ -54,7 +56,9 @@ title: Categories
     {% for tag in all_tags %}
       {% if tag %}
         <div class="tag-group" id="tag-{{ tag | slugify }}">
-          <h5 class="tag-head">{{ tag }}</h5>
+          <h5 class="tag-head">
+            <a href="#tag/tag-{{ tag | slugify }}">{{ tag }}</a>
+          </h5>
           {% for post in site.posts %}
             {% if post.tags contains tag %}
               <article class="archive-item">
@@ -69,10 +73,11 @@ title: Categories
 </div>
 
 <script>
-  function switchTab(tabName) {
+  function switchTab(tabName, targetId = null) {
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
 
+    // Activate the relevant tab
     tabs.forEach(tab => {
       tab.classList.remove('active');
       if (tab.id === `${tabName}-tab`) {
@@ -80,9 +85,29 @@ title: Categories
       }
     });
 
+    // Update button styles
     buttons.forEach(button => button.classList.remove('active'));
     document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+
+    // Scroll to the specific section if targetId is provided
+    if (targetId) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   }
+
+  // Handle URL hash navigation on page load
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const [tabName, sectionId] = hash.split('/');
+      if (tabName) {
+        switchTab(tabName, sectionId);
+      }
+    }
+  });
 </script>
 
 <style>
