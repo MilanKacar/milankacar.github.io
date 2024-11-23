@@ -2,6 +2,7 @@
 layout: post
 title: "#6 # Eigenvectors in Finance: Unlocking Hidden Insights 💼💡"
 categories: Finance
+difficulty: Medium
 ---
 
 In a previous [post](https://milankacar.github.io/math/finance/post1-linear-algebra-I/), I introduced the fundamental concepts of eigenvalues and eigenvectors. Today, we’re going to dive deeper into how these mathematical tools are applied in finance, particularly for portfolio optimization, risk management, and stress testing. Eigenvectors help us uncover hidden relationships between assets and risks that are otherwise difficult to see using traditional methods. We’ll illustrate this with real-world data, mathematical rigor, and a focus on practical applications. Let’s begin our journey into eigenvectors and financial analysis! 📊
