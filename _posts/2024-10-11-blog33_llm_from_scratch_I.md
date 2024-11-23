@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "#33 Understanding ChatGPT and Building Language Models from Scratch - Part I 🌐🤖"
+difficulty: Hard
 categories: [AI, LLM]
 ---
 
