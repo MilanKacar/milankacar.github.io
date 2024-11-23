@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#70 0️⃣0️⃣1️⃣0️⃣ 3097. Shortest Subarray With OR at Least K II 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Bit Manipulation, Sliding Window]
 ---
 
 Given an array of non-negative integers, we aim to find the smallest subarray where the bitwise OR of all elements is at least a given integer `k`. This problem involves bit manipulation and sliding window techniques, which are essential for efficient solutions! 
