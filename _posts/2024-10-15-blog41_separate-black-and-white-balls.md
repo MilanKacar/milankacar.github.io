@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#41 2938. ⚫⚪ Separate Black and White Balls: Efficient Grouping with Minimal Swaps 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Two Pointers, String, Greedy]
 ---
 
 In this problem, you're tasked with grouping black ⚫ and white ⚪ balls represented as a binary string. The goal is to move all the black balls to the right side and all the white balls to the left side with the minimum number of adjacent swaps.
