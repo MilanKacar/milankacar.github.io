@@ -45,7 +45,7 @@ layout: default
        </h1>
         {% if post.categories %}
           {% for category in post.categories %}
-            <a class="category-tag" href="{{site.baseurl}}/categories/#{{category | slugize}}">
+            <a class="category-tag" href="{{site.baseurl}}/categories/#category/{{category | slugify}}">
               {{category}}
             </a>
             {% unless forloop.last %}{% endunless %}
