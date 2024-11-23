@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#80 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#80 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"     
+categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, HashTable, Sliding Window]
 ---
 
 When we think about finding **maximum subarray sums**, things can get tricky when there's a twist: **all elements in the subarray must be distinct**! 🤯 This problem brings an exciting challenge, combining sliding window techniques and a hint of hash magic 🪄 to create a solution that's efficient and clean.
