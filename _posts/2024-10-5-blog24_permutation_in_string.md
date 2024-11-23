@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#24 567. Permutation in String 🧠🚀"
+layout: post  
+title: "#24 567. Permutation in String 🧠🚀" 
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [HashTable, Two Pointers, String, Sliding Window]
 ---
 
 You're given two strings `s1` and `s2`. The goal is to check if `s2` contains a permutation of `s1`. In other words, you want to return `True` if any permutation of `s1` exists as a substring in `s2`, and `False` otherwise. The challenge lies in optimizing this process! 🚀
