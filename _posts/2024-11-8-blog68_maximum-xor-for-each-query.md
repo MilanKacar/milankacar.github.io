@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#68 0️⃣0️⃣1️⃣0️⃣ 1829. Maximum XOR for Each Query 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#68 0️⃣0️⃣1️⃣0️⃣ 1829. Maximum XOR for Each Query 🧠🚀"   
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Bit Manipulation, Prefix Sum]
 ---
 
 Hey, coding enthusiasts! 😃 Let's dive into a unique problem that brings together **bitwise manipulation** and **array queries**. XOR operations are at the core of this challenge, and with a little understanding of binary numbers, we can quickly see how to solve it effectively. This post will not only explain the problem but will also show you the power of bitwise tricks in competitive programming. Let's get started!
