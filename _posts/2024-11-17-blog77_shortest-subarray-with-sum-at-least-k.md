@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#77 🔢📏 862. Shortest Subarray with Sum at Least K 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#77 🔢📏 862. Shortest Subarray with Sum at Least K 🧠🚀"    
+categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, Binary Search, Queue, Sliding Window, Heap (Priority Queue), Prefix Sum, Monotonic Queue]
 ---
 
 Finding the shortest subarray with a sum of at least $$ k $$ is a tricky but highly rewarding challenge. This problem merges concepts like prefix sums, sliding windows, and deques, making it an absolute gem for algorithm enthusiasts! Let’s solve it step by step while keeping it fun and engaging with loads of examples and insights! 🌟
