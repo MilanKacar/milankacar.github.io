@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#84 🔄 1861. Rotating the Box 🧠🚀"  
-categories: [LeetCode, Programming]
+categories: 
+ - LeetCode
+ - Programming
 tags: [array, coding]
 ---
 
