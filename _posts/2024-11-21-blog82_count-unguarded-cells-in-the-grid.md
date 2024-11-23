@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#82 🛡️ 2257. Count Unguarded Cells in the Grid 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Matrix, Simulation]
 ---
 
 Have you ever wondered how to ensure maximum coverage with minimal resources, like setting up surveillance cameras in a building or guarding the boundaries of a field? 🏢🔍 While it might seem like a logistics puzzle, problems like these often have practical solutions grounded in computational thinking. One such fascinating challenge is **LeetCode Problem #2257: Count Unguarded Cells in the Grid**. 🧩👀
