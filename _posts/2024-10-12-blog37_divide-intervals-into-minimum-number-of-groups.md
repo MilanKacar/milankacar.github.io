@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#37 2406. Divide Intervals Into Minimum Number of Groups 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Two Pointers, Greedy, Sorting, Heap (Priority Queue), Prefix Sum]
 ---
 
 In this problem, we are tasked with dividing a set of intervals into groups such that no two intervals in the same group overlap. Each group should be able to hold non-overlapping intervals, and our objective is to minimize the number of groups required. This problem is about efficiently managing the overlap of intervals and finding the minimum number of distinct groups to separate them.
