@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#28 1963. Minimum Number of Swaps to Make the String Balanced 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Two Pointers, String, Stack, Greedy]
 ---
 
 Balancing brackets is a common problem in programming interviews, and in this challenge, we are tasked with making a string of brackets balanced with the minimum number of swaps. Given that the string has an equal number of opening (`[`) and closing (`]`) brackets, the goal is to determine the least number of swaps required to make it balanced.
