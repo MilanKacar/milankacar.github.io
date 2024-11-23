@@ -9,8 +9,9 @@ title: Categories
     <div class="archive-group">
       {% capture category_name %}{{ category | first }}{% endcapture %}
       <div id="{{ category_name | slugify }}"></div>
-      <h3 class="category-head">{{ category_name }}</h3>
-      <a name="{{ category_name | slugify }}"></a>
+      <h3 class="category-head">
+        <a href="#{{ category_name | slugify }}">{{ category_name }}</a>
+      </h3>
 
       {% assign posts_in_category = site.categories[category_name] %}
       
@@ -23,7 +24,7 @@ title: Categories
         <div class="difficulty-group">
           {% for post in posts_without_difficulty %}
             <article class="archive-item">
-              <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+              <h5><a href="#{{ category_name | slugify }}">{{ post.title }}</a></h5>
             </article>
           {% endfor %}
         </div>
@@ -32,9 +33,9 @@ title: Categories
       <!-- Group posts by difficulty -->
       {% assign unique_difficulties = posts_with_difficulty | map: 'difficulty' | uniq %}
       {% for difficulty in unique_difficulties %}
-        <div class="difficulty-group" id="{{ difficulty | slugify }}">
+        <div class="difficulty-group" id="{{ category_name | slugify }}-{{ difficulty | slugify }}">
           <h4 class="difficulty-head">
-            <a href="{{ site.baseurl }}/categories/{{ category_name | slugify }}/{{ difficulty | slugify }}/">{{ difficulty | capitalize }}</a>
+            <a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}">{{ difficulty | capitalize }}</a>
           </h4>
           
           <!-- Collect unique tags within this difficulty -->
@@ -44,14 +45,14 @@ title: Categories
           <!-- Display posts grouped by tags -->
           {% for tag in tags_in_difficulty %}
             {% if tag != "" %}
-              <div class="tag-group" id="{{ tag | slugify }}">
+              <div class="tag-group" id="{{ category_name | slugify }}-{{ difficulty | slugify }}-{{ tag | slugify }}">
                 <h5 class="tag-head">
-                  <a href="{{ site.baseurl }}/categories/{{ category_name | slugify }}/{{ difficulty | slugify }}/{{ tag | slugify }}/">{{ tag }}</a>
+                  <a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}-{{ tag | slugify }}">{{ tag }}</a>
                 </h5>
                 {% for post in posts_in_difficulty %}
                   {% if post.tags contains tag %}
                     <article class="archive-item">
-                      <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+                      <h5><a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}-{{ tag | slugify }}">{{ post.title }}</a></h5>
                     </article>
                   {% endif %}
                 {% endfor %}
@@ -63,7 +64,7 @@ title: Categories
           {% for post in posts_in_difficulty %}
             {% if post.tags.size == 0 %}
               <article class="archive-item">
-                <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+                <h5><a href="#{{ category_name | slugify }}-{{ difficulty | slugify }}">{{ post.title }}</a></h5>
               </article>
             {% endif %}
           {% endfor %}
