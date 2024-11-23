@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#31 1942. The Number of the Smallest Unoccupied Chair 🪑 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Heap (Priority Queue)]
 ---
 
 Ever wondered how to find a seat at a party, especially when it’s a race for the smallest unoccupied chair? This fun problem dives into seating friends at a party and ensuring we track who sits where — and more importantly, where *your* friend sits! Let’s solve it step by step.
