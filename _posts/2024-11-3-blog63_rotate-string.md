@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#63 🔄 796. Rotate String 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [String, String Matching]
 ---
 
 Imagine you have two strings, `s` and `goal`, and you want to know if you can rotate `s` some number of times so it matches `goal`. Let's dive into how to solve this with some cool insights and a clean algorithm! 🌐✨
