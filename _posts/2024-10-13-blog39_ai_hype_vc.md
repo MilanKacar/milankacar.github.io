@@ -2,6 +2,7 @@
 layout: post
 title: "#39 The Overhype of AI in Business: How Venture Capital is Falling for a Misleading Trend 📉"
 categories: [AI, Business Operations]
+difficulty: Easy
 ---
 
 Artificial Intelligence (AI) has become the hottest buzzword in the tech world. Businesses and startups are clamoring to integrate AI into their operations, hoping to ride the wave of innovation and attract the attention of investors. The common belief is that by injecting AI into a project, it automatically becomes more attractive, more efficient, and more profitable. But from a Venture Capital (VC) perspective, this obsession with AI is leading many businesses astray, and investors are increasingly being misled by the allure of AI-powered promises.
