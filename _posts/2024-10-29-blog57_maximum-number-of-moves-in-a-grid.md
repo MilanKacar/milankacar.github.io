@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#57 2684. Maximum Number of Moves in a Grid 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Dynamic Programming, Matrix]
 ---
 
 In this problem, we’re dealing with a matrix of numbers, representing a grid where each number is a cell. Our task is to start from any cell in the first column and traverse rightwards across the grid, only moving to cells with a higher value than our current cell. The goal? To find the maximum number of moves we can make in such a path! Let’s explore how to achieve this optimally using **Dynamic Programming (DP)**. 🤩
