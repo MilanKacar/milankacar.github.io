@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#67 0️⃣1️⃣ 2275. Largest Combination With Bitwise AND Greater Than Zero 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Bit Manipulation, Counting]
 ---
 
 In this problem, we’re exploring bitwise operations, particularly the **bitwise AND** operation. Our goal is to find the **largest subset** of numbers from a list such that the **bitwise AND** of all numbers in the subset is **greater than zero**. 🔥
