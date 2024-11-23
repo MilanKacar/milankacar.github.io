@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#26 1813. Sentence Similarity III 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Two Pointers, String]
 ---
 
 In competitive programming and real-world applications, sentence manipulation and comparison are common tasks. Whether you're working on natural language processing (NLP), chatbots, or search engines, understanding how to determine sentence similarity is crucial.
