@@ -1,9 +1,10 @@
 ---
-layout: post
+layout: post  
 title: "#64 🔍 3163. String Compression III 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [String]
 ---
-
 
 When working with large strings, especially those filled with repeating characters, **compression** can save valuable space. In **LeetCode problem #3163: String Compression III**, we’re asked to create a compressed version of a string while following a specific rule: we can capture **only up to 9 consecutive characters of the same type** at a time. This twist challenges us to think carefully about how to **segment the string** efficiently without missing any repetitions.
 
