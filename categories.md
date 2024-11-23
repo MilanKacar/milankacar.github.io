@@ -80,14 +80,14 @@ title: Categories
     // Activate the relevant tab
     tabs.forEach(tab => {
       tab.classList.remove('active');
-      if (tab.id === ${tabName}-tab) {
+      if (tab.id === `${tabName}-tab`) {
         tab.classList.add('active');
       }
     });
 
     // Update button styles
     buttons.forEach(button => button.classList.remove('active'));
-    document.querySelector([onclick="switchTab('${tabName}')"]).classList.add('active');
+    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
 
     // Scroll to the specific section if targetId is provided
     if (targetId) {
