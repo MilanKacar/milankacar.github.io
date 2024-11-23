@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#19 1331. Rank Transform of an Array 🚀"
 categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [Array, HashTable, Sorting]
 ---
 
 Hey there, coding enthusiasts! 👋 Today, we’re going to tackle a simple yet interesting problem: ranking the elements of an array based on their values. Sounds fun, right? Let's dive in! 🚀
