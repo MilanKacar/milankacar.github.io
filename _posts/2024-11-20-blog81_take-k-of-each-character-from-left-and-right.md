@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#81 📏🧮 2516. Take K of Each Character From Left and Right 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#81 📏🧮 2516. Take K of Each Character From Left and Right 🧠🚀" 
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [HashTable, String, Sliding Window]
 ---
 
 Dealing with constraints in strings can feel like a balancing act! 🧩 In LeetCode problem **#2516: Take K of Each Character From Left and Right**, the challenge is to efficiently remove characters from the edges of a string while ensuring at least `k` occurrences of `'a'`, `'b'`, and `'c'` remain. Using the **sliding window technique**, we’ll determine the **minimum time required** to achieve this. Ready to dive into a smart and efficient solution? Let’s go! 🚀
