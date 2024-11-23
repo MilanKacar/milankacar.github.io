@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <div class="post-difficulty">
     Difficulty:
     {% assign category = page.categories.first | slugify %}
-    <a class="category-tag" href="{{ site.baseurl }}/categories/{{ category }}/{{ page.difficulty | slugify }}">{{ page.difficulty | capitalize }}</a>
+    <a class="category-tag" href="{{ site.baseurl }}/categories/#{{category | slugize}}-{{ page.difficulty | slugify }}">{{ page.difficulty | capitalize }}</a>
   </div>
 {% endif %}
 
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {% assign category = page.categories.first | slugify %}
     {% assign difficulty = page.difficulty | slugify %}
     {% for tag in page.tags %}
-      <a class="category-tag" href="{{ site.baseurl }}/categories/{{ category }}/{{ difficulty }}/{{ tag | slugify }}">{{ tag }}</a>
+      <a class="category-tag" href="{{ site.baseurl }}/categories/#{{category | slugize}}-{{ difficulty }}-{{ tag | slugify }}">{{ tag }}</a>
       {% unless forloop.last %}, {% endunless %}
     {% endfor %}
   </div>
