@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#53 📂✨ 1233. Remove Sub-Folders from the Filesystem 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, String, Depth-First Search, Trie]
 ---
 
 Managing files can be a hassle, especially when we want to clean up our directory structure! This problem is all about identifying and removing redundant sub-folders in a list. Let’s explore the problem and find out how to tackle it efficiently. 😊
