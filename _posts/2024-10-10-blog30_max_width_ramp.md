@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#30 962. Maximum Width Ramp 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Stack, Monotonic Stack]
 ---
 
 In this post, we’ll explore a fun and interesting problem where we need to find the **maximum width ramp** in an array. A ramp is defined as a pair of indices `(i, j)` such that `i < j` and `nums[i] <= nums[j]`. Our goal is to calculate the largest difference `j - i` where this condition holds. Let’s dive in! 🌊
