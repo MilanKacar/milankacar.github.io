@@ -1,7 +1,9 @@
 ---
 layout: post  
-title: "#69 0️⃣0️⃣1️⃣0️⃣ 3133. Minimum Array End 🧠🚀"  
-categories: [LeetCode, Programming]  
+title: "#69 0️⃣0️⃣1️⃣0️⃣ 3133. Minimum Array End 🧠🚀" 
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Bit Manipulation]
 ---
 
 Today, we’ll dive into an interesting problem where we have to construct a **strictly increasing array** with a given length `n`, ensuring that a bitwise `AND` operation across all elements results in a specific number `x`. Our goal? To keep the last element of this array—the largest one—as **small as possible**! 🚀 Let’s break down the problem, understand the logic, and see how Python code helps us solve it efficiently! 🐍💡
