@@ -2,6 +2,7 @@
 layout: post
 title: " #4 Understanding the Balance Sheet 📊 "
 categories: Finance
+difficulty: Easy
 ---
 
 
