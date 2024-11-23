@@ -4,7 +4,6 @@ permalink: /categories/
 title: Categories
 ---
 
-
 <div id="archives">
 {% for category in site.categories %}
   <div class="archive-group">
@@ -15,9 +14,16 @@ title: Categories
     <h3 class="category-head">{{ category_name }}</h3>
     <a name="{{ category_name | slugize }}"></a>
     {% for post in site.categories[category_name] %}
-    <article class="archive-item">
-      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
-    </article>
+      <article class="archive-item">
+        <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
+        {% if post.categories.size > 1 %}
+          <p>Subcategories: 
+          {% for subcategory in post.categories offset:1 %}
+            <a href="#{{ subcategory | slugize }}">{{ subcategory }}</a>{% if forloop.last == false %}, {% endif %}
+          {% endfor %}
+          </p>
+        {% endif %}
+      </article>
     {% endfor %}
   </div>
 {% endfor %}
