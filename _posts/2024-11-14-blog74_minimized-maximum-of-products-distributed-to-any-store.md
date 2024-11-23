@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#74 🚚📦 2064. Minimized Maximum of Products Distributed to Any Store 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Binary Search]
 ---
 
 
