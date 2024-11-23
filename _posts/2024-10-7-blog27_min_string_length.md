@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#27 2696. Minimum String Length After Removing Substrings 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [String, Stack, Simulation]
 ---
 
 Given a string consisting of only uppercase English letters, we need to repeatedly remove the substrings "AB" and "CD" until no more of them exist. Our task is to find the minimum possible length of the string after all these operations.
