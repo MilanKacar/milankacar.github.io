@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#75 🔢 1574. Shortest Subarray to be Removed to Make Array Sorted 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Two Pointers, Binary Search, Stack, Monotonic Stack]
 ---
 
 Sorting arrays is a common requirement in computer science and forms the basis for many efficient algorithms. But what if you’re given an array that’s almost sorted? In this problem, we need to remove the **shortest contiguous subarray** to transform the remaining elements into a sorted (non-decreasing) sequence. 
