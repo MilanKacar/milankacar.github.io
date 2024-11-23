@@ -32,6 +32,19 @@ title: Categories
     {% assign unique_tags = tags_in_category | split: "," | uniq %}
     {% assign untagged_posts_array = untagged_posts | split: "," %}
 
+    <!-- Display untagged posts separately -->
+    {% if untagged_posts_array.size > 0 %}
+      <div class="tag-group">
+        {% for post in posts_in_category %}
+          {% if untagged_posts_array contains post.id %}
+            <article class="archive-item">
+              <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
     <!-- Display posts grouped by tags -->
     {% for tag in unique_tags %}
       {% if tag != "" %}
@@ -48,18 +61,7 @@ title: Categories
       {% endif %}
     {% endfor %}
 
-    <!-- Display untagged posts separately -->
-    {% if untagged_posts_array.size > 0 %}
-      <div class="tag-group">
-        {% for post in posts_in_category %}
-          {% if untagged_posts_array contains post.id %}
-            <article class="archive-item">
-              <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
-            </article>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
+    
   </div>
 {% endfor %}
 </div>
