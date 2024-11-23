@@ -1,7 +1,9 @@
 ---
-layout: post
-title: " #5 2416. Sum of Prefix Scores of Strings 🚀 "
-categories: LeetCode Programming
+layout: post  
+title: " #5 2416. Sum of Prefix Scores of Strings 🚀 " 
+categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, String, Trie, Counting]
 ---
 
 
