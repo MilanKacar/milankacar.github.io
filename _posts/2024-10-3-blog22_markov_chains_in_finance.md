@@ -1,8 +1,10 @@
 ---
 layout: post
-title: "#22 🔗 Markov Chains in Finance: A Comprehensive Guide   🚀"
+title: "#22 🔗 Markov Chains in Finance: A Comprehensive Guide 🚀"
 categories: [Finance, Math]
+difficulty: Medium
 ---
+
 
 Markov Chains 🔗 are an essential mathematical concept used in various fields, including finance. This guide will take you from the basic definition of Markov Chains to their sophisticated applications in finance, using formal mathematical definitions and real-world examples.
 
