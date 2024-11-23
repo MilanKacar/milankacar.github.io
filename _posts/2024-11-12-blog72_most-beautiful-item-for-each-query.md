@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#72 💎 2070. Most Beautiful Item for Each Query 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Binary Search, Sorting]
 ---
 
 Imagine you're in a store filled with beautiful items, each with a price and a beauty score. You have a limited budget for each shopping trip, and you want to get the most beautiful item that your money can buy! This problem is all about finding the maximum beauty within a price constraint for each query. Let’s explore how we can efficiently solve this with Python!
