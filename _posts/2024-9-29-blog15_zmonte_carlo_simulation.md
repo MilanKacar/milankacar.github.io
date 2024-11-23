@@ -2,6 +2,7 @@
 layout: post
 title: "#15 🎲 Monte Carlo Simulation in Finance: A Deep Dive 🚀 "
 categories: [Finance, Math]
+difficulty: Medium
 ---
 
 Monte Carlo simulation is one of quantitative finance's most widely used tools. It’s a **probabilistic method** for modeling uncertainty and simulating various outcomes. The core idea is to generate random samples to understand the potential future performance of financial products like **stocks**, **options**, and **portfolios**.
