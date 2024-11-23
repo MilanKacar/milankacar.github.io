@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "#1 Linear Algebra - part I 🚀"
-categories: Math Finance
+categories: [Math, Finance]
+difficulty: Medium
 ---
 
 Matrices, Eigenvalues, and Singular Value Decomposition (SVD) are fundamental concepts in linear algebra, with applications ranging from data science to machine learning, physics, finance, and beyond. In this post, we'll break down these topics in a beginner-friendly way, explaining what they are, how they work, and why they're important. By the end, you'll have a solid foundation to build on for more advanced topics. 🎓
