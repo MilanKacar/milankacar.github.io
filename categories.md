@@ -14,41 +14,52 @@ title: Categories
 
     {% assign posts_in_category = site.categories[category_name] %}
     {% assign tags_in_category = "" %}
+    {% assign untagged_posts = "" %}
 
-    <!-- Collect unique tags from posts in this category -->
+    <!-- Collect unique tags and separate untagged posts -->
     {% for post in posts_in_category %}
-      {% for tag in post.tags %}
-        {% unless tags_in_category contains tag %}
-          {% assign tags_in_category = tags_in_category | append: tag | append: "," %}
-        {% endunless %}
-      {% endfor %}
+      {% if post.tags.size > 0 %}
+        {% for tag in post.tags %}
+          {% unless tags_in_category contains tag %}
+            {% assign tags_in_category = tags_in_category | append: tag | append: "," %}
+          {% endunless %}
+        {% endfor %}
+      {% else %}
+        {% assign untagged_posts = untagged_posts | append: post.id | append: "," %}
+      {% endif %}
     {% endfor %}
+    
     {% assign unique_tags = tags_in_category | split: "," | uniq %}
+    {% assign untagged_posts_array = untagged_posts | split: "," %}
 
-    <!-- Check if there are tags -->
-    {% if unique_tags.size > 1 or (unique_tags.size == 1 and unique_tags.first != "") %}
-      <!-- Group posts by tag -->
-      {% for tag in unique_tags %}
-        {% if tag != "" %}
-          <div class="tag-group">
-            <h4 class="tag-head">{{ tag }}</h4>
-            {% for post in posts_in_category %}
-              {% if post.tags contains tag %}
-                <article class="archive-item">
-                  <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
-                </article>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    {% else %}
-      <!-- No tags, display posts directly -->
-      {% for post in posts_in_category %}
-        <article class="archive-item">
-          <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
-        </article>
-      {% endfor %}
+    <!-- Display posts grouped by tags -->
+    {% for tag in unique_tags %}
+      {% if tag != "" %}
+        <div class="tag-group">
+          <h4 class="tag-head">{{ tag }}</h4>
+          {% for post in posts_in_category %}
+            {% if post.tags contains tag %}
+              <article class="archive-item">
+                <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Display untagged posts separately -->
+    {% if untagged_posts_array.size > 0 %}
+      <div class="tag-group">
+        <h4 class="tag-head">Untagged</h4>
+        {% for post in posts_in_category %}
+          {% if untagged_posts_array contains post.id %}
+            <article class="archive-item">
+              <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
     {% endif %}
   </div>
 {% endfor %}
