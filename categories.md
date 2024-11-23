@@ -14,69 +14,72 @@ title: Categories
 
     {% assign posts_in_category = site.categories[category_name] %}
     
-    <!-- Collect unique difficulty levels -->
-    {% assign difficulty_levels = "easy,medium,hard" | split: "," %}
-    {% assign posts_by_difficulty = "" %}
-    
-    <!-- Loop through difficulty levels -->
-    {% for difficulty in difficulty_levels %}
-      {% assign posts_with_difficulty = "" %}
-      
-      <!-- Filter posts with current difficulty -->
-      {% for post in posts_in_category %}
-        {% if post.difficulty == difficulty %}
-          {% assign posts_with_difficulty = posts_with_difficulty | append: post.id | append: "," %}
-        {% endif %}
-      {% endfor %}
-      
-      {% assign posts_with_difficulty_array = posts_with_difficulty | split: "," %}
-      
-      <!-- Display posts if any match current difficulty -->
-      {% if posts_with_difficulty_array.size > 1 %}
-        <div class="difficulty-group">
-          <h4 class="difficulty-head">{{ difficulty | capitalize }}</h4>
-          
-          <!-- Collect unique tags within this difficulty level -->
-          {% assign tags_in_difficulty = "" %}
-          {% for post in posts_in_category %}
-            {% if posts_with_difficulty_array contains post.id %}
-              {% for tag in post.tags %}
-                {% unless tags_in_difficulty contains tag %}
-                  {% assign tags_in_difficulty = tags_in_difficulty | append: tag | append: "," %}
-                {% endunless %}
+    <!-- Separate posts with and without difficulty -->
+    {% assign posts_with_difficulty = posts_in_category | where: 'difficulty', nil | where_exp: "post", "post.difficulty != nil" %}
+    {% assign posts_without_difficulty = posts_in_category | where: 'difficulty', nil %}
+
+    <!-- Group posts by difficulty -->
+    {% assign difficulties = "" %}
+    {% for post in posts_with_difficulty %}
+      {% unless difficulties contains post.difficulty %}
+        {% assign difficulties = difficulties | append: post.difficulty | append: "," %}
+      {% endunless %}
+    {% endfor %}
+    {% assign unique_difficulties = difficulties | split: "," | uniq %}
+
+    <!-- Display posts without difficulty first -->
+    {% if posts_without_difficulty.size > 0 %}
+      <div class="difficulty-group">
+        {% for post in posts_without_difficulty %}
+          <article class="archive-item">
+            <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Loop through each difficulty level -->
+    {% for difficulty in unique_difficulties %}
+      <div class="difficulty-group">
+        <h4 class="difficulty-head">{{ difficulty | capitalize }}</h4>
+        
+        <!-- Collect unique tags within this difficulty -->
+        {% assign posts_in_difficulty = posts_with_difficulty | where: 'difficulty', difficulty %}
+        {% assign tags_in_difficulty = "" %}
+        {% for post in posts_in_difficulty %}
+          {% for tag in post.tags %}
+            {% unless tags_in_difficulty contains tag %}
+              {% assign tags_in_difficulty = tags_in_difficulty | append: tag | append: "," %}
+            {% endunless %}
+          {% endfor %}
+        {% endfor %}
+        {% assign unique_tags = tags_in_difficulty | split: "," | uniq %}
+
+        <!-- Display posts grouped by tags -->
+        {% for tag in unique_tags %}
+          {% if tag != "" %}
+            <div class="tag-group">
+              <h5 class="tag-head">{{ tag }}</h5>
+              {% for post in posts_in_difficulty %}
+                {% if post.tags contains tag %}
+                  <article class="archive-item">
+                    <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+                  </article>
+                {% endif %}
               {% endfor %}
-            {% endif %}
-          {% endfor %}
-          {% assign unique_tags_in_difficulty = tags_in_difficulty | split: "," | uniq %}
-          
-          <!-- Display posts grouped by tags within difficulty level -->
-          {% for tag in unique_tags_in_difficulty %}
-            {% if tag != "" %}
-              <div class="tag-group">
-                <h5 class="tag-head">{{ tag }}</h5>
-                {% for post in posts_in_category %}
-                  {% if post.difficulty == difficulty and post.tags contains tag %}
-                    <article class="archive-item">
-                      <h6><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h6>
-                    </article>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            {% endif %}
-          {% endfor %}
-          
-          <!-- Display untagged posts within this difficulty -->
-          <div class="tag-group">
-            {% for post in posts_in_category %}
-              {% if post.difficulty == difficulty and post.tags.size == 0 %}
-                <article class="archive-item">
-                  <h6><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h6>
-                </article>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        
+        <!-- Display untagged posts within this difficulty -->
+        {% for post in posts_in_difficulty %}
+          {% if post.tags.size == 0 %}
+            <article class="archive-item">
+              <h5><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h5>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
     {% endfor %}
   </div>
 {% endfor %}
