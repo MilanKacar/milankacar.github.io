@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#47 1106. Parsing A Boolean Expression 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [String, Stack, Recursion]
 ---
 
 This problem revolves around evaluating complex boolean expressions that include logical operators like AND (`&`), OR (`|`), and NOT (`!`). Given a valid string representing a boolean expression, our goal is to parse it and determine whether it evaluates to **true** or **false**. This problem involves string parsing, recursion, and logical operations, making it a fun and challenging puzzle!
