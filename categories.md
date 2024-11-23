@@ -51,7 +51,6 @@ title: Categories
     <!-- Display untagged posts separately -->
     {% if untagged_posts_array.size > 0 %}
       <div class="tag-group">
-        <h4 class="tag-head">Untagged</h4>
         {% for post in posts_in_category %}
           {% if untagged_posts_array contains post.id %}
             <article class="archive-item">
