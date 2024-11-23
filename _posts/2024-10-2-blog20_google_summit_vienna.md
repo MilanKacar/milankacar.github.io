@@ -2,7 +2,9 @@
 layout: post
 title: "#20 My Day at the Google Conference in Vienna: AI, Networking, and Future Opportunities! 🤖🎉"
 categories: [Self-development]
+difficulty: Easy
 ---
+
 
 Today, I had the pleasure of attending the **Google Cloud Summit in Vienna**, a day packed with insights, networking, and hands-on experiences focused on **AI and Cloud technologies**. The event, titled **"Lernen Sie die Vorteile von KI und Cloud kennen"**, was all about discovering the benefits of AI and how Google Cloud can empower businesses to tackle their challenges head-on and stay ahead in the competitive landscape.
 
