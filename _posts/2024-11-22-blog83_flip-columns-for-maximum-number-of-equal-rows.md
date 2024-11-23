@@ -1,7 +1,9 @@
 ---
 layout: post  
 title: "#83 0️⃣1️⃣→1️⃣0️⃣ 1072. Flip Columns For Maximum Number of Equal Rows 🧠🚀"  
-categories: [LeetCode, Programming]  
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Matrix]
 ---
 
 This problem takes us into the world of binary matrices and challenges us to flip columns to make rows identical. Using the power of Python and some creative pattern recognition, we can solve this efficiently. Let’s dive into the solution step by step! 🌟  
