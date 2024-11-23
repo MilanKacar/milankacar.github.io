@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#48 1593. Split a String Into the Max Number of Unique Substrings 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [HashTable, String, Backtracking]
 ---
 
 
