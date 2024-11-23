@@ -2,6 +2,7 @@
 layout: post
 title: "#36 MyGPT Building and Deploying a Large Language Model (LLM) with Python 🛠️💻"
 categories: [AI, LLM]
+difficulty: Hard
 ---
 
 Now that we've gone through the theory and some optimizations in the previous parts of this blog series, it’s time to put everything together and build a complete **Large Language Model (LLM)** from scratch. If you haven't already, I encourage you to check out the earlier posts in this series to understand the foundational concepts and techniques:
