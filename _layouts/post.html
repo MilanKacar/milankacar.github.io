@@ -11,49 +11,42 @@ layout: default
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-1FBB6CV6WE');
 </script>
 
-<script
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  type="text/javascript">
-</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 <style>
   .category-tag {
     display: inline-block;
     padding: 8px 12px;
     background: linear-gradient(white, white) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
-    border: 2px solid transparent; /* Transparent border to allow background gradient */
-    border-radius: 50px;    /* Full rounded corners */
+                linear-gradient(45deg, #ff7e5f, #feb47b) border-box;
+    border: 2px solid transparent;
+    border-radius: 50px;
     font-size: 16px;
-    color: #333;           /* Text color */
+    color: #333;
     text-align: center;
-    text-decoration: none; /* Removes underline from the link */
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .category-tag:hover {
-    background-color: #e0f7e9;   /* Light green background on hover */
-    color: #000;                 /* Changes text color on hover */
+    background-color: #e0f7e9;
+    color: #000;
   }
 
-  /* Style the container holding the categories */
   .post-categories {
-    text-align: right;     /* Align categories to the right */
-    margin-bottom: 10px;   /* Adds space between the categories and the title */
+    text-align: right;
+    margin-bottom: 10px;
   }
 
-  /* Adds spacing between the title and categories to prevent overlap */
   h1 {
-    margin-top: 20px;      /* Adds more space above the title */
+    margin-top: 20px;
     font-size: 30px;
   }
 
-  /* Ensure the preformatted code block container has relative positioning */
   .code-container {
     position: relative;
     margin-bottom: 1em;
@@ -63,21 +56,19 @@ layout: default
     display: contents;
   }
 
-  /* Style the code block */
   pre {
     margin: 0;
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 4px;
-    overflow-x: auto; /* Ensure long code can scroll horizontally */
-    position: relative; /* Make it the positioning context for the button */
+    overflow-x: auto;
+    position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   code {
     font-size: 14px;
   }
-
 </style>
 
 <script>
@@ -85,15 +76,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const allCodeBlocksElements = document.querySelectorAll("pre");
   
   allCodeBlocksElements.forEach((codeBlock) => {
-    // Create the copy button and position it inside the pre block
     const copyButton = document.createElement("button");
     copyButton.className = "copy-button";
     copyButton.textContent = "Copy";
-    codeBlock.appendChild(copyButton); // Add the button inside the pre block
+    codeBlock.appendChild(copyButton);
 
-    // Copy button click functionality
     copyButton.addEventListener("click", function() {
-      // Select all the text content in <pre> except for the button
       const code = Array.from(codeBlock.childNodes)
                         .filter(node => node.nodeType === Node.TEXT_NODE || node.nodeName === "CODE")
                         .map(node => node.textContent)
@@ -106,66 +94,74 @@ document.addEventListener("DOMContentLoaded", function() {
       document.execCommand("copy");
       document.body.removeChild(tempTextArea);
 
-      // Change button text after copying
       copyButton.textContent = "Copied!";
       setTimeout(() => {
         copyButton.textContent = "Copy";
       }, 2000);
     });
   });
+
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    const [tabName, sectionId] = hash.split('/');
+    if (tabName) {
+      switchTab(tabName, sectionId);
+    }
+  }
 });
+
+function switchTab(tabName, targetId = null) {
+  const tabs = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.tab-button');
+
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+    if (tab.id === `${tabName}-tab`) {
+      tab.classList.add('active');
+    }
+  });
+
+  buttons.forEach(button => button.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+
+  if (targetId) {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
 </script>
 
-
-
-
-
-
-<article class="post" style="transition: background-color 0.3s ease, color 0.3s ease;">
-  <!-- Post Categories positioned above the title -->
+<article class="post">
   <div class="post-categories">
     Category: 
-    {% if post %}
-      {% assign categories = post.categories %}
-    {% else %}
-      {% assign categories = page.categories %}
-    {% endif %}
-    {% for category in categories | slugify %}
-    <a class="category-tag" href="{{site.baseurl}}/categories/#{{ category | slugify }}">{{category}}</a>
-    {% unless forloop.last %}{% endunless %}
+    {% assign categories = post.categories %}
+    {% for category in categories %}
+      <a class="category-tag" href="{{ site.baseurl }}/categories/#category/{{ category | slugify }}">{{ category }}</a>
     {% endfor %}
   </div>
 
-<!-- Difficulty -->
-{% if page.difficulty %}
-  <div class="post-difficulty" style="margin-bottom: 10px;">
-    Difficulty:
-    {% assign category = page.categories.first | slugify %}
-    <a class="category-tag" href="{{ site.baseurl }}/categories/#{{category | slugize}}-{{ page.difficulty | slugify }}">{{ page.difficulty | capitalize }}</a>
-  </div>
-{% endif %}
+  {% if page.difficulty %}
+    <div class="post-difficulty">
+      Difficulty:
+      <a class="category-tag" href="{{ site.baseurl }}/categories/#difficulty/{{ page.difficulty | slugify }}">{{ page.difficulty | capitalize }}</a>
+    </div>
+  {% endif %}
 
-<!-- Tags -->
-{% if page.tags.size > 0 %}
-  <div class="post-tags">
-    Tags:
-    {% assign category = page.categories.first | slugify %}
-    {% assign difficulty = page.difficulty | slugify %}
-    {% for tag in page.tags %}
-      <a class="category-tag" href="{{ site.baseurl }}/categories/#{{category | slugize}}-{{ difficulty }}-{{ tag | slugify }}">{{ tag }}</a>
-      {% unless forloop.last %}{% endunless %}
-    {% endfor %}
-  </div>
-{% endif %}
+  {% if page.tags %}
+    <div class="post-tags">
+      Tags:
+      {% for tag in page.tags %}
+        <a class="category-tag" href="{{ site.baseurl }}/categories/#tag/{{ tag | slugify }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
 
-
-  <!-- Title and content -->
   <h1>{{ page.title }}</h1>
-
   <div class="entry">
     {{ content }}
   </div>
-
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
