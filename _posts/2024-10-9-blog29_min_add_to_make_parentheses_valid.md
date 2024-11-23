@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#29 921. Minimum Add to Make Parentheses Valid 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [String, Stack, Greedy]
 ---
 
 Have you ever encountered a string of parentheses that looks a bit off? The challenge here is to make sure every opening parenthesis `(` has a matching closing parenthesis `)`. We're tasked with calculating the minimum number of insertions needed to make the string valid. 🚀
