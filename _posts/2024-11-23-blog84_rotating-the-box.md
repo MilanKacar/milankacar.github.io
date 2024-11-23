@@ -1,10 +1,9 @@
 ---
 layout: post  
 title: "#84 🔄 1861. Rotating the Box 🧠🚀"  
-categories: 
- - LeetCode
- - Programming
-tags: [array, coding]
+categories: [LeetCode, Programming]
+difficulty: [Medium]
+tags: [Array, Two Pointers, Matrix]
 ---
 
 Are you ready to tackle a **fun matrix problem** that combines the effects of **gravity** and **rotation**? This problem is a mix of geometry and simulation, guaranteed to get your problem-solving gears turning! Imagine stones falling through empty spaces, obstacles blocking their path, and the whole box spinning 90° clockwise. Let’s dive into this visual and engaging challenge! 🚀  
