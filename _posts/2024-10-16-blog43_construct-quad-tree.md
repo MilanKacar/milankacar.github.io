@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#43 🌳 427. Construct Quad Tree 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Divide and Conquer, Tree, Matrix]
 ---
 
 In this post, we're going to explore how to construct a **Quad-Tree** from a given `n x n` grid filled with 0's and 1's. A Quad-Tree is a tree data structure that is particularly useful for partitioning a two-dimensional space.
