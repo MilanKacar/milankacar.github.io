@@ -1,7 +1,8 @@
 ---
 layout: post  
 title: "#78 📊 Mastering Bayes' Theorem in Finance: A Comprehensive Guide with Real-World Examples 💹"  
-categories: [Finance, Data Science]  
+categories: [Finance, Data Science]
+difficulty: Medium
 ---
 
 Bayes’ Theorem is a mathematical framework that allows us to update probabilities based on new information. It plays a crucial role in finance, where decision-making under uncertainty is the norm. Whether it’s assessing credit risk, predicting market movements, or identifying fraudulent transactions, Bayes’ Theorem equips professionals with a robust tool to make informed choices.  
