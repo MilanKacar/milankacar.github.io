@@ -2,7 +2,7 @@
 layout: post  
 title: "#80 📏🧮 2461. Maximum Sum of Distinct Subarrays With Length K 🧠🚀"     
 categories: [LeetCode, Programming]
-difficulty: Hard
+difficulty: Medium
 tags: [Array, HashTable, Sliding Window]
 ---
 
