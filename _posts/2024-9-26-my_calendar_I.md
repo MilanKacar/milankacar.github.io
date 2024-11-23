@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#8 729. My Calendar I 🚀 "
-categories: LeetCode Programming
+categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Binary Search, Design, Segment Tree, Ordered Set]
 ---
 
 In this post, we will tackle the problem of implementing a **simple calendar** that allows booking events without causing a **double booking**. After exploring a basic solution, we'll introduce an **optimized solution using a balanced binary search tree (BST)** to improve efficiency for large datasets. Let’s dive in!
