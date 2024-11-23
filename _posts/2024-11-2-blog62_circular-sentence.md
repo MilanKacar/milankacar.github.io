@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#62 🌀 2490. Circular Sentence 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Easy
+tags: [String]
 ---
 
 In today’s post, we’re tackling a delightful problem that asks us to determine if a sentence is *circular*. Imagine each word is linked, like a chain, by matching the last letter of each word with the first letter of the next. Sounds easy, right? Well, let’s dig into the details and explore both a straightforward solution and a more optimized approach. Let’s get started! 💥
