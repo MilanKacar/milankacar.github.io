@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#51 🌳 951. Flip Equivalent Binary Trees 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Tree, Depth-First Search, Binary Tree]
 ---
 
 Welcome back, coders! 👨‍💻👩‍💻 Today, we're going to dive deep into a fascinating problem that involves binary trees, recursion, and some nifty tree manipulations – specifically, **flip operations**! 🌲🔀🌲 In this post, we'll learn how to check if two binary trees are **flip equivalent**, meaning that by flipping some nodes' children, we can make one tree look like the other. 🌀
