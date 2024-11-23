@@ -2,6 +2,7 @@
 layout: post
 title: "#25 Unlocking the Power of Markov Chains in Finance: A Deep Dive into Transition Matrices 🚀💸"
 categories: [Finance, Math]
+difficulty: Medium
 ---
 
 Markov Chains are powerful models that help predict future events based on current conditions. In the world of finance, they are widely used to model **market states** such as **bull markets** 📈, **bear markets** 📉, and **stable markets** 📊. But how do we calculate these transitions, and what are the key factors to keep in mind? In this blog, we will explore the mathematics behind it, the factors that influence these calculations, and a real-world financial example.
