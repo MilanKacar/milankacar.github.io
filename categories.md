@@ -6,14 +6,19 @@ title: Categories
 
 <div id="archives">
   {% for category in site.categories %}
-    <div class="archive-group" id="{{ category[0] | slugify }}">
-      <h3 class="category-head">{{ category[0] }}</h3>
+    <div class="archive-group">
+      {% capture category_name %}{{ category | first }}{% endcapture %}
+      <div id="{{ category_name | slugify }}"></div>
+      <h3 class="category-head">{{ category_name }}</h3>
+      <a name="{{ category_name | slugify }}"></a>
 
-      {% assign posts_in_category = site.categories[category[0]] %}
-      {% assign unique_difficulties = posts_in_category | map: 'difficulty' | uniq | compact %}
+      {% assign posts_in_category = site.categories[category_name] %}
+      
+      <!-- Separate posts with and without difficulty -->
+      {% assign posts_with_difficulty = posts_in_category | where_exp: "post", "post.difficulty != nil" %}
+      {% assign posts_without_difficulty = posts_in_category | where_exp: "post", "post.difficulty == nil" %}
 
       <!-- Display posts without difficulty first -->
-      {% assign posts_without_difficulty = posts_in_category | where: 'difficulty', nil %}
       {% if posts_without_difficulty.size > 0 %}
         <div class="difficulty-group">
           {% for post in posts_without_difficulty %}
@@ -24,23 +29,24 @@ title: Categories
         </div>
       {% endif %}
 
-      <!-- Loop through each difficulty level -->
+      <!-- Group posts by difficulty -->
+      {% assign unique_difficulties = posts_with_difficulty | map: 'difficulty' | uniq %}
       {% for difficulty in unique_difficulties %}
         <div class="difficulty-group" id="{{ difficulty | slugify }}">
           <h4 class="difficulty-head">
-            <a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}/{{ difficulty | slugify }}">{{ difficulty | capitalize }}</a>
+            <a href="{{ site.baseurl }}/categories/{{ category_name | slugify }}/{{ difficulty | slugify }}/">{{ difficulty | capitalize }}</a>
           </h4>
-
-          {% assign posts_in_difficulty = posts_in_category | where: 'difficulty', difficulty %}
-          {% assign unique_tags = posts_in_difficulty | map: 'tags' | flatten | uniq | compact %}
+          
+          <!-- Collect unique tags within this difficulty -->
+          {% assign posts_in_difficulty = posts_with_difficulty | where: 'difficulty', difficulty %}
+          {% assign tags_in_difficulty = posts_in_difficulty | map: 'tags' | join: ',' | split: ',' | uniq %}
 
           <!-- Display posts grouped by tags -->
-          {% for tag in unique_tags %}
+          {% for tag in tags_in_difficulty %}
             {% if tag != "" %}
               <div class="tag-group" id="{{ tag | slugify }}">
-                <!-- Tag heading with link to /categories/{category}/{difficulty}/{tag} -->
                 <h5 class="tag-head">
-                  <a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}/{{ difficulty | slugify }}/{{ tag | slugify }}">{{ tag }}</a>
+                  <a href="{{ site.baseurl }}/categories/{{ category_name | slugify }}/{{ difficulty | slugify }}/{{ tag | slugify }}/">{{ tag }}</a>
                 </h5>
                 {% for post in posts_in_difficulty %}
                   {% if post.tags contains tag %}
@@ -52,7 +58,7 @@ title: Categories
               </div>
             {% endif %}
           {% endfor %}
-
+          
           <!-- Display untagged posts within this difficulty -->
           {% for post in posts_in_difficulty %}
             {% if post.tags.size == 0 %}
