@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#23 2491. Divide Players Into Teams of Equal Skill 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Two Pointers, Sorting]
 ---
 
 In competitive games, forming balanced teams is essential to ensure fair play. Imagine you’re tasked with dividing players into teams where each team has the same combined skill level. Not only that, but the chemistry of each team is calculated as the product of their individual skills. Sounds like a challenge, right? Let's break down the problem and find a solution step by step!
