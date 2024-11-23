@@ -2,6 +2,7 @@
 layout: post
 title: "#35 Understanding ChatGPT and Building Language Models from Scratch - Part III 🌐🤖"
 categories: [AI, LLM]
+difficulty: Hard
 ---
 
 Absolutely! Let’s dive into [Part 3](https://milankacar.github.io/ai/llm/blog35_llm_from_scratch_III/), where we’ll cover advanced optimization techniques, explore the use of Transformer models in real-world tasks, and discuss how to fine-tune these models for improved performance. This part will aim for around 7000 words, delving deeply into topics like **advanced training strategies**, **improving performance**, **regularization techniques**, and **practical applications**. This will round out the entire process of building and training Transformer models from scratch.
