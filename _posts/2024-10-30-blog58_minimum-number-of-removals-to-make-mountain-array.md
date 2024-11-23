@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#58 ⛰️ 1671. Minimum Number of Removals to Make Mountain Array 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, Binary Search, Dynamic Programming, Greedy]
 ---
 
 Creating a *mountain array* from an unordered sequence of numbers might seem complex at first, but the problem is ultimately about finding an efficient way to keep the “mountain” structure without losing too many elements. 🌄 This challenge boils down to identifying the longest possible sequence that forms a mountain and then calculating how many elements we need to remove to achieve this structure. This type of problem is a great exercise in applying **dynamic programming** techniques, as we’ll need to store and reuse values to optimize our solution. 
