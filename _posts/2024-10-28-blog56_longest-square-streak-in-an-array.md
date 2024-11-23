@@ -1,7 +1,9 @@
 ---
-layout: post
-title: "#56 2501. Longest Square Streak in an Array 🧠🚀"
+layout: post  
+title: "#56 2501. Longest Square Streak in an Array 🧠🚀" 
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, HashTable, Binary Search, Dynamic Programming, Sorting]
 ---
 
 
