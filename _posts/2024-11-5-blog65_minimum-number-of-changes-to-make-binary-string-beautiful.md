@@ -1,7 +1,9 @@
 ---
-layout: post
+layout: post  
 title: "#65 🧩 2914. Minimum Number of Changes to Make Binary String Beautiful 🧠🚀"
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [String]
 ---
 
 
