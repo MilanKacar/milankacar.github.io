@@ -1,9 +1,10 @@
 ---
-layout: post
-title: "#66 🔁 3011. Find if Array Can Be Sorted 🧠🚀"
+layout: post  
+title: "#66 🔁 3011. Find if Array Can Be Sorted 🧠🚀" 
 categories: [LeetCode, Programming]
+difficulty: Medium
+tags: [Array, Bit Manipulation, Sorting]
 ---
-
 
 Welcome back, coders! Today, we’re tackling an exciting array problem that tests our understanding of sorting with constraints. We’ll explore how to determine if an array can be sorted by swapping elements with the **same number of set bits** in their binary representation. Let’s dive in! 🏄‍♂️
 
