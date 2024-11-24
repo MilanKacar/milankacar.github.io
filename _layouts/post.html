@@ -149,16 +149,16 @@ function switchTab(tabName, targetId = null) {
 
 {% if page.difficulty %}
   <section class="post-difficulty">
-    <strong>Difficulty:</strong>
+    Difficulty:
     <a class="category-tag" href="{{ site.baseurl }}/categories/#difficulty/difficulty-{{ page.difficulty | slugify }}">
       {{ page.difficulty | capitalize }}
     </a>
   </section>
 {% endif %}
 
-{% if page.tags %}
+{% if page.tags and page.tags.size > 0 %}
   <section class="post-tags">
-    <strong>Tags:</strong>
+    Topics:
     {% for tag in page.tags %}
       <a class="category-tag" href="{{ site.baseurl }}/categories/#tag/tag-{{ tag | slugify }}">
         {{ tag }}
@@ -166,6 +166,7 @@ function switchTab(tabName, targetId = null) {
     {% endfor %}
   </section>
 {% endif %}
+
 
 
   <h1>{{ page.title }}</h1>
