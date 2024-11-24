@@ -135,27 +135,7 @@ title: Categories
     position: relative;
   }
 
-   body.dark-mode .tab-button {
-    flex: 1;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    color: $dark-text;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: transparent;
-    transition: color 0.3s, border-bottom-color 0.3s;
-    position: relative;
-  }
 
-  
-
-  body.dark-mode .tab-button.active {
-    color: #333;
-    font-weight: bold;
-  }
 
 
   .tab-button.active {
