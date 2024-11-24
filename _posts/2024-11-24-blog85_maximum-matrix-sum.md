@@ -42,7 +42,7 @@ The absolute values of numbers determine their potential contribution to the sum
 
 #### 2. **Flipping Negatives**  
 - Negatives can be turned into positives by flipping.  
-- If two negatives are adjacent, flipping both will leave them negative again.  
+- If  negatives are adjacent, flipping both will leave them negative again.  
 - If two positives are adjacent, flipping them makes them negative, reducing the sum.  
 
 This means we must be **selective** in flipping negatives while ensuring that unnecessary flips do not hurt the total.  
@@ -67,7 +67,9 @@ To deal with this, we need to minimize the penalty from this one unavoidable neg
 2. Count the total number of negative elements.  
 3. Identify the **smallest absolute value** in the matrix.  
 4. If the count of negatives is **even**, no penalty is applied, and we achieve the maximum sum.  
-5. If the count is **odd**, subtract twice the smallest absolute value from the total to account for the one unavoidable negative.  
+5. If the count is **odd**, subtract twice the smallest absolute value from the total to account for the one unavoidable negative since this leftover negative reduces the sum by 
+$$ 2 \times min_abs $$.
+2×min_abs compared to the theoretical maximum (all positives).  
 
 This approach works because it balances the number of flips needed while ensuring the maximum sum is achieved efficiently.  
 
@@ -113,7 +115,7 @@ $$
 $$  
 
 #### Step 1: Compute Absolute Sum  
-- Absolute values: $$ |1| + |-1| + |-1| + |1| = 1 + 1 + 1 + 1 = 4 $$.  
+- Absolute values: |1| + |-1| + |-1| + |1| = 1 + 1 + 1 + 1 = 4.  
 - So, $$ \text{total_sum} = 4 $$.  
 
 #### Step 2: Count Negatives  
