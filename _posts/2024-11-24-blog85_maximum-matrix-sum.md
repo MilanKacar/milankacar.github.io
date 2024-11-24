@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#85 1975. Maximum Matrix Sum 🚀🧠"
+title: "#85 📈 1975. Maximum Matrix Sum 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Array, Greedy, Matrix]
