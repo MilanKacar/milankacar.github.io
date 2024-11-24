@@ -115,7 +115,10 @@ $$
 $$  
 
 #### Step 1: Compute Absolute Sum  
-- Absolute values: |1| + |-1| + |-1| + |1| = 1 + 1 + 1 + 1 = 4.  
+- Absolute values:
+$$
+|1| + |-1| + |-1| + |1|
+$$ = 1 + 1 + 1 + 1 = 4.  
 - So, $$ \text{total_sum} = 4 $$.  
 
 #### Step 2: Count Negatives  
