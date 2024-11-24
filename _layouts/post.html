@@ -147,21 +147,26 @@ function switchTab(tabName, targetId = null) {
     {% endfor %}
   </div>
 
-  {% if page.difficulty %}
-    <div class="post-difficulty">
-      Difficulty:
-      <a class="category-tag" href="{{ site.baseurl }}/categories/#difficulty/difficulty-{{ page.difficulty | slugify }}">{{ page.difficulty | capitalize }}</a>
-    </div>
-  {% endif %}
+{% if page.difficulty %}
+  <section class="post-difficulty">
+    <strong>Difficulty:</strong>
+    <a class="category-tag" href="{{ site.baseurl }}/categories/#difficulty/difficulty-{{ page.difficulty | slugify }}">
+      {{ page.difficulty | capitalize }}
+    </a>
+  </section>
+{% endif %}
 
-  {% if page.tags %}
-    <div class="post-tags">
-      Tags:
-      {% for tag in page.tags %}
-        <a class="category-tag" href="{{ site.baseurl }}/categories/#tag/tag-{{ tag | slugify }}">{{ tag }}</a>
-      {% endfor %}
-    </div>
-  {% endif %}
+{% if page.tags %}
+  <section class="post-tags">
+    <strong>Tags:</strong>
+    {% for tag in page.tags %}
+      <a class="category-tag" href="{{ site.baseurl }}/categories/#tag/tag-{{ tag | slugify }}">
+        {{ tag }}
+      </a>
+    {% endfor %}
+  </section>
+{% endif %}
+
 
   <h1>{{ page.title }}</h1>
   <div class="entry">
