@@ -12,9 +12,9 @@ Have you ever worked with numbers in a matrix and wondered how to manipulate the
 
 ### **The Problem in Simple Terms 📝**  
 
-You are given an \( n \times n \) matrix where each element is an integer. You can perform the following operation as many times as you like:  
+You are given an $$ n \times n $$ matrix where each element is an integer. You can perform the following operation as many times as you like:  
 
-- Select two **adjacent elements** (horizontally or vertically connected) and flip their signs, i.e., multiply each of them by \(-1\).  
+- Select two **adjacent elements** (horizontally or vertically connected) and flip their signs, i.e., multiply each of them by $$-1$$.  
 
 Your task is to find the **maximum possible sum** of the matrix after optimally applying this operation.  
 
@@ -37,8 +37,8 @@ Before jumping to a solution, let's break down some critical insights:
 
 #### 1. **The Goal is Maximization**  
 The absolute values of numbers determine their potential contribution to the sum. For example:  
-- A positive \( 5 \) contributes \( +5 \).  
-- A negative \( -5 \), if flipped to \( 5 \), can contribute \( +5 \) instead of \( -5 \).  
+- A positive $$ 5 $$ contributes $$ +5 $$.  
+- A negative $$ -5 $$, if flipped to $$ 5 $$, can contribute $$ +5 $$ instead of $$ -5 $$.  
 
 #### 2. **Flipping Negatives**  
 - Negatives can be turned into positives by flipping.  
@@ -108,54 +108,54 @@ def maxMatrixSum(matrix):
 Let’s break it down with **Example 1**:  
 
 **Input**:  
-\[
+$$
 \text{matrix} = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}
-\]  
+$$  
 
 #### Step 1: Compute Absolute Sum  
-- Absolute values: \( |1| + |-1| + |-1| + |1| = 1 + 1 + 1 + 1 = 4 \).  
-- So, \( \text{total_sum} = 4 \).  
+- Absolute values: $$ |1| + |-1| + |-1| + |1| = 1 + 1 + 1 + 1 = 4 $$.  
+- So, $$ \text{total_sum} = 4 $$.  
 
 #### Step 2: Count Negatives  
-- Number of negatives: \( -1, -1 \Rightarrow 2 \).  
+- Number of negatives: $$ -1, -1 \Rightarrow 2 $$.  
 
 #### Step 3: Smallest Absolute Value  
-- Smallest value: \( 1 \).  
+- Smallest value: $$ 1 $$.  
 
 #### Step 4: Adjust for Odd Negatives  
-- Since \( 2 \) is even, no adjustment is needed.  
+- Since $$ 2 $$ is even, no adjustment is needed.  
 
-**Output**: \( 4 \).  
+**Output**: $$ 4 $$.  
 
 ---
 
 Now, let’s tackle **Example 2**, which is more complex.  
 
 **Input**:  
-\[
+$$
 \text{matrix} = \begin{bmatrix} 1 & 2 & 3 \\ -1 & -2 & -3 \\ 1 & 2 & 3 \end{bmatrix}
-\]  
+$$  
 
 #### Step 1: Compute Absolute Sum  
 - Absolute values:  
-  \[
+  $$
   |1| + |2| + |3| + |-1| + |-2| + |-3| + |1| + |2| + |3| = 18
-  \]  
-- So, \( \text{total_sum} = 18 \).  
+  $$  
+- So, $$ \text{total_sum} = 18 $$.  
 
 #### Step 2: Count Negatives  
-- Negatives: \( -1, -2, -3 \Rightarrow 3 \).  
+- Negatives: $$ -1, -2, -3 \Rightarrow 3 $$.  
 
 #### Step 3: Smallest Absolute Value  
-- Smallest value: \( 1 \).  
+- Smallest value: $$ 1 $$.  
 
 #### Step 4: Adjust for Odd Negatives  
-- Since \( 3 \) is odd, subtract \( 2 \times 1 \):  
-  \[
+- Since $$ 3 $$ is odd, subtract $$ 2 \times 1 $$:  
+  $$
   \text{Adjusted Sum} = 18 - 2 \cdot 1 = 16
-  \]  
+  $$  
 
-**Output**: \( 16 \).  
+**Output**: $$ 16 $$.  
 
 ---
 
@@ -163,34 +163,34 @@ Now, let’s tackle **Example 2**, which is more complex.
 
 1. **All Positives**  
    Input:  
-   \[
+   $$
    \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}
-   \]  
-   Output: \( 10 \).  
+   $$  
+   Output: $$ 10 $$.  
    Explanation: No negatives, so sum is already maximum.  
 
 2. **All Negatives**  
    Input:  
-   \[
+   $$
    \begin{bmatrix} -1 & -2 \\ -3 & -4 \end{bmatrix}
-   \]  
-   Output: \( 10 \).  
+   $$  
+   Output: $$ 10 $$.  
    Explanation: All negatives can be flipped to positives.  
 
 3. **Single Negative**  
    Input:  
-   \[
+   $$
    \begin{bmatrix} 1 & 2 \\ 3 & -4 \end{bmatrix}
-   \]  
-   Output: \( 10 \).  
+   $$  
+   Output: $$ 10 $$.  
    Explanation: Only one negative, which is unavoidable.  
 
 ---
 
 ### **Complexity Analysis ⏱️**  
 
-- **Time Complexity**: \( O(n^2) \) — Traverse each element in the \( n \times n \) matrix.  
-- **Space Complexity**: \( O(1) \) — Only constants are used.  
+- **Time Complexity**: $$ O(n^2) $$ — Traverse each element in the $$ n \times n $$ matrix.  
+- **Space Complexity**: $$ O(1) $$ — Only constants are used.  
 
 ---
 
