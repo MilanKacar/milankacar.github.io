@@ -5,9 +5,9 @@ title: Categories
 ---
 <div id="archives">
   <div class="tabs">
-    <button class="tab-button active" onclick="switchTab('category')">Categories</button>
-    <button class="tab-button" onclick="switchTab('difficulty')">Difficulty</button>
-    <button class="tab-button" onclick="switchTab('tag')">Tags</button>
+    <button class="tab-button active" onclick="switchTab('category')">Categories 🗂️</button>
+    <button class="tab-button" onclick="switchTab('difficulty')">Difficulty 💪</button>
+    <button class="tab-button" onclick="switchTab('tag')">Topics 💡</button>
   </div>
 
   <!-- Categories Tab -->
