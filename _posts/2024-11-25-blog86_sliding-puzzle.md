@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#85 🧩 773. Sliding Puzzle 🚀🧠"
+title: "#86 🧩 773. Sliding Puzzle 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Breadth-First Search, Matrix]
@@ -66,29 +66,153 @@ Here’s how BFS systematically explores the state space:
 
 ---
 
-### 🚀 Step-by-Step Solution
+### 🚀 Detailed Algorithm Explanation: The Sliding Puzzle Mastermind 🧠
 
-#### 1️⃣ Serialization of the Board  
-Represent the board as a **string** for easier manipulation. For example:  
+To solve the Sliding Puzzle efficiently, we leverage **Breadth-First Search (BFS)**, which is particularly well-suited for finding the shortest path in an unweighted graph. In the context of this problem, the graph is conceptual rather than visual—each unique board configuration is a node, and a valid move between configurations represents an edge.
+
+Let’s break down the algorithm step by step to understand its core mechanics and why BFS is the perfect choice here:
+
+---
+
+#### 🔹 Step 1: **Model the Problem as a State-Space Graph**
+
+Imagine the sliding puzzle as a network of connected states:
+- **Nodes**: Each node represents a unique configuration of the board.
+- **Edges**: An edge connects two nodes if you can transform one board configuration into the other by sliding the empty square (`0`) into an adjacent position.
+
+For example:
+```
+[[4, 1, 2], [5, 0, 3]] → [[4, 1, 2], [0, 5, 3]] 
+```
+The two configurations are connected because `0` swapped positions with `5`. The goal is to traverse this graph to find the shortest path from the initial configuration to the solved state.
+
+---
+
+#### 🔹 Step 2: **Serialize the Board**
+
+Working directly with 2D arrays can be cumbersome when tracking states. Instead, we **serialize** the board into a string. For example:
 ```
 [[4, 1, 2], [5, 0, 3]] → "412503"
 ```
-This format allows for quick comparisons, swaps, and state tracking.
+Serialization simplifies:
+1. **Comparisons**: Checking whether two configurations are equal becomes straightforward.
+2. **State Tracking**: Adding configurations to a `visited` set ensures we don’t revisit nodes, preventing infinite loops.
 
-#### 2️⃣ Define Valid Moves  
-Since the grid is fixed in size (2x3), the possible moves for `0` are predefined based on its position:  
-```
-Index 0: Moves to [1, 3]  
-Index 1: Moves to [0, 2, 4]  
-Index 2: Moves to [1, 5]  
-Index 3: Moves to [0, 4]  
-Index 4: Moves to [1, 3, 5]  
-Index 5: Moves to [2, 4]
-```
-These mappings ensure efficient generation of new states.
+---
 
-#### 3️⃣ Breadth-First Search  
-Using a queue, explore all possible configurations reachable from the initial state. Each level in the BFS tree corresponds to a single move.
+#### 🔹 Step 3: **Define Valid Moves for `0`**
+
+The empty square (`0`) can move only to adjacent positions within the 2x3 grid. Since the grid is small and fixed, we can predefine the valid moves based on the current index of `0` in the serialized string:
+- **Index 0** (top-left corner): Can move to `[1, 3]`
+- **Index 1** (top-middle): Can move to `[0, 2, 4]`
+- **Index 2** (top-right corner): Can move to `[1, 5]`
+- **Index 3** (bottom-left corner): Can move to `[0, 4]`
+- **Index 4** (bottom-middle): Can move to `[1, 3, 5]`
+- **Index 5** (bottom-right corner): Can move to `[2, 4]`
+
+This mapping ensures we generate only valid configurations during the traversal. For example:
+```
+Current: "412503"
+Position of 0: Index 4
+Possible Moves: [1, 3, 5]
+```
+
+---
+
+#### 🔹 Step 4: **Initialize BFS**
+
+**Breadth-First Search** systematically explores all possible configurations level by level:
+1. Start with the initial configuration. Add it to a queue along with the step count (`queue = deque([(start, 0)])`) and mark it as visited (`visited = set([start])`).
+2. While the queue is not empty:
+   - Dequeue the first configuration and check if it matches the target state.
+   - If not, generate all valid configurations reachable in one move by swapping `0` with adjacent tiles.
+   - Add each new configuration to the queue if it hasn’t been visited.
+3. If the queue is exhausted without finding the target state, return `-1`.
+
+---
+
+#### 🔹 Step 5: **Generate New States**
+
+To generate new configurations:
+1. Identify the position of `0` in the serialized board (`zero_index = current.index('0')`).
+2. For each valid move from the `zero_index`, create a new board configuration by swapping `0` with the target position. For example:
+   ```
+   Current: "412503"
+   Swap positions 4 and 3 → "412053"
+   ```
+3. Serialize the updated configuration and check if it has been visited. If not, enqueue it and mark it as visited.
+
+---
+
+#### 🔹 Step 6: **Early Exit on Target State**
+
+The BFS process ensures that the first time you encounter the solved state (`"123450"`), you’ve reached it in the minimum number of moves. This is because BFS explores all configurations at depth `n` before moving to depth `n+1`.
+
+---
+
+### 🔍 Why BFS Works Best for This Problem
+
+BFS guarantees that we explore all configurations that require `k` moves before configurations that require `k+1` moves. This property ensures:
+1. **Shortest Path**: When we first reach the solved state, we can confidently stop the search because no shorter path exists.
+2. **Efficiency**: By pruning visited states, BFS avoids redundant calculations and keeps the solution space manageable.
+
+---
+
+### 🛠 Expanded Algorithm in Action
+
+Let’s revisit the example board:
+```
+Input: [[4, 1, 2], [5, 0, 3]]
+Serialized: "412503"
+Target: "123450"
+```
+
+#### **Initialization**
+- Queue: `[("412503", 0)]`
+- Visited: `{"412503"}`
+
+#### **Iteration 1**
+- Dequeue: `"412503", 0`
+- Index of `0`: `4`
+- Valid Moves: `[1, 3, 5]`
+
+**New States Generated**:
+1. Swap 4 ↔ 1 → `"402513"`  
+2. Swap 4 ↔ 3 → `"412053"`  
+3. Swap 4 ↔ 5 → `"412530"`
+
+**Queue**: `[("402513", 1), ("412053", 1), ("412530", 1)]`  
+**Visited**: `{"412503", "402513", "412053", "412530"}`
+
+---
+
+#### **Iteration 2**
+- Dequeue: `"402513", 1`
+- Index of `0`: `1`
+- Valid Moves: `[0, 2, 4]`
+
+**New States Generated**:
+1. Swap 1 ↔ 0 → `"042513"`
+2. Swap 1 ↔ 2 → `"420513"`
+3. Swap 1 ↔ 4 → `"412503"` (already visited)
+
+**Queue**: `[("412053", 1), ("412530", 1), ("042513", 2), ("420513", 2)]`  
+**Visited**: Updated accordingly.
+
+---
+
+#### **Continuing BFS**
+The process continues level by level, systematically exploring all valid configurations until the solved state (`"123450"`) is reached. BFS ensures that the solution path is optimal, with the minimum number of moves.
+
+---
+
+### 🔑 Key Takeaways from the Algorithm
+
+1. **Graph Representation**: Transforming the board into a state-space graph simplifies the problem.
+2. **Serialization**: Efficiently tracks visited states and avoids redundant work.
+3. **BFS Guarantees Optimality**: By exploring the solution space level by level, BFS finds the shortest path to the target state.
+
+Understanding and implementing these steps provides a robust framework to solve similar graph traversal problems. Keep this algorithm in your toolkit—it’s a game-changer! 🌟
 
 ---
 
