@@ -7,12 +7,6 @@ tags: [Graph]
 ---
 
 
-### 🏆 Find Champion II – LeetCode Problem #2924
-
----
-
-#### Short Description 📜✨
-
 Imagine a thrilling tournament 🏟️ with a unique structure—a Directed Acyclic Graph (DAG)! Each team battles it out, and your goal is to crown the **true champion** 🥇. The twist? The champion must be the **strongest** team with no other team stronger than it. If there’s any ambiguity, the title of champion is denied! Let's dive into this exciting problem!
 
 ---
