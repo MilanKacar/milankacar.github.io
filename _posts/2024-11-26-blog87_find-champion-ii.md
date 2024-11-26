@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#86 🏆 2924. Find Champion II 🚀🧠"
+title: "#87 🏆 2924. Find Champion II 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Graph]
