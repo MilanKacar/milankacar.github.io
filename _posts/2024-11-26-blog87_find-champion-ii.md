@@ -357,14 +357,6 @@ edges = [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7]]
      O(n)
      $$  
 
----
-
-### Space Complexity 🧮
-
-- **In-degree array**: $$O(n)$$  
-- **Other variables**: Negligible.  
-
-**Overall Complexity**: $$O(n)$$
 
 ---
 
