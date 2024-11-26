@@ -71,15 +71,19 @@ edges = [[0, 2], [1, 3], [1, 2]]
 
 ### Constraints 🔒
 
-- $$1 \leq n \leq 100$$  
-- $$m = edges.length$$  
-- $$0 \leq m \leq \frac{n \times (n - 1)}{2}$$  
-- $$edges[i].length = 2$$  
-- $$0 \leq edges[i][j] \leq n - 1$$  
-- $$edges[i][0] \neq edges[i][1]$$  
-- The input guarantees:  
+- Firstly, let $$ 1 \leq n \leq 100 $$  
+- Let $$ m $$ be the number of edges ($$ m = \text{edges.length} $$):  
+  $$ 0 \leq m \leq \frac{n \times (n - 1)}{2} $$  
+- Each edge $$ \text{edges}[i] $$ has exactly two vertices:  
+  $$ \text{edges}[i].\text{length} = 2 $$  
+- Vertex indices satisfy:  
+  $$ 0 \leq \text{edges}[i][j] \leq n - 1 $$  
+- No self-loops:  
+  $$ \text{edges}[i][0] \neq \text{edges}[i][1] $$  
+- **Input guarantees**:  
   - **No cycles**.  
-  - **Transitive property**: If `u > v` and `v > w`, then `u > w`.  
+  - **Transitivity**: If $$ u > v $$ and $$ v > w $$, then $$ u > w $$.  
+
 
 ---
 
@@ -335,16 +339,16 @@ edges = [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7]]
 ### Time and Space Complexity Analysis 🕒
 
 1. **Time Complexity:**  
-   - Calculating in-degrees involves processing all `m` edges, which takes \(O(m)\).  
-   - Identifying candidates involves iterating through `n` nodes, which takes \(O(n)\).  
+   - Calculating in-degrees involves processing all `m` edges, which takes $$O(m)$$.  
+   - Identifying candidates involves iterating through `n` nodes, which takes $$O(n)$$.  
    - Overall time complexity:  
      $$
      O(n + m)
      $$  
-     This is efficient for large inputs, as \(m\) (number of edges) is bounded by \(n(n-1)/2\).  
+     This is efficient for large inputs, as $$m$$ (number of edges) is bounded by $$n(n-1)/2$$.  
 
 2. **Space Complexity:**  
-   - We use an `in_degree` array of size \(O(n)\).  
+   - We use an `in_degree` array of size $$O(n)$$.  
    - The graph itself is not explicitly stored; only the edges are processed.  
    - Overall space complexity:  
      $$
