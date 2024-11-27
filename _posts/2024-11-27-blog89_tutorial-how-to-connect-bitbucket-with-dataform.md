@@ -6,9 +6,6 @@ difficulty: Medium
 tags: [GCP]
 ---
 
-
-# 🌟 Connecting Bitbucket with Dataform via SSH 🌟  
-
 Are you ready to streamline your data workflows by connecting **Bitbucket** with **Dataform**? Let's dive into this guide and make your data integration journey smoother than ever. 🚀  
 
 Dataform empowers you to orchestrate and manage your SQL-based workflows, and by linking it with Bitbucket, you can version-control your data projects like a pro! 💾 But here's the catch: **Dataform only supports SSH for connecting with Bitbucket repositories**. No worries—we'll cover everything you need to set this up step by step. 😊  
