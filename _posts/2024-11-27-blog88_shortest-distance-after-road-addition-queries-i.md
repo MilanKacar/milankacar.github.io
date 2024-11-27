@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#87 🛣️🚗 3243. Shortest Distance After Road Addition Queries I 🚀🧠"
+title: "#88 🛣️🚗 3243. Shortest Distance After Road Addition Queries I 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Array, Breadth-First Search, Graph]
