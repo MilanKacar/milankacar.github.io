@@ -2,7 +2,7 @@
 layout: post  
 title: "#89 🔗 Connect Bitbucket to Dataform 🚀🧠"
 categories: [Tutorial, Programming]
-difficulty: Medium
+difficulty: Easy
 tags: [GCP]
 ---
 
