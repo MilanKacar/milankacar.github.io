@@ -1,9 +1,9 @@
 ---
 layout: post  
-title: "#89 🔗 Connect Bitbucket to Dataform 🚀🧠"
-categories: [Tutorial, Programming]
-difficulty: Easy
-tags: [GCP]
+title: "#89 🚧 2290. Minimum Obstacle Removal to Reach Corner 🚀🧠"
+categories: [LeetCode, Programming]
+difficulty: Hard
+tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
 ---
 
 In this blog post, we'll tackle **LeetCode #2290: Minimum Obstacle Removal to Reach Corner**, an exciting graph-based problem that tests our algorithmic skills! We'll go step-by-step, exploring the problem statement, understanding the examples, diving into solutions, and optimizing our approach. Let's remove those obstacles and get coding! 💪✨
