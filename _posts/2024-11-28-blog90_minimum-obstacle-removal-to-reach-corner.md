@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#89 🚧 2290. Minimum Obstacle Removal to Reach Corner 🚀🧠"
+title: "#90 🚧 2290. Minimum Obstacle Removal to Reach Corner 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
