@@ -5,15 +5,7 @@ categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
 ---
-
-## 🕒 Minimum Time to Visit a Cell in a Grid 🕒  
-**Difficulty**: Hard  
-**Topics**: Graphs, Shortest Path, Priority Queue  
-**Acceptance Rate**: 46.9%  
-
----
-
-### 🚀 Short Description  
+  
 Imagine you are navigating a grid 🚦. Each cell in this grid has a "minimum unlock time," meaning you can only visit it after waiting a certain amount of time⏳. Starting from the top-left cell, your goal is to **reach the bottom-right cell** as quickly as possible while adhering to the timing rules. If no valid path exists, return `-1`.
 
 ---
