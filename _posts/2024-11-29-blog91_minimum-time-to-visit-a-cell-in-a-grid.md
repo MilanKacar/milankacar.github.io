@@ -292,7 +292,7 @@ class Solution:
 
 ---
 
-### **Edge Cases to Consider**
+### ⚠️ **Edge Cases**
 1. **Starting Neighbors Blocked**:
    - Grid like `[[0, 3], [3, 3]]` → Should return `-1`.
 
@@ -306,7 +306,6 @@ class Solution:
    - Grid like `[[0, 2], [1, 3]]` → Requires waiting at specific cells before advancing.
 
 By thoroughly testing these cases, the implementation can be validated for correctness.
-
 
 
 ---
@@ -344,20 +343,9 @@ grid = [[0,1,3,2],[5,1,2,5],[4,3,8,6]]
 
 ---
 
-### ⚠️ Edge Cases  
-1. **Blocked Start**:  
-   If both neighbors of `(0,0)` require `t > 1`.  
-2. **Isolated End**:  
-   If `(m-1, n-1)` is surrounded by cells with very high times.  
-3. **Single Row/Column**:  
-   When $$m=1$$ or $$n=1$$, test linear traversal.  
-4. **Already Unlocked**:  
-   If all `grid[i][j] = 0`, the output should equal the Manhattan distance.  
 
 ---
 
 ### 📜 Conclusion  
 
 This problem highlights the importance of **shortest-path algorithms** like Dijkstra's for grid-based challenges, especially when additional constraints (like waiting times) are involved. Understanding how to manipulate these constraints efficiently can drastically improve performance in complex scenarios. 🧠✨
-
-Let me know if you'd like more details!
