@@ -328,20 +328,138 @@ The basic solution already employs an optimized approach by leveraging Dijkstra�
 
 ### 🧮 Example Walkthrough  
 
-Let's revisit **Example 1**:  
-```python
-grid = [[0,1,3,2],[5,1,2,5],[4,3,8,6]]
-```
-
-1. **Start**: `(0,0)` at `t=0`.  
-2. **Move**:  
-   - To `(0,1)` at `t=1`.  
-   - To `(1,1)` at `t=2`.  
-   - To `(1,2)` at `t=3`.  
-3. **Adjust Timing**: Move back and forth to align with cell unlock times.  
-4. **Reach End**: Finally reach `(2,3)` at `t=7`.  
+Let’s take a **larger and more detailed example** to illustrate the problem and solution step by step. This walkthrough will include **specific grid configurations**, the decisions made during traversal, and the logic applied at each step.
 
 ---
+
+#### **Example**
+
+**Input Grid**:
+
+```python
+grid = [
+    [0, 2, 4, 6],
+    [3, 1, 7, 5],
+    [8, 3, 2, 10],
+    [9, 12, 4, 8]
+]
+```
+
+**Output**: `12`
+
+**Explanation**: Let’s go step-by-step to find the **minimum time** required to traverse from the top-left cell `(0,0)` to the bottom-right cell `(3,3)`.
+
+---
+
+#### **Step 1: Starting at (0,0)**
+- At time `t=0`, we are at `(0,0)`. This cell is accessible because `grid[0][0] = 0`.
+- Push `(0,0,0)` into the priority queue: `(time, row, col)`.
+
+---
+
+#### **Step 2: Exploring Neighbors**
+At `t=0`, we process `(0,0)`. We explore its neighbors:
+
+1. **Right to `(0,1)`**:
+   - `grid[0][1] = 2` requires `t ≥ 2`. 
+   - We’ll wait at `(0,0)` until `t=2`, then move to `(0,1)`.
+   - Update distance for `(0,1)` to `t=2` and push `(2,0,1)` into the queue.
+
+2. **Down to `(1,0)`**:
+   - `grid[1][0] = 3` requires `t ≥ 3`.
+   - We’ll wait at `(0,0)` until `t=3`, then move to `(1,0)`.
+   - Update distance for `(1,0)` to `t=3` and push `(3,1,0)` into the queue.
+
+---
+
+#### **Step 3: Process (0,1)**
+At `t=2`, we process `(0,1)`. We explore its neighbors:
+
+1. **Right to `(0,2)`**:
+   - `grid[0][2] = 4` requires `t ≥ 4`.
+   - We’ll wait at `(0,1)` until `t=4`, then move to `(0,2)`.
+   - Update distance for `(0,2)` to `t=4` and push `(4,0,2)` into the queue.
+
+2. **Down to `(1,1)`**:
+   - `grid[1][1] = 1` is accessible at `t=3`.
+   - Update distance for `(1,1)` to `t=3` and push `(3,1,1)` into the queue.
+
+---
+
+#### **Step 4: Process (1,0)**
+At `t=3`, we process `(1,0)`. We explore its neighbors:
+
+1. **Right to `(1,1)`**:
+   - Already reached with `t=3`. Skip.
+
+2. **Down to `(2,0)`**:
+   - `grid[2][0] = 8` requires `t ≥ 8`.
+   - We’ll wait at `(1,0)` until `t=8`, then move to `(2,0)`.
+   - Update distance for `(2,0)` to `t=8` and push `(8,2,0)` into the queue.
+
+---
+
+#### **Step 5: Process (1,1)**
+At `t=3`, we process `(1,1)`. We explore its neighbors:
+
+1. **Right to `(1,2)`**:
+   - `grid[1][2] = 7` requires `t ≥ 7`.
+   - We’ll wait at `(1,1)` until `t=7`, then move to `(1,2)`.
+   - Update distance for `(1,2)` to `t=7` and push `(7,1,2)` into the queue.
+
+2. **Down to `(2,1)`**:
+   - `grid[2][1] = 3` is accessible at `t=4`.
+   - Update distance for `(2,1)` to `t=4` and push `(4,2,1)` into the queue.
+
+---
+
+#### **Step 6: Process (0,2), (2,1), and Beyond**
+Following the same logic:
+
+1. At `t=4`, process `(0,2)`:
+   - Move to `(0,3)` at `t=6`.
+   - Push `(6,0,3)`.
+
+2. At `t=4`, process `(2,1)`:
+   - Move to `(2,2)` at `t=5`.
+   - Push `(5,2,2)`.
+
+3. At `t=6`, process `(0,3)`:
+   - Move to `(1,3)` at `t=7`.
+   - Push `(7,1,3)`.
+
+4. At `t=8`, process `(2,0)`:
+   - Move to `(3,0)` at `t=9`.
+   - Push `(9,3,0)`.
+
+---
+
+#### **Step 7: Reach (3,3)**
+Finally, at `t=12`, process `(3,3)`. Since we’ve reached the bottom-right corner, return `t=12`.
+
+---
+
+### **Path Taken**
+
+The final path looks like this (with time values in parentheses):
+```
+(0,0) → (0,1)(2) → (1,1)(3) → (2,1)(4) → (2,2)(5) → (3,3)(12)
+```
+
+---
+
+### **Key Observations in the Example**
+1. **Waiting Periods**:
+   - At cells where the required time is greater than the arrival time, waiting is necessary. This ensures alignment with the cell’s accessibility condition.
+
+2. **Optimal Movement**:
+   - The algorithm always processes the cell with the smallest time first, ensuring that the shortest path is evaluated before longer alternatives.
+
+3. **Efficient Queue Management**:
+   - Using a priority queue allows the algorithm to efficiently select the next cell to process.
+
+4. **Dynamic Exploration**:
+   - All directions are explored at each step, enabling the algorithm to handle complex grids with backtracking or detours.
 
 
 ---
