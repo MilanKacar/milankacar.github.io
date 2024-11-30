@@ -253,9 +253,7 @@ $$
 ---
 
 ## 🛠️ **Solution**  
-
-### 🔹 Basic Solution  
-#### **Approach**  
+ 
 The basic solution focuses on:  
 1. Building a graph.  
 2. Performing a depth-first traversal to reconstruct the valid arrangement.
