@@ -3,7 +3,7 @@ layout: post
 title: "#92 2097. Valid Arrangement of Pairs 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
-tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
+tags: [Depth-First Search, Graph, Eulerian Circuit]
 ---
 
 Imagine arranging puzzle pieces 🔄, where each piece has a start 🟩 and an end 🟥. The challenge is to arrange them so the end of one piece perfectly matches the start of the next. Let's dive in and untangle this challenge using Eulerian paths in graph theory! 🚀
