@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#92 🗺️ 2577. Minimum Time to Visit a Cell In a Grid 🚀🧠"
+title: "#92 2097. Valid Arrangement of Pairs 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
