@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#92 2097. Valid Arrangement of Pairs 🚀🧠"
+title: "#93 1346. Check If N and Its Double Exist 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Easy
 tags: [Array HashTable, Two Pointers, Binary Search, Sorting]
