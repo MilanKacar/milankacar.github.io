@@ -77,8 +77,8 @@ A naive **brute-force** approach would involve comparing each element with every
 
 2. **Simultaneous Checking and Storing:**  
    As we traverse the array, for each element:  
-   - Check if $$ 2 \times \text{current\_num} $$ is in the hashmap.  
-   - Check if $$ \text{current\_num} / 2 $$ is in the hashmap.  
+   - Check if $$ 2 \times \text{current_num} $$ is in the hashmap.  
+   - Check if $$ \text{current_num} 2 $$ is in the hashmap.  
    - If either condition is true, return `True`.  
    - Otherwise, add the current number to the hashmap and proceed.  
 
@@ -102,7 +102,7 @@ A naive **brute-force** approach would involve comparing each element with every
 ### 🌟 Why Hashmaps Are Ideal  
 
 Hashmaps are an excellent choice for this problem because:  
-- They allow for **constant-time lookups**, ensuring that we can efficiently check for $$ 2 \times \text{current\_num} $$ or $$ \text{current\_num} / 2 $$.  
+- They allow for **constant-time lookups**, ensuring that we can efficiently check for $$ 2 \times \text{current_num} $$ or $$ \text{current_num} 2 $$.  
 - They reduce the need for nested loops, which would significantly increase runtime for larger arrays.  
 - They maintain the order of insertion implicitly, although that’s not necessary for this problem.  
 
