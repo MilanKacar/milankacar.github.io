@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#93 📝 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence 🚀🧠"
+title: "#94 📝 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Easy
 tags: [Two Pointers, String, String Matching]
