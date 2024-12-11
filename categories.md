@@ -172,7 +172,7 @@ title: Categories
   .tab-content {
     display: none;
     padding: 20px;
-    background: #fafafa;
+    background: $white;
     border: 1px solid #e5e5e5;
     border-radius: 4px;
   }

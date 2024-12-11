@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#100 📆 2054. Two Best Non-Overlapping Events 🚀 "
+title: "#100 📆 2054. Two Best Non-Overlapping Events 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Array, Binary Search, Dynamic Programming, Sorting, Heap (Priority Queue)]
