@@ -58,10 +58,30 @@ $$
 classes = [[2, 4], [3, 9], [4, 5], [2, 10]]
 extraStudents = 4
 ```
+
 **Output:**
 ```
 0.53485
 ```
+
+**Explanation:**  
+Distribute the four extra students optimally as follows:  
+1. Add **1 student** to the first class \([2, 4] → [3, 5]\).  
+2. Add **1 student** to the second class \([3, 9] → [4, 10]\).  
+3. Add **1 student** to the first class again \([3, 5] → [4, 6]\).  
+4. Add **1 student** to the fourth class \([2, 10] → [3, 11]\).  
+
+After these allocations, the updated classes are:  
+- First class: \([4, 6]\), Pass Ratio = \(\frac{4}{6} = 0.6667\)  
+- Second class: \([4, 10]\), Pass Ratio = \(\frac{4}{10} = 0.4\)  
+- Third class: \([4, 5]\), Pass Ratio = \(\frac{4}{5} = 0.8\)  
+- Fourth class: \([3, 11]\), Pass Ratio = \(\frac{3}{11} = 0.2727\)  
+
+The average pass ratio is:
+\[
+\text{Average Pass Ratio} = \frac{0.6667 + 0.4 + 0.8 + 0.2727}{4} = 0.53485
+\]  
+
 
 ---
 
