@@ -6,11 +6,6 @@ difficulty: Medium
 tags: [Array, Greedy, Heap (Priority Queue)]
 ---
 
-
-## 🚀 Maximizing the Average Pass Ratio 🚀
-
-### Short Description
-
 Imagine you're in charge of a school with several classes preparing for final exams. You have a group of extra brilliant students ready to boost any class's pass rate. The challenge? Assign them strategically to maximize the average pass ratio. Let's dive into this problem and solve it using a mix of greedy and heap-based techniques! 🕵️✨
 
 ---
