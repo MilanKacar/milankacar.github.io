@@ -67,12 +67,6 @@ extraStudents = 4
 
 ### Insights and Strategy 🤯
 
-Here’s how we can expand the **Insights and Strategy** section with more depth and actionable ideas:
-
----
-
-### Insights and Strategy 🤯
-
 #### Key Observations:
 1. **Diminishing Returns Principle**:
    - Adding a student to a class improves its pass ratio, but subsequent additions yield smaller incremental gains. This is due to the mathematical behavior of fractions: the numerator grows linearly, while the denominator grows more significantly as it accounts for the total size.
@@ -185,38 +179,188 @@ class Solution:
 
 ### Example Walkthrough 🎨
 
-#### Input:
-```
-classes = [[2, 4], [3, 9], [4, 5], [2, 10]]
-extraStudents = 4
-```
 
-#### Step 1: Initialize the Heap
-Calculate the initial improvement for each class and populate the heap:
-- Class 1: $$[2, 4]$$ $$\to \Delta = 0.1$$
-- Class 2: $$[3, 9]$$ $$\to \Delta = 0.074$$
-- Class 3: $$[4, 5]$$ $$\to \Delta = 0.033$$
-- Class 4: $$[2, 10]$$ $$\to \Delta = 0.048$$
+Let’s dive into **Example 2** and see how we arrive at the output step by step! We'll carefully go through the process to understand the solution.
 
-Heap (sorted by $$-\Delta$$):
-```
-[(-0.1, 2, 4), (-0.074, 3, 9), (-0.033, 4, 5), (-0.048, 2, 10)]
-```
+---
 
-#### Step 2: Assign Extra Students
-1. Pop $$[2, 4]$$, add a student: $$[3, 5]$$.
-   - Recalculate $$\Delta = 0.066$$.
-   - Push back into the heap.
-2. Pop $$[3, 9]$$, add a student: $$[4, 10]$$.
-   - Recalculate $$\Delta = 0.066$$.
-   - Push back into the heap.
-3. Repeat until all extra students are allocated.
+#### **Input**
+- Classes: `[[2, 4], [3, 9], [4, 5], [2, 10]]`  
+  Each element `[pass, total]` represents the number of students who passed and the total number of students in a class.
+- Extra Students: `4`  
+  We have four additional students to distribute across these classes to maximize the average pass ratio.
 
-#### Step 3: Calculate Final Average
-Sum up the pass ratios and compute the average:
-```
-\text{Average Pass Ratio} = \frac{\frac{3}{5} + \frac{4}{10} + \frac{4}{5} + \frac{2}{10}}{4} = 0.53485
-```
+---
+
+### **Step 1: Initial Pass Ratios** 🧮
+We calculate the pass ratio for each class:
+\[
+\text{Pass Ratio} = \frac{\text{pass}}{\text{total}}
+\]
+
+1. Class `[2, 4]`:  
+   \[
+   \text{Pass Ratio} = \frac{2}{4} = 0.5
+   \]
+
+2. Class `[3, 9]`:  
+   \[
+   \text{Pass Ratio} = \frac{3}{9} = 0.3333
+   \]
+
+3. Class `[4, 5]`:  
+   \[
+   \text{Pass Ratio} = \frac{4}{5} = 0.8
+   \]
+
+4. Class `[2, 10]`:  
+   \[
+   \text{Pass Ratio} = \frac{2}{10} = 0.2
+   \]
+
+---
+
+### **Step 2: Potential Improvement (Δ)** 🌟
+Next, we calculate the improvement in pass ratio if we add **one student** to each class. The formula for the improvement is:
+
+\[
+\Delta = \frac{\text{pass} + 1}{\text{total} + 1} - \frac{\text{pass}}{\text{total}}
+\]
+
+#### Compute Δ for Each Class:
+1. Class `[2, 4]`:  
+   \[
+   \Delta = \frac{2+1}{4+1} - \frac{2}{4} = \frac{3}{5} - 0.5 = 0.1
+   \]
+
+2. Class `[3, 9]`:  
+   \[
+   \Delta = \frac{3+1}{9+1} - \frac{3}{9} = \frac{4}{10} - 0.3333 = 0.0667
+   \]
+
+3. Class `[4, 5]`:  
+   \[
+   \Delta = \frac{4+1}{5+1} - \frac{4}{5} = \frac{5}{6} - 0.8 = 0.0333
+   \]
+
+4. Class `[2, 10]`:  
+   \[
+   \Delta = \frac{2+1}{10+1} - \frac{2}{10} = \frac{3}{11} - 0.2 = 0.0485
+   \]
+
+---
+
+### **Step 3: Max-Heap Initialization** 📊
+To allocate the extra students, we use a **max-heap**. The heap will store each class based on its potential improvement (\(\Delta\)) in descending order.  
+We use negative values for \(\Delta\) because Python's `heapq` implements a min-heap by default.
+
+Initial heap:
+\[
+[(-0.1, 2, 4), (-0.0667, 3, 9), (-0.0333, 4, 5), (-0.0485, 2, 10)]
+\]
+
+---
+
+### **Step 4: Allocate Extra Students** 👩‍🏫👨‍🎓
+Now, we allocate the `4` extra students one by one to the class with the highest \(\Delta\) (most improvement in pass ratio).
+
+---
+
+#### **Iteration 1:**
+1. Pop class `[2, 4]` (highest \(\Delta = 0.1\)).  
+2. Add one student to this class:  
+   \[
+   \text{Updated Class: } [3, 5]
+   \]
+3. Calculate the new \(\Delta\) for this class:  
+   \[
+   \Delta = \frac{3+1}{5+1} - \frac{3}{5} = \frac{4}{6} - 0.6 = 0.0667
+   \]
+4. Push updated class `[3, 5]` back into the heap.
+
+Heap after iteration 1:
+\[
+[(-0.0667, 3, 9), (-0.0667, 3, 5), (-0.0333, 4, 5), (-0.0485, 2, 10)]
+\]
+
+---
+
+#### **Iteration 2:**
+1. Pop class `[3, 9]` (highest \(\Delta = 0.0667\)).  
+2. Add one student to this class:  
+   \[
+   \text{Updated Class: } [4, 10]
+   \]
+3. Calculate the new \(\Delta\) for this class:  
+   \[
+   \Delta = \frac{4+1}{10+1} - \frac{4}{10} = \frac{5}{11} - 0.4 = 0.0455
+   \]
+4. Push updated class `[4, 10]` back into the heap.
+
+Heap after iteration 2:
+\[
+[(-0.0667, 3, 5), (-0.0485, 2, 10), (-0.0333, 4, 5), (-0.0455, 4, 10)]
+\]
+
+---
+
+#### **Iteration 3:**
+1. Pop class `[3, 5]` (highest \(\Delta = 0.0667\)).  
+2. Add one student to this class:  
+   \[
+   \text{Updated Class: } [4, 6]
+   \]
+3. Calculate the new \(\Delta\) for this class:  
+   \[
+   \Delta = \frac{4+1}{6+1} - \frac{4}{6} = \frac{5}{7} - 0.6667 = 0.0476
+   \]
+4. Push updated class `[4, 6]` back into the heap.
+
+Heap after iteration 3:
+\[
+[(-0.0485, 2, 10), (-0.0455, 4, 10), (-0.0333, 4, 5), (-0.0476, 4, 6)]
+\]
+
+---
+
+#### **Iteration 4:**
+1. Pop class `[2, 10]` (highest \(\Delta = 0.0485\)).  
+2. Add one student to this class:  
+   \[
+   \text{Updated Class: } [3, 11]
+   \]
+3. Calculate the new \(\Delta\) for this class:  
+   \[
+   \Delta = \frac{3+1}{11+1} - \frac{3}{11} = \frac{4}{12} - 0.2727 = 0.0606
+   \]
+4. Push updated class `[3, 11]` back into the heap.
+
+Heap after iteration 4:
+\[
+[(-0.0476, 4, 6), (-0.0455, 4, 10), (-0.0333, 4, 5), (-0.0606, 3, 11)]
+\]
+
+---
+
+### **Step 5: Compute Final Average Pass Ratio** 📈
+After all extra students are allocated, the updated classes are:
+1. `[4, 6]`: Pass ratio = \(\frac{4}{6} = 0.6667\)  
+2. `[4, 10]`: Pass ratio = \(\frac{4}{10} = 0.4\)  
+3. `[4, 5]`: Pass ratio = \(\frac{4}{5} = 0.8\)  
+4. `[3, 11]`: Pass ratio = \(\frac{3}{11} = 0.2727\)  
+
+The average pass ratio is:
+\[
+\text{Average Pass Ratio} = \frac{0.6667 + 0.4 + 0.8 + 0.2727}{4} = 0.53485
+\]
+
+---
+
+### **Final Output**
+The maximum average pass ratio after optimally assigning the 4 extra students is:
+\[
+\boxed{0.53485}
+\]
 
 ---
 
