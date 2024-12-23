@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#103 🌳 2471. Minimum Number of Operations to Sort a Binary Tree by Level 🚀🧠"
+title: "#104 🌳 2471. Minimum Number of Operations to Sort a Binary Tree by Level 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Tree, Breadth-First Search, Binary Tree]
