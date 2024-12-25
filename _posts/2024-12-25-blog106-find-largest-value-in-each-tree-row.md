@@ -6,8 +6,6 @@ difficulty: Medium
 tags: [Tree, Depth-First Search, Breadth-First Search, Binary Tree]
 ---
 
-### 🌟 Find the Largest Value in Each Tree Row 🌟
-
 Binary trees are fascinating data structures, and problems like this one help us understand their traversal techniques while solving practical challenges. Let’s dive into this exciting problem and explore how to find the largest value in each row of a binary tree! 🚀
 
 ---
