@@ -93,6 +93,22 @@ The goal is to find the largest value in each row (level) of a binary tree. Unde
 
 ---
 
+### 🌟 Edge Cases to Consider
+
+1. **Empty Tree:**  
+   Ensure the code handles an input where `root = None`.
+
+2. **Single Node Tree:**  
+   Verify that a tree with only one node returns its value as the largest in the only row.
+
+3. **All Negative Values:**  
+   Confirm the code works when all node values are negative, as the maximum would still need to be correctly identified.
+
+4. **Unbalanced Tree:**  
+   Test cases where the tree is unbalanced (e.g., all nodes are on the left or right).
+
+---
+
 ### 🔍 Step-by-Step Intuition with BFS
 
 Let’s break the process into clear steps:
@@ -214,33 +230,6 @@ class Solution:
         return ans
 ```
 
----
-
-### 🆚 BFS vs. DFS
-
-| Feature              | BFS                                  | DFS                                  |
-|----------------------|--------------------------------------|--------------------------------------|
-| **Traversal Method** | Level-by-level (row-wise)           | Depth-first (node-wise)             |
-| **Data Structure**   | Queue                               | Recursion or stack                  |
-| **Implementation**   | Iterative                           | Recursive                           |
-| **Performance**      | Same time complexity \(O(N)\)       | Same time complexity \(O(N)\)       |
-| **Simplicity**       | Easier to visualize and implement   | Requires handling recursion depth   |
-
----
-
-### 🌟 Edge Cases to Consider
-
-1. **Empty Tree:**  
-   Ensure the code handles an input where `root = None`.
-
-2. **Single Node Tree:**  
-   Verify that a tree with only one node returns its value as the largest in the only row.
-
-3. **All Negative Values:**  
-   Confirm the code works when all node values are negative, as the maximum would still need to be correctly identified.
-
-4. **Unbalanced Tree:**  
-   Test cases where the tree is unbalanced (e.g., all nodes are on the left or right).
 
 ---
 
@@ -274,8 +263,167 @@ Let’s visualize BFS traversal with a tree:
 
 ---
 
+### 🌟 DFS Approach
+
+#### Steps:
+1. **Recursive Function:**
+   - Define a recursive helper function that processes each node, taking the node, its depth, and the result list (`ans`) as parameters.
+
+2. **Track Depth:**  
+   - Use the depth of the recursion to determine the current level. This depth maps directly to the index in the result list.
+
+3. **Expand Result List:**  
+   - If the current depth exceeds the length of the result list, it means you've encountered a new level. Add the node's value as the initial maximum for this level.
+
+4. **Update Maximum:**  
+   - If the level already exists in the result list, compare the node's value with the current maximum for that level and update it if needed.
+
+5. **Recur for Children:**  
+   - Recursively call the helper function for the left and right children, incrementing the depth.
+
+---
+
+### 🛠️ Python Code for DFS
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+from typing import Optional, List
+
+class Solution:
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        # Helper function for DFS traversal
+        def dfs(node, depth):
+            if not node:
+                return
+            
+            # If we encounter a new level, expand the result list
+            if depth == len(ans):
+                ans.append(node.val)
+            else:
+                # Update the maximum value for this level
+                ans[depth] = max(ans[depth], node.val)
+            
+            # Recursively process left and right children
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+        
+        # Result list to store the largest values
+        ans = []
+        # Start DFS from the root at depth 0
+        dfs(root, 0)
+        return ans
+```
+
+---
+
+### 🌟 Intuition for DFS Solution
+
+1. **Recursion Depth Equals Tree Level:**  
+   The depth of the recursion corresponds to the level of the binary tree. By using the depth as the index, we map each node to its appropriate level in the result list.
+
+2. **Dynamic List Expansion:**  
+   The result list expands dynamically as we encounter new levels during traversal. If the depth matches the size of the list, it means this is the first node in a new level.
+
+3. **Maximum Value Update:**  
+   As recursion proceeds, the function compares the node’s value to the current maximum value for its level and updates it accordingly.
+
+4. **Left-to-Right Traversal Order:**  
+   DFS naturally processes left children before right children. This order does not affect the correctness of the solution because we are only concerned with finding the maximum value in each level.
+
+---
+
+### 🌟 Example Walkthrough
+
+Consider the binary tree:
+
+```plaintext
+        10
+       /  \
+      20   30
+     /    /  \
+    40   50   60
+```
+
+#### Initial State:
+- `ans = []`  
+- Start DFS at root (value `10`) with depth `0`.
+
+#### Recursive Steps:
+1. **Root Node (`10` at depth `0`):**  
+   - New level → Append `10` to `ans`.  
+   - `ans = [10]`
+
+2. **Left Child (`20` at depth `1`):**  
+   - New level → Append `20` to `ans`.  
+   - `ans = [10, 20]`
+
+3. **Left Child (`40` at depth `2`):**  
+   - New level → Append `40` to `ans`.  
+   - `ans = [10, 20, 40]`
+
+4. **Right Child of Root (`30` at depth `1`):**  
+   - Update → Max(`20`, `30`) → `30`.  
+   - `ans = [10, 30, 40]`
+
+5. **Left Child (`50` at depth `2`):**  
+   - Update → Max(`40`, `50`) → `50`.  
+   - `ans = [10, 30, 50]`
+
+6. **Right Child (`60` at depth `2`):**  
+   - Update → Max(`50`, `60`) → `60`.  
+   - `ans = [10, 30, 60]`
+
+---
+
+### ⏳ Time Complexity
+
+- **Traversal:**  
+  Each node is visited once, making the time complexity $$O(N)$$, where $$N$$ is the number of nodes in the tree.
+
+- **Update Operations:**  
+  Updating the result list for each node is $$O(1)$$.
+
+- **Overall Complexity:**  
+  $$O(N)$$, as traversal dominates.
+
+---
+
+### 🧠 Comparing BFS and DFS
+
+| Feature                 | BFS                                   | DFS                                   |
+|-------------------------|---------------------------------------|---------------------------------------|
+| **Traversal Style**      | Level-by-level                       | Depth-first                          |
+| **Data Structure**       | Queue                                | Recursion or Stack                   |
+| **Use Case**             | Natural for level-order problems     | Flexible for problems requiring depth |
+| **Space Complexity**     | $$O(W)$$, where $$W$$ is max width   | $$O(H)$$, where $$H$$ is max depth   |
+| **Edge Cases**           | Handles large trees level by level   | Handles deep trees with recursion     |
+
+---
+
+
+
+
+### 🌟 When to Choose DFS Over BFS
+
+- **Memory Constraints:**  
+  DFS may use less memory than BFS for wide trees because BFS requires storing all nodes at a level in the queue.
+
+- **Implementation Preference:**  
+  DFS is more elegant and concise for recursive solutions. If you’re comfortable with recursion, DFS can simplify your code.
+
+- **Specific Requirements:**  
+  Some problems, like this one, can be solved equally well with either method. If you're already exploring nodes depth-first for some other purpose, DFS might be a natural choice.
+
+---
+
 ### 🚀 Conclusion
 
 This problem is a fantastic example of applying BFS or DFS techniques to solve real-world challenges with binary trees. Both approaches work efficiently, but BFS is generally more intuitive for level-based operations.  
 
-Through examples, edge cases, and visual walkthroughs, we’ve covered everything you need to confidently tackle this problem! 😊
+Through examples, edge cases, and visual walkthroughs, we’ve covered everything you need to tackle this problem confidently! 😊
