@@ -196,9 +196,7 @@ This approach uses a single loop, making it **O(n)**. It is much more efficient 
 
 #### Step-by-Step Process:
 
-Here is the HTML representation of the step-by-step process in a table format:
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
