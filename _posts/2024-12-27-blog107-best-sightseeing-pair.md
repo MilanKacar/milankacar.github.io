@@ -14,19 +14,19 @@ Ever planned a sightseeing tour and wondered which two spots would maximize your
 ## 🧩 **Problem Statement**  
 We are given an array `values`, where each `values[i]` represents the "value" of the `i`-th sightseeing spot. A pair of sightseeing spots `(i, j)` has a **score** defined as:  
 
-\[
+$$
 \text{score} = \text{values}[i] + \text{values}[j] + i - j
-\]
+$$
 
-Here, the term \(i - j\) represents the **distance penalty** for selecting sightseeing spots that are farther apart.  
+Here, the term \(i - j$$ represents the **distance penalty** for selecting sightseeing spots that are farther apart.  
 
-**Goal**: Return the maximum score for any valid pair `(i, j)` where \(i < j\).  
+**Goal**: Return the maximum score for any valid pair `(i, j)` where \(i < j$$.  
 
 ---
 
 ### Constraints  
-1. \(2 \leq \text{values.length} \leq 50,000\)  
-2. \(1 \leq \text{values}[i] \leq 1,000\)  
+1. \(2 \leq \text{values.length} \leq 50,000$$  
+2. \(1 \leq \text{values}[i] \leq 1,000$$  
 
 ---
 
@@ -44,10 +44,10 @@ values = [8, 1, 5, 2, 6]
 ```  
 
 **Explanation**:  
-For \(i = 0\) and \(j = 2\):  
-\[
+For \(i = 0$$ and \(j = 2$$:  
+$$
 \text{score} = 8 + 5 + 0 - 2 = 11
-\]  
+$$  
 
 ### Example 2:  
 **Input**:  
@@ -74,28 +74,28 @@ Understanding how to approach the solution is key to mastering this problem. Let
 Before diving into solutions, it’s essential to note a few key observations about the problem:  
 
 1. **Pair Score Formula**:  
-   The score for any pair \((i, j)\) is defined as:  
-   \[
+   The score for any pair \((i, j)$$ is defined as:  
+   $$
    \text{score} = \text{values}[i] + \text{values}[j] + i - j
-   \]  
+   $$  
    This can be rearranged as:  
-   \[
+   $$
    \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
-   \]  
+   $$  
 
-   Here, \(\text{values}[i] + i\) is a term that only depends on \(i\), while \(\text{values}[j] - j\) only depends on \(j\). This separation is critical for optimizing the solution.
+   Here, \(\text{values}[i] + i$$ is a term that only depends on \(i$$, while \(\text{values}[j] - j$$ only depends on \(j$$. This separation is critical for optimizing the solution.
 
 2. **Reducing Redundancy**:  
-   In a brute-force solution, we compute \(\text{values}[i] + \text{values}[j] + i - j\) for all pairs \((i, j)\). This involves \(O(n^2)\) operations. However, by keeping track of the maximum \((\text{values}[i] + i)\) as we iterate through the array, we can avoid recalculating this term repeatedly.
+   In a brute-force solution, we compute \(\text{values}[i] + \text{values}[j] + i - j$$ for all pairs \((i, j)$$. This involves \(O(n^2)$$ operations. However, by keeping track of the maximum \((\text{values}[i] + i)$$ as we iterate through the array, we can avoid recalculating this term repeatedly.
 
 3. **Dynamic Maximum Tracking**:  
-   As we iterate through the array, we can maintain a running maximum of \(\text{values}[i] + i\). This allows us to compute the score for each \(j\) in \(O(1)\) time.
+   As we iterate through the array, we can maintain a running maximum of \(\text{values}[i] + i$$. This allows us to compute the score for each \(j$$ in \(O(1)$$ time.
 
 ---
 
 ### 💡 **Brute-Force Solution**  
 
-The brute-force solution involves two nested loops to iterate over all possible pairs \((i, j)\), where \(i < j\). For each pair, we calculate the score and update the maximum score if the current pair’s score is greater.  
+The brute-force solution involves two nested loops to iterate over all possible pairs \((i, j)$$, where \(i < j$$. For each pair, we calculate the score and update the maximum score if the current pair’s score is greater.  
 
 ---
 
@@ -120,23 +120,23 @@ class Solution:
 ### **Analysis of the Brute-Force Solution**  
 
 1. **Time Complexity**:  
-   - The brute-force solution requires two nested loops. For each \(i\), we iterate over all \(j > i\), leading to \(O(n^2)\) complexity.  
-   - This is infeasible for large input sizes (e.g., \(n = 50,000\)) due to excessive computations.
+   - The brute-force solution requires two nested loops. For each \(i$$, we iterate over all \(j > i$$, leading to \(O(n^2)$$ complexity.  
+   - This is infeasible for large input sizes (e.g., \(n = 50,000$$) due to excessive computations.
 
 2. **Space Complexity**:  
-   - The solution uses only a few variables for tracking the maximum score, so the space complexity is \(O(1)\).  
+   - The solution uses only a few variables for tracking the maximum score, so the space complexity is \(O(1)$$.  
 
 ---
 
 ### 🚀 **Optimized Solution: Key Idea**  
 
 The optimized solution leverages the separation of terms in the score formula:  
-\[
+$$
 \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
-\]  
+$$  
 
-- As we iterate through the array, we maintain the maximum value of \((\text{values}[i] + i)\) seen so far. Let’s call this `first`.  
-- For each \(j\), we compute the score using `first` and \((\text{values}[j] - j)\).  
+- As we iterate through the array, we maintain the maximum value of \((\text{values}[i] + i)$$ seen so far. Let’s call this `first`.  
+- For each \(j$$, we compute the score using `first` and \((\text{values}[j] - j)$$.  
 - We update the maximum score if the current score is greater than the previous maximum.  
 
 ---
@@ -144,24 +144,24 @@ The optimized solution leverages the separation of terms in the score formula:
 ### **Step-by-Step Explanation**  
 
 1. **Initialization**:  
-   - Start by setting `first` to the value of \(\text{values}[0] + 0\), as this is the only valid value for \(i = 0\) initially.  
+   - Start by setting `first` to the value of \(\text{values}[0] + 0$$, as this is the only valid value for \(i = 0$$ initially.  
    - Initialize `max_sum` to 0 to track the maximum score.
 
 2. **Iterate Through the Array**:  
-   - For each index \(j\) starting from 1, compute the current score using `first` and \(\text{values}[j] - j\).  
+   - For each index \(j$$ starting from 1, compute the current score using `first` and \(\text{values}[j] - j$$.  
    - Update `max_sum` if the current score is higher than the previous maximum.  
 
 3. **Update `first`**:  
-   - After computing the score for \(j\), update `first` to the maximum of its current value and \(\text{values}[j] + j\). This ensures that `first` always holds the best \((\text{values}[i] + i)\) for indices up to \(j\).  
+   - After computing the score for \(j$$, update `first` to the maximum of its current value and \(\text{values}[j] + j$$. This ensures that `first` always holds the best \((\text{values}[i] + i)$$ for indices up to \(j$$.  
 
 ---
 
 Instead of iterating through all pairs, we can break the problem into smaller subproblems. Notice that:  
-\[
+$$
 \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
-\]  
+$$  
 
-This allows us to maintain a running maximum of \((\text{values}[i] + i)\) as we iterate through the array.  
+This allows us to maintain a running maximum of \((\text{values}[i] + i)$$ as we iterate through the array.  
 
 ### Python Code:  
 ```python
@@ -219,8 +219,8 @@ This approach uses a single loop, making it **O(n)**. It is much more efficient 
 
 ## 📚 **Conclusion**  
 
-- The **basic solution** provides a simple approach but is computationally expensive with \(O(n^2)\) complexity.  
-- The **optimized solution** achieves \(O(n)\) complexity by leveraging a running maximum for the first term and iterating through the array efficiently.  
+- The **basic solution** provides a simple approach but is computationally expensive with \(O(n^2)$$ complexity.  
+- The **optimized solution** achieves \(O(n)$$ complexity by leveraging a running maximum for the first term and iterating through the array efficiently.  
 
 With the optimized approach, this problem becomes solvable even for large input sizes. 🎉  
 
