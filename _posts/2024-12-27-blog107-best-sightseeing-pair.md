@@ -217,15 +217,6 @@ This approach uses a single loop, making it **O(n)**. It is much more efficient 
             text-align: left;
             padding: 8px;
         }
-        th {
-            background-color: #f4f4f4;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
     </style>
 </head>
 <body>
