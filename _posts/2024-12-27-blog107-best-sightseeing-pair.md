@@ -18,15 +18,15 @@ $$
 \text{score} = \text{values}[i] + \text{values}[j] + i - j
 $$
 
-Here, the term \(i - j$$ represents the **distance penalty** for selecting sightseeing spots that are farther apart.  
+Here, the term $$i - j$$ represents the **distance penalty** for selecting sightseeing spots that are farther apart.  
 
-**Goal**: Return the maximum score for any valid pair `(i, j)` where \(i < j$$.  
+**Goal**: Return the maximum score for any valid pair `(i, j)` where $$i < j$$.  
 
 ---
 
 ### Constraints  
-1. \(2 \leq \text{values.length} \leq 50,000$$  
-2. \(1 \leq \text{values}[i] \leq 1,000$$  
+1. $$2 \leq \text{values.length} \leq 50,000$$  
+2. $$1 \leq \text{values}[i] \leq 1,000$$  
 
 ---
 
@@ -44,7 +44,7 @@ values = [8, 1, 5, 2, 6]
 ```  
 
 **Explanation**:  
-For \(i = 0$$ and \(j = 2$$:  
+For $$i = 0$$ and $$j = 2$$:  
 $$
 \text{score} = 8 + 5 + 0 - 2 = 11
 $$  
@@ -74,7 +74,7 @@ Understanding how to approach the solution is key to mastering this problem. Let
 Before diving into solutions, it’s essential to note a few key observations about the problem:  
 
 1. **Pair Score Formula**:  
-   The score for any pair \((i, j)$$ is defined as:  
+   The score for any pair $$(i, j)$$ is defined as:  
    $$
    \text{score} = \text{values}[i] + \text{values}[j] + i - j
    $$  
@@ -83,19 +83,19 @@ Before diving into solutions, it’s essential to note a few key observations ab
    \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
    $$  
 
-   Here, \(\text{values}[i] + i$$ is a term that only depends on \(i$$, while \(\text{values}[j] - j$$ only depends on \(j$$. This separation is critical for optimizing the solution.
+   Here, $$\text{values}[i] + i$$ is a term that only depends on $$i$$, while $$\text{values}[j] - j$$ only depends on $$j$$. This separation is critical for optimizing the solution.
 
 2. **Reducing Redundancy**:  
-   In a brute-force solution, we compute \(\text{values}[i] + \text{values}[j] + i - j$$ for all pairs \((i, j)$$. This involves \(O(n^2)$$ operations. However, by keeping track of the maximum \((\text{values}[i] + i)$$ as we iterate through the array, we can avoid recalculating this term repeatedly.
+   In a brute-force solution, we compute $$\text{values}[i] + \text{values}[j] + i - j$$ for all pairs $$(i, j)$$. This involves $$O(n^2)$$ operations. However, by keeping track of the maximum $$(\text{values}[i] + i)$$ as we iterate through the array, we can avoid recalculating this term repeatedly.
 
 3. **Dynamic Maximum Tracking**:  
-   As we iterate through the array, we can maintain a running maximum of \(\text{values}[i] + i$$. This allows us to compute the score for each \(j$$ in \(O(1)$$ time.
+   As we iterate through the array, we can maintain a running maximum of $$\text{values}[i] + i$$. This allows us to compute the score for each $$j$$ in $$O(1)$$ time.
 
 ---
 
 ### 💡 **Brute-Force Solution**  
 
-The brute-force solution involves two nested loops to iterate over all possible pairs \((i, j)$$, where \(i < j$$. For each pair, we calculate the score and update the maximum score if the current pair’s score is greater.  
+The brute-force solution involves two nested loops to iterate over all possible pairs $$(i, j)$$, where $$i < j$$. For each pair, we calculate the score and update the maximum score if the current pair’s score is greater.  
 
 ---
 
@@ -120,11 +120,11 @@ class Solution:
 ### **Analysis of the Brute-Force Solution**  
 
 1. **Time Complexity**:  
-   - The brute-force solution requires two nested loops. For each \(i$$, we iterate over all \(j > i$$, leading to \(O(n^2)$$ complexity.  
-   - This is infeasible for large input sizes (e.g., \(n = 50,000$$) due to excessive computations.
+   - The brute-force solution requires two nested loops. For each $$i$$, we iterate over all $$j > i$$, leading to $$O(n^2)$$ complexity.  
+   - This is infeasible for large input sizes (e.g., $$n = 50,000$$) due to excessive computations.
 
 2. **Space Complexity**:  
-   - The solution uses only a few variables for tracking the maximum score, so the space complexity is \(O(1)$$.  
+   - The solution uses only a few variables for tracking the maximum score, so the space complexity is $$O(1)$$.  
 
 ---
 
@@ -135,8 +135,8 @@ $$
 \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
 $$  
 
-- As we iterate through the array, we maintain the maximum value of \((\text{values}[i] + i)$$ seen so far. Let’s call this `first`.  
-- For each \(j$$, we compute the score using `first` and \((\text{values}[j] - j)$$.  
+- As we iterate through the array, we maintain the maximum value of $$(\text{values}[i] + i)$$ seen so far. Let’s call this `first`.  
+- For each $$j$$, we compute the score using `first` and $$(\text{values}[j] - j)$$.  
 - We update the maximum score if the current score is greater than the previous maximum.  
 
 ---
@@ -144,15 +144,15 @@ $$
 ### **Step-by-Step Explanation**  
 
 1. **Initialization**:  
-   - Start by setting `first` to the value of \(\text{values}[0] + 0$$, as this is the only valid value for \(i = 0$$ initially.  
+   - Start by setting `first` to the value of $$\text{values}[0] + 0$$, as this is the only valid value for $$i = 0$$ initially.  
    - Initialize `max_sum` to 0 to track the maximum score.
 
 2. **Iterate Through the Array**:  
-   - For each index \(j$$ starting from 1, compute the current score using `first` and \(\text{values}[j] - j$$.  
+   - For each index $$j$$ starting from 1, compute the current score using `first` and $$\text{values}[j] - j$$.  
    - Update `max_sum` if the current score is higher than the previous maximum.  
 
 3. **Update `first`**:  
-   - After computing the score for \(j$$, update `first` to the maximum of its current value and \(\text{values}[j] + j$$. This ensures that `first` always holds the best \((\text{values}[i] + i)$$ for indices up to \(j$$.  
+   - After computing the score for $$j$$, update `first` to the maximum of its current value and $$\text{values}[j] + j$$. This ensures that `first` always holds the best $$(\text{values}[i] + i)$$ for indices up to $$j$$.  
 
 ---
 
@@ -161,7 +161,7 @@ $$
 \text{score} = (\text{values}[i] + i) + (\text{values}[j] - j)
 $$  
 
-This allows us to maintain a running maximum of \((\text{values}[i] + i)$$ as we iterate through the array.  
+This allows us to maintain a running maximum of $$(\text{values}[i] + i)$$ as we iterate through the array.  
 
 ### Python Code:  
 ```python
@@ -195,13 +195,101 @@ This approach uses a single loop, making it **O(n)**. It is much more efficient 
 `values = [8, 1, 5, 2, 6]`
 
 #### Step-by-Step Process:
-| Iteration | `j` | `first`  | `second`       | `max_sum` | Explanation                                 |
-|-----------|------|----------|----------------|-----------|---------------------------------------------|
-| Initial   | -    | `8 + 0 = 8` | -              | `0`       | Initialize first term with `values[0]`.     |
-| 1         | 1    | `8`      | `1 - 1 = 0`    | `8 + 0 = 8` | Add the first and second terms.             |
-| 2         | 2    | `8`      | `5 - 2 = 3`    | `8 + 3 = 11`| New max sum found!                          |
-| 3         | 3    | `8`      | `2 - 3 = -1`   | `11`      | Keep the max sum as no better score exists. |
-| 4         | 4    | `8`      | `6 - 4 = 2`    | `11`      | No improvement in the max sum.              |
+
+Here is the HTML representation of the step-by-step process in a table format:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Process</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Step-by-Step Process</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Iteration</th>
+                <th>`j`</th>
+                <th>`first`</th>
+                <th>`second`</th>
+                <th>`max_sum`</th>
+                <th>Explanation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Initial</td>
+                <td>-</td>
+                <td>`8 + 0 = 8`</td>
+                <td>-</td>
+                <td>0</td>
+                <td>Initialize first term with `values[0]`.</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>`8`</td>
+                <td>`1 - 1 = 0`</td>
+                <td>`8 + 0 = 8`</td>
+                <td>Add the first and second terms.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>`8`</td>
+                <td>`5 - 2 = 3`</td>
+                <td>`8 + 3 = 11`</td>
+                <td>New max sum found!</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>`8`</td>
+                <td>`2 - 3 = -1`</td>
+                <td>11</td>
+                <td>Keep the max sum as no better score exists.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>`8`</td>
+                <td>`6 - 4 = 2`</td>
+                <td>11</td>
+                <td>No improvement in the max sum.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
 
 #### Output:
 `11`
@@ -219,8 +307,8 @@ This approach uses a single loop, making it **O(n)**. It is much more efficient 
 
 ## 📚 **Conclusion**  
 
-- The **basic solution** provides a simple approach but is computationally expensive with \(O(n^2)$$ complexity.  
-- The **optimized solution** achieves \(O(n)$$ complexity by leveraging a running maximum for the first term and iterating through the array efficiently.  
+- The **basic solution** provides a simple approach but is computationally expensive with $$O(n^2)$$ complexity.  
+- The **optimized solution** achieves $$O(n)$$ complexity by leveraging a running maximum for the first term and iterating through the array efficiently.  
 
 With the optimized approach, this problem becomes solvable even for large input sizes. 🎉  
 
