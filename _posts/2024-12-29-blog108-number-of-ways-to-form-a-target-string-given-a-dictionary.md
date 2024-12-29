@@ -169,7 +169,7 @@ target = "aba"
 #### Calculation:
 The number of ways to form `"aba"` starting from column 0 is:
 
-\[ dp[(0, 0)] += 2 \times \text{dfs(1, 1)} \]
+$$ dp[(0, 0)] += 2 \times \text{dfs(1, 1)} $$
 
 Here, `2` accounts for the two ways to choose `'a'` in column 0, and for each of those choices, we multiply by the number of ways to form `"ba"` starting from column 1.
 
