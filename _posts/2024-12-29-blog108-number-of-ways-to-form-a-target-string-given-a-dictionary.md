@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#107 🔢 1639. Number of Ways to Form a Target String Given a Dictionary 🚀🧠"
+title: "#108 🔢 1639. Number of Ways to Form a Target String Given a Dictionary 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Dynamic Programming]
