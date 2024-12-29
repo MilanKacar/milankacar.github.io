@@ -27,7 +27,7 @@ Your task is to determine how many ways you can form the `target` string by sele
 3. **Index restriction:** Once you use a character at index `k` from any string in `words`, all characters at indices ≤ `k` in every string become unavailable.
 4. **Repetition allowed:** You can use multiple characters from the same string.
 
-Return the number of ways to form the `target` string, modulo \(10^9 + 7\).
+Return the number of ways to form the `target` string, modulo $$10^9 + 7$$.
 
 ---
 
@@ -189,7 +189,7 @@ This is a hallmark of problems involving **combinatorics and recursive enumerati
 #### Key Observations 🔍
 1. **Precompute Frequencies**: Instead of repeatedly counting occurrences of `target[i]` in each column, precompute a frequency table `freq` where `freq[c][k]` is the count of character `c` in column `k`.
 2. **Recursive Transition**: Each state depends on two smaller subproblems: one where the current column is skipped, and one where it contributes to forming the target.
-3. **Modulo Constraint**: Since the answer can be very large, every addition is computed modulo \(10^9 + 7\).
+3. **Modulo Constraint**: Since the answer can be very large, every addition is computed modulo $$10^9 + 7$$.
 
 
 ---
@@ -231,7 +231,7 @@ def numWays(words, target):
 
 The brute force approach is highly inefficient due to repeated work. Each recursive call has two branches, leading to exponential complexity:
 
-- \( O(2^{\text{len(words[0])}} \cdot \text{len(target)}) \).
+- $$ O(2^{\text{len(words[0])}} \cdot \text{len(target)}) $$.
 
 ---
 
@@ -290,15 +290,15 @@ class Solution:
 
 #### Time Complexity:
 
-- **Building Frequency Table:** \( O(n \cdot m) \), where \( n \) is the number of strings in `words` and \( m \) is their length.
-- **Dynamic Programming:** \( O(t \cdot m) \), where \( t \) is the length of `target`.
+- **Building Frequency Table:** $$ O(n \cdot m) $$, where $$ n $$ is the number of strings in `words` and $$ m $$ is their length.
+- **Dynamic Programming:** $$ O(t \cdot m) $$, where $$ t $$ is the length of `target`.
 
-Total time complexity: \( O(n \cdot m + t \cdot m) \).
+Total time complexity: $$ O(n \cdot m + t \cdot m) $$.
 
 #### Space Complexity:
 
-- Frequency table: \( O(26 \cdot m) \) for storing character counts.
-- DP table: \( O(t \cdot m) \).
+- Frequency table: $$ O(26 \cdot m) $$ for storing character counts.
+- DP table: $$ O(t \cdot m) $$.
 
 ---
 
@@ -322,19 +322,19 @@ target = "bab"
 
 2. **Recursive DP Steps:**
 
-- Starting at \( i=0, k=0 \), match 'b' using column 0, 1, or 2.
-- Move to \( i=1, k=1 \), match 'a'.
-- Move to \( i=2, k=2 \), match 'b'.
+- Starting at $$ i=0, k=0 $$, match 'b' using column 0, 1, or 2.
+- Move to $$ i=1, k=1 $$, match 'a'.
+- Move to $$ i=2, k=2 $$, match 'b'.
 
-3. **Final Output:** \( 4 \) ways.
+3. **Final Output:** $$ 4 $$ ways.
 
 ---
 
 ### 🛠️ Edge Cases
 
-1. **No Matching Characters:** If `target` contains characters not in `words`, return \( 0 \).
+1. **No Matching Characters:** If `target` contains characters not in `words`, return $$ 0 $$.
 2. **Empty Target:** If `target` is an empty string, there's exactly one way to form it: do nothing.
-3. **Empty Words:** If `words` is empty, return \( 0 \).
+3. **Empty Words:** If `words` is empty, return $$ 0 $$.
 
 ---
 
