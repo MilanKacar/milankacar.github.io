@@ -11,20 +11,13 @@ Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school
 
 
 <script>
-    // JavaScript function to calculate and inject experience directly into text
-    function calculateExperience(startYear) {
-        const currentYear = new Date().getFullYear();
-        const baseExperience = currentYear - startYear;
-        return baseExperience > (currentYear - 2018) ? baseExperience + 1 : baseExperience;
-    }
+  // Calculate the number of years of experience
+  const startYear = 2018; // Replace with your actual starting year
+  const currentYear = new Date().getFullYear();
+  const yearsOfExperience = currentYear - startYear;
 
-    // Inject the calculated experience directly into the paragraph text
-    const experienceYears = calculateExperience(2018);
-    const paragraph = document.getElementById("dynamic-experience");
-    paragraph.innerHTML = paragraph.innerHTML.replace(
-        '<span id="years-placeholder"></span>',
-        `${experienceYears}`
-    );
+  // Update the experienceYears span
+  document.getElementById("experienceYears").textContent = yearsOfExperience;
 </script>
 
 ## 🚀 About this blog:
