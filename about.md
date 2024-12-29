@@ -3,11 +3,29 @@ layout: page
 title: 👨‍💻 About Me
 permalink: /about/
 ---
-I am a Vienna-based **Software Engineer** and **Survey Engineer** with over 5 years of professional experience. I hold a degree in **Geodesy** from *Graz University of Technology*, where I contributed as a project and teaching assistant. Currently, I work in the e-commerce and fintech sectors as a **Data Scientist, Engineer, and Analyst** at *Niceshops GmbH* and *Gateway Ventures GmbH*.
+I am a Vienna-based **Software Engineer** and **Survey Engineer** with over <span id="years-placeholder"></span> years of professional experience. I hold a degree in **Geodesy** from *Graz University of Technology*, where I contributed as a project and teaching assistant. Currently, I work in the e-commerce and fintech sectors as a **Data Scientist, Engineer, and Analyst** at *Niceshops GmbH* and *Gateway Ventures GmbH*.
 
 Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school focusing on advanced studies in **Mathematics, Logic, and Physics**.
 
 ---
+
+
+<script>
+    // JavaScript function to calculate and inject experience directly into text
+    function calculateExperience(startYear) {
+        const currentYear = new Date().getFullYear();
+        const baseExperience = currentYear - startYear;
+        return baseExperience > (currentYear - 2018) ? baseExperience + 1 : baseExperience;
+    }
+
+    // Inject the calculated experience directly into the paragraph text
+    const experienceYears = calculateExperience(2018);
+    const paragraph = document.getElementById("dynamic-experience");
+    paragraph.innerHTML = paragraph.innerHTML.replace(
+        '<span id="years-placeholder"></span>',
+        `${experienceYears}`
+    );
+</script>
 
 ## 🚀 About this blog:
 
@@ -238,6 +256,8 @@ At the outset, I expect most topics will revolve around software development. Ho
 - **LinkedIn**: [linkedin.com/in/milan-kacar](https://linkedin.com/in/milan-kacar)
 - **Website**: [milankacar.github.io/CV](https://milankacar.github.io/CV)
 
+Let’s connect and share knowledge. Together, we can build something extraordinary! 🚀
+
 ---
 
 ## ⚙️ Hobbies
@@ -245,3 +265,4 @@ At the outset, I expect most topics will revolve around software development. Ho
 - **🏋️‍♂️ Fitness**: Passionate about fitness and healthy living  
 - **✈️ Traveling**: An avid traveler always looking for new adventures  
 - **📈 Trading**: Enthusiastic about market analysis and trading strategies
+
