@@ -153,6 +153,7 @@ target = "aba"
 ```
 
 #### Precomputed Frequency Table:
+
 | Column (Index) | 'a' | 'b' | 'c' |
 |----------------|-----|-----|-----|
 | 0              | 2   | 0   | 1   |
