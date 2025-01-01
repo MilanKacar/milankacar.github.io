@@ -6,7 +6,7 @@ difficulty: Medium
 tags: [String, Dynamic Programming]
 ---
 
-Imagine you're tasked with creating good strings 🧵 from two components (`zero` and `one`), while keeping their lengths within a range (`low` and `high`). The goal is to calculate how many such strings you can generate, modulo $$10^9 + 7$$. This problem combines recursion, memoization, and creativity in dynamic programming. Let's dive deep into this fascinating challenge! 🚀  
+Imagine you're tasked with creating good strings 🧵 from two components (`zero` and `one`), while keeping their lengths within a range (`low` and `high`). The goal is to calculate how many such strings you can generate. This problem combines recursion, memoization, and creativity in dynamic programming. Let's dive deep into this fascinating challenge! 🚀  
 
 ---
 
@@ -34,7 +34,7 @@ The valid lengths are 3, 5, 6, 8, and 10. Here's how they can be formed:
 - Length 5: `2 * zero + one`  
 - Length 6: `3 * two`  
 - Length 8: `4 * zero`  
-- Length 10: `5 dot ..  
+- Length 10: `5 dot .. ` 
 
 
 
@@ -66,9 +66,7 @@ We iterate through possible lengths from `low` to `high`:
 
 1. **Length 3**: This is possible because $$ 1 \times \text{one} = 3 $$.
 2. **Length 5**: Achievable with $$ 1 \times \text{zero} + 1 \times \text{one} = 5 $$.
-3. **Length 6**: Possible using $$ 2 \times \text{three} 
-
-.
+3. **Length 6**: Possible using $$ 2 \times \text{three} $$.
 
 Let's refine the walkthrough and detail all aspects of this problem!
 
@@ -283,19 +281,19 @@ low = 3, high = 10, zero = 2, one = 3
 
 1. **Start at Length 0**:  
    $$ \text{dfs}(0) $$  
-   - $$ \text{Add zero: dfs}(2) $$  
-   - $$ \text{Add one: dfs}(3) $$  
+   $$ \text{Add zero: dfs}(2) $$  
+   $$ \text{Add one: dfs}(3) $$  
 
 2. **Process Length 2**:  
    $$ \text{dfs}(2) $$  
-   - $$ \text{Add zero: dfs}(4) $$  
-   - $$ \text{Add one: dfs}(5) $$  
+   $$ \text{Add zero: dfs}(4) $$  
+   $$ \text{Add one: dfs}(5) $$  
 
 3. **Process Length 3**:  
    $$ \text{dfs}(3) $$  
-   - Valid length ($$3 \geq \text{low}$$) contributes 1.  
-   - $$ \text{Add zero: dfs}(5) $$  
-   - $$ \text{Add one: dfs}(6) $$  
+   Valid length ($$3 \geq \text{low}$$) contributes 1.  
+   $$ \text{Add zero: dfs}(5) $$  
+   $$ \text{Add one: dfs}(6) $$  
 
 4. **Continue Recursion**:  
    - Explore lengths $$5, 6, 8, 10$$ similarly.  
