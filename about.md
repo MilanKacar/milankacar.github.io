@@ -152,12 +152,12 @@ At the outset, I expect most topics will revolve around software development. Ho
 ### **Master's in Computer Science**
 *Graz University of Technology*  
 📍 Graz, Austria  
-🗓️ 2022 – Present  
+🗓️ 2022 – 2024  
 
 ### **Master's in Geodesy**
 *Graz University of Technology*  
 📍 Graz, Austria  
-🗓️ 2019 – Present  
+🗓️ 2019 – 2024  
 
 ### **BSc in Geomatics Engineering**
 *Graz University of Technology*  
