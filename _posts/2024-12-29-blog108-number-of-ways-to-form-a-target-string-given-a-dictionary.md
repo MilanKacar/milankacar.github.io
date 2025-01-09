@@ -6,9 +6,6 @@ difficulty: Hard
 tags: [Array, Dynamic Programming]
 ---
 
-
-### 🧩 Forming a Target String from a Dictionary 🧩
-
 Let's dive into an exciting problem that challenges our understanding of dynamic programming! 🚀 We're tasked with figuring out the number of ways to form a target string using characters from a list of strings, under some specific constraints. Ready to explore this fascinating challenge? Let’s go! 🎉
 
 ---
