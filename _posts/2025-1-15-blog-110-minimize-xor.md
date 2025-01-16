@@ -181,9 +181,9 @@ Let’s use another example with new numbers for better clarity. 😊
 - `num2 = 15`  
   Binary Representation: `01111`  
 
-Our goal is to find a number \( x $$ such that:  
-1. \( x $$ has the **same number of set bits** (1's) as `num2` (4 set bits).  
-2. \( x \, \text{XOR} \, \text{num1} $$ is **minimized**.
+Our goal is to find a number $$ x $$ such that:  
+1. $$ x $$ has the **same number of set bits** (1's) as `num2` (4 set bits).  
+2. $$ x \, \text{XOR} \, \text{num1} $$ is **minimized**.
 
 ---
 
@@ -199,68 +199,68 @@ We start by counting the number of `1`s in `num2`.
 - Set bits in `num2`: `4`  
 
 So, `bits = 4`.  
-This means \( x $$ must have exactly **4 set bits**.
+This means $$ x $$ must have exactly **4 set bits**.
 
 ---
 
 #### **Step 2: Align with Most Significant Bits (MSBs) of `num1`**
 
-To minimize \( x \, \text{XOR} \, \text{num1} $$, we try to align the set bits of \( x $$ with the set bits of `num1`, starting from the **most significant bits (MSBs)**.
+To minimize $$ x \, \text{XOR} \, \text{num1} $$, we try to align the set bits of $$ x $$ with the set bits of `num1`, starting from the **most significant bits (MSBs)**.
 
 1. **Binary of `num1`:** `101101`  
 2. Traverse each bit of `num1` from left (MSB) to right (LSB):  
-   - **Bit 5** (Value \( 32 $$):  
+   - **Bit 5** (Value $$ 32 $$):  
      - `num1` has a `1` here.  
-     - Set the corresponding bit in \( x $$.  
-     - \( x = 100000 $$ (Decimal: \( 32 $$)  
+     - Set the corresponding bit in $$ x $$.  
+     - $$ x = 100000 $$ (Decimal: $$ 32 $$)  
      - Remaining `bits = 3`.
 
-   - **Bit 4** (Value \( 16 $$):  
+   - **Bit 4** (Value $$ 16 $$):  
      - `num1` has a `0` here.  
      - Do nothing.  
-     - \( x = 100000 $$ (Decimal: \( 32 $$)  
+     - $$ x = 100000 $$ (Decimal: $$ 32 $$)  
 
-   - **Bit 3** (Value \( 8 $$):  
+   - **Bit 3** (Value $$ 8 $$):  
      - `num1` has a `1` here.  
-     - Set the corresponding bit in \( x $$.  
-     - \( x = 101000 $$ (Decimal: \( 40 $$)  
+     - Set the corresponding bit in $$ x $$.  
+     - $$ x = 101000 $$ (Decimal: $$ 40 $$)  
      - Remaining `bits = 2`.
 
-   - **Bit 2** (Value \( 4 $$):  
+   - **Bit 2** (Value $$ 4 $$):  
      - `num1` has a `1` here.  
-     - Set the corresponding bit in \( x $$.  
-     - \( x = 101100 $$ (Decimal: \( 44 $$)  
+     - Set the corresponding bit in $$ x $$.  
+     - $$ x = 101100 $$ (Decimal: $$ 44 $$)  
      - Remaining `bits = 1`.
 
-   - **Bit 1** (Value \( 2 $$):  
+   - **Bit 1** (Value $$ 2 $$):  
      - `num1` has a `0` here.  
      - Do nothing.  
-     - \( x = 101100 $$ (Decimal: \( 44 $$)  
+     - $$ x = 101100 $$ (Decimal: $$ 44 $$)  
 
-   - **Bit 0** (Value \( 1 $$):  
+   - **Bit 0** (Value $$ 1 $$):  
      - `num1` has a `1` here.  
-     - Set the corresponding bit in \( x $$.  
-     - \( x = 101101 $$ (Decimal: \( 45 $$)  
+     - Set the corresponding bit in $$ x $$.  
+     - $$ x = 101101 $$ (Decimal: $$ 45 $$)  
      - Remaining `bits = 0`.
 
 ---
 
 #### **Step 3: Fill Remaining Bits if Needed**
 
-If we still have remaining `bits` after aligning with `num1`, we turn on the **least significant bits (LSBs)** in \( x $$. However, in this case, the required set bits (`bits = 4`) have already been filled.
+If we still have remaining `bits` after aligning with `num1`, we turn on the **least significant bits (LSBs)** in $$ x $$. However, in this case, the required set bits (`bits = 4`) have already been filled.
 
 ---
 
 #### **Step 4: Verify the XOR Minimization**
 
-- \( x = 45 $$  
-- Binary of \( x $$: `101101`  
-- Set bits in \( x $$: `4` (matches `num2`).
+- $$ x = 45 $$  
+- Binary of $$ x $$: `101101`  
+- Set bits in $$ x $$: `4` (matches `num2`).
 
-Now calculate \( x \, \text{XOR} \, \text{num1} $$:  
-- \( 45 \, \text{XOR} \, 45 = 0 $$.  
+Now calculate $$ x \, \text{XOR} \, \text{num1} $$:  
+- $$ 45 \, \text{XOR} \, 45 = 0 $$.  
 
-Since the XOR result is \( 0 $$, this is the **minimal possible value**.
+Since the XOR result is $$ 0 $$, this is the **minimal possible value**.
 
 ---
 
@@ -281,14 +281,14 @@ Since the XOR result is \( 0 $$, this is the **minimal possible value**.
 
 1. **Case 1: Same Number of Set Bits in `num1` and `num2`**  
    - Example: `num1 = 7` (Binary: `111`), `num2 = 11` (Binary: `1011`)  
-   - \( x = \text{num1} $$, since \( x \, \text{XOR} \, \text{num1} = 0 $$.
+   - $$ x = \text{num1} $$, since $$ x \, \text{XOR} \, \text{num1} = 0 $$.
 
 2. **Case 2: `num1` is Smaller than `num2` in Set Bits**  
    - Example: `num1 = 2` (Binary: `10`), `num2 = 7` (Binary: `111`).  
    - Fill all set bits from `num1`, then use LSBs to meet `num2`'s bit count.
 
 3. **Case 3: `num2 = 1`**  
-   - `num2` has only 1 set bit, so \( x $$ will be the **least significant set bit of `num1`** or \( 1 $$ if no set bits exist.
+   - `num2` has only 1 set bit, so $$ x $$ will be the **least significant set bit of `num1`** or $$ 1 $$ if no set bits exist.
 
 ---
 
