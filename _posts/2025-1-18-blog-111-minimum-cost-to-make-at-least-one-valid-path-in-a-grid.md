@@ -294,5 +294,3 @@ grid = [
 ## 🎉 Conclusion  
 
 This problem challenges us to think about optimization and graph traversal. Using BFS with a priority queue ensures minimal cost while exploring all possible paths. Whether you're navigating a grid or solving a real-world logistics problem, this approach showcases the power of systematic exploration.  
-
-Let me know how I can improve this further! 😊
