@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#111 💰 1368. Minimum Cost to Make at Least One Valid Path in a Grid 🚀🧠"
+title: "#111 💰💸 1368. Minimum Cost to Make at Least One Valid Path in a Grid 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Hard
 tags: [Array, Breadth-First Search, Graph, Heap (Priority Queue), Matrix, Shortest Path]
