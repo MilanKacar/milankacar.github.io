@@ -189,12 +189,6 @@ This method works because it mimics how water naturally behaves. The priority qu
 
 ---
 
-#### Conclusion 🌟
-
-This approach to solving the Trapping Rain Water II problem is both elegant and efficient, combining **heap-based traversal** with **matrix manipulation techniques**. It ensures that the solution is scalable, handles edge cases gracefully, and adheres to the constraints effectively. By breaking the problem into logical steps and leveraging key data structures, we achieve an optimal balance of clarity and performance.
-
----
-
 ### 🧑‍💻 Python Code
 
 Here’s the Python implementation:
@@ -282,4 +276,4 @@ heightMap = [
 
 ### ✨ Conclusion
 
-This problem teaches us how to think **beyond brute force** and leverage efficient data structures to solve complex problems. It’s a perfect blend of **BFS**, **heaps**, and **matrix traversal**. 🎉
+This approach to solving the Trapping Rain Water II problem is both elegant and efficient, combining **heap-based traversal** with **matrix manipulation techniques**. It ensures that the solution is scalable, handles edge cases gracefully, and adheres to the constraints effectively. By breaking the problem into logical steps and leveraging key data structures, we achieve an optimal balance of clarity and performance.
