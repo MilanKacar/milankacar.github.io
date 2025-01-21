@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#112 ⊹ 2017. Grid Game 🚀🧠"
+title: "#113 ⊹ 2017. Grid Game 🚀🧠"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Array, Matrix, Prefix Sum]
