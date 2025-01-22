@@ -6,11 +6,6 @@ difficulty: Medium
 tags: [Array, Breadth-First Search, Matrix]
 ---
 
-Here’s the requested blog post draft for LeetCode problem **#1765: Map of Highest Peak**! 🗺️🏔️ Let's dive in! 🚀
-
----
-
-# 🗺️ Map of Highest Peak 🌊🌄
 
 Assigning heights to a matrix may sound straightforward, but this problem adds a fun twist with rules that require thought and logic! 🤔 Let's explore this engaging problem with examples, solutions, and walkthroughs! 💡
 
