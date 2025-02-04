@@ -25,6 +25,10 @@
       "activeUsers": "12"
     },
     {
+      "city": "Serbia",
+      "activeUsers": "5"
+    },
+    {
       "city": "Germany",
       "activeUsers": "3"
     },
@@ -34,10 +38,6 @@
     },
     {
       "city": "Lithuania",
-      "activeUsers": "3"
-    },
-    {
-      "city": "Serbia",
       "activeUsers": "3"
     }
   ]
