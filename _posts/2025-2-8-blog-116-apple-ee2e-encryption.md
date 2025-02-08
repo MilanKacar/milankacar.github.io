@@ -1,16 +1,11 @@
 ---
 layout: post  
-title: "#115 📦 2349. Design a Number Container System 🚀🧠"
+title: "#116 ☁️ The UK Wants a Backdoor into Your iCloud 🚀🧠"
 categories: [Programming, Cryptography]
 difficulty: Medium
 tags: [EE2E]
 ---
 
-
-
-# The UK Wants a Backdoor into Your iCloud 🔓🍏
-
-## The British Empire Strikes Back (at Encryption) 🇬🇧🕵️‍♂️
 
 Ah, the UK. Land of tea ☕, rain 🌧️, and now... government-mandated backdoors into your private data? Yep, you read that right. The British government has issued a **Technical Capability Notice** (which is just fancy spy talk for "Do what we say or else!") demanding Apple to create a **backdoor** that would let them access users' encrypted iCloud data **worldwide**. 🌍🔑
 
