@@ -133,7 +133,7 @@ A quick reference table of key statistical concepts:
 
 Finally, consider the **practical effect size** (lift). A result might be statistically significant but tiny in business terms (e.g. +0.1% conversion). Always ask: *Is this improvement worth deploying?* Likewise, analyze metrics like absolute difference, relative lift, and even secondary outcomes. Segment recommends checking questions like *“What is the lift (difference in conversion rates)?”* and *“Were outside events or novelty effects at play?”*. If a variant shows a big lift, look into **why**: perhaps its change genuinely improves UX, or maybe a special event occurred during testing that gave it an advantage.
 
-In practice, a bar chart with error bars (like the one above) can help interpret A/B results. If the bar for Variant B is higher than A’s and their confidence intervals don’t overlap, we infer a significant positive effect. In contrast, heavy overlap means the result is inconclusive. These visualizations, combined with the table of p-values and CIs, help translate numbers into actionable decisions. Tools like Python’s matplotlib or Seaborn can generate such charts; even simple spreadsheets or dashboards serve the purpose.
+In practice, a bar chart with error bars can help interpret A/B results. If the bar for Variant B is higher than A’s and their confidence intervals don’t overlap, we infer a significant positive effect. In contrast, heavy overlap means the result is inconclusive. These visualizations, combined with the table of p-values and CIs, help translate numbers into actionable decisions. Tools like Python’s matplotlib or Seaborn can generate such charts; even simple spreadsheets or dashboards serve the purpose.
 
 ## 🧐 Validating and Checking for Bias
 
