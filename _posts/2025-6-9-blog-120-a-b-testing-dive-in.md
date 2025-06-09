@@ -67,7 +67,68 @@ The **p-value** tells us the probability of observing a difference at least as l
 Equally important are **confidence intervals (CIs)** around the effect size (difference in rates). A 95% CI gives a range of plausible values for the true difference. For example, if variant A’s conversion was 5% and B’s was 6%, the 95% CI for the difference might be \[+0.1%, +2.3%]. If this interval excludes 0, it implies a significant effect. The medium article on CIs notes that CIs *“provide a possible range of effect sizes within which the true change is likely to fall”*. Plotting error bars for each variant helps visualization: if the bars (CIs) overlap heavily, it’s likely not a true effect. (For instance, in one example chart we see the variant bar and its CI above the control’s, with no overlap, suggesting a real lift.)
 
 A quick reference table of key statistical concepts:
+{% raw %} 
+<style>
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
 
+  .stats-table th,
+  .stats-table td {
+    border: 1px solid #ccc;
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .stats-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  .stats-table td strong {
+    color: #007acc;
+  }
+
+  @media (max-width: 600px) {
+    .stats-table {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<table class="stats-table">
+  <thead>
+    <tr>
+      <th>Statistic</th>
+      <th>Description</th>
+      <th>Typical Benchmark/Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>p-value</strong></td>
+      <td>Probability of observing an effect as extreme as the data, assuming null is true.</td>
+      <td><strong>Significant</strong> if &lt; 0.05 (95% confidence)</td>
+    </tr>
+    <tr>
+      <td><strong>95% Confidence Interval</strong></td>
+      <td>Range of plausible values for the true effect size. If it excludes 0, the result is significant.</td>
+      <td>Should <em>not</em> include 0 for a clear effect</td>
+    </tr>
+    <tr>
+      <td><strong>Power (1−β)</strong></td>
+      <td>Probability to detect a true effect of a specified size.</td>
+      <td>Aim for ~80% power (0.8) to be likely to find the effect</td>
+    </tr>
+  </tbody>
+</table>
+
+{% end raw %}
 | Statistic                   | Description                                                                                      | Typical Benchmark/Interpretation                          |
 | --------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | **p-value**                 | Probability of observing an effect as extreme as the data, assuming null is true.                | **Significant** if < 0.05 (95% confidence)                |
