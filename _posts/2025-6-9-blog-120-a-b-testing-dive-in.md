@@ -86,8 +86,8 @@ A quick reference table of key statistical concepts:
   }
 
   .stats-table th {
-    background-color: #f5f5f5;
     font-weight: bold;
+    background: transparent;
   }
 
   .stats-table td strong {
@@ -129,11 +129,7 @@ A quick reference table of key statistical concepts:
 </table>
 
 {% endraw %}
-| Statistic                   | Description                                                                                      | Typical Benchmark/Interpretation                          |
-| --------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| **p-value**                 | Probability of observing an effect as extreme as the data, assuming null is true.                | **Significant** if < 0.05 (95% confidence)                |
-| **95% Confidence Interval** | Range of plausible values for the true effect size. If it excludes 0, the result is significant. | Should *not* include 0 for a clear effect                 |
-| **Power (1−β)**             | Probability to detect a true effect of a specified size.                                         | Aim for \~80% power (0.8) to be likely to find the effect |
+
 
 Finally, consider the **practical effect size** (lift). A result might be statistically significant but tiny in business terms (e.g. +0.1% conversion). Always ask: *Is this improvement worth deploying?* Likewise, analyze metrics like absolute difference, relative lift, and even secondary outcomes. Segment recommends checking questions like *“What is the lift (difference in conversion rates)?”* and *“Were outside events or novelty effects at play?”*. If a variant shows a big lift, look into **why**: perhaps its change genuinely improves UX, or maybe a special event occurred during testing that gave it an advantage.
 
