@@ -128,7 +128,7 @@ A quick reference table of key statistical concepts:
   </tbody>
 </table>
 
-{% end raw %}
+{% endraw %}
 | Statistic                   | Description                                                                                      | Typical Benchmark/Interpretation                          |
 | --------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | **p-value**                 | Probability of observing an effect as extreme as the data, assuming null is true.                | **Significant** if < 0.05 (95% confidence)                |
