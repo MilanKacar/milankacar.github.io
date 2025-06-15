@@ -1,6 +1,6 @@
 ---
 layout: post  
-title: "#121 6 U.S. Stocks That Could Double in a Year — And Why I'm Betting on Them 🚀🧠"
+title: "#121 5 U.S. Stocks That Could Double in a Year — And Why I'm Betting on Them 🚀🧠"
 categories: [Finance, Trading]
 difficulty: Medium
 tags: [Stock Analysis]
@@ -99,7 +99,7 @@ To summarize the case: **Unity is the world leader in real-time 3D development**
 
 ---
 
-## 6. Sezzle (SEZL) – *Fintech Reborn: Small But Profitable BNPL Star*
+## BONUS: 6. Sezzle (SEZL) – *Fintech Reborn: Small But Profitable BNPL Star*
 
 **Why I’m Betting on Sezzle:** Sezzle is a fintech company in the **“Buy Now, Pay Later” (BNPL)** segment, offering short-term installment plans for online shoppers. If you’ve bought something online and split the payment into, say, four chunks, you might have used services like Afterpay, Affirm, or Klarna – Sezzle is a smaller player in that space. BNPL was a red-hot industry a couple of years ago (as an alternative to credit cards), but many BNPL stocks crashed in 2022–2023 due to rising interest rates (which increase their financing costs and consumer defaults). Here’s the thing: **Sezzle has managed a dramatic turnaround and is now thriving** under conditions that hurt others. The stock was absolutely pummeled in the downturn (it was a penny stock at one point), but it has **skyrocketed \~1000% in the past year** as the company’s fundamentals have improved astonishingly. Even after that run, I believe Sezzle’s story isn’t over – in fact, it could still *double* from here over the next year, given its growth trajectory, newfound profitability, and potential undervaluation relative to peers.
 
