@@ -17,12 +17,12 @@
       "activeUsers": "68"
     },
     {
-      "city": "China",
-      "activeUsers": "20"
+      "city": "(not set)",
+      "activeUsers": "21"
     },
     {
-      "city": "(not set)",
-      "activeUsers": "18"
+      "city": "China",
+      "activeUsers": "20"
     },
     {
       "city": "Poland",
@@ -47,10 +47,6 @@
     {
       "city": "Serbia",
       "activeUsers": "5"
-    },
-    {
-      "city": "",
-      "activeUsers": "3"
     },
     {
       "city": "Lithuania",
