@@ -721,7 +721,7 @@ main {
 }
 
 // Dark mode overrides
-@media (prefers-color-scheme: dark-mode) {
+@media (prefers-color-scheme: dark) {
   main {
     --color-prettylights-syntax-comment: #8b949e;
     --color-prettylights-syntax-constant: #79c0ff;
