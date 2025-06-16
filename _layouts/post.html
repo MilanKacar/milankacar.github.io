@@ -192,7 +192,7 @@ function switchTab(tabName, targetId = null) {
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
 
-  \{\{ if site.comments.giscus.enabled \}\}
+  {% if site.comments.giscus.enabled %}
   <script src="https://giscus.app/client.js"
           data-repo="MilanKacar/milankacar.github.io"
           data-repo-id="R_kgDOM1tu4A"
@@ -208,5 +208,5 @@ function switchTab(tabName, targetId = null) {
           crossorigin="anonymous"
           async>
   </script>
-  \{\{ end \}\}
+{% end %}
 </article>
