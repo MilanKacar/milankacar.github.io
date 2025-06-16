@@ -85,3 +85,13 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+comments:
+  giscus:
+    enabled: true
+    repo: "MilanKacar/milankacar.github.io"
+    repo_id: "R_kgDOM1tu4A"
+    category: "Q&A"
+    category_id: "DIC_kwDOM1tu4M4Crk-M"
+    mapping: "pathname"
+    reactions_enabled: "1"
