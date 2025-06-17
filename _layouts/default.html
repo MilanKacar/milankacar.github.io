@@ -255,9 +255,25 @@
                 }
               }
             }, "https://giscus.app");
+          } else {
+            // fallback: wait for iframe
+            const observer = new MutationObserver((mutations, obs) => {
+              const iframeNow = document.querySelector("iframe.giscus-frame");
+              if (iframeNow) {
+                iframeNow.contentWindow.postMessage({
+                  giscus: {
+                    setConfig: {
+                      theme: isDarkMode ? "dark" : "light"
+                    }
+                  }
+                }, "https://giscus.app");
+                obs.disconnect();
+              }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
           }
         }
-    
+          
         // Initialize theme + chart + giscus
         function initializeTheme() {
           const savedMode = localStorage.getItem("darkMode");
