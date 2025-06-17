@@ -276,22 +276,26 @@
           
         // Initialize theme + chart + giscus
         function initializeTheme() {
-          const savedMode = localStorage.getItem("darkMode");
-          const isDarkMode = savedMode === "enabled";
+          const savedMode = localStorage.getItem("darkMode") === "enabled";
+          toggleButton.checked = savedMode;
+        
+          const isDarkMode = toggleButton.checked;
           document.body.classList.toggle("dark-mode", isDarkMode);
           document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
           updateChartOptions(isDarkMode);
           updateGiscusTheme(isDarkMode);
         }
-        
+
         toggleButton.addEventListener("click", () => {
-          const isDarkMode = !document.body.classList.contains("dark-mode");
+          const isDarkMode = toggleButton.checked;
+        
           document.body.classList.toggle("dark-mode", isDarkMode);
           document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
           localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
           updateChartOptions(isDarkMode);
           updateGiscusTheme(isDarkMode);
         });
+
 
     
         initializeTheme();
