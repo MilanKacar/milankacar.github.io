@@ -228,7 +228,8 @@
     
           // Initialize chart options based on dark mode
           updateChartOptions(isDarkMode);
-          updateGiscusTheme();
+          updateGiscusTheme(isDarkMode);
+
         }
 
       
@@ -241,27 +242,26 @@
       
             // Reinitialize chart with the updated theme
             updateChartOptions(isDarkMode);
+
           });
       
           // Initialize theme and chart options on page load
           initializeTheme();
         });
 
-
-      function updateGiscusTheme() {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage(
-          {
-            giscus: {
-              setConfig: {
-                theme: "https://milankacar.github.io/giscus-theme.css"
+        function updateGiscusTheme(isDarkMode) {
+          const iframe = document.querySelector("iframe.giscus-frame");
+          if (iframe) {
+            iframe.contentWindow.postMessage({
+              giscus: {
+                setConfig: {
+                  theme: isDarkMode ? "dark" : "light"
+                }
               }
-            }
-          },
-          "https://giscus.app"
-        );
-      }
+            }, "https://giscus.app");
+          }
+        }
+
       </script>
 
 
