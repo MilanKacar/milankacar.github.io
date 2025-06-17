@@ -215,67 +215,34 @@
           }
       
         // Function to load and apply dark mode from localStorage
-        document.addEventListener("DOMContentLoaded", function () {
-          const toggleButton = document.getElementById("toggle-mode");
+        // Function to load and apply dark mode from localStorage
+        function initializeTheme() {
+          const savedMode = localStorage.getItem("darkMode");
+          const isDarkMode = savedMode === "enabled";
+    
+          // Apply the mode immediately
+          document.body.classList.toggle("dark-mode", isDarkMode);
+    
+          // Set the toggle button state based on the dark mode
+          toggleButton.checked = isDarkMode;
+    
+          // Initialize chart options based on dark mode
+          updateChartOptions(isDarkMode);
+        }
+
       
-          if (!toggleButton) {
-            console.error("Dark mode toggle button not found.");
-            return;
-          }
-      
-          // Load and apply dark mode from localStorage
-          function initializeTheme() {
-            const savedMode = localStorage.getItem("darkMode");
-            const isDarkMode = savedMode === "enabled";
-      
-            // Apply to body and html attribute
-            document.body.classList.toggle("dark-mode", isDarkMode);
-            document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-      
-            // If your toggle is a checkbox/radio, reflect state
-            if (toggleButton.type === "checkbox" || toggleButton.type === "radio") {
-              toggleButton.checked = isDarkMode;
-            }
-      
-            // Update chart and Giscus
-            updateChartOptions(isDarkMode);
-            updateGiscusTheme(isDarkMode);
-          }
-      
-          // Toggle handler
+          // Add event listener for toggling dark mode
           toggleButton.addEventListener("click", () => {
             const isDarkMode = document.body.classList.toggle("dark-mode");
-            document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+      
+            // Save dark mode preference in localStorage
             localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
       
+            // Reinitialize chart with the updated theme
             updateChartOptions(isDarkMode);
-            updateGiscusTheme(isDarkMode);
           });
       
-          // Update Giscus iframe to respect the new data-theme
-          function updateGiscusTheme(isDarkMode) {
-            const giscusIframe = document.querySelector("iframe.giscus-frame");
-            if (!giscusIframe) return;
-      
-            giscusIframe.contentWindow.postMessage(
-              {
-                giscus: {
-                  setConfig: {
-                    // Use same custom CSS URL every time — it switches mode based on parent data-theme
-                    theme: "https://yourdomain.com/assets/css/giscus-theme.css"
-                  }
-                }
-              },
-              "https://giscus.app"
-            );
-          }
-      
-          // Dummy chart update function — replace with yours
-          function updateChartOptions(isDarkMode) {
-            console.log(`Chart updated for ${isDarkMode ? "dark" : "light"} mode`);
-          }
-      
-          // Kick things off
+          // Initialize theme and chart options on page load
           initializeTheme();
         });
       </script>
