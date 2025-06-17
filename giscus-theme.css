@@ -1,0 +1,87 @@
+/* Giscus custom theme for your Jekyll blog */
+
+/* === Light Mode === */
+
+:root {
+  --color-background: #ffffff;              /* same as $white */
+  --color-foreground: #333333;              /* approximate $darkGray */
+  --color-border: #dddddd;                  /* approximate $lightGray */
+  --color-primary: #007bff;                 /* your $blue */
+  --color-primary-dark: #0056b3;            /* darker variant */
+  --color-text: #333333;
+  --color-secondary: #555555;               /* approximate $gray */
+  --color-comment: #f6f8fa;                 /* code block background */
+
+  color-scheme: light;
+}
+
+/* === Dark Mode === */
+
+[data-theme="dark"],
+:root[data-theme="dark"] {
+  --color-background: #121212;              /* same as $dark-background */
+  --color-foreground: #d4ccde;              /* same as $dark-text */
+  --color-border: #333333;                  /* darker border */
+  --color-primary: #50b5ff;                 /* same as $dark-link */
+  --color-primary-dark: #3399ff;
+  --color-text: #d4ccde;
+  --color-secondary: #aaaaaa;               /* lighter gray */
+  --color-comment: #1e1e1e;                 /* dark code surface */
+
+  color-scheme: dark;
+}
+
+/* === Giscus built-in tokens === */
+
+.giscus, .giscus-frame {
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
+}
+
+.giscus a {
+  color: var(--color-primary);
+}
+
+.giscus a:hover {
+  color: var(--color-primary-dark);
+}
+
+.giscus .gsc-comment-box {
+  background: var(--color-comment);
+}
+
+.giscus .gsc-comment-box, 
+.giscus .gsc-comment-content,
+.giscus .gsc-timeline {
+  border-color: var(--color-border);
+}
+
+.giscus .gsc-comment-content {
+  background: var(--color-comment);
+}
+
+.giscus .gsc-header, 
+.giscus .gsc-footer {
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
+}
+
+.giscus .gsc-reactions {
+  background: var(--color-background);
+}
+
+/* === Text === */
+.giscus p,
+.giscus span,
+.giscus div {
+  color: var(--color-foreground);
+}
+
+.giscus .gsc-comment-author {
+  color: var(--color-primary);
+}
+
+.giscus .gsc-comment-date {
+  color: var(--color-secondary);
+}
+
