@@ -215,11 +215,38 @@
           }
       
         // Function to load and apply dark mode from localStorage
+        function initializeTheme() {
+          const savedMode = localStorage.getItem("darkMode");
+          const isDarkMode = savedMode === "enabled";
+    
+          // Apply the mode immediately
+          document.body.classList.toggle("dark-mode", isDarkMode);
+    
+          // Set the toggle button state based on the dark mode
+          toggleButton.checked = isDarkMode;
+    
+          // Initialize chart options based on dark mode
+          updateChartOptions(isDarkMode);
+          updateGiscusTheme(isDarkMode);
 
+        }
 
+      
+          // Add event listener for toggling dark mode
+          toggleButton.addEventListener("click", () => {
+            const isDarkMode = document.body.classList.toggle("dark-mode");
+      
+            // Save dark mode preference in localStorage
+            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+      
+            // Reinitialize chart with the updated theme
+            updateChartOptions(isDarkMode);
 
-
-
+          });
+      
+          // Initialize theme and chart options on page load
+          initializeTheme();
+        });
 
       </script>
 
