@@ -248,11 +248,33 @@
         function updateGiscusTheme(isDarkMode) {
           const iframe = document.querySelector("iframe.giscus-frame");
           if (iframe) {
+            // If found, update immediately:
             iframe.contentWindow.postMessage({
-              giscus: { setConfig: { theme: isDarkMode ? "dark" : "light" } }
+              giscus: {
+                setConfig: {
+                  theme: isDarkMode ? "dark" : "light"
+                }
+              }
             }, "https://giscus.app");
+          } else {
+            // If not found, watch for it:
+            const observer = new MutationObserver((mutations, obs) => {
+              const found = document.querySelector("iframe.giscus-frame");
+              if (found) {
+                found.contentWindow.postMessage({
+                  giscus: {
+                    setConfig: {
+                      theme: isDarkMode ? "dark" : "light"
+                    }
+                  }
+                }, "https://giscus.app");
+                obs.disconnect();
+              }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
           }
         }
+
         
         // Initialize theme + chart + giscus
         function initializeTheme() {
