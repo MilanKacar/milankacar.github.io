@@ -219,42 +219,47 @@
 
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("toggle-mode");
-      
-        function initializeTheme() {
-          const savedMode = localStorage.getItem("darkMode");
-          const isDarkMode = savedMode === "enabled";
-          document.body.classList.toggle("dark-mode", isDarkMode);
-          document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-          updateGiscusTheme(isDarkMode);
-        }
-      
-        toggleButton.addEventListener("click", () => {
-          const isDarkMode = !document.body.classList.contains("dark-mode");
-          document.body.classList.toggle("dark-mode", isDarkMode);
-          document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-          localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-          updateGiscusTheme(isDarkMode);
-        });
-      
-        function updateGiscusTheme(isDarkMode) {
-          const iframe = document.querySelector("iframe.giscus-frame");
-          if (iframe) {
-            iframe.contentWindow.postMessage({
-              giscus: {
-                setConfig: {
-                  theme: isDarkMode ? "dark" : "light"
-                }
-              }
-            }, "https://giscus.app");
-          }
-        }
-      
-        initializeTheme();
-      });
+
 
       </script>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+          const toggleButton = document.getElementById("toggle-mode");
+        
+          function initializeTheme() {
+            const savedMode = localStorage.getItem("darkMode");
+            const isDarkMode = savedMode === "enabled";
+            document.body.classList.toggle("dark-mode", isDarkMode);
+            document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+            updateGiscusTheme(isDarkMode);
+          }
+        
+          toggleButton.addEventListener("click", () => {
+            const isDarkMode = !document.body.classList.contains("dark-mode");
+            document.body.classList.toggle("dark-mode", isDarkMode);
+            document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+            updateGiscusTheme(isDarkMode);
+          });
+        
+          function updateGiscusTheme(isDarkMode) {
+            const iframe = document.querySelector("iframe.giscus-frame");
+            if (iframe) {
+              iframe.contentWindow.postMessage({
+                giscus: {
+                  setConfig: {
+                    theme: isDarkMode ? "dark" : "light"
+                  }
+                }
+              }, "https://giscus.app");
+            }
+          }
+        
+          initializeTheme();
+        });
+
+    </script>
 
 
 
