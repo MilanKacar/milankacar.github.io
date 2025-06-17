@@ -230,23 +230,6 @@
 
         }
 
-      
-          // Add event listener for toggling dark mode
-          toggleButton.addEventListener("click", () => {
-            const isDarkMode = document.body.classList.toggle("dark-mode");
-      
-            // Save dark mode preference in localStorage
-            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-      
-            // Reinitialize chart with the updated theme
-            updateChartOptions(isDarkMode);
-
-          });
-      
-          // Initialize theme and chart options on page load
-          initializeTheme();
-        });
-
       </script>
 
     <script type="text/javascript">
