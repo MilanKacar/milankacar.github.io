@@ -249,46 +249,25 @@
           const iframe = document.querySelector("iframe.giscus-frame");
           if (iframe) {
             iframe.contentWindow.postMessage({
-              giscus: {
-                setConfig: {
-                  theme: isDarkMode ? "dark" : "light"
-                }
-              }
+              giscus: { setConfig: { theme: isDarkMode ? "dark" : "light" } }
             }, "https://giscus.app");
-          } else {
-            // fallback: wait for iframe
-            const observer = new MutationObserver((mutations, obs) => {
-              const iframeNow = document.querySelector("iframe.giscus-frame");
-              if (iframeNow) {
-                iframeNow.contentWindow.postMessage({
-                  giscus: {
-                    setConfig: {
-                      theme: isDarkMode ? "dark" : "light"
-                    }
-                  }
-                }, "https://giscus.app");
-                obs.disconnect();
-              }
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
           }
         }
-          
+        
         // Initialize theme + chart + giscus
         function initializeTheme() {
           const savedMode = localStorage.getItem("darkMode") === "enabled";
           toggleButton.checked = savedMode;
-        
+      
           const isDarkMode = toggleButton.checked;
           document.body.classList.toggle("dark-mode", isDarkMode);
           document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
           updateChartOptions(isDarkMode);
           updateGiscusTheme(isDarkMode);
         }
-
-        toggleButton.addEventListener("click", () => {
+      
+        toggleButton.addEventListener("change", () => {
           const isDarkMode = toggleButton.checked;
-        
           document.body.classList.toggle("dark-mode", isDarkMode);
           document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
           localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
