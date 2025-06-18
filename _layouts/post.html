@@ -194,59 +194,35 @@ function switchTab(tabName, targetId = null) {
 
 
 
-  {% if site.comments.giscus.enabled %}
-  <script src="https://giscus.app/client.js"
-        data-repo="MilanKacar/milankacar.github.io"
-        data-repo-id="R_kgDOM1tu4A"
-        data-category="Q&A"
-        data-category-id="DIC_kwDOM1tu4M4Crk-M"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-lang="en"
-        data-theme="light"
-        crossorigin="anonymous"
-        async>
-  </script>
-  {% endif %}
 
-    <script>
-      function updateGiscusTheme(isDark) {
-        const iframe = document.querySelector("iframe.giscus-frame");
-        if (iframe) {
-          iframe.contentWindow.postMessage({
-            giscus: {
-              setConfig: {
-                theme: isDark ? "dark" : "light"
-              }
-            }
-          }, "*");
-        } else {
-          const obs = new MutationObserver((mutations, observer) => {
-            const found = document.querySelector("iframe.giscus-frame");
-            if (found) {
-              found.contentWindow.postMessage({
-                giscus: {
-                  setConfig: {
-                    theme: isDark ? "dark" : "light"
-                  }
-                }
-              }, "*");
-              observer.disconnect();
-            }
-          });
-          obs.observe(document.body, { childList: true, subtree: true });
-        }
-      }
-    
-      (function() {
-        const savedMode = localStorage.getItem("darkMode") === "enabled";
-        document.documentElement.setAttribute("data-theme", savedMode ? "dark" : "light");
-        document.body.classList.toggle("dark-mode", savedMode);
-        updateGiscusTheme(savedMode);
-      })();
-    </script>
+
+{% if site.comments.giscus.enabled %}
+<script>
+  (function() {
+    const savedMode = localStorage.getItem("darkMode") === "enabled";
+    const theme = savedMode ? "dark" : "light";
+
+    // Create the Giscus script dynamically:
+    const giscus = document.createElement("script");
+    giscus.src = "https://giscus.app/client.js";
+    giscus.setAttribute("data-repo", "MilanKacar/milankacar.github.io");
+    giscus.setAttribute("data-repo-id", "R_kgDOM1tu4A");
+    giscus.setAttribute("data-category", "Q&A");
+    giscus.setAttribute("data-category-id", "DIC_kwDOM1tu4M4Crk-M");
+    giscus.setAttribute("data-mapping", "pathname");
+    giscus.setAttribute("data-strict", "0");
+    giscus.setAttribute("data-reactions-enabled", "1");
+    giscus.setAttribute("data-emit-metadata", "0");
+    giscus.setAttribute("data-input-position", "bottom");
+    giscus.setAttribute("data-lang", "en");
+    giscus.setAttribute("data-theme", theme); // 👈 dynamic!
+    giscus.setAttribute("crossorigin", "anonymous");
+    giscus.async = true;
+
+    document.currentScript.parentElement.appendChild(giscus);
+  })();
+</script>
+{% endif %}
+
 
 </article>
