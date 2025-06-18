@@ -229,7 +229,7 @@ function switchTab(tabName, targetId = null) {
                 theme: isDark ? "dark" : "light"
               }
             }
-          }, "https://giscus.app");
+          }, "*");
         } else {
           // If iframe is not yet in DOM, watch for it
           const obs = new MutationObserver((mutations, observer) => {
@@ -241,7 +241,7 @@ function switchTab(tabName, targetId = null) {
                     theme: isDark ? "dark" : "light"
                   }
                 }
-              }, "https://giscus.app");
+              }, "*");
               observer.disconnect();
             }
           });
