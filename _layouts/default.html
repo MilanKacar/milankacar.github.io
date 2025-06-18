@@ -255,7 +255,7 @@
                   theme: isDarkMode ? "dark" : "light"
                 }
               }
-            }, "https://giscus.app");
+            }, "*";
           } else {
             // If not found, watch for it:
             const observer = new MutationObserver((mutations, obs) => {
@@ -267,7 +267,7 @@
                       theme: isDarkMode ? "dark" : "light"
                     }
                   }
-                }, "https://giscus.app");
+                }, "*");
                 obs.disconnect();
               }
             });
