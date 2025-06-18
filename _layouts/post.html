@@ -191,6 +191,47 @@ function switchTab(tabName, targetId = null) {
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
+  <script>
+    // Runs on every page, toggle or not
+    (function() {
+      const savedMode = localStorage.getItem("darkMode") === "enabled";
+      document.documentElement.setAttribute("data-theme", savedMode ? "dark" : "light");
+      document.body.classList.toggle("dark-mode", savedMode);
+  
+      // Always update Giscus if present
+      function updateGiscusTheme(isDark) {
+        const iframe = document.querySelector("iframe.giscus-frame");
+        if (iframe) {
+          iframe.contentWindow.postMessage({
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light"
+              }
+            }
+          }, "https://giscus.app");
+        } else {
+          // If iframe is not yet in DOM, watch for it
+          const obs = new MutationObserver((mutations, observer) => {
+            const found = document.querySelector("iframe.giscus-frame");
+            if (found) {
+              found.contentWindow.postMessage({
+                giscus: {
+                  setConfig: {
+                    theme: isDark ? "dark" : "light"
+                  }
+                }
+              }, "https://giscus.app");
+              observer.disconnect();
+            }
+          });
+          obs.observe(document.body, { childList: true, subtree: true });
+        }
+      }
+  
+      updateGiscusTheme(savedMode);
+    })();
+  </script>
+
 
   {% if site.comments.giscus.enabled %}
   <script src="https://giscus.app/client.js"
