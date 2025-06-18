@@ -193,29 +193,21 @@ function switchTab(tabName, targetId = null) {
   </div>
 
   {% if site.comments.giscus.enabled %}
-  <script>
-    const toggleButton = document.getElementById("toggle-mode");
-    const isDarkMode = toggleButton && toggleButton.checked;
-    const theme = isDarkMode ? "dark" : "light";
-  
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.setAttribute("data-repo", "MilanKacar/milankacar.github.io");
-    script.setAttribute("data-repo-id", "R_kgDOM1tu4A");
-    script.setAttribute("data-category", "Q&A");
-    script.setAttribute("data-category-id", "DIC_kwDOM1tu4M4Crk-M");
-    script.setAttribute("data-mapping", "pathname");
-    script.setAttribute("data-strict", "0");
-    script.setAttribute("data-reactions-enabled", "1");
-    script.setAttribute("data-emit-metadata", "0");
-    script.setAttribute("data-theme", theme);
-    script.setAttribute("data-input-position", "bottom");
-    script.setAttribute("data-lang", "en");
-    script.crossOrigin = "anonymous";
-    script.async = true;
-  
-    document.body.appendChild(script);
-  </script>
+  <script src="https://giscus.app/client.js"
+        data-repo="MilanKacar/milankacar.github.io"
+        data-repo-id="R_kgDOM1tu4A"
+        data-category="Q&A"
+        data-category-id="DIC_kwDOM1tu4M4Crk-M"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
   {% endif %}
 
 
