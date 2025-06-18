@@ -12,20 +12,28 @@ layout: default
   gtag('config', 'G-1FBB6CV6WE');
 </script>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<!-- Configure MathJax v3 -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
 
-
-
-
-
+<!-- Load MathJax v3 from jsDelivr -->
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-
+<!-- Optional style adjustments -->
 <style>
-  .MathJax_Display, .MathJax {
-    font-size: 80%; /* Adjust percentage as needed */
+  .mjx-container {
+    font-size: 80%; /* Adjust as needed */
   }
 </style>
 
