@@ -1,7 +1,7 @@
 ---
 layout: post  
-title: "#122 Decoding Machine Learning Success: 10 Insights from Andrew Ng's "Machine Learning Yearning" 🚀🧠"
-categories: [Finance, Trading]
+title: "#122 Decoding Machine Learning Success: 10 Insights from Andrew Ng's Machine Learning Yearning 🚀🧠"
+categories: [AI, Programming, Machine Learning]
 difficulty: Medium
 tags: [Machine Learning, AI]
 ---
