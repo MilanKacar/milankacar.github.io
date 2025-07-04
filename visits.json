@@ -2,7 +2,7 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "13418"
+      "activeUsers": "13420"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -26,7 +26,7 @@
     },
     {
       "city": "India",
-      "activeUsers": "19"
+      "activeUsers": "20"
     },
     {
       "city": "Poland",
@@ -41,12 +41,12 @@
       "activeUsers": "10"
     },
     {
-      "city": "Sweden",
-      "activeUsers": "6"
+      "city": "Canada",
+      "activeUsers": "9"
     },
     {
-      "city": "Canada",
-      "activeUsers": "5"
+      "city": "Sweden",
+      "activeUsers": "6"
     },
     {
       "city": "Serbia",
