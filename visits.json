@@ -45,6 +45,10 @@
       "activeUsers": "9"
     },
     {
+      "city": "Singapore",
+      "activeUsers": "6"
+    },
+    {
       "city": "Sweden",
       "activeUsers": "6"
     },
@@ -62,10 +66,6 @@
     },
     {
       "city": "Lithuania",
-      "activeUsers": "3"
-    },
-    {
-      "city": "Singapore",
       "activeUsers": "3"
     }
   ]
