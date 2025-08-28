@@ -10,7 +10,7 @@
     },
     {
       "city": "United States",
-      "activeUsers": "94"
+      "activeUsers": "100"
     },
     {
       "city": "Netherlands",
@@ -54,6 +54,10 @@
     },
     {
       "city": "Australia",
+      "activeUsers": "5"
+    },
+    {
+      "city": "Bulgaria",
       "activeUsers": "5"
     },
     {
