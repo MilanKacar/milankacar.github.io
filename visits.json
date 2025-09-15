@@ -69,6 +69,10 @@
       "activeUsers": "5"
     },
     {
+      "city": "Nigeria",
+      "activeUsers": "5"
+    },
+    {
       "city": "Serbia",
       "activeUsers": "5"
     },
@@ -82,10 +86,6 @@
     },
     {
       "city": "Lithuania",
-      "activeUsers": "3"
-    },
-    {
-      "city": "Nigeria",
       "activeUsers": "3"
     }
   ]
