@@ -29,6 +29,10 @@
       "activeUsers": "21"
     },
     {
+      "city": "Canada",
+      "activeUsers": "17"
+    },
+    {
       "city": "Poland",
       "activeUsers": "17"
     },
@@ -39,10 +43,6 @@
     {
       "city": "Germany",
       "activeUsers": "14"
-    },
-    {
-      "city": "Canada",
-      "activeUsers": "13"
     },
     {
       "city": "Singapore",
