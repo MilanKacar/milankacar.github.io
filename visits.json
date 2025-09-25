@@ -18,11 +18,11 @@
     },
     {
       "city": "India",
-      "activeUsers": "43"
+      "activeUsers": "48"
     },
     {
       "city": "China",
-      "activeUsers": "34"
+      "activeUsers": "36"
     },
     {
       "city": "(not set)",
@@ -91,6 +91,14 @@
     {
       "city": "Lithuania",
       "activeUsers": "3"
+    },
+    {
+      "city": "Paraguay",
+      "activeUsers": "3"
+    },
+    {
+      "city": "Mexico",
+      "activeUsers": "1"
     }
   ]
 }
