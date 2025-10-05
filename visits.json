@@ -14,15 +14,15 @@
     },
     {
       "city": "Netherlands",
-      "activeUsers": "89"
+      "activeUsers": "91"
+    },
+    {
+      "city": "India",
+      "activeUsers": "77"
     },
     {
       "city": "China",
       "activeUsers": "69"
-    },
-    {
-      "city": "India",
-      "activeUsers": "55"
     },
     {
       "city": "(not set)",
