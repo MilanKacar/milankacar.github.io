@@ -2,19 +2,19 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "13611"
+      "activeUsers": "13618"
     },
     {
       "city": "Bosnia & Herzegovina",
       "activeUsers": "220"
     },
     {
-      "city": "India",
-      "activeUsers": "141"
+      "city": "China",
+      "activeUsers": "144"
     },
     {
-      "city": "China",
-      "activeUsers": "138"
+      "city": "India",
+      "activeUsers": "144"
     },
     {
       "city": "United States",
@@ -29,11 +29,11 @@
       "activeUsers": "36"
     },
     {
-      "city": "(not set)",
-      "activeUsers": "21"
+      "city": "Singapore",
+      "activeUsers": "24"
     },
     {
-      "city": "Singapore",
+      "city": "(not set)",
       "activeUsers": "21"
     },
     {
@@ -70,6 +70,10 @@
     },
     {
       "city": "Chile",
+      "activeUsers": "5"
+    },
+    {
+      "city": "Denmark",
       "activeUsers": "5"
     },
     {
