@@ -10,15 +10,15 @@
     },
     {
       "city": "China",
-      "activeUsers": "154"
+      "activeUsers": "173"
     },
     {
       "city": "India",
-      "activeUsers": "147"
+      "activeUsers": "148"
     },
     {
       "city": "United States",
-      "activeUsers": "118"
+      "activeUsers": "123"
     },
     {
       "city": "Netherlands",
@@ -30,7 +30,7 @@
     },
     {
       "city": "Singapore",
-      "activeUsers": "25"
+      "activeUsers": "29"
     },
     {
       "city": "(not set)",
@@ -78,6 +78,10 @@
     },
     {
       "city": "Finland",
+      "activeUsers": "5"
+    },
+    {
+      "city": "Indonesia",
       "activeUsers": "5"
     },
     {
