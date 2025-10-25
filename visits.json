@@ -37,11 +37,11 @@
       "activeUsers": "21"
     },
     {
-      "city": "Poland",
-      "activeUsers": "17"
+      "city": "United Kingdom",
+      "activeUsers": "21"
     },
     {
-      "city": "United Kingdom",
+      "city": "Poland",
       "activeUsers": "17"
     },
     {
@@ -58,6 +58,10 @@
     },
     {
       "city": "Germany",
+      "activeUsers": "14"
+    },
+    {
+      "city": "Ireland",
       "activeUsers": "14"
     },
     {
@@ -106,10 +110,6 @@
     },
     {
       "city": "Iraq",
-      "activeUsers": "3"
-    },
-    {
-      "city": "Ireland",
       "activeUsers": "3"
     },
     {
