@@ -2,11 +2,11 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "13618"
+      "activeUsers": "13624"
     },
     {
       "city": "China",
-      "activeUsers": "338"
+      "activeUsers": "402"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -21,12 +21,12 @@
       "activeUsers": "123"
     },
     {
-      "city": "Netherlands",
-      "activeUsers": "91"
+      "city": "Singapore",
+      "activeUsers": "113"
     },
     {
-      "city": "Singapore",
-      "activeUsers": "84"
+      "city": "Netherlands",
+      "activeUsers": "91"
     },
     {
       "city": "Canada",
@@ -102,6 +102,10 @@
     },
     {
       "city": "Bhutan",
+      "activeUsers": "3"
+    },
+    {
+      "city": "Brazil",
       "activeUsers": "3"
     },
     {
