@@ -6,7 +6,7 @@
     },
     {
       "city": "China",
-      "activeUsers": "531"
+      "activeUsers": "540"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -41,6 +41,10 @@
       "activeUsers": "21"
     },
     {
+      "city": "Germany",
+      "activeUsers": "19"
+    },
+    {
       "city": "Poland",
       "activeUsers": "17"
     },
@@ -54,10 +58,6 @@
     },
     {
       "city": "Australia",
-      "activeUsers": "14"
-    },
-    {
-      "city": "Germany",
       "activeUsers": "14"
     },
     {
