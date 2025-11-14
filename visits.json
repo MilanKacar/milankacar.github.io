@@ -2,27 +2,27 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "13664"
+      "activeUsers": "13670"
     },
     {
       "city": "China",
-      "activeUsers": "641"
+      "activeUsers": "745"
+    },
+    {
+      "city": "Singapore",
+      "activeUsers": "235"
     },
     {
       "city": "Bosnia & Herzegovina",
       "activeUsers": "220"
     },
     {
-      "city": "Singapore",
-      "activeUsers": "188"
+      "city": "United States",
+      "activeUsers": "165"
     },
     {
       "city": "India",
       "activeUsers": "161"
-    },
-    {
-      "city": "United States",
-      "activeUsers": "149"
     },
     {
       "city": "Netherlands",
@@ -69,7 +69,15 @@
       "activeUsers": "8"
     },
     {
+      "city": "Brazil",
+      "activeUsers": "6"
+    },
+    {
       "city": "Kyrgyzstan",
+      "activeUsers": "6"
+    },
+    {
+      "city": "Mexico",
       "activeUsers": "6"
     },
     {
@@ -113,6 +121,10 @@
       "activeUsers": "5"
     },
     {
+      "city": "Vietnam",
+      "activeUsers": "5"
+    },
+    {
       "city": "Algeria",
       "activeUsers": "4"
     },
@@ -129,10 +141,6 @@
       "activeUsers": "3"
     },
     {
-      "city": "Brazil",
-      "activeUsers": "3"
-    },
-    {
       "city": "Czechia",
       "activeUsers": "3"
     },
@@ -145,12 +153,16 @@
       "activeUsers": "3"
     },
     {
+      "city": "Morocco",
+      "activeUsers": "3"
+    },
+    {
       "city": "Paraguay",
       "activeUsers": "3"
     },
     {
-      "city": "Mexico",
-      "activeUsers": "1"
+      "city": "Uruguay",
+      "activeUsers": "3"
     }
   ]
 }
