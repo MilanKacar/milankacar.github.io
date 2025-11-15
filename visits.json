@@ -2,15 +2,15 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "13670"
+      "activeUsers": "13673"
     },
     {
       "city": "China",
-      "activeUsers": "745"
+      "activeUsers": "788"
     },
     {
       "city": "Singapore",
-      "activeUsers": "235"
+      "activeUsers": "259"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -18,7 +18,7 @@
     },
     {
       "city": "United States",
-      "activeUsers": "165"
+      "activeUsers": "168"
     },
     {
       "city": "India",
@@ -34,7 +34,7 @@
     },
     {
       "city": "United Kingdom",
-      "activeUsers": "27"
+      "activeUsers": "31"
     },
     {
       "city": "(not set)",
