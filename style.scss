@@ -42,8 +42,9 @@ article {
 
 
 body.dark-mode {
-  background-color: $dark-background !important; /* Ensure dark mode applies */
+  background-color: linear-gradient(135deg, var(#0a0a0a) 0%, var(#1a1a2e) 100%) !important; /* Ensure dark mode applies */
   transition: background-color 0.3s ease, color 0.3s ease;
+  background: linear-gradient(135deg, var(#0a0a0a) 0%, var(#1a1a2e) 100%);
 }
 
 .container {
@@ -423,7 +424,6 @@ body.dark-mode #toggle-mode .icon-moon {
     font: 18px/1.4 $helvetica;
     color: #ffffff !important;
     transition: background-color 0.3s ease, color 0.3s ease;
-    overflow-x: hidden;
   }
 
   button {
@@ -550,59 +550,66 @@ body.dark-mode #toggle-mode .icon-moon {
     font-style: italic;
   }
 
- /* Copy button - modal close style */
+ /* Modern copy button with gradient */
  .copy-button {
    position: absolute;
-   top: 10px;
-   right: 12px;
-   width: 36px;
-   height: 36px;
-   border-radius: 10px;
-   background: rgba(255, 255, 255, 0.06);
-   color: #ffffff;
-   border: 1px solid rgba(255, 255, 255, 0.08);
-   backdrop-filter: blur(6px);
+   top: 8px;
+   right: 8px;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   color: white;
+   border: none;
+   padding: 8px 16px;
+   font-size: 13px;
+   font-weight: 600;
+   border-radius: 24px;
    cursor: pointer;
-   font-size: 12px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+   transition: all 0.3s ease;
  }
 
  .copy-button:hover {
-   transform: scale(1.05);
-   background: rgba(255, 255, 255, 0.1);
-   border-color: rgba(255, 255, 255, 0.18);
+   transform: translateY(-2px);
+   box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
  }
 
  .copy-button:active {
-   transform: scale(0.98);
+   transform: translateY(0);
+   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
  }
 
-  /* Category tags - modern pill style */
+  /* Modern category tags with glassmorphism */
   .category-tag {
     display: inline-block;
-    padding: 6px 14px;
+    padding: 8px 16px;
     background: rgba(102, 126, 234, 0.1);
     border: 1px solid rgba(102, 126, 234, 0.3);
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
     color: #667eea;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transition: all 0.3s ease;
   }
 
   .category-tag:hover {
     background: rgba(102, 126, 234, 0.2);
     border-color: #667eea;
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
   }
 
-  /* Icon buttons - clean circular design */
+  .category-tag:active {
+    transform: translateY(0);
+  }
+
+  /* Icon buttons for contact/social links */
   .icon-btn {
     --size: 3.5rem;
     width: var(--size);
@@ -612,10 +619,11 @@ body.dark-mode #toggle-mode .icon-moon {
     justify-content: center;
     border-radius: 50%;
     background: rgba(102, 126, 234, 0.1);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
     outline: none;
     text-decoration: none;
   }
@@ -628,19 +636,19 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   .icon-btn:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    background: rgba(118, 75, 162, 0.18);
+    transform: translateY(-4px);
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
   }
 
   .icon-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) inset;
+    transform: translateY(-2px);
   }
 
   .icon-btn:focus-visible {
     outline: 2px solid transparent;
-    box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(118, 75, 162, 0.65);
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(102, 126, 234, 0.6);
   }
 
   /* Skill tags - similar to category tags but smaller */
@@ -719,94 +727,21 @@ body.dark-mode #toggle-mode .icon-moon {
     background: rgba(102, 126, 234, 0.1);
   }
 
-  /* Back button with horizontal slide */
-  .back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 600;
-    margin-bottom: 40px;
-    transition: all 0.3s ease;
-  }
-
-  .back-button:hover {
-    transform: translateX(-5px);
-  }
-
-  /* Read more / link buttons */
-  .read-more {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .read-more:hover {
-    color: #764ba2;
-    transform: translateX(5px);
-  }
-
   /* Cards with modern styling */
   .skill-card,
   .project-card {
     background: rgba(102, 126, 234, 0.05);
     border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 20px;
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-card::before,
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
   }
 
   .skill-card:hover,
   .project-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
     border-color: #667eea;
-  }
-
-  .skill-card:hover::before,
-  .project-card:hover::before {
-    transform: scaleX(1);
-  }
-
-  /* Contact links */
-  .contact-link {
-    padding: 20px 40px;
-    background: rgba(102, 126, 234, 0.1);
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    border-radius: 15px;
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .contact-link:hover {
-    background: rgba(102, 126, 234, 0.2);
-    border-color: #667eea;
-    transform: translateY(-5px);
   }
 
 }
