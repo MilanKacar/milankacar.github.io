@@ -1,6 +1,3 @@
----
----
-
 //
 // IMPORTS
 //
@@ -8,6 +5,20 @@
 @import "reset";
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
+
+/**************/
+/* COLOR SYSTEM */
+/**************/
+
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --dark: #0a0a0a;
+  --darker: #1a1a2e;
+  --text: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+}
 
 /**************/
 /* BASE RULES */
@@ -18,31 +29,31 @@ html {
 }
 
 body {
-  background: $white;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
   font: 18px/1.4 $helvetica;
-  color: $darkGray;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease, color 0.3s ease;
-
 }
 
-
 pre {
- background: $light-code-surface;
+  background: $light-code-surface;
+  border-radius: 24px;
 }
 
 div {
-  background: $white;
+  background: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;	
 }
 
 article {
-  background: $white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 24px;
+  padding: 1.5rem;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
 body.dark-mode {
-  background-color: $dark-background !important; /* Ensure dark mode applies */
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -51,18 +62,21 @@ body.dark-mode {
   max-width: 740px;
   padding: 0 10px;
   width: 100%;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 24px;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
-  color: $darkerGray;
+  color: var(--text-primary);
   font-weight: bold;
-
   line-height: 1.7;
   margin: 1em 0 15px;
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
+
   @include mobile {
     line-height: 1.4;
   }
@@ -85,25 +99,29 @@ h3 {
 
 h4 {
   font-size: 18px;
-  color: $gray;
+  color: var(--text-secondary);
 }
 
 p {
   margin: 15px 0;
+  color: var(--text-secondary);
 }
 
 a {
-  color: $blue;
+  color: var(--primary);
   text-decoration: none;
-	cursor: pointer;
-  &:hover, &:active {
-    color: $blue;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: var(--secondary);
   }
 }
 
 ul, ol {
   margin: 15px 0;
   padding-left: 30px;
+  color: var(--text-secondary);
 }
 
 ul {
@@ -141,29 +159,29 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
+  color: var(--text-secondary);
 }
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 ::selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 // Nicolas Gallagher's micro clearfix hack
 // http://nicolasgallagher.com/micro-clearfix-hack/
 .clearfix:before,
 .clearfix:after {
-    content: " ";
-    display: table;
+  content: " ";
+  display: table;
 }
 
 .clearfix:after {
-    clear: both;
+  clear: both;
 }
 
 /*********************/
@@ -180,7 +198,9 @@ img {
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 24px 24px 0 0;
 
   @include mobile {
     text-align: center;
@@ -200,7 +220,7 @@ img {
   }
 
   img {
-    border-radius: 5px;
+    border-radius: 24px;
   }
 }
 
@@ -216,55 +236,76 @@ img {
 
 .site-name {
   margin: 0;
-  color: $darkGray;
+  color: var(--text-primary);
   cursor: pointer;
   font-family: $helveticaNeue;
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
 }
+
 /* Position the copy button at the top-right corner of the pre block */
 .copy-button {
   position: absolute;
-  top: 2px; /* Adjust as necessary */
-  right: 2px; /* Position at the top-right corner */ 
-  background-color: #007bff;
-  color: white;
+  top: 2px;
+  right: 2px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--text-primary);
   border: none;
   padding: 5px 10px;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.15s ease;
 }
 
-  .category-tag {
-    display: inline-block;
-    padding: 8px 12px;
-    background: linear-gradient(white, white) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
-    border: 2px solid transparent; /* Transparent border to allow background gradient */
-    border-radius: 50px;    /* Full rounded corners */
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none; /* Removes underline from the link */
-    cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */ 
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  .category-tag:hover {
-    background-color: #e0f7e9;   /* Light green background on hover */
-    color: $dark-link;                 /* Changes text color on hover */
-  }
-
 .copy-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--primary)
+  );
+  transform: translateY(-1px);
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) border-box;
+  border: 2px solid transparent;
+  border-radius: 24px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+
+.category-tag:hover {
+  background: linear-gradient(
+      135deg,
+      rgba(102, 126, 234, 0.1),
+      rgba(118, 75, 162, 0.1)
+    )
+    padding-box,
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary),
+      var(--primary)
+    )
+    border-box;
+  color: var(--primary);
+  transform: translateY(-1px);
 }
 
 .site-description {
   margin: -5px 0 0 0;
-  color: $gray;
+  color: var(--text-secondary);
   font-size: 16px;
 
   @include mobile {
@@ -287,14 +328,18 @@ nav {
 
   a {
     margin-left: 20px;
-    color: $darkGray;
+    color: var(--text-secondary);
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
 
     @include mobile {
       margin: 0 10px;
-      color: $blue;
+      color: var(--primary);
+    }
+
+    &:hover {
+      color: var(--text-primary);
     }
   }
 }
@@ -305,7 +350,7 @@ nav {
 
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .posts > .post:last-child {
@@ -314,11 +359,13 @@ nav {
 }
 
 .post {
+  border-radius: 24px;
+
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $gray;
+    border-left: 2px solid rgba(255, 255, 255, 0.4);
     padding: 0.1em 1em;
-    color: $gray;
+    color: var(--text-secondary);
     font-size: 22px;
     font-style: italic;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -331,22 +378,57 @@ nav {
   .read-more {
     text-transform: uppercase;
     font-size: 15px;
+    color: var(--text-primary);
   }
 }
 
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $white;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 0 0 24px 24px;
 }
 
 footer {
   padding: 20px 0;
   text-align: center;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
+/**************/
+/* TABS (if used) */
+/**************/
+
+.tab-button {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  transition: color 0.3s, border-bottom-color 0.3s, background 0.3s;
+  position: relative;
+}
+
+.tab-button.active {
+  color: var(--text-primary);
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--primary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-bottom: 2px solid var(--primary);
+}
 
 /**************/
 /* DARK MODE TOGGLE */
@@ -364,17 +446,27 @@ footer {
 }
 
 #toggle-mode {
-  background: $lightGray;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   border: none;
-  border-radius: 50%;
+  border-radius: 24px;
   padding: 10px;
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.15s ease;
+}
+
+#toggle-mode:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--primary)
+  );
+  transform: translateY(-1px);
 }
 
 #toggle-mode .icon-sun,
@@ -389,7 +481,7 @@ footer {
 }
 
 body.dark-mode #toggle-mode {
-  background: $dark-background;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
 }
 
 body.dark-mode #toggle-mode .icon-sun {
@@ -399,8 +491,6 @@ body.dark-mode #toggle-mode .icon-sun {
 body.dark-mode #toggle-mode .icon-moon {
   display: inline-block;
 }
-
-
 
 /**************/
 /* DARK MODE  */
@@ -416,9 +506,9 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   body {
-    background-color: $dark-background  !important;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%) !important;
     font: 18px/1.4 $helvetica;
-    color: $dark-text !important;
+    color: var(--text-secondary) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -427,183 +517,203 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   div {
-    background: $dark-background  !important;
+    background: transparent !important;
     transition: background-color 0.3s ease, color 0.3s ease;	
   }
 
-   article {
-    background: $dark-background  !important;
+  article {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%) !important;
+    border-radius: 24px;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .container {
-    background: $dark-background;
-    color: $dark-text;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+    color: var(--text-secondary);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: $dark-text;
+    color: var(--text-primary);
   }
 
   h4 {
-    color: lighten($dark-text, 20%);
+    color: var(--text-secondary);
   }
 
   a {
-    color: $dark-link;
-    &:hover, &:active {
-      color: lighten($dark-link, 10%);
+    color: var(--primary);
+    &:hover,
+    &:active {
+      color: var(--secondary);
     }
   }
 
   ul, ol {
-    color: $dark-text;
+    color: var(--text-secondary);
   }
 
   em, i {
-    color: lighten($dark-text, 10%);
+    color: var(--text-secondary);
   }
 
   strong, b {
-    color: lighten($dark-text, 5%);
+    color: var(--text-primary);
   }
 
   .date {
-    color: lighten($dark-text, 30%);
+    color: var(--text-secondary);
   }
 
   ::-moz-selection {
-    color: $dark-text;
-    background: darken($dark-link, 30%);
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   }
   ::selection {
-    color: $dark-text;
-    background: darken($dark-link, 30%);
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   }
 
   nav {
     a {
-      color: $dark-text;
+      color: var(--text-secondary);
       &:hover {
-        color: $dark-link;
+        color: var(--text-primary);
       }
     }
   }
 
-
-   .tab-button {
-    flex: 1;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    color: $dark-text;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: transparent;
-    transition: color 0.3s, border-bottom-color 0.3s;
-    position: relative;
+  .tab-button {
+    color: var(--text-secondary);
   }
 
-  
-
   .tab-button.active {
-    color: $dark-text;
-    font-weight: bold;
+    color: var(--text-primary);
+    background: linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary),
+      var(--primary)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .wrapper-footer {
     margin-top: 50px;
-    border-top: 1px solid darken($dark-footer, 20%);
-    border-bottom: 1px solid darken($dark-footer, 20%);
-    background-color: $dark-footer;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
   }
 
   footer {
-    color: $dark-text;
+    color: var(--text-secondary);
   }
 
   .masthead {
     padding: 20px 0;
-    border-bottom: 1px solid darken($dark-background, 10%); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .posts > .post {
-    border-bottom: 1px solid darken($dark-background, 10%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $dark-link;
+    border-left: 2px solid var(--primary);
     padding: 0.1em 1em;
-    color: lighten($dark-text, 20%);
+    color: var(--text-secondary);
     font-size: 22px;
     font-style: italic;
   }
 
- /* Position the copy button at the top-right corner of the pre block */
- .copy-button {
-   position: absolute;
-   top: 2px; /* Adjust as necessary */
-   right: 2px; /* Position at the top-right corner */ 
-   background-color: #0056b3;
-   color: white;
-   border: none;
-   padding: 5px 10px;
-   font-size: 12px;
-   border-radius: 4px;
-   cursor: pointer;
- }
+  /* Position the copy button at the top-right corner of the pre block */
+  .copy-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary),
+      var(--primary)
+    );
+    color: var(--text-primary);
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 24px;
+    cursor: pointer;
+  }
 
- .copy-button:hover {
-   background-color: #007bff;
- }
+  .copy-button:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  }
 
   .category-tag {
     display: inline-block;
-    padding: 8px 12px;
-    background: linear-gradient($darkGray, $darkGray) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
-    border: 2px solid transparent; /* Transparent border to allow background gradient */
-    border-radius: 50px;    /* Full rounded corners */
-    font-size: 16px;
-    color: #d4ccde;           /* Text color */
+    padding: 8px 16px;
+    background: linear-gradient(
+        135deg,
+        var(--dark),
+        var(--darker)
+      ) padding-box,
+      linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary),
+        var(--primary)
+      ) border-box;
+    border: 2px solid transparent;
+    border-radius: 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
     text-align: center;
-    text-decoration: none; /* Removes underline from the link */
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .category-tag:hover {
-    background-color: #b8e4d6;   /* Light green background on hover */
-    color: $dark-link;                 /* Changes text color on hover */
+    background: linear-gradient(
+        135deg,
+        var(--dark),
+        var(--darker)
+      ) padding-box,
+      linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary),
+        var(--primary)
+      ) border-box;
+    color: var(--text-primary);
   }
-
 }
 
 /* Default styles for the light mode icons */
 .icon-light {
-  color: black; /* Light mode icon color */
+  color: black;
 }
 
 /* Styles for the dark mode icons */
 body.dark-mode .icon-dark {
-  color: white; /* Dark mode icon color */
+  color: white;
 }
 
 body.dark-mode .icon-light {
-  color: #6c757d; /* Optional: a less saturated color for icons in dark mode */
+  color: #6c757d;
 }
 
 /* Adjust icon color for hover (both modes) */
-.icon-light:hover, .icon-dark:hover {
-  color: #007bff; /* A highlight color for hover state */
-  transition: color 0.3s ease; /* Smooth transition on hover */
+.icon-light:hover,
+.icon-dark:hover {
+  color: var(--primary);
+  transition: color 0.3s ease;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
