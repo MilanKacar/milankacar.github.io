@@ -389,7 +389,8 @@ footer {
 }
 
 body.dark-mode #toggle-mode {
-  background: $dark-background;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
 }
 
 body.dark-mode #toggle-mode .icon-sun {
@@ -412,13 +413,15 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   pre {
-    background: $dark-code-surface;
+    background: #1a1a2e;
+    border-radius: 24px;
+    padding: 20px;
   }
 
   body {
-    background-color: $dark-background  !important;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%) !important;
     font: 18px/1.4 $helvetica;
-    color: $dark-text !important;
+    color: #ffffff !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -427,66 +430,66 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   div {
-    background: $dark-background  !important;
+    background: transparent !important;
     transition: background-color 0.3s ease, color 0.3s ease;	
   }
 
    article {
-    background: $dark-background  !important;
+    background: transparent !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .container {
-    background: $dark-background;
-    color: $dark-text;
+    background: transparent;
+    color: #ffffff;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: $dark-text;
+    color: #ffffff;
   }
 
   h4 {
-    color: lighten($dark-text, 20%);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   a {
-    color: $dark-link;
+    color: #667eea;
     &:hover, &:active {
-      color: lighten($dark-link, 10%);
+      color: #764ba2;
     }
   }
 
   ul, ol {
-    color: $dark-text;
+    color: #ffffff;
   }
 
   em, i {
-    color: lighten($dark-text, 10%);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   strong, b {
-    color: lighten($dark-text, 5%);
+    color: #ffffff;
   }
 
   .date {
-    color: lighten($dark-text, 30%);
+    color: rgba(255, 255, 255, 0.8);
   }
 
   ::-moz-selection {
-    color: $dark-text;
-    background: darken($dark-link, 30%);
+    color: #ffffff;
+    background: #667eea;
   }
   ::selection {
-    color: $dark-text;
-    background: darken($dark-link, 30%);
+    color: #ffffff;
+    background: #667eea;
   }
 
   nav {
     a {
-      color: $dark-text;
+      color: #ffffff;
       &:hover {
-        color: $dark-link;
+        color: #667eea;
       }
     }
   }
@@ -498,7 +501,7 @@ body.dark-mode #toggle-mode .icon-moon {
     text-align: center;
     font-size: 16px;
     font-weight: 500;
-    color: $dark-text;
+    color: #ffffff;
     border: none;
     outline: none;
     cursor: pointer;
@@ -510,100 +513,268 @@ body.dark-mode #toggle-mode .icon-moon {
   
 
   .tab-button.active {
-    color: $dark-text;
+    color: #667eea;
     font-weight: bold;
+    border-bottom: 2px solid #667eea;
   }
 
   .wrapper-footer {
     margin-top: 50px;
-    border-top: 1px solid darken($dark-footer, 20%);
-    border-bottom: 1px solid darken($dark-footer, 20%);
-    background-color: $dark-footer;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
   }
 
   footer {
-    color: $dark-text;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .masthead {
     padding: 20px 0;
-    border-bottom: 1px solid darken($dark-background, 10%); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .posts > .post {
-    border-bottom: 1px solid darken($dark-background, 10%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $dark-link;
+    border-left: 2px solid #667eea;
     padding: 0.1em 1em;
-    color: lighten($dark-text, 20%);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 22px;
     font-style: italic;
   }
 
- /* Position the copy button at the top-right corner of the pre block */
+ /* Modern copy button with gradient */
  .copy-button {
    position: absolute;
-   top: 2px; /* Adjust as necessary */
-   right: 2px; /* Position at the top-right corner */ 
-   background-color: #0056b3;
+   top: 8px;
+   right: 8px;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
    color: white;
    border: none;
-   padding: 5px 10px;
-   font-size: 12px;
-   border-radius: 4px;
+   padding: 8px 16px;
+   font-size: 13px;
+   font-weight: 600;
+   border-radius: 24px;
    cursor: pointer;
+   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+   transition: all 0.3s ease;
  }
 
  .copy-button:hover {
-   background-color: #007bff;
+   transform: translateY(-2px);
+   box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
  }
 
+ .copy-button:active {
+   transform: translateY(0);
+   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+ }
+
+  /* Modern category tags with glassmorphism */
   .category-tag {
     display: inline-block;
-    padding: 8px 12px;
-    background: linear-gradient($darkGray, $darkGray) padding-box, 
-                linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
-    border: 2px solid transparent; /* Transparent border to allow background gradient */
-    border-radius: 50px;    /* Full rounded corners */
-    font-size: 16px;
-    color: #d4ccde;           /* Text color */
+    padding: 8px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
     text-align: center;
-    text-decoration: none; /* Removes underline from the link */
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transition: all 0.3s ease;
   }
 
   .category-tag:hover {
-    background-color: #b8e4d6;   /* Light green background on hover */
-    color: $dark-link;                 /* Changes text color on hover */
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+  }
+
+  .category-tag:active {
+    transform: translateY(0);
+  }
+
+  /* Icon buttons for contact/social links */
+  .icon-btn {
+    --size: 3.5rem;
+    width: var(--size);
+    height: var(--size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .icon-btn img,
+  .icon-btn svg {
+    width: 60%;
+    height: auto;
+    display: block;
+  }
+
+  .icon-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .icon-btn:active {
+    transform: translateY(-2px);
+  }
+
+  .icon-btn:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(102, 126, 234, 0.6);
+  }
+
+  /* Skill tags - similar to category tags but smaller */
+  .skill-tag {
+    padding: 6px 14px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #667eea;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+
+  .skill-tag:hover {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+    transform: scale(1.05);
+  }
+
+  /* Tech tags for projects */
+  .tech-tag {
+    padding: 6px 14px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #667eea;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+
+  .tech-tag:hover {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+  }
+
+  /* Modern button styles */
+  .btn {
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+  }
+
+  .btn-primary:active {
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(102, 126, 234, 0.5);
+  }
+
+  .btn-secondary:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+  }
+
+  /* Cards with modern styling */
+  .skill-card,
+  .project-card {
+    background: rgba(102, 126, 234, 0.05);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .skill-card:hover,
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
   }
 
 }
 
 /* Default styles for the light mode icons */
 .icon-light {
-  color: black; /* Light mode icon color */
+  color: black;
 }
 
 /* Styles for the dark mode icons */
 body.dark-mode .icon-dark {
-  color: white; /* Dark mode icon color */
+  color: white;
 }
 
 body.dark-mode .icon-light {
-  color: #6c757d; /* Optional: a less saturated color for icons in dark mode */
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Adjust icon color for hover (both modes) */
 .icon-light:hover, .icon-dark:hover {
-  color: #007bff; /* A highlight color for hover state */
-  transition: color 0.3s ease; /* Smooth transition on hover */
+  color: #667eea;
+  transition: color 0.3s ease;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn,
+  .category-tag,
+  .skill-tag,
+  .tech-tag,
+  .btn,
+  .copy-button {
+    transition: none;
+  }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
