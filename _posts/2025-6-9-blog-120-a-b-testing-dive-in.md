@@ -4,6 +4,7 @@ title: "#120 A/B Test - Deep dive 🚀🧠"
 categories: [Data Science]
 difficulty: Medium
 tags: [A/B Test]
+date: 2025-06-09
 ---
 
 
