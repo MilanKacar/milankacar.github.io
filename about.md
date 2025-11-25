@@ -3,9 +3,7 @@ layout: page
 title: 👨‍💻 About Me
 permalink: /about/
 ---
-I am a Vienna-based **Software Engineer** and **AI Engineer** with over <span id="experienceYears"></span> years of professional experience. I hold a degree in **Geodesy** from *Graz University of Technology*, where I contributed as a project and teaching assistant. Currently, I work in the e-commerce and fintech sectors as a **AI Engineer | Software Engineer** at *Niceshops GmbH* and *Gateway Ventures GmbH*.
-
-Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school focusing on advanced studies in **Mathematics, Logic, and Physics**.
+I am a Vienna-based **Software Engineer** and **AI Engineer** with over <span id="experienceYears"></span> years of professional experience. I hold a degree in **Geodesy** from *Graz University of Technology*, where I contributed as a project and teaching assistant. Currently, I work in the e-commerce and fintech sectors as a **AI Engineer** and **Software Engineer** at *Niceshops GmbH* and *Gateway Ventures GmbH*. Originally from Mrkonjić Grad, Republic of Srpska (BA), I completed high school focusing on advanced studies in **Mathematics, Logic, and Physics**.
 
 ---
 
