@@ -105,7 +105,7 @@ At the outset, I expect most topics will revolve around software development. Ho
 
 ## 💼 Work Experience
 
-### **Data Scientist & Engineer**
+### **AI Engineer | Data Scientist**
 *Niceshops GmbH*  
 📍 Vienna, Austria  
 🗓️ Jan 2021 – Present  
@@ -115,7 +115,7 @@ At the outset, I expect most topics will revolve around software development. Ho
   
 *overlaping with Data Engineer / Team Lead position*
 
-### **Data Engineer / Team Lead**  
+### **Software Engineer / Team Lead**  
 *Gateway Ventures GmbH*  
 📍 Vienna, Austria  
 🗓️ Aug 2023 – Present  
