@@ -42,7 +42,7 @@ article {
 
 
 body.dark-mode {
-  background-color: linear-gradient(135deg, var($dark) 0%, var($darker) 100%) !important;
+  background-color: $dark-background !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
