@@ -4,6 +4,7 @@ title: "#73 🧮 2563. Count the Number of Fair Pairs 🧠🚀"
 categories: [LeetCode, Programming]
 difficulty: Medium
 tags: [Array, Two Pointers, Binary Search, Sorting]
+date: 2024-11-13
 ---
 
 Counting pairs 🧮 in an array that meet specific conditions can be quite tricky—especially when large numbers are involved! In this post, we'll dive into finding *fair pairs* where the sum of two elements falls within a given range. With sorted arrays and two-pointer techniques, we'll show how to do this efficiently!
