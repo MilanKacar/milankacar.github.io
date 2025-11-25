@@ -15,12 +15,12 @@ $white: #fff;
 $light-code-surface: #efefef;
 
 // Dark Mode Colors
-$dark-background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); // from --dark / --darker
-$dark-code-surface: #1a1a2e;                                        // from --darker
-$dark-text: #ffffff;                                                // from --text / --text-primary
-$dark-link: #667eea;                                                // from --primary
-$dark-header: rgba(10, 10, 10, 0.91);                               // based on --dark
-$dark-footer: rgba(10, 10, 10, 0.91);     
+$dark-background: #161b22;
+$dark-code-surface: #010409;
+$dark-text: #ffffff;
+$dark-link: #d4ccde;
+$dark-header: #121212e8;
+$dark-footer: #121212e8;
 
 // Font stacks
 $helvetica: Helvetica, Arial, sans-serif;
