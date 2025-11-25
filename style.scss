@@ -412,11 +412,11 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   pre {
-    background: $dark-background !important;
+    background: $dark-code-surface;
   }
 
   body {
-    background-color: linear-gradient(135deg, #667eea, #764ba2) !important;
+    background-color: $dark-background  !important;
     font: 18px/1.4 $helvetica;
     color: $dark-text !important;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -566,7 +566,7 @@ body.dark-mode #toggle-mode .icon-moon {
   .category-tag {
     display: inline-block;
     padding: 8px 12px;
-    background: linear-gradient(135deg, #667eea, #764ba2) padding-box, 
+    background: linear-gradient($darkGray, $darkGray) padding-box, 
                 linear-gradient(45deg, #ff7e5f, #feb47b) border-box; /* Background gradient */
     border: 2px solid transparent; /* Transparent border to allow background gradient */
     border-radius: 50px;    /* Full rounded corners */
