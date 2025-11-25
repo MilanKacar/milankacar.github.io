@@ -8,11 +8,7 @@ date: 2025-11-25
 ---
 
 
-We keep hearing that *this* is “the year of AI agents.” I don’t buy it.
-
-If you look a bit closer at where we actually are, it feels much more honest to say: **this will be the decade of agents**. They’re already useful and impressive—but they’re also obviously incomplete.
-
-In this post I’ll unpack why, what’s missing, how we got here, and what it means if you’re building with (or around) agents today. 🧠🤖
+We keep hearing that *this* is “the year of AI agents.” I don’t buy it. If you look a bit closer at where we actually are, it feels much more honest to say: **this will be the decade of agents**. They’re already useful and impressive—but they’re also obviously incomplete. In this post I’ll unpack why, what’s missing, how we got here, and what it means if you’re building with (or around) agents today. 🧠🤖
 
 ---
 
