@@ -412,7 +412,7 @@ body.dark-mode #toggle-mode .icon-moon {
   }
 
   pre {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: $dark-background !important;
   }
 
   body {
