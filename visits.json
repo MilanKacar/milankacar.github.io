@@ -6,11 +6,11 @@
     },
     {
       "city": "China",
-      "activeUsers": "1543"
+      "activeUsers": "1571"
     },
     {
       "city": "Singapore",
-      "activeUsers": "520"
+      "activeUsers": "524"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -18,7 +18,7 @@
     },
     {
       "city": "United States",
-      "activeUsers": "217"
+      "activeUsers": "219"
     },
     {
       "city": "India",
@@ -97,6 +97,10 @@
       "activeUsers": "6"
     },
     {
+      "city": "Morocco",
+      "activeUsers": "6"
+    },
+    {
       "city": "Belgium",
       "activeUsers": "5"
     },
@@ -166,10 +170,6 @@
     },
     {
       "city": "Lithuania",
-      "activeUsers": "3"
-    },
-    {
-      "city": "Morocco",
       "activeUsers": "3"
     },
     {
