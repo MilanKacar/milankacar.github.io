@@ -2,19 +2,19 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "14028"
+      "activeUsers": "14031"
     },
     {
       "city": "China",
-      "activeUsers": "1661"
+      "activeUsers": "1680"
     },
     {
       "city": "Singapore",
-      "activeUsers": "562"
+      "activeUsers": "571"
     },
     {
       "city": "United States",
-      "activeUsers": "283"
+      "activeUsers": "291"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -29,12 +29,12 @@
       "activeUsers": "99"
     },
     {
-      "city": "Canada",
-      "activeUsers": "36"
+      "city": "United Kingdom",
+      "activeUsers": "40"
     },
     {
-      "city": "United Kingdom",
-      "activeUsers": "35"
+      "city": "Canada",
+      "activeUsers": "36"
     },
     {
       "city": "(not set)",
