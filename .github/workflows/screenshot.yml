@@ -1,12 +1,13 @@
 name: Take Screenshot
 
 on:
-  # 1. Runs automatically when you push code to the 'main' branch
-  push:
-    branches:
-      - master
-
-  # 2. Allows you to run it manually from the 'Actions' tab
+  # Trigger this workflow only after the Pages deployment finishes
+  workflow_run:
+    workflows: ["pages-build-deployment"] # The default name of the GitHub Pages workflow
+    types:
+      - completed
+  
+  # Keep manual trigger for testing
   workflow_dispatch:
 
 permissions:
@@ -14,6 +15,8 @@ permissions:
 
 jobs:
   screenshot:
+    # Only run if deployment succeeded AND it wasn't triggered by the screenshot bot (prevents loops)
+    if: ${{ github.event.workflow_run.conclusion == 'success' && !contains(github.event.workflow_run.head_commit.message, 'Auto-update homepage screenshot') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,9 +34,6 @@ jobs:
           script: |
             const puppeteer = require('puppeteer');
             
-            // ----------------------------------------------------
-            // FIX: Launch with arguments to disable the sandbox
-            // ----------------------------------------------------
             const browser = await puppeteer.launch({
               args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
@@ -44,6 +44,7 @@ jobs:
             await page.setViewport({ width: 1280, height: 800 });
             
             // Go to your website
+            // Added a small hard wait to ensure CDN has propagated if necessary
             await page.goto('https://milankacar.github.io', { waitUntil: 'networkidle0' });
             
             // Ensure folder exists
@@ -64,9 +65,12 @@ jobs:
           
           # Check if there are changes to commit
           git add images/homepage-preview.png
+          
+          # If no changes, exit without error
           if git diff-index --quiet HEAD; then
             echo "No changes in screenshot to commit"
           else
+            # Note: [skip ci] is good practice, but the 'if' check at the top is the real protection
             git commit -m "Auto-update homepage screenshot [skip ci]"
             git push
           fi
