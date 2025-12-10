@@ -4,7 +4,7 @@ on:
   # 1. Runs automatically when you push code to the 'main' branch
   push:
     branches:
-      - main
+      - master
 
   # 2. Allows you to run it manually from the 'Actions' tab
   workflow_dispatch:
