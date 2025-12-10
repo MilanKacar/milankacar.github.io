@@ -30,22 +30,29 @@ jobs:
         with:
           script: |
             const puppeteer = require('puppeteer');
-            const browser = await puppeteer.launch();
+            
+            // ----------------------------------------------------
+            // FIX: Launch with arguments to disable the sandbox
+            // ----------------------------------------------------
+            const browser = await puppeteer.launch({
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            
             const page = await browser.newPage();
             
-            // Set screen size (1280x800 is a good standard laptop size)
+            // Set screen size
             await page.setViewport({ width: 1280, height: 800 });
             
-            // Go to your website and wait until network is idle (no loading spinners)
+            // Go to your website
             await page.goto('https://milankacar.github.io', { waitUntil: 'networkidle0' });
             
-            // Ensure the 'images' folder exists (Node.js trick)
+            // Ensure folder exists
             const fs = require('fs');
             if (!fs.existsSync('images')){
                 fs.mkdirSync('images');
             }
 
-            // Save the screenshot
+            // Save screenshot
             await page.screenshot({ path: 'images/homepage-preview.png', fullPage: false });
             
             await browser.close();
