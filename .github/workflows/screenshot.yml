@@ -1,0 +1,50 @@
+name: Take Screenshot
+
+on:
+  push:
+    branches:
+      - main  # or 'master'
+  schedule:
+    - cron: '0 0 * * *' # Run once a day (optional)
+
+permissions:
+  contents: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Take Screenshot
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const puppeteer = require('puppeteer');
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            // Set a nice desktop viewport
+            await page.setViewport({ width: 1280, height: 800 });
+            
+            // Go to your live site
+            await page.goto('https://milankacar.github.io', { waitUntil: 'networkidle0' });
+            
+            // Save the screenshot to your repo folder (e.g., inside 'images')
+            await page.screenshot({ path: 'images/homepage-preview.png', fullPage: false });
+            
+            await browser.close();
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "MilanKacar"
+          git config --global user.email "milankacar@live.com"
+          git add images/homepage-preview.png
+          git commit -m "Update homepage screenshot" || exit 0
+          git push
