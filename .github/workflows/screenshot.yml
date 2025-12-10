@@ -1,11 +1,13 @@
 name: Take Screenshot
 
 on:
+  # 1. Runs automatically when you push code to the 'main' branch
   push:
     branches:
-      - main  # or 'master'
-  schedule:
-    - cron: '0 0 * * *' # Run once a day (optional)
+      - main
+
+  # 2. Allows you to run it manually from the 'Actions' tab
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,21 +32,34 @@ jobs:
             const puppeteer = require('puppeteer');
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
-            // Set a nice desktop viewport
+            
+            // Set screen size (1280x800 is a good standard laptop size)
             await page.setViewport({ width: 1280, height: 800 });
             
-            // Go to your live site
+            // Go to your website and wait until network is idle (no loading spinners)
             await page.goto('https://milankacar.github.io', { waitUntil: 'networkidle0' });
             
-            // Save the screenshot to your repo folder (e.g., inside 'images')
+            // Ensure the 'images' folder exists (Node.js trick)
+            const fs = require('fs');
+            if (!fs.existsSync('images')){
+                fs.mkdirSync('images');
+            }
+
+            // Save the screenshot
             await page.screenshot({ path: 'images/homepage-preview.png', fullPage: false });
             
             await browser.close();
 
-      - name: Commit and Push
+      - name: Commit and Push Screenshot
         run: |
           git config --global user.name "MilanKacar"
           git config --global user.email "milankacar@live.com"
+          
+          # Check if there are changes to commit
           git add images/homepage-preview.png
-          git commit -m "Update homepage screenshot" || exit 0
-          git push
+          if git diff-index --quiet HEAD; then
+            echo "No changes in screenshot to commit"
+          else
+            git commit -m "Auto-update homepage screenshot [skip ci]"
+            git push
+          fi
