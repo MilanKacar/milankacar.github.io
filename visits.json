@@ -6,11 +6,11 @@
     },
     {
       "city": "China",
-      "activeUsers": "1680"
+      "activeUsers": "1693"
     },
     {
       "city": "Singapore",
-      "activeUsers": "571"
+      "activeUsers": "576"
     },
     {
       "city": "United States",
@@ -126,6 +126,10 @@
     },
     {
       "city": "Laos",
+      "activeUsers": "5"
+    },
+    {
+      "city": "Malta",
       "activeUsers": "5"
     },
     {
