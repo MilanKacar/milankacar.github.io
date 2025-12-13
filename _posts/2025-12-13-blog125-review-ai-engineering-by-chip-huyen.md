@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Deep Dive Book Review: AI Engineering by Chip Huyen 🤖"
+title: "#125 Deep Dive Book Review: AI Engineering by Chip Huyen 🤖"
 categories: [Book Reviews, Artificial Intelligence, Software Engineering]
 tags: [LLM, System Design, MLOps, RAG, Fine-Tuning, Architecture]
 difficulty: Medium
