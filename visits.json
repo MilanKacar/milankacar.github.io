@@ -2,19 +2,19 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "14105"
+      "activeUsers": "14121"
     },
     {
       "city": "China",
-      "activeUsers": "1772"
+      "activeUsers": "1852"
     },
     {
       "city": "Singapore",
-      "activeUsers": "605"
+      "activeUsers": "629"
     },
     {
       "city": "United States",
-      "activeUsers": "295"
+      "activeUsers": "304"
     },
     {
       "city": "Bosnia & Herzegovina",
@@ -158,6 +158,10 @@
     },
     {
       "city": "Kazakhstan",
+      "activeUsers": "4"
+    },
+    {
+      "city": "Peru",
       "activeUsers": "4"
     },
     {
