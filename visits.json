@@ -2,15 +2,15 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "14184"
+      "activeUsers": "14186"
     },
     {
       "city": "China",
-      "activeUsers": "2067"
+      "activeUsers": "2093"
     },
     {
       "city": "Singapore",
-      "activeUsers": "660"
+      "activeUsers": "662"
     },
     {
       "city": "United States",
@@ -22,7 +22,7 @@
     },
     {
       "city": "India",
-      "activeUsers": "183"
+      "activeUsers": "185"
     },
     {
       "city": "Netherlands",
