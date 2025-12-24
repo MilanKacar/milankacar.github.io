@@ -21,7 +21,7 @@ We define BPE as an iterative algorithm that performs a series of merge operatio
 Let $A$ be the base alphabet (e.g., the set of all unique Unicode characters in the corpus). We initialize the vocabulary $V_0 = A$. The corpus $\mathcal{C}_0$ is represented as a sequence of tokens from $V_0$.
 
 ### 1.2 The Objective Function
-At each iteration $t$, we seek to identify a pair of adjacent symbols $(s_i, s_j)$ that appears with the highest frequency in $\mathcal{C}_t$. Let $S$ be the set of all possible pairs in the current vocabulary $V_t \times V_t$. We define the objective as:
+At each iteration $t$, we seek to identify a pair of adjacent symbols $$(s_i, s_j)$$ that appears with the highest frequency in $$\mathcal{C}_t$$. Let $S$ be the set of all possible pairs in the current vocabulary $$V_t \times V_t$$. We define the objective as:
 
 $$(u, v) = \arg\max_{(s_i, s_j) \in S} \text{Freq}(s_i, s_j, \mathcal{C}_t)$$
 
@@ -35,7 +35,7 @@ The transition to the next state is defined by two primary updates:
 1.  **Vocabulary Update:** $V_{t+1} = V_t \cup \{z\}$
 2.  **Sequence Transformation:** $\mathcal{C}_{t+1} = \text{Replace}(\mathcal{C}_t, [u, v], z)$
 
-This transformation reduces the total length of the corpus such that $|\mathcal{C}_{t+1}| < |\mathcal{C}_t|$. The algorithm continues until the stopping criterion is met, typically when $|V_t| = K$, where $K$ is a predefined hyperparameter representing the target vocabulary size.
+This transformation reduces the total number of tokens in the corpus such that $$|\mathcal{C}_{t+1}| < |\mathcal{C}_t|$$. The algorithm continues until the stopping criterion is met, typically when $$|V_t| = K$$, where $$K$$ is a predefined hyperparameter representing the target vocabulary size.
 
 ---
 
@@ -76,7 +76,7 @@ The pair $(l, o)$ appears $5 + 2 = 7$ times.
 * **Updated Vocab:** $\{..., est, lo\}$
 * **Updated Corpus:** `lo w`, `lo w e r`, `n e est`, `w i d est`
 
-By the end of this process, the word "newest" has been compressed from 6 tokens to 3 ($n, e, est$). Mathematical efficiency is achieved because the model no longer needs to learn the relationship between $e$, $s$, and $t$ individually; it treats $est$ as a singular semantic unit.
+By the end of this process, the word "newest" has been compressed from 6 tokens to 3 ($n, e, est$). Mathematical efficiency is achieved because the model no longer needs to learn the relationship between $e, s, t$ individually; it treats $est$ as a singular semantic unit.
 
 ---
 
@@ -89,9 +89,9 @@ $$H(\mathcal{C}) = -\sum_{i=1}^{|V|} p(v_i) \log p(v_i)$$
 
 By merging frequent pairs, BPE shifts the probability distribution $p(v_i)$. Rare characters are relegated to the tail of the distribution, while frequent subword clusters move to the head. This increases the **Information Density** per token. 
 
+
+
 In a character-level model, each token carries very little information (high redundancy). In a BPE-optimized model, each token carries significant semantic weight. This can be viewed as an attempt to satisfy **Zipf's Law**, where the frequency of a token is inversely proportional to its rank in the frequency table.
-
-
 
 ---
 
