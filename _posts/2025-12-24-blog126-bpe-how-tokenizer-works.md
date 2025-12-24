@@ -35,7 +35,11 @@ The transition to the next state is defined by two primary updates:
 1.  **Vocabulary Update:** $V_{t+1} = V_t \cup \{z\}$
 2.  **Sequence Transformation:** $\mathcal{C}_{t+1} = \text{Replace}(\mathcal{C}_t, [u, v], z)$
 
-This transformation reduces the total number of tokens in the corpus such that $$|\mathcal{C}_{t+1}| < |\mathcal{C}_t|$$. The algorithm continues until the stopping criterion is met, typically when $$|V_t| = K$$, where $$K$$ is a predefined hyperparameter representing the target vocabulary size.
+This transformation reduces the total number of tokens in the corpus such that 
+$$|\mathcal{C}_{t+1}| < |\mathcal{C}_t|$$
+The algorithm continues until the stopping criterion is met, typically when 
+$$|V_t| = K$$ 
+where $K$ is a predefined hyperparameter representing the target vocabulary size.
 
 ---
 
