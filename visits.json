@@ -2,11 +2,11 @@
   "data": [
     {
       "city": "Austria",
-      "activeUsers": "14206"
+      "activeUsers": "14212"
     },
     {
       "city": "China",
-      "activeUsers": "2342"
+      "activeUsers": "2391"
     },
     {
       "city": "Singapore",
@@ -38,7 +38,7 @@
     },
     {
       "city": "Canada",
-      "activeUsers": "36"
+      "activeUsers": "39"
     },
     {
       "city": "(not set)",
