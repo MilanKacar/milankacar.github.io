@@ -6,7 +6,7 @@
     },
     {
       "city": "China",
-      "activeUsers": "2714"
+      "activeUsers": "2723"
     },
     {
       "city": "Singapore",
@@ -18,7 +18,7 @@
     },
     {
       "city": "Bosnia & Herzegovina",
-      "activeUsers": "225"
+      "activeUsers": "233"
     },
     {
       "city": "India",
@@ -53,6 +53,10 @@
       "activeUsers": "23"
     },
     {
+      "city": "Poland",
+      "activeUsers": "23"
+    },
+    {
       "city": "Spain",
       "activeUsers": "21"
     },
@@ -67,10 +71,6 @@
     {
       "city": "Ireland",
       "activeUsers": "19"
-    },
-    {
-      "city": "Poland",
-      "activeUsers": "17"
     },
     {
       "city": "Australia",
