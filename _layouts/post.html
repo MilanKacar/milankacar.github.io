@@ -4,12 +4,33 @@ layout: default
 <head>
   <link rel="icon" type="image/x-icon" href="https://milankacar.github.io/images/ironman.ico" />
 </head>
+
+<!-- Google Analytics with Consent Check -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FBB6CV6WE"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  
+  // Set default consent to 'denied' as a placeholder
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied'
+  });
+  
   gtag('js', new Date());
   gtag('config', 'G-1FBB6CV6WE');
+  
+  // Check if user has already given consent
+  (function() {
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    if (cookieConsent === 'accepted') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+    } else if (cookieConsent === 'declined') {
+      // Disable Google Analytics globally
+      window['ga-disable-G-1FBB6CV6WE'] = true;
+    }
+  })();
 </script>
 
 <!-- Configure MathJax v3 -->
