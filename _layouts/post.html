@@ -394,16 +394,29 @@ function switchTab(tabName, targetId = null) {
 <!-- Cookie Consent Script -->
 <script>
   // Show banner if user hasn't made a choice
-  window.addEventListener('DOMContentLoaded', function() {
+  (function() {
+    // Clear the consent for testing - REMOVE THIS LINE after testing
+    // localStorage.removeItem('cookieConsent');
+    
     const cookieConsent = localStorage.getItem('cookieConsent');
+    console.log('Cookie consent status:', cookieConsent); // Debug log
+    
     if (!cookieConsent) {
+      console.log('Showing cookie banner'); // Debug log
       setTimeout(function() {
-        document.getElementById('cookie-consent').classList.add('show');
-      }, 500);
+        const banner = document.getElementById('cookie-consent');
+        if (banner) {
+          banner.classList.add('show');
+          console.log('Banner should be visible now'); // Debug log
+        } else {
+          console.error('Cookie banner element not found!'); // Debug log
+        }
+      }, 1000);
     }
-  });
+  })();
 
   function acceptCookies() {
+    console.log('Cookies accepted'); // Debug log
     localStorage.setItem('cookieConsent', 'accepted');
     document.getElementById('cookie-consent').classList.remove('show');
     
@@ -416,6 +429,7 @@ function switchTab(tabName, targetId = null) {
   }
 
   function declineCookies() {
+    console.log('Cookies declined'); // Debug log
     localStorage.setItem('cookieConsent', 'declined');
     document.getElementById('cookie-consent').classList.remove('show');
     
