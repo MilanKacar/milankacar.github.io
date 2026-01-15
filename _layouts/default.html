@@ -330,14 +330,15 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #ffffff;
+        background-color: #ffffff;
+        color: rgb(10, 10, 10);
         padding: 20px;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid #e7ecf0;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         z-index: 9999;
         transform: translateY(100%);
         transition: transform 0.4s ease-in-out;
-        border-top: 3px solid rgba(255, 255, 255, 0.2);
+        font-family: ui-serif, "Georgia", "Cambria", "Times New Roman", "Times", serif;
       }
 
       #cookie-consent.show {
@@ -357,16 +358,18 @@
         flex: 1;
         font-size: 15px;
         line-height: 1.6;
+        color: rgb(82, 82, 82);
       }
 
       .cookie-text a {
-        color: #ffffff;
+        color: rgb(10, 10, 10);
         text-decoration: underline;
-        font-weight: 600;
+        text-underline-offset: 4px;
+        transition: all 0.2s;
       }
 
       .cookie-text a:hover {
-        color: #e0f7e9;
+        color: rgb(82, 82, 82);
       }
 
       .cookie-buttons {
@@ -376,66 +379,77 @@
       }
 
       .cookie-btn {
-        padding: 10px 24px;
-        border: 2px solid #ffffff;
-        border-radius: 50px;
+        padding: 8px 20px;
+        border: 1px solid rgb(10, 10, 10);
+        background-color: transparent;
+        color: rgb(10, 10, 10);
         font-size: 14px;
-        font-weight: 600;
+        font-family: ui-serif, "Georgia", "Cambria", "Times New Roman", "Times", serif;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s;
         white-space: nowrap;
       }
 
-      .cookie-btn-accept {
-        background-color: #ffffff;
-        color: #667eea;
-      }
-
-      .cookie-btn-accept:hover {
-        background-color: #e0f7e9;
-        border-color: #e0f7e9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .cookie-btn-decline {
-        background-color: transparent;
+      .cookie-btn:hover {
+        background-color: rgb(10, 10, 10);
         color: #ffffff;
       }
 
-      .cookie-btn-decline:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transform: translateY(-2px);
+      .cookie-btn-accept {
+        background-color: rgb(10, 10, 10);
+        color: #ffffff;
+      }
+
+      .cookie-btn-accept:hover {
+        background-color: rgb(82, 82, 82);
+        border-color: rgb(82, 82, 82);
       }
 
       /* Dark Mode Specific Styles */
       body[data-theme="dark"] #cookie-consent,
       body.dark-mode #cookie-consent {
-        background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
-        border-top: 3px solid #667eea;
+        background-color: #0e1116;
+        color: rgb(250, 250, 250);
+        border-top: 1px solid #30363d;
+      }
+
+      body[data-theme="dark"] .cookie-text,
+      body.dark-mode .cookie-text {
+        color: rgb(163, 163, 163);
+      }
+
+      body[data-theme="dark"] .cookie-text a,
+      body.dark-mode .cookie-text a {
+        color: rgb(250, 250, 250);
+      }
+
+      body[data-theme="dark"] .cookie-text a:hover,
+      body.dark-mode .cookie-text a:hover {
+        color: rgb(163, 163, 163);
+      }
+
+      body[data-theme="dark"] .cookie-btn,
+      body.dark-mode .cookie-btn {
+        border-color: rgb(250, 250, 250);
+        color: rgb(250, 250, 250);
+      }
+
+      body[data-theme="dark"] .cookie-btn:hover,
+      body.dark-mode .cookie-btn:hover {
+        background-color: rgb(250, 250, 250);
+        color: #0e1116;
       }
 
       body[data-theme="dark"] .cookie-btn-accept,
       body.dark-mode .cookie-btn-accept {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #ffffff;
-        border-color: #667eea;
+        background-color: rgb(250, 250, 250);
+        color: #0e1116;
       }
 
       body[data-theme="dark"] .cookie-btn-accept:hover,
       body.dark-mode .cookie-btn-accept:hover {
-        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-      }
-
-      body[data-theme="dark"] .cookie-btn-decline,
-      body.dark-mode .cookie-btn-decline {
-        border-color: #667eea;
-      }
-
-      body[data-theme="dark"] .cookie-btn-decline:hover,
-      body.dark-mode .cookie-btn-decline:hover {
-        background-color: rgba(102, 126, 234, 0.2);
+        background-color: rgb(163, 163, 163);
+        border-color: rgb(163, 163, 163);
       }
 
       /* Mobile Responsive */
@@ -470,14 +484,39 @@
     <div id="cookie-consent">
       <div class="cookie-content">
         <div class="cookie-text">
-          🍪 This website uses cookies to enhance your experience and analyze site traffic. 
-          By clicking "Accept", you consent to our use of cookies. 
-          <a href="/privacy-policy" target="_blank">Learn more</a>
+          This website uses cookies for analytics purposes. These cookies are managed by Google Analytics, not by us. 
+          <a href="#" onclick="event.preventDefault(); showPrivacyInfo();">Learn more</a>
         </div>
         <div class="cookie-buttons">
           <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Accept</button>
-          <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">Decline</button>
+          <button class="cookie-btn" onclick="declineCookies()">Decline</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Privacy Info Modal -->
+    <div id="privacy-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center;">
+      <div style="background: #ffffff; padding: 30px; max-width: 600px; margin: 20px; max-height: 80vh; overflow-y: auto; font-family: ui-serif, 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif;">
+        <h2 style="margin-top: 0; color: rgb(10, 10, 10);">Cookie Policy</h2>
+        <p style="color: rgb(82, 82, 82); line-height: 1.6;">
+          This website uses cookies solely for analytics purposes to help us understand how visitors interact with our content.
+        </p>
+        <h3 style="color: rgb(10, 10, 10);">What cookies do we use?</h3>
+        <p style="color: rgb(82, 82, 82); line-height: 1.6;">
+          We use Google Analytics cookies to collect anonymous information about page visits, time spent on the site, and general navigation patterns. 
+          These cookies do not collect personally identifiable information.
+        </p>
+        <h3 style="color: rgb(10, 10, 10);">Who manages these cookies?</h3>
+        <p style="color: rgb(82, 82, 82); line-height: 1.6;">
+          All analytics cookies are managed by Google Analytics. We do not directly manage or have access to the data collected by these cookies. 
+          For more information about how Google handles data, please visit <a href="https://policies.google.com/privacy" target="_blank" style="color: rgb(10, 10, 10); text-decoration: underline;">Google's Privacy Policy</a>.
+        </p>
+        <h3 style="color: rgb(10, 10, 10);">Your choices</h3>
+        <p style="color: rgb(82, 82, 82); line-height: 1.6;">
+          You can choose to accept or decline cookies. If you decline, we will not track your visit with Google Analytics. 
+          You can change your decision at any time by clearing your browser's local storage and refreshing the page.
+        </p>
+        <button onclick="closePrivacyInfo()" style="padding: 8px 20px; border: 1px solid rgb(10, 10, 10); background-color: rgb(10, 10, 10); color: #ffffff; cursor: pointer; font-family: ui-serif, 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif; margin-top: 20px;">Close</button>
       </div>
     </div>
 
@@ -520,6 +559,66 @@
           });
         }
       }
+
+      function showPrivacyInfo() {
+        const modal = document.getElementById('privacy-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+        }
+      }
+
+      function closePrivacyInfo() {
+        const modal = document.getElementById('privacy-modal');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      }
+
+      // Update modal styling for dark mode
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('privacy-modal');
+        if (modal) {
+          const modalContent = modal.querySelector('div');
+          const updateModalTheme = function() {
+            const isDark = document.body.classList.contains('dark-mode') || 
+                          document.documentElement.getAttribute('data-theme') === 'dark';
+            if (modalContent) {
+              modalContent.style.backgroundColor = isDark ? '#0e1116' : '#ffffff';
+              modalContent.style.color = isDark ? 'rgb(250, 250, 250)' : 'rgb(10, 10, 10)';
+              
+              const headings = modalContent.querySelectorAll('h2, h3');
+              headings.forEach(h => {
+                h.style.color = isDark ? 'rgb(250, 250, 250)' : 'rgb(10, 10, 10)';
+              });
+              
+              const paragraphs = modalContent.querySelectorAll('p');
+              paragraphs.forEach(p => {
+                p.style.color = isDark ? 'rgb(163, 163, 163)' : 'rgb(82, 82, 82)';
+              });
+              
+              const links = modalContent.querySelectorAll('a');
+              links.forEach(a => {
+                a.style.color = isDark ? 'rgb(250, 250, 250)' : 'rgb(10, 10, 10)';
+              });
+              
+              const button = modalContent.querySelector('button');
+              if (button) {
+                button.style.backgroundColor = isDark ? 'rgb(250, 250, 250)' : 'rgb(10, 10, 10)';
+                button.style.color = isDark ? '#0e1116' : '#ffffff';
+                button.style.borderColor = isDark ? 'rgb(250, 250, 250)' : 'rgb(10, 10, 10)';
+              }
+            }
+          };
+          
+          // Update on load
+          updateModalTheme();
+          
+          // Listen for theme changes
+          const observer = new MutationObserver(updateModalTheme);
+          observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        }
+      });
     </script>
 
   </body>
