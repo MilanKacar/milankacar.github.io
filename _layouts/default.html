@@ -81,9 +81,24 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    
+    // Set default consent to 'denied' as a placeholder
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+    
     gtag('js', new Date());
-  
     gtag('config', 'G-1FBB6CV6WE');
+    
+    // Check if user has already given consent
+    (function() {
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      if (cookieConsent === 'accepted') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+    })();
   </script>
 
   <body>
@@ -338,7 +353,7 @@
         z-index: 9999;
         transform: translateY(100%);
         transition: transform 0.4s ease-in-out;
-        font-family: ui-serif, "Georgia", "Cambria", "Times New Roman", "Times", serif;
+        font-family: Helvetica, Arial, sans-serif;
       }
 
       #cookie-consent.show {
@@ -385,7 +400,7 @@
         background-color: transparent;
         color: rgb(10, 10, 10);
         font-size: 14px;
-        font-family: ui-serif, "Georgia", "Cambria", "Times New Roman", "Times", serif;
+        font-family: Helvetica, Arial, sans-serif;
         cursor: pointer;
         transition: all 0.2s;
         white-space: nowrap;
@@ -497,7 +512,7 @@
 
     <!-- Privacy Info Modal -->
     <div id="privacy-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center;">
-      <div style="background: #ffffff; padding: 30px; max-width: 600px; margin: 20px; max-height: 80vh; overflow-y: auto; font-family: ui-serif, 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif;">
+      <div style="background: #ffffff; padding: 30px; max-width: 600px; margin: 20px; max-height: 80vh; overflow-y: auto; font-family: Helvetica, Arial, sans-serif;">
         <h2 style="margin-top: 0; color: rgb(10, 10, 10);">Cookie Policy</h2>
         <p style="color: rgb(82, 82, 82); line-height: 1.6;">
           This website uses cookies solely for analytics purposes to help me understand how visitors interact with my content.
@@ -517,7 +532,7 @@
           You can choose to accept or decline cookies. If you decline, I will not track your visit with Google Analytics. 
           You can change your decision at any time by clearing your browser's local storage and refreshing the page.
         </p>
-        <button onclick="closePrivacyInfo()" style="padding: 8px 20px; border: 1px solid rgb(10, 10, 10); background-color: rgb(10, 10, 10); color: #ffffff; cursor: pointer; font-family: ui-serif, 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif; margin-top: 20px; border-radius: 50px;">Close</button>
+        <button onclick="closePrivacyInfo()" style="padding: 8px 20px; border: 1px solid rgb(10, 10, 10); background-color: rgb(10, 10, 10); color: #ffffff; cursor: pointer; font-family: Helvetica, Arial, sans-serif; margin-top: 20px; border-radius: 50px;">Close</button>
       </div>
     </div>
 
@@ -541,24 +556,30 @@
         localStorage.setItem('cookieConsent', 'accepted');
         document.getElementById('cookie-consent').classList.remove('show');
         
-        // Initialize Google Analytics if user accepts
+        // Grant analytics consent
         if (typeof gtag !== 'undefined') {
           gtag('consent', 'update', {
             'analytics_storage': 'granted'
           });
         }
+        
+        // Reload to start tracking
+        window.location.reload();
       }
 
       function declineCookies() {
         localStorage.setItem('cookieConsent', 'declined');
         document.getElementById('cookie-consent').classList.remove('show');
         
-        // Disable Google Analytics if user declines
+        // Deny analytics consent - this prevents Google Analytics from tracking
         if (typeof gtag !== 'undefined') {
           gtag('consent', 'update', {
             'analytics_storage': 'denied'
           });
         }
+        
+        // Disable Google Analytics globally
+        window['ga-disable-G-1FBB6CV6WE'] = true;
       }
 
       function showPrivacyInfo() {
