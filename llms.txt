@@ -1,0 +1,187 @@
+# Milan Kacar
+
+> AI Engineer, Data Engineer, and Software Engineer based in Vienna, Austria.
+
+## About
+
+Milan Kacar is an AI and software engineer with experience spanning artificial intelligence, machine learning, large language models, data engineering, analytics, backend development, and research.
+
+He has an academic background in geodesy and geomatics engineering from Graz University of Technology (TU Graz), with additional studies in computer science.
+
+## Current Focus
+
+* Artificial intelligence and machine learning
+* Large language models (LLMs)
+* AI agents and RAG systems
+* Data engineering and data platforms
+* AI-powered applications
+* Machine learning infrastructure and MLOps
+* Analytics and business intelligence
+* Software architecture and backend systems
+
+## Technical Skills
+
+### AI & Machine Learning
+
+* Python
+* PyTorch
+* TensorFlow
+* NLP
+* Large Language Models
+* RAG
+* Computer Vision
+* Anomaly Detection
+* YOLO
+* Model Serving
+* MLOps
+
+### Data Engineering
+
+* ETL / ELT
+* Data Lakes
+* Data Warehousing
+* Apache Spark
+* Databricks
+* BigQuery
+* PostgreSQL
+* Looker
+* Data Analytics
+
+### Software Engineering
+
+* Python
+* C / C++
+* Java
+* Scala
+* JavaScript
+* TypeScript
+* Rust
+* Go
+* React
+* FastAPI
+* Node.js
+* REST
+* gRPC
+* Docker
+* Kubernetes
+* CI/CD
+
+### Cloud
+
+* Google Cloud
+* AWS
+* Azure
+* Cloud-based machine learning
+* Distributed data processing
+
+## Experience
+
+### AI Engineer / Data Scientist — Niceshops GmbH
+
+2021–Present
+
+AI engineering, machine learning, data engineering, analytics, AI-driven applications, automation, and internal technical education.
+
+### CTO / Full-stack Developer — Gateway Ventures
+
+2022–Present
+
+Technical leadership, AI-driven applications, predictive systems, software architecture, React and Python applications, CI/CD, and technology strategy.
+
+### Software Engineer — TU Graz, VSI
+
+2019–2022
+
+Software engineering and research projects involving automation, statistics, geoinformatics, and automotive applications.
+
+### Teaching Assistant — TU Graz, IFG
+
+2021–2022
+
+Teaching and academic support in indoor navigation, filtering, and sensor fusion.
+
+### Survey Engineer — Geodata GmbH
+
+2019
+
+Tunnel surveying and 3D laser scanning.
+
+## Selected Projects
+
+### AI SQL Analyst
+
+An AI-powered data agent that converts natural-language questions into SQL queries, with safety mechanisms and data visualization.
+
+Technologies: Python, LangGraph, React, SQLite, TypeScript.
+
+### AI-Powered Chat Application
+
+A real-time AI chat application using large language models, RAG, and custom model integrations.
+
+Technologies: React, Python, Docker, OpenAI, Gemini.
+
+### Robust Solar Panel Detection
+
+Research project using computer vision and satellite imagery to detect solar panels and monitor solar adoption.
+
+Technologies: Python, YOLOv5, CUDA, AWS/GCP.
+
+### Global Scale Data Platforms
+
+Data infrastructure supporting international markets, business dashboards, analytics, and machine-learning pipelines.
+
+Technologies: GCP, AWS, BigQuery, DataProc, Vertex AI.
+
+### FlowState: Gamified Recruitment
+
+A recruitment application combining AI-assisted candidate evaluation with a high-velocity user interface.
+
+Technologies: React Native, FastAPI, OpenAI, Redis, TypeScript.
+
+### LLM Tokenizer Playground
+
+Interactive educational software demonstrating Byte Pair Encoding and the mechanics of LLM tokenization.
+
+Technologies: Rust, React, Axum, TypeScript.
+
+### Looker Visualization — Period-over-Period
+
+A Looker visualization plugin for period-over-period analytics without additional queries or compute.
+
+Technologies: JavaScript, Looker, BI.
+
+## Research
+
+Milan Kacar has worked on applied machine learning and computer vision research, including detection of photovoltaic panels from satellite imagery and methods for improving robustness under distribution shifts.
+
+## Education
+
+### Graz University of Technology (TU Graz)
+
+Academic background in Geodesy / Geomatics Engineering and Computer Science.
+
+## Professional Interests
+
+* Artificial Intelligence
+* Large Language Models
+* AI Agents
+* Machine Learning
+* Data Engineering
+* Data Platforms
+* MLOps
+* Computer Vision
+* Software Engineering
+* Geospatial Technologies
+* Analytics
+* AI Product Development
+
+## Links
+
+* Website: https://milankacar.github.io/
+* CV: https://milankacar.github.io/CV/
+* GitHub: https://github.com/MilanKacar
+* LinkedIn: https://at.linkedin.com/in/milan-kacar
+
+## Canonical CV
+
+https://milankacar.github.io/CV/
