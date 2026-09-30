@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://milankacar.github.io/sitemap.xml
