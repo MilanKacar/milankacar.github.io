@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main website / blog -->
+
+  <url>
+    <loc>https://milankacar.github.io/</loc>
+  </url>
+
+  <!-- Professional CV -->
+
+  <url>
+    <loc>https://milankacar.github.io/CV/</loc>
+  </url>
+
+  <!-- Blog #126 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/software%20engineering/mathematics/blog126-bpe-how-tokenizer-works/</loc>
+  </url>
+
+  <!-- Blog #125 -->
+
+  <url>
+    <loc>https://milankacar.github.io/book%20reviews/ai/software%20engineering/blog125-review-ai-engineering-by-chip-huyen/</loc>
+  </url>
+
+  <!-- Blog #124 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/storytelling/futurism/environment/blog-124-ai-fire-analogy/</loc>
+  </url>
+
+  <!-- Blog #123 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llms/agents/blog-123-AGI-predictions/</loc>
+  </url>
+
+  <!-- Blog #122 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/programming/machine%20learning/blog122-decoding-ml-success/</loc>
+  </url>
+
+  <!-- Blog #121 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/trading/blog-121-stock-analyisis-2x-in-the-next-year/</loc>
+  </url>
+
+  <!-- Blog #120 -->
+
+  <url>
+    <loc>https://milankacar.github.io/data%20science/blog-120-a-b-testing-dive-in/</loc>
+  </url>
+
+  <!-- Blog #119 -->
+
+  <url>
+    <loc>https://milankacar.github.io/economy/history/blog-119-the-changing-world-order/</loc>
+  </url>
+
+  <!-- Blog #118 -->
+
+  <url>
+    <loc>https://milankacar.github.io/programming/data%20engineering/blog-118-databricks-review/</loc>
+  </url>
+
+  <!-- Blog #117 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog117-genai-image-generators/</loc>
+  </url>
+
+  <!-- Blog #116 -->
+
+  <url>
+    <loc>https://milankacar.github.io/programming/cryptography/blog-116-apple-ee2e-encryption/</loc>
+  </url>
+
+  <!-- Blog #115 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-115-design-a-number-container-system/</loc>
+  </url>
+
+  <!-- Blog #114 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-114-map-of-highest-peak/</loc>
+  </url>
+
+  <!-- Blog #113 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-113-grid-game/</loc>
+  </url>
+
+  <!-- Blog #112 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-112-trapping-rain-water-ii/</loc>
+  </url>
+
+  <!-- Blog #111 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-111-minimum-cost-to-make-at-least-one-valid-path-in-a-grid/</loc>
+  </url>
+
+  <!-- Blog #110 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog-110-minimize-xor/</loc>
+  </url>
+
+  <!-- Blog #109 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog109-count-ways-to-build-good-strings/</loc>
+  </url>
+
+  <!-- Blog #108 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog108-number-of-ways-to-form-a-target-string-given-a-dictionary/</loc>
+  </url>
+
+  <!-- Blog #107 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog107-best-sightseeing-pair/</loc>
+  </url>
+
+  <!-- Blog #106 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog106-find-largest-value-in-each-tree-row/</loc>
+  </url>
+
+  <!-- Blog #105 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog105-find-minimum-diameter-after-merging-two-trees/</loc>
+  </url>
+
+  <!-- Blog #104 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog104-minimum-number-of-operations-to-sort-a-binary-tree-by-level/</loc>
+  </url>
+
+  <!-- Blog #103 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog103_maximum-average-pass-ratio/</loc>
+  </url>
+
+  <!-- Blog #102 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog102_find-score-of-an-array-after-marking-all-elements/</loc>
+  </url>
+
+  <!-- Blog #101 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog101_maximum-beauty-of-an-array-after-applying-operation/</loc>
+  </url>
+
+  <!-- Blog #100 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog100_two-best-non-overlapping-events/</loc>
+  </url>
+
+  <!-- Blog #99 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog99_minimum-limit-of-balls-in-a-bag/</loc>
+  </url>
+
+  <!-- Blog #98 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog98_maximum-number-of-integers-to-choose-from-a-range-i/</loc>
+  </url>
+
+  <!-- Blog #97 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog97-move-pieces-to-obtain-a-string/</loc>
+  </url>
+
+  <!-- Blog #96 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog96_make-string-a-subsequence-using-cyclic-increments/</loc>
+  </url>
+
+  <!-- Blog #95 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog95_adding-spaces-to-a-string/</loc>
+  </url>
+
+  <!-- Blog #94 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog94_check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/</loc>
+  </url>
+
+  <!-- Blog #93 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog93_check-if-n-and-its-double-exist/</loc>
+  </url>
+
+  <!-- Blog #92 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog92_valid-arrangement-of-pairs/</loc>
+  </url>
+
+  <!-- Blog #91 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog91_minimum-time-to-visit-a-cell-in-a-grid/</loc>
+  </url>
+
+  <!-- Blog #90 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog90_minimum-obstacle-removal-to-reach-corner/</loc>
+  </url>
+
+  <!-- Blog #89 -->
+
+  <url>
+    <loc>https://milankacar.github.io/tutorial/programming/blog89_tutorial-how-to-connect-bitbucket-with-dataform/</loc>
+  </url>
+
+  <!-- Blog #88 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog88_shortest-distance-after-road-addition-queries-i/</loc>
+  </url>
+
+  <!-- Blog #87 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog87_find-champion-ii/</loc>
+  </url>
+
+  <!-- Blog #86 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog86_sliding-puzzle/</loc>
+  </url>
+
+  <!-- Blog #85 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog85_maximum-matrix-sum/</loc>
+  </url>
+
+  <!-- Blog #84 / actual URL blog71 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog71_prime-subtraction-operation/</loc>
+  </url>
+
+  <!-- Blog #83 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog83_flip-columns-for-maximum-number-of-equal-rows/</loc>
+  </url>
+
+  <!-- Blog #82 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog82_count-unguarded-cells-in-the-grid/</loc>
+  </url>
+
+  <!-- Blog #81 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog81_take-k-of-each-character-from-left-and-right/</loc>
+  </url>
+
+  <!-- Blog #80 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog80_maximum-sum-of-distinct-subarrays-with-length-k/</loc>
+  </url>
+
+  <!-- Blog #79 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog79_defuse-the-bomb/</loc>
+  </url>
+
+  <!-- Blog #78 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/data%20science/blog78_bayes_theorem/</loc>
+  </url>
+
+  <!-- Blog #77 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog77_shortest-subarray-with-sum-at-least-k/</loc>
+  </url>
+
+  <!-- Blog #76 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog76_find-the-power-of-k-size-subarrays-I/</loc>
+  </url>
+
+  <!-- Blog #75 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog75_shortest-subarray-to-be-removed-to-make-array-sorted/</loc>
+  </url>
+
+  <!-- Blog #74 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog74_minimized-maximum-of-products-distributed-to-any-store/</loc>
+  </url>
+
+  <!-- Blog #73 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog73_count-the-number-of-fair-pairs/</loc>
+  </url>
+
+  <!-- Blog #72 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog72_most-beautiful-item-for-each-query/</loc>
+  </url>
+
+  <!-- Blog #70 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog70_shortest-subarray-with-or-at-least-k-ii/</loc>
+  </url>
+
+  <!-- Blog #69 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog69_minimum-array-end/</loc>
+  </url>
+
+  <!-- Blog #68 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog68_maximum-xor-for-each-query/</loc>
+  </url>
+
+  <!-- Blog #67 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog67_largest-combination-with-bitwise-and-greater-than-zero/</loc>
+  </url>
+
+  <!-- Blog #66 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog66_find-if-array-can-be-sorted/</loc>
+  </url>
+
+  <!-- Blog #65 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog65_minimum-number-of-changes-to-make-binary-string-beautiful/</loc>
+  </url>
+
+  <!-- Blog #64 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog64_string-compression-iii/</loc>
+  </url>
+
+  <!-- Blog #63 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog63_rotate-string/</loc>
+  </url>
+
+  <!-- Blog #62 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog62_circular-sentence/</loc>
+  </url>
+
+  <!-- Blog #61 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog61_delete-characters-to-make-fancy-string/</loc>
+  </url>
+
+  <!-- Blog #60 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog60_minimum-total-distance-traveled/</loc>
+  </url>
+
+  <!-- Blog #59 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/blog59_industires_for_the_future/</loc>
+  </url>
+
+  <!-- Blog #58 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog58_minimum-number-of-removals-to-make-mountain-array/</loc>
+  </url>
+
+  <!-- Blog #57 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog57_maximum-number-of-moves-in-a-grid/</loc>
+  </url>
+
+  <!-- Blog #56 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog56_longest-square-streak-in-an-array/</loc>
+  </url>
+
+  <!-- Blog #55 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog55_count-square-submatrices-with-all-ones/</loc>
+  </url>
+
+  <!-- Blog #54 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog54_height-of-binary-tree-after-subtree-removal-queries/</loc>
+  </url>
+
+  <!-- Blog #53 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog53_remove-sub-folders-from-the-filesystem/</loc>
+  </url>
+
+  <!-- Blog #52 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/self-development/blog52_masterthesis/</loc>
+  </url>
+
+  <!-- Blog #51 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog51_flip-equivalent-binary-trees/</loc>
+  </url>
+
+  <!-- Blog #50 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog50_cousins-in-binary-tree-ii/</loc>
+  </url>
+
+  <!-- Blog #49 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog49_kth-largest-sum-in-a-binary-tree/</loc>
+  </url>
+
+  <!-- Blog #48 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog48_split-a-string-into-the-max-number-of-unique-substrings/</loc>
+  </url>
+
+  <!-- Blog #47 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog47_parsing-a-boolean-expression/</loc>
+  </url>
+
+  <!-- Blog #46 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog46_find-kth-bit-in-nth-binary-string/</loc>
+  </url>
+
+  <!-- Blog #45 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog45_count-number-of-maximum-bitwise-or-subsets/</loc>
+  </url>
+
+  <!-- Blog #44 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog44_maximum-swap/</loc>
+  </url>
+
+  <!-- Blog #43 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog43_construct-quad-tree/</loc>
+  </url>
+
+  <!-- Blog #42 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog42_longest-happy-string/</loc>
+  </url>
+
+  <!-- Blog #41 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog41_separate-black-and-white-balls/</loc>
+  </url>
+
+  <!-- Blog #40 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog40_maximal-score-after-applying-k-operations/</loc>
+  </url>
+
+  <!-- Blog #39 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/business%20operations/blog39_ai_hype_vc/</loc>
+  </url>
+
+  <!-- Blog #38 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog38_smallest-range-covering-elements-from-k-lists/</loc>
+  </url>
+
+  <!-- Blog #37 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog37_divide-intervals-into-minimum-number-of-groups/</loc>
+  </url>
+
+  <!-- Blog #36 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog36_llm_from_scratch_final/</loc>
+  </url>
+
+  <!-- Blog #35 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog35_llm_from_scratch_III/</loc>
+  </url>
+
+  <!-- Blog #34 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog34_llm_from_scratch_II/</loc>
+  </url>
+
+  <!-- Blog #33 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog33_llm_from_scratch_I/</loc>
+  </url>
+
+  <!-- Blog #32 -->
+
+  <url>
+    <loc>https://milankacar.github.io/ai/llm/blog32_llm_architectures/</loc>
+  </url>
+
+  <!-- Blog #31 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog31_number_of_smallest_unoccupied_chair/</loc>
+  </url>
+
+  <!-- Blog #30 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog30_max_width_ramp/</loc>
+  </url>
+
+  <!-- Blog #29 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog29_min_add_to_make_parentheses_valid/</loc>
+  </url>
+
+  <!-- Blog #28 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog28_min_nr_swaps_to_make_string_balanced/</loc>
+  </url>
+
+  <!-- Blog #27 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog27_min_string_length/</loc>
+  </url>
+
+  <!-- Blog #26 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog26_sentence_similarity_3/</loc>
+  </url>
+
+  <!-- Blog #25 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/math/blog25_markov_in_financial_modeling/</loc>
+  </url>
+
+  <!-- Blog #24 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog24_permutation_in_string/</loc>
+  </url>
+
+  <!-- Blog #23 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog23_divide_players_Into_teams_of_equal_skill/</loc>
+  </url>
+
+  <!-- Blog #22 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/math/blog22_markov_chains_in_finance/</loc>
+  </url>
+
+  <!-- Blog #21 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog21_make_sum_div_by_k/</loc>
+  </url>
+
+  <!-- Blog #20 -->
+
+  <url>
+    <loc>https://milankacar.github.io/self-development/blog20_google_summit_vienna/</loc>
+  </url>
+
+  <!-- Blog #19 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog19_rank_transform_of_an_array/</loc>
+  </url>
+
+  <!-- Blog #18 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog18_array_pairs_divisable_by_k/</loc>
+  </url>
+
+  <!-- Blog #17 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog17_stack_with_increment_operation/</loc>
+  </url>
+
+  <!-- Blog #16 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/math/blog16_finite_difference_methods_p1/</loc>
+  </url>
+
+  <!-- Blog #15 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/math/blog15_zmonte_carlo_simulation/</loc>
+  </url>
+
+  <!-- Blog #14 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/blog14_all_Oone_Data_Structure/</loc>
+  </url>
+
+  <!-- Blog #13 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/design_circular_dequeue/</loc>
+  </url>
+
+  <!-- Blog #12 -->
+
+  <url>
+    <loc>https://milankacar.github.io/data%20science/zdatalemur_part1/</loc>
+  </url>
+
+  <!-- Blog #11 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/my_calendar_II/</loc>
+  </url>
+
+  <!-- Blog #10 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/math/zzpca-in-finance/</loc>
+  </url>
+
+  <!-- Blog #9 -->
+
+  <url>
+    <loc>https://milankacar.github.io/self-development/zhooked-book-summery/</loc>
+  </url>
+
+  <!-- Blog #8 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/my_calendar_I/</loc>
+  </url>
+
+  <!-- Blog #7 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/ai/llm/zez-bloomberg-gpt/</loc>
+  </url>
+
+  <!-- Blog #6 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/eigenvecors-in-finance/</loc>
+  </url>
+
+  <!-- Blog #5 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/a_sum_of_prefix_scores_of_string/</loc>
+  </url>
+
+  <!-- Blog #4 -->
+
+  <url>
+    <loc>https://milankacar.github.io/finance/c-balancesheet/</loc>
+  </url>
+
+  <!-- Blog #3 -->
+
+  <url>
+    <loc>https://milankacar.github.io/data%20governance/business%20operations/but_why_early_data_management_is_crucial/</loc>
+  </url>
+
+  <!-- Blog #2 -->
+
+  <url>
+    <loc>https://milankacar.github.io/leetcode/programming/aleetcode3043/</loc>
+  </url>
+
+  <!-- Blog #1 -->
+
+  <url>
+    <loc>https://milankacar.github.io/self-development/hustagafulizaha/</loc>
+  </url>
+
+</urlset>
