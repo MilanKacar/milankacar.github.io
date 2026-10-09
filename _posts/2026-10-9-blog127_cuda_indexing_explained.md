@@ -6,7 +6,7 @@ tags: [CUDA, GPU, Parallel Programming, Visualization, Algorithms]
 difficulty: Medium
 ---
 
-CUDA indexing is the part of GPU programming that confuses almost everyone at the start. Below you will find a school analogy, the one formula you need, and **two interactive visualizations** (no libraries, just plain HTML and JavaScript) so you can see how threads, blocks and the grid fit together.
+CUDA indexing is the part of GPU programming that confuses almost everyone at the start. Below you will find a school analogy, the one formula you need, and **two interactive visualizations** so you can see how threads, blocks and the grid fit together.
 
 ## The problem: 1,000 apples, 1,000 helpers
 
