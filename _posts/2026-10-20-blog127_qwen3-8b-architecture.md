@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "#128 Inside Qwen3-8B: Layers, Attention Heads and Key/Value Heads You Can Build Yourself 🏗️"
+title: "#127 The Anatomy of Qwen3-8B: Every Tensor, Matrix and Dimension, Explorable 🔬"
 categories: [AI, Software Engineering]
-tags: [LLM, Qwen3, Transformer, Architecture, Attention, Visualization]
+tags: [LLM, Qwen3, Transformer, Architecture, Tensors, Visualization]
 difficulty: Medium
 ---
 
-A language model like Qwen3-8B looks mysterious until you notice that it is one small recipe repeated 36 times. In this post we put the network together from its real `config.json`: what a *hidden layer* is, why there are 36 of them, what an *attention head* is, why 32 query heads share only 8 key/value heads, and where all 8.19 billion weights sit. There is a zoomable map of the architecture and a builder where you assemble the network yourself.
+Qwen3-8B is 399 tensors, 36 layers that look alike and a handful of numbers. This post takes the model apart down to the last matrix: the name of every tensor in the checkpoint, its exact shape, how many numbers it holds, which rows of a matrix belong to which attention head, how the shapes change on their way through one layer, and how rotary position encoding really rotates. Everything is derived from the model's published configuration and checked against the model repository: adding up all tensors reproduces the size of the weight files to the byte.
 
 <style>
 .lq{--lq-line:rgba(128,128,128,.4);--lq-soft:rgba(128,128,128,.12);--lq-acc:#2a78d6;--lq-grn:#1baf7a;--lq-org:#eb6834;--lq-vio:#8a7bea;border:1px solid var(--lq-line);border-radius:12px;padding:16px;margin:24px 0;font-size:15px;line-height:1.5;color:inherit;background:transparent;overflow-x:auto}
@@ -67,404 +67,542 @@ A language model like Qwen3-8B looks mysterious until you notice that it is one 
 .sm-desc ul{margin:6px 0 0 18px;padding:0}
 .sm-desc li{margin:5px 0;font-size:14px}
 @media (max-width:640px){.sm-row{flex-wrap:wrap}.sm-lab{min-width:100%}}
+.lq table.lq-t code{font-size:11px}
+.lq pre{overflow-x:auto}
 </style>
 
+How to use it: every section has a widget. Click, type, drag.
 
 ## Contents
 
-1. [Where the numbers come from: `config.json`](#config)
-2. [What you need to know first](#basics)
-3. [The architecture, drawn with the config values](#architecture)
-4. [The KV cache](#kvcache)
-5. [The four questions everyone asks](#questions)
-6. [The map: zoom from the whole model down to one head (interactive)](#map)
-7. [Assemble it yourself: depth, width and the size of the model (interactive)](#builder)
-8. [One token's route through the network, in words](#route)
-9. [Glossary](#glossary)
+1. [Eight numbers define the network](#symbols)
+2. [How to read a shape](#shapes)
+3. [The checkpoint: 399 tensors (interactive)](#checkpoint)
+4. [The blueprint: one forward pass with exact shapes](#blueprint)
+5. [The matrices drawn to scale (interactive)](#scale)
+6. [One layer, operation by operation (interactive)](#layer)
+7. [Attention in exact dimensions: heads, rows and rotations (interactive)](#attention)
+8. [Why these numbers: layers, heads and key/value heads (interactive builder)](#why)
+9. [Check it yourself](#reproduce)
 10. [Limits of this post and sources](#sources)
 
-<a id="config"></a>
+<a id="symbols"></a>
 
-## 1. Where the numbers come from: `config.json`
+## 1. Eight numbers define the network
 
-Every model on Hugging Face ships a small file called `config.json`. It does not contain any weights, only the **shape** of the network. Everything in this post is derived from it. This is the real file for Qwen3-8B ([source](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json), fetched 2026-10-20):
+The whole architecture of Qwen3-8B is fixed by a few entries of its `config.json` ([source](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json), read on 2026-10-20). I give them short symbols, because every shape in this post is built from them:
 
-```json
-{
-  "architectures": ["Qwen3ForCausalLM"],
-  "attention_bias": false,
-  "attention_dropout": 0.0,
-  "bos_token_id": 151643,
-  "eos_token_id": 151645,
-  "head_dim": 128,
-  "hidden_act": "silu",
-  "hidden_size": 4096,
-  "initializer_range": 0.02,
-  "intermediate_size": 12288,
-  "max_position_embeddings": 40960,
-  "max_window_layers": 36,
-  "model_type": "qwen3",
-  "num_attention_heads": 32,
-  "num_hidden_layers": 36,
-  "num_key_value_heads": 8,
-  "rms_norm_eps": 1e-06,
-  "rope_scaling": null,
-  "rope_theta": 1000000,
-  "sliding_window": null,
-  "tie_word_embeddings": false,
-  "torch_dtype": "bfloat16",
-  "transformers_version": "4.51.0",
-  "use_cache": true,
-  "use_sliding_window": false,
-  "vocab_size": 151936
-}
-```
+| Symbol | Meaning | Config key | Value |
+|---|---|---|---|
+| `H` | width of the vector that travels through the network | `hidden_size` | 4,096 |
+| `N` | number of layers | `num_hidden_layers` | 36 |
+| `n_q` | number of query heads | `num_attention_heads` | 32 |
+| `n_kv` | number of key/value heads | `num_key_value_heads` | 8 |
+| `d` | size of one head | `head_dim` | 128 |
+| `I` | width of the MLP in the middle | `intermediate_size` | 12,288 |
+| `V` | rows of the embedding table | `vocab_size` | 151,936 |
+| `θ` | base of the rotary position encoding | `rope_theta` | 1,000,000 |
 
-Ten of those keys define the shape of the network:
-
-| Key | Value | What it controls |
-|---|---|---|
-| `hidden_size` | 4,096 | Width of the vector that represents one token everywhere in the network |
-| `num_hidden_layers` | 36 | How many times the attention + MLP pair is repeated |
-| `num_attention_heads` | 32 | Number of **query** heads. This drives attention FLOPs |
-| `num_key_value_heads` | 8 | Number of **key/value** heads. This drives KV-cache bytes (grouped-query attention) |
-| `head_dim` | 128 | Size of each head. 32 × 128 = 4,096 = `hidden_size` |
-| `intermediate_size` | 12,288 | Width of the MLP in the middle (3× `hidden_size`) |
-| `vocab_size` | 151,936 | Rows of the embedding table and columns of the output head |
-| `tie_word_embeddings` | false | Embedding table and output head are two **separate** matrices |
-| `sliding_window` | null | Full attention: every token sees *all* earlier tokens |
-| `max_position_embeddings` | 40,960 | Native context limit |
-
-Three more keys matter for deployment:
-
-- `torch_dtype: bfloat16`. The T4 has **no bf16 support**, so on a T4 you must run FP16 (`--dtype half` in vLLM) or a quantized checkpoint.
-- `rope_theta: 1000000` is the base for rotary position encoding. A large value helps with long contexts.
-- `use_cache: true` is the KV cache from section 4.
-
-### Try it: compute everything from the config
-
-Change any value (or paste the numbers from another model's `config.json`) and see parameters, FLOPs per token and KV-cache size update. The defaults are Qwen3-8B.
-
-<div class="lq" id="lqA">
-<div class="lq-grid" id="lqA-in"></div>
-<div class="lq-row" style="margin-top:10px"><label><input type="checkbox" id="lqA-tie"> tie_word_embeddings</label><button type="button" id="lqA-reset">Reset to Qwen3-8B</button></div>
-<div id="lqA-out" style="margin-top:12px"></div>
-</div>
-<script>
-(function(){
-var F=[["hidden_size",4096],["num_hidden_layers",36],["num_attention_heads",32],["num_key_value_heads",8],["head_dim",128],["intermediate_size",12288],["vocab_size",151936],["context L (tokens)",8000]];
-var inEl=document.getElementById("lqA-in"),out=document.getElementById("lqA-out"),tie=document.getElementById("lqA-tie");
-function nf(x){return Math.round(x).toLocaleString("en-US")}
-function sz(x){if(x>=1e9)return (x/1e9).toFixed(2)+" GB";if(x>=1e6)return (x/1e6).toFixed(1)+" MB";return nf(x)+" B"}
-F.forEach(function(f,i){var d=document.createElement("label");d.className="lq-fld";d.innerHTML='<span class="lq-mut">'+f[0]+'</span><input type="number" min="1" id="lqA-f'+i+'" value="'+f[1]+'">';inEl.appendChild(d);d.querySelector("input").addEventListener("input",calc)});
-function v(i){var x=+document.getElementById("lqA-f"+i).value;return x>0?x:1}
-function calc(){
-var H=v(0),NL=v(1),nh=v(2),kv=v(3),hd=v(4),I=v(5),V=v(6),L=v(7);
-var q=H*nh*hd,k=H*kv*hd,o=nh*hd*H,m=3*H*I,layer=q+2*k+o+m;
-var emb=V*H,head=tie.checked?0:V*H,total=NL*layer+emb+head;
-var fl=2*(NL*layer+V*H),att=4*NL*nh*hd,kvt=2*NL*kv*hd*2,kvfull=2*NL*nh*hd*2;
-var R=[
-["Wq","hidden × (heads·head_dim)",nf(q)],
-["Wk and Wv (each)","hidden × (kv_heads·head_dim)",nf(k)],
-["Wo","(heads·head_dim) × hidden",nf(o)],
-["MLP (gate, up, down)","3 × hidden × intermediate",nf(m)],
-["Weights per layer","sum of the above",nf(layer)],
-["All layers","layers × per layer",nf(NL*layer)],
-["Embedding table","vocab × hidden",nf(emb)],
-["Output head",tie.checked?"tied: shares the embedding":"vocab × hidden",nf(head)],
-["Total parameters","",nf(total)+" ("+(total/1e9).toFixed(2)+" B)"],
-["Size in FP16 / INT4","params × 2 B / ≈ params × 0.5 B",sz(total*2)+" / "+sz(total*0.5)],
-["Weight FLOPs per token","2 × (layer weights + output head)",(fl/1e9).toFixed(2)+" GFLOPs"],
-["Attention FLOPs per token","4 × layers × heads × head_dim × L",(att*L/1e9).toFixed(2)+" GFLOPs at L = "+nf(L)],
-["KV cache per token","2 × layers × kv_heads × head_dim × 2 B",nf(kvt)+" B"],
-["KV cache per user at L","per token × L",sz(kvt*L)],
-["Without grouped-query attention","same, but kv_heads = heads",sz(kvfull*L)+" ("+(nh/kv).toFixed(1)+"× larger)"]
-];
-var h='<table class="lq-t"><tr><th>Quantity</th><th>Formula</th><th>Value</th></tr>';
-R.forEach(function(r){h+="<tr><td>"+r[0]+'</td><td class="lq-mut">'+r[1]+"</td><td><b>"+r[2]+"</b></td></tr>"});
-var note=(nh*hd===H)?"":'<p class="lq-sm">Note: heads × head_dim = '+nf(nh*hd)+', which differs from hidden_size. The formulas above still hold because the Q and O matrices use heads × head_dim.</p>';
-out.innerHTML=h+"</table>"+note;
-}
-tie.addEventListener("change",calc);
-document.getElementById("lqA-reset").addEventListener("click",function(){F.forEach(function(f,i){document.getElementById("lqA-f"+i).value=f[1]});tie.checked=false;calc()});
-calc();
-})();
-</script>
-
-<a id="basics"></a>
-
-## 2. What you need to know first
-
-Five words are enough to read the rest of this post.
-
-- **Vector**: a list of numbers. Inside the model every token is a vector of 4,096 numbers.
-- **Matrix**: a grid of numbers. The **weights** (also called parameters) of the model are matrices. The "8B" in the name is the count of all the numbers in them.
-- **Dot product**: multiply two lists number by number and add up the results. A large positive value means the two lists "match".
-- **Matrix × vector**: every output number is the dot product of one row of the matrix with the vector. So every output is a weighted sum of *all* input numbers, with learned weights. This is the operation the whole network is built from.
-- **FLOP**: one multiplication or one addition. A matrix with `m` rows and `k` columns times a vector costs `2 × m × k` FLOPs: 2 FLOPs per weight.
-
-A tiny example, a 2×3 matrix times a vector of 3 numbers:
+From these follow the derived sizes that appear everywhere:
 
 ```
-[ 1 2 3 ]   [ 1 ]     [ 1·1 + 2·0 + 3·2 ]   [  7 ]
-[ 4 5 6 ] × [ 0 ]  =  [ 4·1 + 5·0 + 6·2 ] = [ 16 ]
-            [ 2 ]
+q_dim  = n_q  × d = 32 × 128 = 4,096     (width of the query vector, equals H here)
+kv_dim = n_kv × d =  8 × 128 = 1,024     (width of the key vector and of the value vector)
+g      = n_q / n_kv = 4                  (query heads that share one key/value head)
+I      = 3 × H                           (the MLP is three times as wide as the stream)
+V      = 1,187 × 128                     (a multiple of 128, chosen to suit GPU kernels)
 ```
 
-Everything in Qwen3-8B is this operation with bigger matrices (4,096 columns instead of 3), plus a few cheap extras such as normalising a vector or squashing numbers through a smooth switch.
+A few more config entries describe what is *absent*, and that matters for counting tensors:
 
-<a id="architecture"></a>
+- `attention_bias: false`: the projections have **no bias vectors**, only weight matrices.
+- `tie_word_embeddings: false`: the embedding table and the output head are **two separate matrices**.
+- `sliding_window: null`: every token may look at **all** earlier tokens.
+- `torch_dtype: bfloat16`: every number is stored in **2 bytes**. `max_position_embeddings` is 40,960 and `rms_norm_eps` is 1e-6.
 
-## 3. The architecture, drawn with the config values
+<a id="shapes"></a>
 
-An LLM generates text by repeating one loop: *take the text so far, output a score for every possible next token, pick one, append it.* Inside the model every token is a vector of 4,096 numbers that travels through a stack of identical layers.
+## 2. How to read a shape
 
-<div class="lq">
-<svg viewBox="0 0 680 600" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-labelledby="lq-arch-t lq-arch-d" font-size="13">
-<title id="lq-arch-t">Qwen3-8B architecture with config.json values</title>
-<desc id="lq-arch-d">A token ID passes through an embedding table, then 36 identical layers, each containing an attention block with 32 query heads and 8 key-value heads and an MLP block that expands 4096 to 12288, then an output head that produces scores for 151936 vocabulary tokens.</desc>
-<defs><marker id="lq-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<rect x="240" y="16" width="200" height="40" rx="8" fill="rgba(128,128,128,.12)" stroke="currentColor" stroke-opacity=".4"/>
-<text x="340" y="41" text-anchor="middle" fill="currentColor">Token ID</text>
-<line x1="340" y1="56" x2="340" y2="82" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-arr)"/>
-<rect x="190" y="84" width="300" height="52" rx="8" fill="rgba(128,128,128,.12)" stroke="currentColor" stroke-opacity=".4"/>
-<text x="340" y="106" text-anchor="middle" fill="currentColor" font-weight="600">Embedding lookup</text>
-<text x="340" y="124" text-anchor="middle" fill="currentColor" opacity=".75" font-size="12">vocab_size 151,936 × hidden_size 4,096</text>
-<line x1="340" y1="136" x2="340" y2="160" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-arr)"/>
-<rect x="40" y="162" width="600" height="262" rx="20" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="6 4"/>
-<text x="60" y="186" fill="currentColor" font-weight="600">num_hidden_layers: 36, repeated</text>
-<rect x="60" y="202" width="260" height="206" rx="12" fill="rgba(27,175,122,.16)" stroke="#1baf7a"/>
-<text x="190" y="230" text-anchor="middle" fill="currentColor" font-weight="600">Attention</text>
-<text x="190" y="262" text-anchor="middle" fill="currentColor" font-size="12">num_attention_heads: 32</text>
-<text x="190" y="284" text-anchor="middle" fill="currentColor" font-size="12">num_key_value_heads: 8</text>
-<text x="190" y="306" text-anchor="middle" fill="currentColor" font-size="12">head_dim: 128</text>
-<text x="190" y="338" text-anchor="middle" fill="currentColor" font-size="12" opacity=".8">sliding_window: none</text>
-<text x="190" y="360" text-anchor="middle" fill="currentColor" font-size="12" opacity=".8">every token sees all L tokens</text>
-<line x1="320" y1="305" x2="358" y2="305" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-arr)"/>
-<rect x="360" y="202" width="260" height="206" rx="12" fill="rgba(138,123,234,.18)" stroke="#8a7bea"/>
-<text x="490" y="230" text-anchor="middle" fill="currentColor" font-weight="600">MLP (SwiGLU)</text>
-<text x="490" y="262" text-anchor="middle" fill="currentColor" font-size="12">hidden_size: 4,096</text>
-<text x="490" y="284" text-anchor="middle" fill="currentColor" font-size="12">intermediate_size: 12,288</text>
-<text x="490" y="306" text-anchor="middle" fill="currentColor" font-size="12">hidden_act: silu</text>
-<text x="490" y="338" text-anchor="middle" fill="currentColor" font-size="12" opacity=".8">gate and up: 4,096 → 12,288</text>
-<text x="490" y="360" text-anchor="middle" fill="currentColor" font-size="12" opacity=".8">down: 12,288 → 4,096</text>
-<line x1="340" y1="424" x2="340" y2="450" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-arr)"/>
-<rect x="190" y="452" width="300" height="52" rx="8" fill="rgba(128,128,128,.12)" stroke="currentColor" stroke-opacity=".4"/>
-<text x="340" y="474" text-anchor="middle" fill="currentColor" font-weight="600">LM head</text>
-<text x="340" y="492" text-anchor="middle" fill="currentColor" opacity=".75" font-size="12">4,096 → 151,936, not tied</text>
-<line x1="340" y1="504" x2="340" y2="530" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-arr)"/>
-<rect x="220" y="532" width="240" height="40" rx="8" fill="rgba(128,128,128,.12)" stroke="currentColor" stroke-opacity=".4"/>
-<text x="340" y="557" text-anchor="middle" fill="currentColor">Score for every token</text>
-</svg>
-</div>
+A shape such as `[B, T, 4096]` lists the sizes of the dimensions of a tensor:
 
-Inside each layer there are two blocks, each wrapped in a **residual connection** (the block's output is *added* to its input, never replaces it):
+- `B` is the **batch**: how many sequences are processed side by side.
+- `T` is the number of **tokens** processed in this pass. It is the length of the prompt when the prompt is read, and 1 when one new token is generated.
+- `L` is the length of the **keys and values** the attention looks at: the tokens already in the cache plus the `T` new ones.
 
-- **Attention** lets the current token look at earlier tokens. It needs four matrices: `Wq`, `Wk`, `Wv`, `Wo`.
-- **MLP** (feed-forward network) processes each token on its own. It widens the vector to 12,288 numbers and narrows it again. Qwen uses the SwiGLU design with three matrices: `Wgate`, `Wup`, `Wdown`.
-- **RMSNorm** layers before each block keep the numbers in a stable range. Their cost is negligible.
-
-### Counting the weights
-
-The "8B" in the name is just the sum of all matrix entries. Using rows × columns from the config:
-
-| Matrix | Shape | Weights |
-|---|---|---|
-| `Wq` | 4,096 × 4,096 (32 heads × 128) | 16,777,216 |
-| `Wk` | 4,096 × 1,024 (8 heads × 128) | 4,194,304 |
-| `Wv` | 4,096 × 1,024 | 4,194,304 |
-| `Wo` | 4,096 × 4,096 | 16,777,216 |
-| `Wgate` | 4,096 × 12,288 | 50,331,648 |
-| `Wup` | 4,096 × 12,288 | 50,331,648 |
-| `Wdown` | 12,288 × 4,096 | 50,331,648 |
-| **One layer** | | **192,937,984** |
-| 36 layers | | 6,945,767,424 |
-| Embedding table | 151,936 × 4,096 | 622,329,856 |
-| LM head (not tied) | 4,096 × 151,936 | 622,329,856 |
-| **Total** | | **≈ 8.19 billion** |
-
-The few thousand norm weights per layer are negligible. In FP16 that is 16.4 GB, in INT4 roughly 4 to 5 GB (depending on what the quantizer leaves in FP16).
-
-### FLOPs per token
-
-The golden rule says 2 FLOPs per weight that takes part in a multiplication. The embedding table is only a lookup, so it does not count; the LM head does:
+A **linear layer** multiplies every token vector with a weight matrix. PyTorch stores that matrix as `[out_features, in_features]` and computes
 
 ```
-weight FLOPs per token = 2 × (6,945,767,424 + 622,329,856) = 15.14 GFLOPs
+y = x @ W.T          with  x: [..., in]   W: [out, in]   y: [..., out]
+y[r] = dot( W[r, :], x )          row r of W produces output number r
 ```
 
-Attention adds math that depends on the context length `L`. For each of the 32 query heads in each of the 36 layers the new token does a dot product with `L` cached keys (256 FLOPs each: 128 multiplies + 128 adds) and then mixes `L` cached values (another 256 per position):
+So **rows are outputs and columns are inputs**. `q_proj.weight` has the shape `[4096, 4096]`, `k_proj.weight` has `[1024, 4096]` (1,024 outputs, each reading all 4,096 inputs), and `down_proj.weight` has `[4096, 12288]`. Reshapes (`view`) and transposes only change how the same numbers are indexed, they do not copy or compute anything. Remember the convention: whenever this post says "rows 512 to 639 of `q_proj`", it means 128 output numbers.
 
-```
-attention FLOPs per token = 36 layers × 32 heads × 512 × L
-                          = 589,824 × L
-```
+<a id="checkpoint"></a>
 
-At `L` = 8,000 that is 4.72 GFLOPs, so one token costs about **19.9 GFLOPs** in total.
+## 3. The checkpoint: 399 tensors
 
-<a id="kvcache"></a>
+The weights of the model live in five `safetensors` files, plus a small index (`model.safetensors.index.json`) that maps the name of every tensor to the file that contains it. I read that index from the repository. It lists **399 tensors**, and its metadata says that together they occupy **16,381,470,720 bytes**. The tensors fall into three groups:
 
-## 4. The KV cache
+- `model.embed_tokens.weight`: the embedding table (1 tensor).
+- `model.layers.{i}.…` for `i` = 0 … 35: **11 tensors per layer**, 396 in total.
+- `model.norm.weight` and `lm_head.weight`: the final norm and the output head (2 tensors).
 
-The keys and values of earlier tokens never change. Instead of recomputing them for all `L` tokens at every step (which would multiply the work by `L`), the model **stores** them once and reads them back. That store is the **KV cache**.
+The 11 tensors of a layer are four attention matrices, three MLP matrices and four small RMSNorm scale vectors: two for the input of each block and two for the heads (`q_norm` and `k_norm`, 128 numbers each, applied to every query and key head).
 
-```
-bytes per token = 2 (K and V) × 36 layers × 8 kv_heads × 128 head_dim × 2 bytes (FP16)
-                = 147,456 bytes ≈ 147 KB
-```
+Use the explorer to list the tensors of any layer, filter by name, and see the exact shapes, parameter counts, byte sizes and the shard file of each tensor. The sums at the bottom are computed from the shapes, not looked up.
 
-| Context per user | KV cache per user | 10 users |
-|---|---|---|
-| 1,000 tokens | 0.15 GB | 1.5 GB |
-| 4,000 tokens | 0.59 GB | 5.9 GB |
-| 8,000 tokens | 1.18 GB | 11.8 GB |
-| 16,000 tokens | 2.36 GB | 23.6 GB |
-| 40,960 tokens (model limit) | 6.04 GB | 60.4 GB |
-
-**Grouped-query attention (GQA) is why this is affordable.** With 32 KV heads instead of 8, every number above would be 4× larger (4.7 GB per user at 8,000 tokens). Notice the asymmetry: the cache stores **8** heads (bytes) but the attention math runs over **32** query heads (FLOPs). Every cached byte is therefore used by 4 query heads, which gives the KV part a fixed intensity of about 4 FLOP/byte, no matter how many users you have. Post #127 shows what this does to decode speed on a T4 and an A100.
-
-<a id="questions"></a>
-
-## 5. The four questions everyone asks
-
-**What is a "hidden layer"?** A neural network has an input (here: the token), an output (here: a score for every word) and a lot of computation in between. Everything in between is called *hidden*, because nobody reads those intermediate vectors directly. In Qwen3-8B the hidden layers are **36 transformer blocks** that look alike, and `hidden_size` = 4,096 is the width of the vector that travels between them. (Each block itself contains several smaller steps. The config counts the blocks.)
-
-**Why 36 layers?** It is a design choice, not a law of nature. One layer does one round of "gather information from the other tokens" (attention) followed by one round of "think about it" (MLP). Stacking layers lets later rounds build on the results of earlier ones, so depth buys **sequential steps of refinement**. The exact number follows from the designers' size budget: with a width of 4,096 one layer holds 11.5 × 4,096² = 192.9 M weights, and 36 of them plus the 1.24 B weights of embedding table and output head make the 8.19 B that give the model its name. The same budget could have been spent on fewer, wider layers or more, narrower ones. The builder below lets you try that.
-
-**What is an attention head?** A head is one independent attention "reader". The 4,096 numbers of the query are cut into 32 slices of 128, and each slice computes its own scores and its own softmax, so each head can focus on different earlier tokens. Splitting is free: 32 heads × 128 numbers = 4,096, the same math, just in slices. Studies of transformer models in general found heads that follow the previous word, heads that copy repeated text and heads that match a number to its label. I did not verify what the heads of Qwen3-8B specifically do.
-
-**Why only 8 key/value heads?** Memory. The keys and values of all earlier tokens are kept in the KV cache and read again for every generated token, and the cache grows with the number of key/value heads. In classic multi-head attention every query head has its own key/value head (32 of them). Qwen3-8B lets **4 query heads share one key/value head**, which makes the cache 4× smaller. This design is called grouped-query attention (GQA), and the paper that introduced it reports quality close to full multi-head attention at a much lower memory cost. The extreme version with a single shared head (multi-query attention) is even smaller but can cost quality. Eight is a compromise. It also divides 32 evenly and is a common head count when a model is split over 8 GPUs, but I cannot verify that this was Qwen's reason.
-
-<a id="map"></a>
-
-## 6. The map: zoom from the whole model down to one head
-
-Click the level buttons, click a box in the drawing to zoom into it, or use **Zoom in** and **Zoom out**. At level 4 you can change the number of key/value heads and see what it does to the cache and to decode speed (estimated with the same assumptions as in post #127).
-
-<div class="lq" id="lqE">
-<div class="lq-row" style="gap:6px">
-<button type="button" data-lv="1">1 Whole model</button>
-<button type="button" data-lv="2">2 The stack</button>
-<button type="button" data-lv="3">3 One layer</button>
-<button type="button" data-lv="4">4 Attention heads</button>
-<button type="button" data-lv="5">5 The MLP</button>
-<button type="button" data-zoom="-1">Zoom out</button>
-<button type="button" data-zoom="1">Zoom in</button>
-</div>
-<div id="lqE-stage" class="lq-card"></div>
-<div id="lqE-info" class="lq-grid"></div>
+<div class="lq" id="lqG">
+<div class="lq-row"><label>Scope <select id="lqG-s"></select></label><label>Filter <input type="text" id="lqG-f" placeholder="e.g. k_proj" style="background:var(--lq-soft);border:1px solid var(--lq-line);border-radius:8px;padding:6px 8px;width:160px;color:inherit;font:inherit"></label></div>
+<div id="lqG-t" style="margin-top:6px"></div>
+<div id="lqG-sum" class="lq-grid" style="margin-top:12px"></div>
 </div>
 <script>
 (function(){
 function $(id){return document.getElementById(id)}
 function nf(x){return Math.round(x).toLocaleString("en-US")}
-function gb(x){return (x/1e9).toFixed(2)+" GB"}
-var GRY="rgba(128,128,128,.14)",GS="rgba(128,128,128,.6)",GRN="rgba(27,175,122,.2)",GRS="#1baf7a",PUR="rgba(138,123,234,.22)",PUS="#8a7bea";
-var PAL=["#2a78d6","#1baf7a","#eb6834","#8a7bea","#eda100","#e87ba4","#00a3bf","#8a8a86"];
-var DEF='<defs><marker id="lqE-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>';
-function T(x,y,s,o){o=o||{};return '<text x="'+x+'" y="'+y+'" text-anchor="'+(o.a||"middle")+'" fill="currentColor" font-size="'+(o.s||12)+'"'+(o.w?' font-weight="600"':"")+(o.o?' opacity="'+o.o+'"':"")+'>'+s+'</text>'}
-function bx(x,y,w,h,fill,st,t1,t2,go){var g='<g'+(go?' data-go="'+go+'" style="cursor:pointer" tabindex="0" role="button" aria-label="Zoom into '+t1+'"':"")+'><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="8" fill="'+fill+'" stroke="'+st+'"/>';
-if(t2)g+=T(x+w/2,y+h/2-6,t1,{w:1,s:13})+T(x+w/2,y+h/2+12,t2,{o:0.8});else g+=T(x+w/2,y+h/2+4,t1,{w:1,s:13});
-return g+'</g>'}
-function ar(x1,y1,x2,y2){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="currentColor" stroke-width="1.5" marker-end="url(#lqE-a)"/>'}
-function ln(x1,y1,x2,y2){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="currentColor" stroke-opacity=".4"/>'}
-function svg(h,inner,label){return '<svg viewBox="0 0 680 '+h+'" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-label="'+label+'">'+DEF+inner+'</svg>'}
-function L1(){var s=bx(170,10,260,34,GRY,GS,"Text: “The invoice total is”")+ar(300,44,300,62)+bx(170,62,260,44,GRY,GS,"Tokenizer","151,936-piece dictionary")+ar(300,106,300,124)+bx(170,124,260,48,GRY,GS,"Embedding lookup","[151,936 × 4,096]")+ar(300,172,300,194);
-s+=bx(170,194,260,96,GRN,GRS,"36 hidden layers","num_hidden_layers: 36",2)+ar(300,290,300,312)+bx(170,312,260,34,GRY,GS,"Final RMSNorm")+ar(300,346,300,364)+bx(170,364,260,48,GRY,GS,"LM head","[4,096 → 151,936]")+ar(300,412,300,432)+bx(170,432,260,34,GRY,GS,"Score for every word");
-s+=ln(448,10,448,172)+T(458,84,"Input side",{a:"start",w:1})+T(458,102,"values you can read",{a:"start",o:0.75});
-s+=ln(448,194,448,290)+T(458,236,"Hidden layers",{a:"start",w:1})+T(458,254,"vectors nobody reads",{a:"start",o:0.75});
-s+=ln(448,312,448,466)+T(458,386,"Output side",{a:"start",w:1})+T(458,404,"scores you can read",{a:"start",o:0.75});
-s+=T(40,242,"click to zoom in",{a:"start",s:11,o:0.7})+'<line x1="116" y1="238" x2="166" y2="238" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="3 3"/>';
-return svg(480,s,"The whole model: input side, hidden layers, output side")}
-function L2(){var s=T(24,18,"The residual stream: one vector of 4,096 numbers rides down the belt",{a:"start",o:0.85})+'<line x1="80" y1="30" x2="80" y2="318" stroke="currentColor" stroke-width="2" marker-end="url(#lqE-a)"/>';
-var ys=[52,96,140,212,256],nm=["Layer 1","Layer 2","Layer 3","Layer 35","Layer 36"];
-ys.forEach(function(y,i){s+='<g data-go="3" style="cursor:pointer" tabindex="0" role="button" aria-label="Zoom into '+nm[i]+'"><rect x="170" y="'+y+'" width="160" height="34" rx="6" fill="'+GRN+'" stroke="'+GRS+'"/><rect x="336" y="'+y+'" width="164" height="34" rx="6" fill="'+PUR+'" stroke="'+PUS+'"/>'+T(250,y+21,"Attention")+T(418,y+21,"MLP")+'</g>'+T(512,y+21,nm[i],{a:"start",s:11,o:0.8})+ar(82,y+10,168,y+10)+ar(168,y+26,82,y+26)});
-s+=T(335,198,"⋮  layers 4 to 34, 31 more  ⋮",{o:0.8})+T(24,338,"…and arrives at the LM head as one [4,096] vector",{a:"start",o:0.85});
-s+=T(170,364,"Every layer: 192.9 M weights, same shape, its own learned values.",{a:"start"})+T(170,382,"Every layer reads the belt, adds a correction and writes it back.",{a:"start"})+T(170,400,"Every layer also writes 4,096 bytes per token into the KV cache.",{a:"start"});
-return svg(414,s,"The stack of 36 layers along the residual stream")}
-function L3(){var s='<line x1="80" y1="20" x2="80" y2="203" stroke="currentColor" stroke-width="2"/><line x1="80" y1="225" x2="80" y2="405" stroke="currentColor" stroke-width="2"/><line x1="80" y1="427" x2="80" y2="440" stroke="currentColor" stroke-width="2" marker-end="url(#lqE-a)"/>';
-s+=T(24,16,"belt",{a:"start",o:0.7})+ar(80,52,168,52)+bx(170,36,150,32,GRY,GS,"RMSNorm")+ar(245,68,245,90)+bx(170,90,300,96,GRN,GRS,"Attention","tokens look at each other",4)+'<polyline points="320,186 320,214 93,214" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#lqE-a)"/>';
-s+='<circle cx="80" cy="214" r="11" fill="'+GRY+'" stroke="'+GS+'"/>'+T(80,219,"+",{w:1,s:14});
-s+=ar(80,254,168,254)+bx(170,238,150,32,GRY,GS,"RMSNorm")+ar(245,270,245,292)+bx(170,292,300,96,PUR,PUS,"MLP (SwiGLU)","each token thinks alone",5)+'<polyline points="320,388 320,416 93,416" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#lqE-a)"/>';
-s+='<circle cx="80" cy="416" r="11" fill="'+GRY+'" stroke="'+GS+'"/>'+T(80,421,"+",{w:1,s:14});
-s+=T(486,130,"Wq, Wk, Wv, Wo",{a:"start"})+T(486,148,"41.9 M weights",{a:"start",o:0.8})+T(486,332,"Wgate, Wup, Wdown",{a:"start"})+T(486,350,"151.0 M weights",{a:"start",o:0.8});
-s+=T(486,60,"normalise first",{a:"start",o:0.75})+T(486,250,"normalise first",{a:"start",o:0.75})+T(122,208,"add",{a:"start",s:11,o:0.7})+T(122,410,"add",{a:"start",s:11,o:0.7});
-return svg(452,s,"One layer: normalise, attention, add, normalise, MLP, add")}
-function L5(){var s="",sc=500/12288,cx=340;
-function bar(y,h,w,t,f){return '<rect x="'+(cx-w/2)+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="4" fill="'+f+'" stroke="currentColor" stroke-opacity=".45"/>'+T(cx,y+h/2+4,t)}
-s+=bar(14,26,4096*sc,"x [4,096]",GRY)+ar(cx,40,cx,60)+bar(62,24,12288*sc,"gate [12,288]",PUR)+bar(90,24,12288*sc,"up [12,288]",PUR)+ar(cx,114,cx,134)+bar(136,26,12288*sc,"h = SiLU(gate) × up   [12,288]",PUR)+ar(cx,162,cx,182)+bar(184,26,4096*sc,"out [4,096]",GRY);
-s+=T(cx+4096*sc/2+10,32,"hidden_size",{a:"start",s:11,o:0.7})+T(cx+12288*sc/2+8,92,"3 ×",{a:"start",s:11,o:0.7});
-var parts=[["Wq",16777216,0.5],["Wk",4194304,0.3],["Wv",4194304,0.3],["Wo",16777216,0.5],["MLP",150994944,1]],tot=192937984,x=40;
-s+=T(40,246,"Where the 192.9 M weights of one layer sit",{a:"start",w:1});
-parts.forEach(function(p,i){var w=600*p[1]/tot,att=i<4;s+='<rect x="'+x+'" y="256" width="'+w+'" height="30" fill="'+(att?"rgba(27,175,122,"+(0.22+p[2]*0.2)+")":"rgba(138,123,234,.3)")+'" stroke="currentColor" stroke-opacity=".45"/>';x+=w});
-s+=T(40,304,"Attention 21.7%",{a:"start",o:0.9})+T(640,304,"MLP 78.3%",{a:"end",o:0.9})+T(40,324,"Wq 8.7% · Wk 2.2% · Wv 2.2% · Wo 8.7%      MLP: Wgate + Wup + Wdown",{a:"start",s:11,o:0.75});
-return svg(338,s,"MLP widths and the share of weights in one layer")}
-function fmtKV(kv){var qh=32,per=qh/kv,gw=600/kv,x0=40,y0=36,sq=12,st=16,cols=Math.max(1,Math.min(per,Math.floor((gw-6)/st))),rows=Math.ceil(per/cols),ah=rows*st,ky=y0+ah+30,s=T(40,20,"32 query heads (each square is one head of 128 numbers)",{a:"start",o:0.85});
-for(var g=0;g<kv;g++){var gx=x0+g*gw,c=PAL[g%8];
-s+='<g data-g="'+g+'"><rect x="'+(gx+2)+'" y="'+(y0-4)+'" width="'+(gw-4)+'" height="'+(ah+8)+'" rx="4" fill="'+c+'" fill-opacity=".1" stroke="'+c+'" stroke-opacity=".6"/>';
-for(var i=0;i<per;i++){var r=Math.floor(i/cols),cc=i%cols;s+='<rect x="'+(gx+5+cc*st)+'" y="'+(y0+r*st)+'" width="'+sq+'" height="'+sq+'" rx="2" fill="'+c+'"/>'}
-s+='<line x1="'+(gx+gw/2)+'" y1="'+(y0+ah+4)+'" x2="'+(gx+gw/2)+'" y2="'+ky+'" stroke="'+c+'" stroke-width="1.5"/><rect x="'+(gx+4)+'" y="'+ky+'" width="'+(gw-8)+'" height="28" rx="4" fill="'+c+'" fill-opacity=".28" stroke="'+c+'"/>';
-if(gw>=44)s+=T(gx+gw/2,ky+18,"KV "+g,{s:11});s+='</g>'}
-s+=T(40,ky+50,kv+" key/value head"+(kv>1?"s":"")+" (each 128 numbers for K and 128 for V)",{a:"start",o:0.85});
-return svg(ky+62,s,"Query heads grouped around "+kv+" key value heads")}
-function est(kv){var tok=18432*kv,per=tok*8000,bytes=5e9+6*per;return {tok:tok,per:per,a:1/(bytes/(0.6*1935e9)),t:1/(bytes/(0.6*320e9)),fit:bytes<=12.9e9}}
-var kvSel=8;
-function l4(){var per=32/kvSel,name=kvSel===32?"MHA, multi-head attention: every query head has its own key/value head":kvSel===1?"MQA, multi-query attention: all query heads share one key/value head":"GQA, grouped-query attention: "+per+" query heads share each key/value head";
-var h='<div class="lq-row"><label>Key/value heads <select id="lqE-K">';
-[32,16,8,4,2,1].forEach(function(k){h+='<option value="'+k+'"'+(k===kvSel?" selected":"")+'>'+k+(k===8?" (Qwen3-8B)":k===32?" (classic MHA)":k===1?" (MQA)":"")+'</option>'});
-h+='</select></label></div><div class="lq-sm" style="margin:2px 0 8px"><b>'+name+'</b></div>'+fmtKV(kvSel);
-h+='<div class="lq-sm" style="margin:8px 0">head_dim = 4,096 ÷ 32 = 128. Wq: [4,096 × 4,096], Wk and Wv: [4,096 × '+nf(kvSel*128)+'] each, Wo: [4,096 × 4,096]. Hover a group to highlight it.</div>';
-h+='<table class="lq-t"><tr><th>KV heads</th><th>Cache per token</th><th>Per user at 8,000</th><th>A100 decode per user</th><th>T4 decode per user</th></tr>';
-[32,16,8,4,2,1].forEach(function(k){var e=est(k);h+='<tr'+(k===kvSel?' style="font-weight:600"':"")+'><td>'+k+(k===8?" ← Qwen3-8B":"")+'</td><td>'+nf(e.tok)+' B</td><td>'+gb(e.per)+'</td><td>≈ '+Math.round(e.a)+' t/s</td><td>'+(e.fit?"≈ "+Math.round(e.t)+" t/s":"does not fit")+'</td></tr>'});
-return h+'</table><div class="lq-sm lq-mut" style="margin-top:6px">Estimate for 36 layers, INT4 weights (≈ 5 GB), 6 users, 8,000 tokens each, 60% of peak bandwidth. It shows the memory effect only. Quality is not computed here.</div>'}
-var LV={
-1:{t:"The whole model",what:"Text goes in, a score for every possible next word comes out. In between sits the big stack of hidden layers.",cfg:"<code>vocab_size</code> 151,936 · <code>hidden_size</code> 4,096 · <code>num_hidden_layers</code> 36 · <code>tie_word_embeddings</code> false",
-why:["<b>Input layer:</b> the tokens you feed in. <b>Output layer:</b> the scores you read out. Everything between them is <b>hidden</b>, because nobody looks at those vectors directly.","In a transformer the hidden layers are the stack of 36 blocks you zoom into next. <code>hidden_size</code> is the width of the vector that moves between them.","Embedding table and output head together hold 1.24 B of the 8.19 B weights (15%). A large dictionary covers many languages, code and symbols with few pieces per text.","The 36 blocks hold the other 6.95 B weights (85%)."]},
-2:{t:"The stack of 36 layers",what:"Picture a conveyor belt, the residual stream. A vector of 4,096 numbers rides down the belt past 36 stations. Every station reads the vector, computes a correction and adds it back. Nothing is ever replaced.",cfg:"<code>num_hidden_layers</code> 36",
-why:["<b>Why layers at all?</b> One layer can only do one round of “gather information from other tokens” and one round of “think about it”. Harder patterns need several rounds, each building on the previous result. Depth buys sequential steps of refinement.","<b>Are they all the same?</b> Same shape, different weights. Each layer learns its own job. In studies of transformers, early layers tend to pick up local patterns such as grammar and later layers more abstract relations. That is a tendency, not a rule, and I did not verify it for Qwen3-8B.","<b>Why 36?</b> A design choice. With a width of 4,096 one layer has 11.5 × 4,096² = 192.9 M weights. 36 layers plus 1.24 B for embedding and output head give the 8.19 B that name the model. The same budget could go into fewer, wider layers or more, narrower ones (try it in the builder below).","<b>What depth costs:</b> every layer's weights are read from memory for every generated token, the KV cache grows by 4,096 bytes per layer and token, and the layers must run strictly one after another."]},
-3:{t:"One layer",what:"Two blocks in a row. Attention lets the tokens exchange information, the MLP processes every token alone. Before each block the vector is normalised, after each block the result is added back onto the belt.",cfg:"<code>hidden_size</code> 4,096 · <code>intermediate_size</code> 12,288 · <code>hidden_act</code> silu · <code>rms_norm_eps</code> 1e-6",
-why:["<b>Attention</b> is the only place where tokens talk to each other: 41.9 M weights, 2.5 × hidden².","<b>MLP</b> thinks about each token on its own, like a huge learned memory: 151 M weights, 9 × hidden², which is 78% of the layer.","<b>Residual add (+):</b> new vector = old vector + correction. The original information cannot get lost and a layer only has to learn a small improvement. This is what makes 36 layers trainable.","<b>RMSNorm before each block</b> keeps the numbers in a stable range."]},
-4:{t:"Attention heads",what:"The 4,096-number query is cut into 32 slices of 128 numbers. Each slice is a head: its own small attention reader with its own scores and its own softmax. Keys and values are cut into only 8 slices, and every group of 4 query heads reads the same key/value head.",cfg:"<code>num_attention_heads</code> 32 · <code>num_key_value_heads</code> 8 · <code>head_dim</code> 128",
-why:["<b>What is a head?</b> One independent attention pattern. With 32 heads a layer can look at the earlier tokens in 32 different ways at once.","<b>Why not one big head?</b> One head makes one set of percentages. Different relationships need different percentages. Splitting costs nothing extra: 32 × 128 = 4,096 = <code>hidden_size</code>.","<b>Why head_dim 128?</b> A common size: big enough for a meaningful dot product and a good fit for GPU kernels such as FlashAttention.","<b>Why only 8 key/value heads?</b> Memory. The KV cache is read for every generated token and grows with the number of KV heads. Sharing each K/V head between 4 query heads makes the cache 4× smaller than classic multi-head attention. Try the selector: with 32 KV heads six users at 8,000 tokens no longer fit on a T4 at all, and an A100 decodes about 2.7× slower than with 8.","8 also divides 32 evenly and is a common count when a model is split across 8 GPUs. I cannot verify that this was Qwen's reason."]},
-5:{t:"The MLP",what:"The vector is widened from 4,096 to 12,288 numbers twice in parallel (gate and up), combined with a smooth switch (SiLU) and squeezed back to 4,096.",cfg:"<code>intermediate_size</code> 12,288 · <code>hidden_act</code> silu",
-why:["<b>Why wider?</b> The wide middle gives room to keep thousands of features apart. Research suggests that MLP layers act like a learned memory for facts and patterns, so width is capacity.","<b>Why 3×?</b> 12,288 = 3 × 4,096, a design choice. Gated MLPs (SwiGLU) have three matrices instead of two and therefore usually use a smaller ratio than the older 4× design. This is a general observation, not a statement about Qwen's reasoning.","<b>Three matrices:</b> Wgate and Wup (4,096 → 12,288) and Wdown (12,288 → 4,096), 50.3 M weights each.","The MLP is 78% of a layer's weights, so most of the weight traffic of decoding is MLP. Attention has fewer weights, but its KV cache grows with the context."]}
-};
-var lv=1;
-function render(){var d=LV[lv],body=lv===1?L1():lv===2?L2():lv===3?L3():lv===4?l4():L5(),ul="";
-d.why.forEach(function(w){ul+="<li>"+w+"</li>"});
-$("lqE-stage").innerHTML='<div style="font-size:18px;font-weight:600;margin:0 0 8px">Level '+lv+': '+d.t+'</div>'+body;
-$("lqE-info").innerHTML='<div class="lq-card"><b>What you see</b><p style="margin:6px 0 10px">'+d.what+'</p><b>Config keys</b><p style="margin:6px 0 0">'+d.cfg+'</p></div><div class="lq-card sm-desc"><b>Why these numbers</b><ul>'+ul+'</ul></div>';
-document.querySelectorAll("#lqE button[data-lv]").forEach(function(b){b.className=(+b.getAttribute("data-lv")===lv)?"on":""})}
-var root=$("lqE");
-root.addEventListener("click",function(e){var b=e.target.closest("button[data-lv]");if(b){lv=+b.getAttribute("data-lv");render();return}
-b=e.target.closest("button[data-zoom]");if(b){lv=Math.max(1,Math.min(5,lv+(+b.getAttribute("data-zoom"))));render();return}
-var g=e.target.closest("[data-go]");if(g){lv=+g.getAttribute("data-go");render()}});
-root.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){var g=e.target.closest&&e.target.closest("[data-go]");if(g){e.preventDefault();lv=+g.getAttribute("data-go");render()}}});
-root.addEventListener("change",function(e){if(e.target.id==="lqE-K"){kvSel=+e.target.value;render()}});
-root.addEventListener("mouseover",function(e){var g=e.target.closest("[data-g]");if(!g)return;var id=g.getAttribute("data-g");root.querySelectorAll("[data-g]").forEach(function(n){n.style.opacity=n.getAttribute("data-g")===id?1:0.25})});
-root.addEventListener("mouseout",function(e){if(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest("[data-g]"))return;root.querySelectorAll("[data-g]").forEach(function(n){n.style.opacity=1})});
+var H=4096,NL=36,NQ=32,NKV=8,D=128,I=12288,V=151936;
+var LT=[
+["input_layernorm.weight",[H],"RMSNorm scale in front of attention","input_layernorm"],
+["self_attn.q_proj.weight",[NQ*D,H],"queries: 32 bands of 128 rows","q_proj"],
+["self_attn.k_proj.weight",[NKV*D,H],"keys: 8 bands of 128 rows","k_proj"],
+["self_attn.v_proj.weight",[NKV*D,H],"values: 8 bands of 128 rows","v_proj"],
+["self_attn.q_norm.weight",[D],"RMSNorm scale for every query head","q_norm"],
+["self_attn.k_norm.weight",[D],"RMSNorm scale for every key head","k_norm"],
+["self_attn.o_proj.weight",[H,NQ*D],"mixes the 32 head outputs","o_proj"],
+["post_attention_layernorm.weight",[H],"RMSNorm scale in front of the MLP","post_attention_layernorm"],
+["mlp.gate_proj.weight",[I,H],"gate branch of the MLP","gate_proj"],
+["mlp.up_proj.weight",[I,H],"up branch of the MLP","up_proj"],
+["mlp.down_proj.weight",[H,I],"back from 12,288 to 4,096","down_proj"]];
+function shard(l,k){if(l<=6)return 1;if(l===7)return (k==="q_proj"||k==="k_proj"||k==="v_proj")?1:2;if(l<=16)return 2;if(l===17)return (k==="input_layernorm"||k==="down_proj"||k==="up_proj"||k==="post_attention_layernorm")?3:2;if(l<=26)return 3;if(l===27)return (k==="input_layernorm"||k==="down_proj"||k==="post_attention_layernorm")?4:3;return 4}
+function prod(a){var p=1;a.forEach(function(x){p*=x});return p}
+var rows=[{n:"model.embed_tokens.weight",s:[V,H],r:"lookup table: one row per token ID",sh:1,sc:"embedding"}],l;
+for(l=0;l<NL;l++)(function(l){LT.forEach(function(x){rows.push({n:"model.layers."+l+"."+x[0],s:x[1],r:x[2],sh:shard(l,x[3]),sc:"layer "+l})})})(l);
+rows.push({n:"model.norm.weight",s:[H],r:"final RMSNorm scale",sh:4,sc:"head"},{n:"lm_head.weight",s:[V,H],r:"one score per token ID",sh:5,sc:"head"});
+rows.forEach(function(r){r.p=prod(r.s)});
+var sel=$("lqG-s"),o='<option value="all">All 399 tensors</option><option value="embedding">Embedding</option>';
+for(l=0;l<NL;l++)o+='<option value="layer '+l+'">Layer '+l+'</option>';
+sel.innerHTML=o+'<option value="head">Final norm and head</option>';
+sel.value="layer 0";
+function shp(s){return "["+s.map(nf).join(", ")+"]"}
+function render(){
+var scope=sel.value,q=$("lqG-f").value.trim().toLowerCase(),list=rows.filter(function(r){return (scope==="all"||r.sc===scope)&&(!q||r.n.toLowerCase().indexOf(q)>=0)});
+var p=0;list.forEach(function(r){p+=r.p});
+var h='<table class="lq-t"><tr><th>Tensor</th><th>Shape [out, in]</th><th>Parameters</th><th>bf16 bytes</th><th>Shard</th></tr>',shown=list.slice(0,40);
+shown.forEach(function(r){h+='<tr><td><code>'+r.n+'</code><div class="lq-sm lq-mut">'+r.r+'</div></td><td><code>'+shp(r.s)+'</code></td><td>'+nf(r.p)+'</td><td>'+nf(r.p*2)+'</td><td>'+r.sh+'</td></tr>'});
+h+='<tr style="font-weight:600"><td>'+list.length+' tensor'+(list.length===1?"":"s")+(list.length>shown.length?' (first '+shown.length+' shown)':"")+'</td><td></td><td>'+nf(p)+'</td><td>'+nf(p*2)+'</td><td></td></tr></table>';
+$("lqG-t").innerHTML=h;
+var tp=0,sh=[0,0,0,0,0,0];rows.forEach(function(r){tp+=r.p;sh[r.sh]+=r.p*2});
+var files=["4.00","3.99","3.96","3.19","1.24"],c='<div class="lq-card"><b>Whole checkpoint, computed from the shapes</b><div class="lq-m"><span>Tensors</span><span>'+rows.length+'</span></div><div class="lq-m"><span>Parameters</span><span>'+nf(tp)+'</span></div><div class="lq-m"><span>× 2 bytes (bf16)</span><span>'+nf(tp*2)+' B</span></div><div class="lq-m"><span>total_size in the repository index</span><span>16,381,470,720 B</span></div><div class="lq-m"><span>Match</span><span><b>'+(tp*2===16381470720?"exact":"MISMATCH")+'</b></span></div></div>';
+c+='<div class="lq-card"><b>The five shard files</b>';
+for(var i=1;i<=5;i++)c+='<div class="lq-m"><span>model-0000'+i+'-of-00005</span><span>'+nf(sh[i])+' B ('+(sh[i]/1e9).toFixed(2)+' GB; listed as '+files[i-1]+' GB)</span></div>';
+$("lqG-sum").innerHTML=c+'</div>'}
+sel.addEventListener("change",render);$("lqG-f").addEventListener("input",render);
 render();
 })();
 </script>
 
-<a id="builder"></a>
+Two things worth noticing in the table. First, there is no `.bias` tensor anywhere, which is what `attention_bias: false` means in practice. Second, the shard files do not split exactly at layer boundaries: a layer such as layer 7 or 17 is spread over two files, simply because the exporter filled one file up to its size limit and continued in the next.
 
-## 7. Assemble it yourself: depth, width and the size of the model
 
-Press **Build it** to watch the network being put together piece by piece: first the embedding table, then layer after layer, finally the output head, while the parameter counter climbs towards 8.19 B. Then change the design. The tower is drawn with **width = hidden size** and **height = number of layers**. Its layers are split into an attention part (green) and an MLP part (purple) according to their share of the weights, and the dashed outline is Qwen3-8B for comparison.
+<a id="blueprint"></a>
+
+## 4. The blueprint: one forward pass with exact shapes
+
+This is the complete path of a batch of token IDs through the network. Boxes show the tensors that hold weights (with the exact shape of the stored matrix), arrows carry the shapes of the data that flows through. The belt on the left is the **residual stream**: the vector `x` of 4,096 numbers per token. Each of the two blocks of a layer reads `x`, computes a correction and adds it back (the circles with a plus).
+
+<div class="lq">
+<svg viewBox="0 0 680 1080" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-labelledby="lq-bp-t lq-bp-d" font-size="12">
+<title id="lq-bp-t">Blueprint of one Qwen3-8B forward pass with tensor shapes</title>
+<desc id="lq-bp-d">Token IDs of shape B by T pass through the embedding table into a stream of shape B, T, 4096. Each of 36 layers applies an input RMSNorm, query, key and value projections, query and key norms, rotary position encoding, grouped-query attention with a key-value cache, an output projection and a residual add, then a second RMSNorm, gate and up projections, a SiLU gating, a down projection and a residual add. A final norm and the output head produce logits of shape B, T, 151936.</desc>
+<defs><marker id="lq-bp-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="240" y="8" width="200" height="30" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="28" text-anchor="middle" fill="currentColor">input_ids  [B, T]</text>
+<line x1="340" y1="38" x2="340" y2="58" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="190" y="60" width="300" height="44" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="79" text-anchor="middle" fill="currentColor" font-weight="600">model.embed_tokens</text>
+<text x="340" y="96" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[151,936, 4,096]</text>
+<line x1="340" y1="104" x2="340" y2="128" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="350" y="121" fill="currentColor" font-size="11" opacity=".8">x  [B, T, 4,096]</text>
+<rect x="16" y="130" width="648" height="730" rx="16" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="6 4"/>
+<text x="648" y="150" text-anchor="end" fill="currentColor" font-weight="600" font-size="12">model.layers.i, i = 0 … 35  (36 times)</text>
+<text x="56" y="148" fill="currentColor" font-size="11" opacity=".8">residual stream x [B, T, 4,096]</text>
+<line x1="46" y1="156" x2="46" y2="537" stroke="currentColor" stroke-width="2"/>
+<line x1="46" y1="559" x2="46" y2="825" stroke="currentColor" stroke-width="2"/>
+<line x1="46" y1="847" x2="46" y2="858" stroke="currentColor" stroke-width="2"/>
+<line x1="46" y1="175" x2="228" y2="175" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="230" y="160" width="220" height="30" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="180" text-anchor="middle" fill="currentColor" font-size="11">input_layernorm  [4,096]</text>
+<line x1="340" y1="190" x2="340" y2="206" stroke="currentColor" stroke-width="1.5"/>
+<line x1="175" y1="206" x2="515" y2="206" stroke="currentColor" stroke-width="1.5"/>
+<line x1="175" y1="206" x2="175" y2="220" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<line x1="345" y1="206" x2="345" y2="220" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<line x1="515" y1="206" x2="515" y2="220" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="100" y="222" width="150" height="44" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="175" y="241" text-anchor="middle" fill="currentColor" font-weight="600">q_proj</text>
+<text x="175" y="258" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[4,096, 4,096]</text>
+<rect x="270" y="222" width="150" height="44" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="345" y="241" text-anchor="middle" fill="currentColor" font-weight="600">k_proj</text>
+<text x="345" y="258" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[1,024, 4,096]</text>
+<rect x="440" y="222" width="150" height="44" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="515" y="241" text-anchor="middle" fill="currentColor" font-weight="600">v_proj</text>
+<text x="515" y="258" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[1,024, 4,096]</text>
+<line x1="175" y1="266" x2="175" y2="298" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="183" y="286" fill="currentColor" font-size="11" opacity=".8">[B, T, 32, 128]</text>
+<line x1="345" y1="266" x2="345" y2="298" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="353" y="286" fill="currentColor" font-size="11" opacity=".8">[B, T, 8, 128]</text>
+<line x1="515" y1="266" x2="515" y2="370" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="523" y="286" fill="currentColor" font-size="11" opacity=".8">[B, T, 8, 128]</text>
+<rect x="100" y="300" width="320" height="44" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="260" y="319" text-anchor="middle" fill="currentColor" font-weight="600" font-size="11">q_norm, k_norm  [128] each</text>
+<text x="260" y="336" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">then RoPE with cos, sin tables [L, 128]</text>
+<line x1="175" y1="344" x2="175" y2="370" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="183" y="362" fill="currentColor" font-size="11" opacity=".8">Q [B, 32, T, 128]</text>
+<line x1="345" y1="344" x2="345" y2="370" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="353" y="362" fill="currentColor" font-size="11" opacity=".8">K [B, 8, T, 128]</text>
+<rect x="100" y="372" width="490" height="70" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="345" y="392" text-anchor="middle" fill="currentColor" font-weight="600">GQA attention</text>
+<text x="345" y="410" text-anchor="middle" fill="currentColor" font-size="11">softmax( Q · Kᵀ ÷ √128 + causal mask ) · V</text>
+<text x="345" y="428" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">K, V cache [B, 8, L, 128] each. Query head h reads KV head ⌊h ÷ 4⌋</text>
+<line x1="345" y1="442" x2="345" y2="466" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="353" y="459" fill="currentColor" font-size="11" opacity=".8">[B, T, 4,096]</text>
+<rect x="245" y="468" width="200" height="40" rx="8" fill="rgba(27,175,122,.2)" stroke="#1baf7a"/>
+<text x="345" y="486" text-anchor="middle" fill="currentColor" font-weight="600">o_proj</text>
+<text x="345" y="501" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[4,096, 4,096]</text>
+<polyline points="345,508 345,548 59,548" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<circle cx="46" cy="548" r="11" fill="rgba(128,128,128,.25)" stroke="rgba(128,128,128,.7)"/>
+<text x="46" y="553" text-anchor="middle" fill="currentColor" font-weight="600" font-size="14">+</text>
+<line x1="46" y1="589" x2="228" y2="589" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="230" y="574" width="220" height="30" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="594" text-anchor="middle" fill="currentColor" font-size="11">post_attention_layernorm  [4,096]</text>
+<line x1="340" y1="604" x2="340" y2="620" stroke="currentColor" stroke-width="1.5"/>
+<line x1="235" y1="620" x2="445" y2="620" stroke="currentColor" stroke-width="1.5"/>
+<line x1="235" y1="620" x2="235" y2="632" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<line x1="445" y1="620" x2="445" y2="632" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="150" y="634" width="170" height="44" rx="8" fill="rgba(138,123,234,.22)" stroke="#8a7bea"/>
+<text x="235" y="653" text-anchor="middle" fill="currentColor" font-weight="600">gate_proj</text>
+<text x="235" y="670" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[12,288, 4,096]</text>
+<rect x="360" y="634" width="170" height="44" rx="8" fill="rgba(138,123,234,.22)" stroke="#8a7bea"/>
+<text x="445" y="653" text-anchor="middle" fill="currentColor" font-weight="600">up_proj</text>
+<text x="445" y="670" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[12,288, 4,096]</text>
+<line x1="235" y1="678" x2="235" y2="698" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="243" y="693" fill="currentColor" font-size="11" opacity=".8">[B, T, 12,288]</text>
+<line x1="445" y1="678" x2="445" y2="698" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="453" y="693" fill="currentColor" font-size="11" opacity=".8">[B, T, 12,288]</text>
+<rect x="190" y="700" width="300" height="34" rx="8" fill="rgba(138,123,234,.22)" stroke="#8a7bea"/>
+<text x="340" y="721" text-anchor="middle" fill="currentColor" font-size="11">SiLU(gate) ⊙ up   [B, T, 12,288]</text>
+<line x1="340" y1="734" x2="340" y2="756" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="240" y="758" width="200" height="40" rx="8" fill="rgba(138,123,234,.22)" stroke="#8a7bea"/>
+<text x="340" y="776" text-anchor="middle" fill="currentColor" font-weight="600">down_proj</text>
+<text x="340" y="791" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[4,096, 12,288]</text>
+<polyline points="340,798 340,836 59,836" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<circle cx="46" cy="836" r="11" fill="rgba(128,128,128,.25)" stroke="rgba(128,128,128,.7)"/>
+<text x="46" y="841" text-anchor="middle" fill="currentColor" font-weight="600" font-size="14">+</text>
+<line x1="340" y1="860" x2="340" y2="884" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<text x="350" y="878" fill="currentColor" font-size="11" opacity=".8">x  [B, T, 4,096]</text>
+<rect x="230" y="886" width="220" height="30" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="906" text-anchor="middle" fill="currentColor" font-size="11">model.norm  [4,096]</text>
+<line x1="340" y1="916" x2="340" y2="938" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="190" y="940" width="300" height="44" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="959" text-anchor="middle" fill="currentColor" font-weight="600">lm_head</text>
+<text x="340" y="976" text-anchor="middle" fill="currentColor" opacity=".8" font-size="11">[151,936, 4,096]</text>
+<line x1="340" y1="984" x2="340" y2="1006" stroke="currentColor" stroke-width="1.5" marker-end="url(#lq-bp-a)"/>
+<rect x="215" y="1008" width="250" height="30" rx="8" fill="rgba(128,128,128,.14)" stroke="rgba(128,128,128,.6)"/>
+<text x="340" y="1028" text-anchor="middle" fill="currentColor" font-size="11">logits  [B, T, 151,936]</text>
+<text x="340" y="1062" text-anchor="middle" fill="currentColor" font-size="11" opacity=".75">When generating text, only the last position is needed: [B, 1, 151,936]</text>
+</svg>
+</div>
+
+Four details in the picture deserve a sentence each.
+
+- **Two residual adds per layer.** The attention output and the MLP output are never written *over* `x`, they are added to it. The stream keeps its shape `[B, T, 4096]` all the way from the embedding to the final norm.
+- **Q, K and V are born with different widths.** The query has 32 heads, the key and the value only 8. They meet in the attention step, where every key/value head is read by four query heads.
+- **The value does not pass through the norm and RoPE box.** Only the query and the key are normalised per head and rotated. The value goes straight into the attention.
+- **The MLP is the wide part.** For a moment the stream swells from 4,096 to 12,288 numbers per token (gate and up), is combined element by element, and is squeezed back by `down_proj`.
+
+<a id="scale"></a>
+
+## 5. The matrices drawn to scale
+
+Numbers like 16,777,216 are hard to feel. Here every matrix of one layer is drawn with its true proportions: **1,024 rows or columns equal 28 pixels**, so the area of a rectangle is proportional to the number of parameters. A matrix is drawn as stored: height = rows = outputs, width = columns = inputs. The thin lines mark bands of 128 (one attention head). Click a matrix to see exactly what its rows and columns mean.
+
+<div class="lq" id="lqH">
+<svg id="lqH-svg" viewBox="0 0 680 600" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-label="The seven weight matrices of one Qwen3-8B layer drawn to scale"></svg>
+<div id="lqH-d" class="lq-card" style="margin-top:10px"></div>
+<div id="lqH-t" style="margin-top:12px"></div>
+</div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function nf(x){return Math.round(x).toLocaleString("en-US")}
+var U=28/1024,LAYER=192937984,QP=16777216,EMB=622329856;
+var M=[
+{id:"q",s:"q_proj",n:"self_attn.q_proj.weight",o:4096,i:4096,x:16,y:44,c:"att",b:"rows",nb:32,what:"Row r produces output number r of the query vector. Rows 128h to 128h+127 are the 128 numbers of query head h (h = 0 … 31). Every row reads all 4,096 input numbers."},
+{id:"k",s:"k_proj",n:"self_attn.k_proj.weight",o:1024,i:4096,x:176,y:44,c:"att",b:"rows",nb:8,what:"Rows 128g to 128g+127 are the 128 numbers of key head g (g = 0 … 7). It has a quarter of the rows of q_proj, because four query heads share each key head."},
+{id:"v",s:"v_proj",n:"self_attn.v_proj.weight",o:1024,i:4096,x:176,y:112,c:"att",b:"rows",nb:8,what:"Rows 128g to 128g+127 are the 128 numbers of value head g. Same shape as k_proj, and the same sharing: four query heads read each value head."},
+{id:"o",s:"o_proj",n:"self_attn.o_proj.weight",o:4096,i:4096,x:336,y:44,c:"att",b:"cols",nb:32,what:"The 4,096 columns are the 32 head outputs side by side: columns 128h to 128h+127 receive the output of head h. Every one of the 4,096 rows is a weighted sum over all heads."},
+{id:"gate",s:"gate_proj",n:"mlp.gate_proj.weight",o:12288,i:4096,x:16,y:222,c:"mlp",what:"Each of the 12,288 rows is one hidden feature: a weighted sum of all 4,096 input numbers. The result is passed through SiLU and acts as the gate."},
+{id:"up",s:"up_proj",n:"mlp.up_proj.weight",o:12288,i:4096,x:176,y:222,c:"mlp",what:"Same shape as gate_proj. Its 12,288 outputs are the values that the gate lets through, multiplied element by element."},
+{id:"down",s:"down_proj",n:"mlp.down_proj.weight",o:4096,i:12288,x:336,y:222,c:"mlp",what:"The only matrix that is wider than tall: each of the 4,096 rows is a weighted sum over all 12,288 hidden features. It brings the stream back to its normal width."}
+];
+var FILL={att:"rgba(27,175,122,.22)",mlp:"rgba(138,123,234,.24)"},STR={att:"#1baf7a",mlp:"#8a7bea"},cur="q";
+function T(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'" text-anchor="'+(o.a||"middle")+'" fill="currentColor" font-size="'+(o.s||11)+'"'+(o.w?' font-weight="600"':"")+(o.o?' opacity="'+o.o+'"':"")+'>'+t+'</text>'}
+function draw(){
+var s=T(16,24,"Attention matrices of one layer",{a:"start",w:1,s:12})+T(16,204,"MLP matrices of one layer",{a:"start",w:1,s:12});
+M.forEach(function(m){var w=m.i*U,h=m.o*U,on=m.id===cur,band=(m.b==="rows"?h:w)/m.nb;
+s+='<g data-m="'+m.id+'" style="cursor:pointer" tabindex="0" role="button" aria-label="Show details of '+m.s+'"><rect x="'+m.x+'" y="'+m.y+'" width="'+w+'" height="'+h+'" rx="3" fill="'+FILL[m.c]+'" stroke="'+STR[m.c]+'" stroke-width="'+(on?3:1)+'"/>';
+if(m.b){for(var j=1;j<m.nb;j++){var p=j*band;s+=(m.b==="rows")?'<line x1="'+m.x+'" y1="'+(m.y+p)+'" x2="'+(m.x+w)+'" y2="'+(m.y+p)+'" stroke="currentColor" stroke-opacity=".28"/>':'<line x1="'+(m.x+p)+'" y1="'+m.y+'" x2="'+(m.x+p)+'" y2="'+(m.y+h)+'" stroke="currentColor" stroke-opacity=".28"/>'}}
+s+=T(m.x+w/2,m.y+h+13,m.s,{w:1})+T(m.x+w/2,m.y+h+26,"["+nf(m.o)+", "+nf(m.i)+"]",{o:0.8})+'</g>'});
+s+=T(480,64,"Scale: 1,024 rows or columns",{a:"start",o:0.85})+T(480,80,"are 28 pixels. Area is",{a:"start",o:0.85})+T(480,96,"proportional to parameters.",{a:"start",o:0.85})+T(480,120,"Thin lines: bands of 128",{a:"start",o:0.85})+T(480,136,"rows or columns, one per",{a:"start",o:0.85})+T(480,152,"attention head.",{a:"start",o:0.85});
+$("lqH-svg").innerHTML=s}
+function detail(){var m=M.filter(function(x){return x.id===cur})[0],p=m.o*m.i;
+$("lqH-d").innerHTML='<b>model.layers.i.'+m.n+'</b><div class="lq-grid" style="margin-top:8px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))"><div class="lq-mc"><small>Shape [rows = out, columns = in]</small><b>['+nf(m.o)+', '+nf(m.i)+']</b></div><div class="lq-mc"><small>Parameters</small><b>'+nf(p)+'</b></div><div class="lq-mc"><small>Bytes in bf16</small><b>'+nf(p*2)+'</b></div><div class="lq-mc"><small>Share of one layer</small><b>'+(100*p/LAYER).toFixed(1)+'%</b></div><div class="lq-mc"><small>Compared with q_proj</small><b>'+(p/QP).toFixed(2)+' ×</b></div><div class="lq-mc"><small>FLOPs per token</small><b>'+nf(2*p)+'</b></div></div><p style="margin:10px 0 0">'+m.what+'</p>'}
+function table(){var R=[["model.embed_tokens (once)",EMB],["lm_head (once)",EMB]],h='<table class="lq-t"><tr><th>Tensor family</th><th>Parameters</th><th>In units of one layer</th></tr>';
+M.forEach(function(m){R.push([m.s+" (per layer)",m.o*m.i])});
+R.push(["norm scales (per layer: 2 × 4,096 + 2 × 128)",8448]);
+R.forEach(function(r){h+="<tr><td><code>"+r[0]+"</code></td><td>"+nf(r[1])+"</td><td>"+(r[1]/LAYER).toFixed(3)+"</td></tr>"});
+h+='<tr style="font-weight:600"><td>One layer in total</td><td>'+nf(LAYER+8448)+'</td><td>1.000</td></tr></table>';$("lqH-t").innerHTML=h}
+$("lqH-svg").addEventListener("click",function(e){var g=e.target.closest("[data-m]");if(g){cur=g.getAttribute("data-m");draw();detail()}});
+$("lqH-svg").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){var g=e.target.closest&&e.target.closest("[data-m]");if(g){e.preventDefault();cur=g.getAttribute("data-m");draw();detail()}}});
+draw();detail();table();
+})();
+</script>
+
+What the picture shows at a glance:
+
+- **`k_proj` and `v_proj` are slim.** Each has a quarter of the rows of `q_proj`. That is the visible form of grouped-query attention: 8 key/value heads instead of 32.
+- **The MLP dominates.** Its three matrices are 78% of the weights of a layer (151.0 M of 192.9 M). The four attention matrices share the remaining 21.7%.
+- **`down_proj` is the `gate_proj` turned on its side.** Same number of parameters, rows and columns swapped.
+- **The embedding table and the output head** are each worth 3.2 layers. Together with the 36 layers they make up the 8.19 B parameters, and 15% of all parameters sit outside the layers.
+
+
+<a id="layer"></a>
+
+## 6. One layer, operation by operation
+
+Now the same layer as a table: every operation in the order it runs, with the weight tensor it uses, the exact shapes going in and out, the number of floating-point operations (FLOPs) and the size of its output. Choose how many sequences you process (`B`), how many tokens are already in the cache (`past`) and how many tokens this pass processes (`T`). Then `L = past + T`.
+
+Three presets cover the two situations that matter: reading a prompt (many tokens at once, empty cache) and generating (one new token, long cache).
+
+How the FLOPs are counted: a matrix product costs `2 × (outputs) × (multiply-adds)`, which is exact. The small element-wise operations (norms, RoPE, softmax, SiLU) are rough estimates and marked with `≈`. They are tiny next to the matrix products.
+
+<div class="lq" id="lqI">
+<div class="lq-row" style="gap:6px"><button type="button" data-p="1,8000,1">Generate one token (8,000 cached)</button><button type="button" data-p="1,0,8000">Read an 8,000-token prompt</button><button type="button" data-p="16,8000,1">Generate for 16 sequences</button></div>
+<div class="lq-row"><label>B <select id="lqI-B"><option>1</option><option>2</option><option>4</option><option>8</option><option>16</option><option>32</option><option>64</option></select></label><label>past <select id="lqI-P"><option value="0">0</option><option value="1000">1,000</option><option value="4000">4,000</option><option value="8000" selected>8,000</option><option value="16000">16,000</option><option value="32000">32,000</option></select></label><label>T <select id="lqI-T"><option value="1" selected>1</option><option value="16">16</option><option value="128">128</option><option value="1024">1,024</option><option value="4096">4,096</option><option value="8000">8,000</option></select></label><label><input type="checkbox" id="lqI-last" checked> output head for the last position only</label></div>
+<div id="lqI-t"></div>
+<div id="lqI-c" class="lq-grid" style="margin-top:12px"></div>
+</div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function nf(x){return Math.round(x).toLocaleString("en-US")}
+function F(x){if(x>=1e12)return (x/1e12).toFixed(2)+" T";if(x>=1e9)return (x/1e9).toFixed(2)+" G";if(x>=1e6)return (x/1e6).toFixed(1)+" M";if(x>=1e3)return (x/1e3).toFixed(1)+" K";return Math.round(x)+""}
+function Bt(x){if(x>=1e9)return (x/1e9).toFixed(2)+" GB";if(x>=1e6)return (x/1e6).toFixed(1)+" MB";if(x>=1e3)return (x/1e3).toFixed(1)+" KB";return Math.round(x)+" B"}
+function S(a){return "["+a.map(nf).join(", ")+"]"}
+function pr(a){var p=1;a.forEach(function(x){p*=x});return p}
+var H=4096,Q=32,K=8,D=128,I=12288,V=151936,N=36;
+function build(B,T,P){var L=P+T,R=[];
+function r(name,note,w,wp,inS,outS,fl,act,est){R.push({name:name,note:note,w:w,wp:wp,inS:inS,outS:outS,fl:fl,act:act,est:est})}
+r("input_layernorm","RMSNorm: rescale every token vector",[H],H,S([B,T,H]),S([B,T,H]),4*B*T*H,B*T*H,1);
+r("q_proj","queries",[Q*D,H],Q*D*H,S([B,T,H]),S([B,T,Q*D])+" → view "+S([B,T,Q,D]),2*B*T*H*Q*D,B*T*Q*D);
+r("k_proj","keys",[K*D,H],K*D*H,S([B,T,H]),S([B,T,K*D])+" → view "+S([B,T,K,D]),2*B*T*H*K*D,B*T*K*D);
+r("v_proj","values",[K*D,H],K*D*H,S([B,T,H]),S([B,T,K*D])+" → view "+S([B,T,K,D]),2*B*T*H*K*D,B*T*K*D);
+r("q_norm, k_norm","RMSNorm over the 128 numbers of every head",[D],2*D,S([B,T,Q,D])+" and "+S([B,T,K,D]),"same shapes",4*B*T*(Q+K)*D,B*T*(Q+K)*D,1);
+r("RoPE","rotate the pairs (i, i+64) by position × θᵢ",null,0,S([B,Q,T,D])+" and "+S([B,K,T,D]),"same shapes; cos, sin "+S([L,D]),3*B*T*(Q+K)*D,B*T*(Q+K)*D,1);
+r("KV cache append","write the new keys and values",null,0,S([B,K,T,D])+" ×2",S([B,K,L,D])+" ×2 (the cache)",0,2*B*K*T*D);
+r("repeat_kv (GQA)","every KV head serves 4 query heads",null,0,S([B,K,L,D]),S([B,Q,L,D])+" (logical view)",0,0);
+r("scores = Q·Kᵀ ÷ √128","one dot product per query head, query token and key token",null,0,S([B,Q,T,D])+" · "+S([B,Q,D,L]),S([B,Q,T,L]),2*B*Q*T*L*D,B*Q*T*L);
+r("causal mask, softmax","percentages over the L keys",null,0,S([B,Q,T,L]),S([B,Q,T,L]),5*B*Q*T*L,B*Q*T*L,1);
+r("P·V","blend the values with the attention weights",null,0,S([B,Q,T,L])+" · "+S([B,Q,L,D]),S([B,Q,T,D]),2*B*Q*T*L*D,B*Q*T*D);
+r("merge heads","transpose and reshape",null,0,S([B,Q,T,D]),S([B,T,Q*D]),0,B*T*Q*D);
+r("o_proj","mix the 32 heads",[H,Q*D],H*Q*D,S([B,T,Q*D]),S([B,T,H]),2*B*T*Q*D*H,B*T*H);
+r("residual add","x = x + attention output",null,0,S([B,T,H])+" + "+S([B,T,H]),S([B,T,H]),B*T*H,B*T*H);
+r("post_attention_layernorm","RMSNorm in front of the MLP",[H],H,S([B,T,H]),S([B,T,H]),4*B*T*H,B*T*H,1);
+r("gate_proj","gate branch",[I,H],I*H,S([B,T,H]),S([B,T,I]),2*B*T*H*I,B*T*I);
+r("up_proj","up branch",[I,H],I*H,S([B,T,H]),S([B,T,I]),2*B*T*H*I,B*T*I);
+r("SiLU(gate) ⊙ up","smooth switch times values, element by element",null,0,S([B,T,I])+" and "+S([B,T,I]),S([B,T,I]),5*B*T*I,B*T*I,1);
+r("down_proj","back to the width of the stream",[H,I],H*I,S([B,T,I]),S([B,T,H]),2*B*T*I*H,B*T*H);
+r("residual add","x = x + MLP output",null,0,S([B,T,H])+" + "+S([B,T,H]),S([B,T,H]),B*T*H,B*T*H);
+return {R:R,L:L}}
+function render(){
+var B=+$("lqI-B").value,P=+$("lqI-P").value,T=+$("lqI-T").value,last=$("lqI-last").checked,b=build(B,T,P),R=b.R,L=b.L,lf=0,lw=0;
+R.forEach(function(x){lf+=x.fl;lw+=x.wp});
+var Tl=last?1:T,normF=4*B*Tl*H,headF=2*B*Tl*H*V,total=N*lf+normF+headF;
+var h='<table class="lq-t"><tr><th>#</th><th>Operation</th><th>Weight [out, in]</th><th>Shapes in → out</th><th>FLOPs</th><th>Share</th><th>Output</th></tr>';
+R.forEach(function(x,i){var sh=lf?100*x.fl/lf:0;
+h+='<tr><td>'+(i+1)+'</td><td><code>'+x.name+'</code><div class="lq-sm lq-mut">'+x.note+'</div></td><td>'+(x.w?'<code>'+S(x.w)+(x.name==="q_norm, k_norm"?" ×2":"")+'</code>':'')+'</td><td class="lq-sm"><code>'+x.inS+'</code><br>→ <code>'+x.outS+'</code></td><td>'+(x.est?"≈ ":"")+F(x.fl)+'</td><td style="min-width:70px"><div style="height:8px;border-radius:4px;background:rgba(42,120,214,.75);width:'+Math.max(sh>0?2:0,sh)+'%"></div><span class="lq-sm">'+sh.toFixed(1)+'%</span></td><td>'+Bt(x.act*2)+'</td></tr>'});
+h+='<tr style="font-weight:600"><td></td><td>One layer</td><td>'+nf(lw)+' weights</td><td></td><td>'+F(lf)+'</td><td></td><td></td></tr>';
+h+='<tr><td></td><td><code>model.embed_tokens</code><div class="lq-sm lq-mut">row lookup, no arithmetic</div></td><td><code>'+S([V,H])+'</code></td><td class="lq-sm"><code>'+S([B,T])+'</code><br>→ <code>'+S([B,T,H])+'</code></td><td>0</td><td></td><td>'+Bt(B*T*H*2)+'</td></tr>';
+h+='<tr><td></td><td>× 36 layers</td><td></td><td></td><td>'+F(N*lf)+'</td><td></td><td></td></tr>';
+h+='<tr><td></td><td><code>model.norm</code> and <code>lm_head</code><div class="lq-sm lq-mut">'+(last?"last position only":"all positions")+'</div></td><td><code>'+S([V,H])+'</code></td><td class="lq-sm"><code>'+S([B,Tl,H])+'</code><br>→ <code>'+S([B,Tl,V])+'</code></td><td>'+F(normF+headF)+'</td><td></td><td>'+Bt(B*Tl*V*2)+'</td></tr>';
+h+='<tr style="font-weight:600"><td></td><td>Whole forward pass</td><td></td><td></td><td>'+F(total)+'</td><td></td><td></td></tr></table>';
+$("lqI-t").innerHTML=h;
+var w=(8190735360-V*H)*2,kvl=2*B*L*K*D*2,sc=B*Q*T*L*2;
+var c='<div class="lq-card"><b>This pass</b><div class="lq-m"><span>Tokens processed (B × T)</span><span>'+nf(B*T)+'</span></div><div class="lq-m"><span>Keys and values per layer (L)</span><span>'+nf(L)+(L>40960?" (above the native 40,960)":"")+'</span></div><div class="lq-m"><span>FLOPs, one layer</span><span>'+F(lf)+'</span></div><div class="lq-m"><span>FLOPs, whole pass</span><span><b>'+F(total)+'</b></span></div><div class="lq-m"><span>FLOPs per processed token</span><span>'+F(total/(B*T))+'</span></div></div>';
+c+='<div class="lq-card"><b>Memory touched</b><div class="lq-m"><span>Weight matrices, read once per pass</span><span>'+Bt(w)+'</span></div><div class="lq-m"><span>… independent of B and T</span><span>yes</span></div><div class="lq-m"><span>KV cache after the pass, one layer</span><span>'+Bt(kvl)+'</span></div><div class="lq-m"><span>KV cache after the pass, 36 layers</span><span>'+Bt(kvl*N)+'</span></div><div class="lq-m"><span>Score tensor if it were stored (one layer)</span><span>'+Bt(sc)+'</span></div></div>';
+$("lqI-c").innerHTML=c}
+["lqI-B","lqI-P","lqI-T","lqI-last"].forEach(function(id){$(id).addEventListener("change",render)});
+document.querySelector("#lqI .lq-row").addEventListener("click",function(e){var b=e.target.closest("button[data-p]");if(!b)return;var p=b.getAttribute("data-p").split(",");$("lqI-B").value=p[0];$("lqI-P").value=p[1];$("lqI-T").value=p[2];render()});
+render();
+})();
+</script>
+
+What the table teaches:
+
+- **Where the arithmetic is.** Every matrix product has FLOPs proportional to `B × T`. The two attention products are proportional to `B × T × L`. When you generate one token (`T = 1`) the seven weight matrices dominate. When you read a long prompt (`T = L = 8,000`) the attention products grow with the square of the prompt and take a visibly larger share. The table counts the full `T × L` score matrix. Kernels that skip the masked upper triangle do roughly half of these attention products during a prompt pass.
+- **The weights are read once per pass, whatever B and T are.** The memory line "weight matrices, read once per pass" does not change when you change the batch or the number of tokens. Processing more tokens per pass therefore reuses every weight more often. That is the reason a prompt is cheap per token and a single generated token is not.
+- **The score tensor is huge in principle.** For an 8,000-token prompt the matrix `[1, 32, 8000, 8000]` would hold 2.05 billion numbers (4.1 GB in bf16) per layer. Attention kernels of the FlashAttention family never write it to memory, they compute it block by block. The row only shows what a naive implementation would have to store.
+- **The cache grows by `T` rows per pass.** The append step writes only the new keys and values, `2 × B × T × 8 × 128` numbers per layer.
+
+
+<a id="attention"></a>
+
+## 7. Attention in exact dimensions: heads, rows and rotations
+
+Attention is the part where names like "head" and "group" stay vague until you see the indices. Two questions have exact answers:
+
+1. **Which rows of `q_proj`, `k_proj` and `v_proj` belong to which head?**
+2. **What exactly does RoPE do to the 128 numbers of a head?**
+
+### Which rows belong to which head
+
+The output of `q_proj` is a vector of 4,096 numbers per token. It is cut into 32 consecutive bands of 128: numbers 0 to 127 are query head 0, numbers 128 to 255 are query head 1, and so on. `k_proj` and `v_proj` produce only 1,024 numbers, cut into 8 bands of 128. The link between the two is plain integer division: **query head `h` uses key/value head `⌊h / 4⌋`**.
+
+Move the slider to select a query head. The three bars are the outputs of the three projections, aligned so that the four query heads of a group sit exactly above their shared key/value head.
+
+<div class="lq" id="lqJ">
+<div class="lq-row"><label for="lqJ-h" style="min-width:110px">Query head h</label><input type="range" id="lqJ-h" min="0" max="31" value="13"><b id="lqJ-hv" style="min-width:30px;text-align:right"></b></div>
+<svg id="lqJ-svg" viewBox="0 0 680 216" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-label="Rows of q_proj, k_proj and v_proj and the head that each band belongs to"></svg>
+<div id="lqJ-i" class="lq-card" style="margin-top:10px"></div>
+</div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function nf(x){return Math.round(x).toLocaleString("en-US")}
+var PAL=["#2a78d6","#1baf7a","#eb6834","#8a7bea","#eda100","#e87ba4","#00a3bf","#8a8a86"];
+function T(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'" text-anchor="'+(o.a||"middle")+'" fill="currentColor" font-size="'+(o.s||11)+'"'+(o.w?' font-weight="600"':"")+(o.o?' opacity="'+o.o+'"':"")+'>'+t+'</text>'}
+function draw(h){var g=Math.floor(h/4),x0=40,bw=600/32,kw=600/8,s=T(40,18,"q_proj output: 4,096 numbers = 32 bands of 128 (one band per query head)",{a:"start",o:0.85}),i,j;
+for(i=0;i<32;i++){var gi=Math.floor(i/4),on=i===h;s+='<rect x="'+(x0+i*bw)+'" y="26" width="'+(bw-1.5)+'" height="30" fill="'+PAL[gi]+'" fill-opacity="'+(on?1:(gi===g?0.7:0.28))+'"'+(on?' stroke="currentColor" stroke-width="2"':'')+'/>'}
+s+=T(x0+h*bw+bw/2,46,String(h),{s:10});
+s+='<polygon points="'+(x0+4*g*bw)+',56 '+(x0+4*g*bw+4*bw-1.5)+',56 '+(x0+(g+1)*kw-2)+',96 '+(x0+g*kw)+',96" fill="'+PAL[g]+'" fill-opacity="0.2"/>';
+for(j=0;j<8;j++)s+='<rect x="'+(x0+j*kw)+'" y="96" width="'+(kw-2)+'" height="30" fill="'+PAL[j]+'" fill-opacity="'+(j===g?1:0.28)+'"'+(j===g?' stroke="currentColor" stroke-width="2"':'')+'/>'+T(x0+j*kw+kw/2,116,"KV "+j,{s:11});
+s+=T(40,142,"k_proj output: 1,024 numbers = 8 bands of 128 (one band per key/value head)",{a:"start",o:0.85});
+for(j=0;j<8;j++)s+='<rect x="'+(x0+j*kw)+'" y="152" width="'+(kw-2)+'" height="30" fill="'+PAL[j]+'" fill-opacity="'+(j===g?1:0.28)+'"'+(j===g?' stroke="currentColor" stroke-width="2"':'')+'/>'+T(x0+j*kw+kw/2,172,"KV "+j,{s:11});
+s+=T(40,198,"v_proj output: same layout as k_proj",{a:"start",o:0.85});
+s+=T(28,46,"q",{a:"end",s:12,w:1})+T(28,116,"k",{a:"end",s:12,w:1})+T(28,172,"v",{a:"end",s:12,w:1});
+$("lqJ-svg").innerHTML=s}
+function info(h){var g=Math.floor(h/4),qa=h*128,ka=g*128;
+$("lqJ-i").innerHTML='<b>Query head '+h+' reads key/value head '+g+'</b><div class="lq-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px"><div class="lq-mc"><small>q_proj rows (its query)</small><b>'+nf(qa)+' … '+nf(qa+127)+'</b></div><div class="lq-mc"><small>k_proj and v_proj rows (shared)</small><b>'+nf(ka)+' … '+nf(ka+127)+'</b></div><div class="lq-mc"><small>Query heads sharing KV head '+g+'</small><b>'+(4*g)+', '+(4*g+1)+', '+(4*g+2)+', '+(4*g+3)+'</b></div><div class="lq-mc"><small>o_proj columns that receive head '+h+'</small><b>'+nf(qa)+' … '+nf(qa+127)+'</b></div></div><pre style="margin:10px 0 0;white-space:pre-wrap;font-size:12px"><code>Q_h    = q[:, :, '+h+', :]        # [B, T, 128]   rows '+qa+'..'+(qa+127)+' of q_proj\nK_g    = k_cache[:, '+g+', :, :]     # [B, L, 128]   rows '+ka+'..'+(ka+127)+' of k_proj, for every cached token\nV_g    = v_cache[:, '+g+', :, :]     # [B, L, 128]\nscores = Q_h @ K_g.transpose(-1,-2) / sqrt(128)     # [B, T, L]\nout_h  = softmax(scores + mask) @ V_g               # [B, T, 128] → columns '+qa+'..'+(qa+127)+' of o_proj</code></pre>'}
+function upd(){var h=+$("lqJ-h").value;$("lqJ-hv").textContent=h;draw(h);info(h)}
+$("lqJ-h").addEventListener("input",upd);upd();
+})();
+</script>
+
+Some exact facts that follow from the picture:
+
+- **Cache layout.** Per layer the cache holds keys and values of shape `[B, 8, L, 128]` each. One token adds `2 × 8 × 128` numbers, which is 4,096 bytes in bf16, or 147,456 bytes over the 36 layers.
+- **Sharing is just indexing.** Reference implementations expand the 8 cached heads to 32 by repeating each one four times in a row (heads 0, 0, 0, 0, 1, 1, 1, 1, …). Fast kernels skip the copy and simply read KV head `⌊h / 4⌋`.
+- **What multi-head attention would cost.** With 32 key/value heads, `k_proj` and `v_proj` would be `[4096, 4096]` instead of `[1024, 4096]` and the cache four times larger.
+- **The causal mask.** Query token `t` (at position `past + t`) may only look at keys with an index up to `past + t`. All other scores are set to minus infinity before the softmax, so they get exactly zero weight. During generation (`T = 1`) the single query sees every cached key, so the mask changes nothing.
+
+### How the rotation works
+
+Before the keys are stored and before queries meet keys, RoPE rotates the 128 numbers of each head. The numbers are paired **half a head apart**: number `i` is paired with number `i + 64`, for `i` = 0 … 63. Each pair is treated as a point in a plane and turned by the angle
+
+```
+φ(p, i) = p × θᵢ        with   θᵢ = 1,000,000 ^ ( −i / 64 )        p = position of the token
+
+a′ =  a·cos φ − b·sin φ        (a, b) = (x[i], x[i + 64])
+b′ =  a·sin φ + b·cos φ
+```
+
+So every token position turns pair `i` by `p × θᵢ` radians. Pair 0 turns fastest, by exactly 1 radian per position. Pair 63 turns about one millionth of that. The result is a clock with 64 hands at very different speeds. Because rotations compose, the dot product of a rotated query and a rotated key depends only on the **distance** between the two tokens, which is why the model can use position without storing absolute positions anywhere.
+
+Pick a frequency and a position. The circle shows where the hand points, the bars show the wavelength (the number of positions per full turn) of all 64 pairs on a logarithmic scale.
+
+<div class="lq" id="lqK">
+<div class="lq-row"><label for="lqK-i" style="min-width:150px">Frequency index i</label><input type="range" id="lqK-i" min="0" max="63" value="0"><b id="lqK-iv" style="min-width:30px;text-align:right"></b></div>
+<div class="lq-row"><label for="lqK-p" style="min-width:150px">Token position p</label><input type="range" id="lqK-p" min="0" max="40959" value="3"><b id="lqK-pv" style="min-width:60px;text-align:right"></b></div>
+<svg id="lqK-svg" viewBox="0 0 680 250" width="100%" style="max-width:680px;display:block;margin:0 auto" role="img" aria-label="A rotating hand for the chosen frequency and the wavelengths of all 64 frequencies"></svg>
+<div id="lqK-i2" class="lq-card" style="margin-top:10px"></div>
+</div>
+<script>
+(function(){
+function $(id){return document.getElementById(id)}
+function nf(x){return Math.round(x).toLocaleString("en-US")}
+function th(i){return Math.pow(1e6,-i/64)}
+function T(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'" text-anchor="'+(o.a||"middle")+'" fill="currentColor" font-size="'+(o.s||11)+'"'+(o.w?' font-weight="600"':"")+(o.o?' opacity="'+o.o+'"':"")+'>'+t+'</text>'}
+function hgt(i){return Math.max(1,(Math.log10(2*Math.PI/th(i))-0.7)/6.1*150)}
+function upd(){
+var i=+$("lqK-i").value,p=+$("lqK-p").value,t=th(i),tau=2*Math.PI,wl=tau/t,phi=(p*t)%tau,c=Math.cos(phi),sn=Math.sin(phi),cx=110,cy=120,R=80,k,s="";
+$("lqK-iv").textContent=i;$("lqK-pv").textContent=nf(p);
+s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="currentColor" stroke-opacity=".4"/><line x1="'+(cx-R)+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="currentColor" stroke-opacity=".2"/><line x1="'+cx+'" y1="'+(cy-R)+'" x2="'+cx+'" y2="'+(cy+R)+'" stroke="currentColor" stroke-opacity=".2"/>';
+s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="3 3"/><line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*c)+'" y2="'+(cy-R*sn)+'" stroke="#eb6834" stroke-width="3" stroke-linecap="round"/><circle cx="'+(cx+R*c)+'" cy="'+(cy-R*sn)+'" r="4" fill="#eb6834"/>';
+s+=T(cx,22,"pair ("+"x["+i+"], x["+(i+64)+"])",{w:1,s:12})+T(cx,222,"angle φ = "+phi.toFixed(3)+" rad = "+(phi*180/Math.PI).toFixed(1)+"°",{o:0.9})+T(cx,238,"dashed: position 0",{o:0.7});
+var bx=250,bw=400/64,base=210;
+for(k=0;k<64;k++)s+='<rect x="'+(bx+k*bw)+'" y="'+(base-hgt(k))+'" width="'+(bw-1)+'" height="'+hgt(k)+'" fill="'+(k===i?"#eb6834":"#2a78d6")+'" fill-opacity="'+(k===i?1:0.55)+'"/>';
+var ry=base-(Math.log10(40960)-0.7)/6.1*150;
+s+='<line x1="'+bx+'" y1="'+ry+'" x2="'+(bx+400)+'" y2="'+ry+'" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>'+T(bx,ry-6,"native context: 40,960 positions",{a:"start",o:0.85});
+s+=T(bx,22,"wavelength of each of the 64 pairs (positions per full turn, log scale)",{a:"start",o:0.85})+T(bx,226,"pair 0: 6.3 positions",{a:"start",o:0.8})+T(bx+400,226,"pair 63: 5.1 million",{a:"end",o:0.8});
+$("lqK-svg").innerHTML=s;
+var slow=0;for(k=0;k<64;k++)if(tau/th(k)>40960)slow++;
+var a=0.6,b=0.8;
+$("lqK-i2").innerHTML='<div class="lq-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))"><div class="lq-mc"><small>θ'+i+' = 1,000,000^(−'+i+'/64)</small><b>'+t.toExponential(3)+' rad per position</b></div><div class="lq-mc"><small>Wavelength 2π ÷ θ</small><b>'+(wl<1e4?wl.toFixed(1):nf(wl))+' positions</b></div><div class="lq-mc"><small>cos φ and sin φ</small><b>'+c.toFixed(4)+' and '+sn.toFixed(4)+'</b></div><div class="lq-mc"><small>Example pair (0.60, 0.80) becomes</small><b>('+(a*c-b*sn).toFixed(3)+', '+(a*sn+b*c).toFixed(3)+')</b></div></div><p style="margin:10px 0 0" class="lq-sm">'+slow+' of the 64 pairs have a wavelength above 40,960 positions: within the native context they never complete even one turn. They tell the model about large distances. The fastest pairs tell it about neighbours. The cos and sin tables hold the 64 angles twice, once for each half of the head, so their shape is [L, 128].</p>'}
+$("lqK-i").addEventListener("input",upd);$("lqK-p").addEventListener("input",upd);upd();
+})();
+</script>
+
+
+<a id="why"></a>
+
+## 8. Why these numbers: layers, heads and key/value heads
+
+With the exact shapes in hand, the questions behind the numbers can be asked precisely.
+
+**What is a "hidden layer"?** A neural network has an input (here: token IDs), an output (here: a score for every dictionary entry) and a lot of computation in between. Everything in between is called *hidden*, because nobody reads those intermediate vectors directly. In Qwen3-8B the hidden layers are the 36 blocks `model.layers.0` … `model.layers.35`, and `hidden_size` is the width of the vector that travels between them. The config counts blocks, although every block itself contains several smaller steps.
+
+**Why 36 layers?** It is a design choice, not a law of nature. One layer does one round of "gather information from the other tokens" (attention) followed by one round of "think about it" (MLP). Stacking layers lets later rounds build on the results of earlier ones: depth buys *sequential steps of refinement*. The exact number follows from the size budget. The weights of one layer are
+
+```
+attention:  q_proj H² + o_proj H² + k_proj ¼H² + v_proj ¼H²  =  2.5 H²
+MLP:        gate 3H² + up 3H² + down 3H²                     =  9   H²
+per layer:  11.5 × 4,096² = 192,937,984   (plus 8,448 norm weights)
+
+total:      36 × 192,937,984  +  2 × 151,936 × 4,096   =   6.95 B + 1.24 B   =   8.19 B
+```
+
+The same budget could be spent on fewer, wider layers or on more, narrower ones. The builder below shows how steeply the layer count changes with the width. I cannot tell you why the designers chose exactly this point.
+
+**What is an attention head?** One independent attention reader. The 4,096 query numbers are cut into 32 bands of 128 (section 7), and each band computes its own scores and its own softmax, so each head can focus on different earlier tokens. Splitting is free in arithmetic: 32 × 128 = 4,096, the same matrix, just indexed in bands. Studies of transformer models in general found heads that follow the previous word, heads that copy repeated text and heads that match a number to its label. I did not verify what the heads of Qwen3-8B specifically do.
+
+**Why only 8 key/value heads?** Memory. Keys and values of all earlier tokens are kept in the cache, so their size is set by the number of key/value heads:
+
+```
+bytes per token  =  2 (K and V) × 36 layers × n_kv × 128 × 2 bytes
+n_kv = 32 (classic multi-head attention):  589,824 bytes  →  4.7 GB for 8,000 tokens
+n_kv =  8 (Qwen3-8B):                      147,456 bytes  →  1.2 GB for 8,000 tokens
+n_kv =  1 (multi-query attention):          18,432 bytes  →  0.15 GB for 8,000 tokens
+```
+
+Grouped-query attention, the design with 1 < `n_kv` < `n_q`, was introduced as a middle way: the paper reports quality close to multi-head attention at a speed comparable to multi-query attention, while pure multi-query attention can cost quality. Eight also divides 32 evenly and is a common head count when a model is split across eight GPUs, but I cannot verify that this was Qwen's reason.
+
+### Assemble it yourself
+
+Press **Build it** to watch the network being put together piece by piece: first the embedding table, then layer after layer, finally the output head, while the parameter counter climbs towards 8.19 B. Then change the design. The tower is drawn with **width = hidden size** and **height = number of layers**. Its layers are split into an attention part (green) and an MLP part (purple) by their share of the weights, and the dashed outline is Qwen3-8B for comparison.
 
 Things to try:
 
-- Keep the parameter count near 8.19 B and change the hidden size. The card "layers needed for 8.19 B" tells you how deep the tower would have to be (a wide, short tower or a narrow, tall one).
+- Keep the parameter count near 8.19 B and change the hidden size. The card "layers needed for 8.19 B" tells you how deep the tower would have to be.
 - Raise the number of layers and watch the **KV cache per token** grow in proportion.
-- Raise the KV heads to the number of query heads (classic multi-head attention) and see the cache and the estimated decode speed react.
+- Raise the KV heads up to the number of query heads (classic multi-head attention) and see the cache explode.
 
 <div class="lq" id="lqF">
 <div class="lq-row"><label for="lqF-L" style="min-width:70px">Layers</label><input type="range" id="lqF-L" min="4" max="80" value="36"><b id="lqF-Lv" style="min-width:34px;text-align:right"></b></div>
 <div class="lq-row"><label>Hidden size <select id="lqF-H"><option value="2048">2,048</option><option value="3072">3,072</option><option value="4096" selected>4,096</option><option value="5120">5,120</option><option value="6144">6,144</option><option value="8192">8,192</option></select></label><label>KV heads <select id="lqF-K"></select></label><span id="lqF-q" class="lq-sm lq-mut"></span></div>
 <div class="lq-row"><button type="button" id="lqF-b">▶ Build it</button><button type="button" id="lqF-r">Reset to Qwen3-8B</button></div>
 <div class="lq-grid" style="grid-template-columns:repeat(auto-fit,minmax(290px,1fr));align-items:start"><div id="lqF-svg"></div><div id="lqF-m"></div></div>
-<div class="lq-sm lq-mut" style="margin-top:8px">Fixed in this builder: head_dim 128, intermediate_size = 3 × hidden_size, vocabulary 151,936, separate embedding and output head. Estimates use 60% of peak A100 bandwidth, 6 users and 8,000 tokens each.</div>
+<div class="lq-sm lq-mut" style="margin-top:8px">Fixed in this builder: head_dim 128, intermediate_size = 3 × hidden_size, vocabulary 151,936, separate embedding and output head, no biases.</div>
 </div>
 <script>
 (function(){
@@ -480,9 +618,9 @@ var best=valid.indexOf(keep)>=0?keep:valid.filter(function(k){return k<=8}).pop(
 sel.innerHTML=opts;sel.value=String(best);$("lqF-q").textContent=qh+" query heads"}
 function calc(){var L=+$("lqF-L").value,H=+$("lqF-H").value,kv=+$("lqF-K").value,per=11*H*H+256*H*kv,emb=V*H,total=L*per+2*emb;
 return {L:L,H:H,kv:kv,per:per,emb:emb,total:total,att:(2*H*H+256*H*kv)/per}}
-function tower(c){var cx=170,sc=300/8192,w=c.H*sc,ref=4096*sc,yb=526,lh=5,st=stage;
+function tower(c){var cx=170,sc=300/8192,w=c.H*sc,ref=4096*sc,HT=Math.max(c.L,40)*6+86,yb=HT-12,lh=5,st=stage;
 function ok(i){return st<0||st-1>=i}
-var s='<svg viewBox="0 0 340 540" width="100%" style="max-width:340px;display:block;margin:0 auto" role="img" aria-label="Tower of layers: width is hidden size, height is the number of layers">';
+var s='<svg viewBox="0 0 340 '+HT+'" width="100%" style="max-width:340px;display:block;margin:0 auto" role="img" aria-label="Tower of layers: width is hidden size, height is the number of layers">';
 var topRef=yb-18-36*6-20;
 s+='<rect x="'+(cx-ref/2-3)+'" y="'+(topRef-3)+'" width="'+(ref+6)+'" height="'+(yb-topRef+6)+'" rx="6" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-dasharray="4 3"/><text x="'+(cx+ref/2+8)+'" y="'+(topRef+8)+'" font-size="11" fill="currentColor" opacity=".7">Qwen3-8B</text>';
 s+='<rect x="'+(cx-w/2)+'" y="'+(yb-18)+'" width="'+w+'" height="18" rx="3" fill="rgba(128,128,128,.3)" stroke="currentColor" stroke-opacity=".5" opacity="'+((st<0||st>=1)?1:0.2)+'"/><text x="'+cx+'" y="'+(yb-5)+'" text-anchor="middle" font-size="11" fill="currentColor">Embedding</text>';
@@ -494,10 +632,10 @@ return s+'</svg>'}
 function row(l,v){return '<div class="lq-m"><span>'+l+'</span><span>'+v+'</span></div>'}
 function render(){var c=calc(),st=stage;$("lqF-Lv").textContent=c.L;
 var built=st<0?c.total:(st>=1?c.emb:0)+Math.max(0,Math.min(c.L,st-1))*c.per+(st>=c.L+2?c.emb:0);
-var tok=512*c.L*c.kv,bytes=c.total*0.61+6*8000*tok,speed=1/(bytes/(0.6*1935e9)),need=(TARGET-2*c.emb)/c.per;
+var tok=512*c.L*c.kv,need=(TARGET-2*c.emb)/c.per;
 var pct=Math.min(100,100*built/TARGET);
 var m='<div class="lq-card"><div class="lq-m"><span>Parameters built</span><span><b>'+B(built)+'</b></span></div><div class="lq-bar" style="height:12px;margin:4px 0 10px"><div style="width:'+pct+'%;background:#2a78d6"></div></div>'+
-row("Target (Qwen3-8B)","8.19 B")+row("Weights per layer",B(c.per))+row("Total parameters",B(c.total))+row("Size in FP16",GB(c.total*2))+row("Weight FLOPs per token",(2*(c.L*c.per+c.emb)/1e9).toFixed(1)+" GFLOPs")+row("KV cache per token",nf(tok)+" B")+row("KV cache per user at 8,000",GB(tok*8000))+row("A100 decode per user, INT4",c.L>0?"≈ "+Math.round(speed)+" t/s":"-")+row("Layers needed for 8.19 B at this width","≈ "+(need>0?need.toFixed(0):"none, embeddings alone are too big"))+'</div>';
+row("Target (Qwen3-8B)","8.19 B")+row("Weights per layer",B(c.per))+row("Total parameters",B(c.total))+row("Size in bf16",GB(c.total*2))+row("Weight FLOPs per token",(2*(c.L*c.per+c.emb)/1e9).toFixed(1)+" GFLOPs")+row("KV cache per token",nf(tok)+" B")+row("KV cache per user at 8,000",GB(tok*8000))+row("Layers needed for 8.19 B at this width","≈ "+(need>0?need.toFixed(0):"none, embeddings alone are too big"))+'</div>';
 $("lqF-svg").innerHTML=tower(c);$("lqF-m").innerHTML=m}
 function stop(){if(timer){clearInterval(timer);timer=null}}
 function start(){stop();var L=+$("lqF-L").value;stage=0;render();var inc=Math.max(1,Math.ceil(L/50));
@@ -513,74 +651,76 @@ fillK(8);render();
 
 What the builder shows, in short:
 
-- **Width vs depth at the same size.** About 8.19 B parameters can be reached with roughly 22 layers at width 5,120, 36 at 4,096, or about 66 at 3,072 (if the other ratios are kept). Qwen's designers picked one point on this line. I cannot tell you why that point and not another. Models of similar size from other families use different depths, so it is a design trade-off rather than a rule.
-- **Depth costs memory traffic and cache.** Doubling the layers doubles the KV cache per token and, at the same width, roughly doubles the weights that must be streamed for every generated token.
-- **Width costs weights quadratically.** One layer has 11.5 × hidden² weights, so a 25% wider model has about 56% more weights per layer.
-- **Heads are free, KV heads are not.** Changing the number of query heads (which follows the hidden size at head_dim 128) does not change the FLOPs. Changing the number of KV heads changes the cache directly.
+- **Width versus depth at the same size.** About 8.19 B parameters can be reached with roughly 22 layers at width 5,120, 36 at 4,096 or about 66 at 3,072 (if the other ratios are kept). Qwen's designers picked one point on this line.
+- **Depth grows the cache.** Doubling the layers doubles the KV cache per token.
+- **Width costs weights quadratically.** One layer has about 11.5 × hidden² weights, so a 25% wider model has about 56% more weights per layer.
+- **Heads are free, KV heads are not.** Changing the number of query heads (which follows the hidden size at head size 128) does not change the arithmetic. Changing the number of KV heads changes the cache directly.
 
+<a id="reproduce"></a>
 
-<a id="route"></a>
+## 9. Check it yourself
 
-## 8. One token's route through the network, in words
+Everything in this post can be verified on your own machine. The first snippet reads the shape of every tensor from a `safetensors` file without loading a single weight. The format starts with 8 bytes that give the length of a JSON header, and the header lists every tensor with its dtype and shape.
 
-The architecture above becomes a recipe once you follow a single token. The animated version, with real arithmetic in a miniature network and plain-words explanations for every step, is section 4 of post #127. Here is the route in short:
+```python
+import json, struct
 
-1. **Tokenizer**: the text is cut into pieces and every piece becomes an ID (a number from 0 to 151,935).
-2. **Embedding lookup**: the ID selects one row of the embedding table, a vector of 4,096 numbers. This vector now travels through the network. It is called the *residual stream*.
-3. **Repeat 36 times** (one hidden layer each):
-   1. *RMSNorm*: rescale the vector to a standard size.
-   2. *Q, K, V projections*: three matrix × vector products give the query, key and value (32 query heads, 8 key/value heads).
-   3. *RoPE*: rotate the query and key by an angle that depends on the position of the token.
-   4. *KV cache*: store the new key and value for later tokens.
-   5. *Attention*: compare the query with all cached keys, turn the scores into percentages (softmax) and blend the cached values with them.
-   6. *Output projection and residual*: mix the heads with `Wo` and add the result onto the vector.
-   7. *RMSNorm, then the MLP*: widen to 12,288 numbers (gate and up), apply the SiLU switch, narrow back to 4,096 (down) and add the result onto the vector again.
-4. **Final RMSNorm and LM head**: one score for each of the 151,936 dictionary entries.
-5. **Softmax and sampling**: scores become probabilities, one token is chosen and appended. The loop restarts at step 2 with only that token. Everything older is read from the KV cache.
+def read_header(path):
+    with open(path, "rb") as f:
+        n = struct.unpack("<Q", f.read(8))[0]       # length of the JSON header
+        return json.loads(f.read(n))
 
-<a id="glossary"></a>
+h = read_header("model-00005-of-00005.safetensors")
+for name, t in h.items():
+    if name != "__metadata__":
+        print(name, t["dtype"], t["shape"])         # lm_head.weight BF16 [151936, 4096]
+```
 
-## 9. Glossary
+The second snippet loads the model and counts the tensors and parameters. (Newer versions of `transformers` call the argument `dtype` instead of `torch_dtype`.)
 
-| Term | Meaning in one line |
-|---|---|
-| Token / ID | A piece of text and its number in the dictionary (151,936 entries) |
-| Embedding | The learned list of 4,096 numbers that stands for one token |
-| Hidden layer, `num_hidden_layers` | One transformer block (attention + MLP). The 36 blocks between input and output are called hidden because nobody reads their vectors directly |
-| `hidden_size` | The width of the vector that travels through all layers (4,096 numbers) |
-| Residual stream | That vector. Every block adds a correction to it and never replaces it |
-| Weights / parameters | The learned numbers inside the matrices (8.19 billion in total) |
-| RMSNorm | Rescales a vector so that the typical size of its numbers is 1, then applies a learned scale |
-| Query, key, value | What a token is looking for, how it is labelled, and what it hands over |
-| Attention head | One independent group of query/key/value numbers (128 each) with its own scores and softmax |
-| `head_dim` | The size of one head: 128 |
-| MHA, MQA, GQA | Multi-head attention (every query head has its own key/value head), multi-query attention (one shared key/value head), grouped-query attention (groups of query heads share one; 4 per group here) |
-| KV cache | Stored keys and values of all earlier tokens, so they are not recomputed |
-| RoPE | Rotates pairs of numbers in the query and key by an angle that depends on the position |
-| Softmax | Turns any list of scores into percentages that add up to 100% |
-| MLP / feed-forward | The per-token block with the widest vectors; holds 78% of the weights of a layer |
-| SiLU / SwiGLU | A smooth switch, and the gated MLP design that uses it |
-| Logit | The raw score of one dictionary entry before softmax |
+```python
+from transformers import AutoModelForCausalLM
+
+m = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-8B", torch_dtype="auto")
+params = list(m.named_parameters())
+print(len(params), sum(p.numel() for _, p in params))      # 399  8190735360
+
+layer = m.model.layers[0]
+print(layer.self_attn.q_proj.weight.shape)                  # torch.Size([4096, 4096])
+print(layer.self_attn.k_proj.weight.shape)                  # torch.Size([1024, 4096])
+print(layer.mlp.down_proj.weight.shape)                     # torch.Size([4096, 12288])
+
+W = layer.self_attn.q_proj.weight
+head_13 = W[13 * 128 : 14 * 128]                            # the 128 rows of query head 13: [128, 4096]
+```
 
 <a id="sources"></a>
 
 ## 10. Limits of this post and sources
 
-**What is exact:** every shape, weight count, FLOP count and KV-cache size is derived from the real `config.json` and checked against the 8.19 billion parameters of the model.
+**What I checked against the repository (2026-10-20):**
 
-**What is not verified:**
+- The values of `config.json`.
+- The names of all 399 tensors and their grouping into five files, from `model.safetensors.index.json`.
+- The total size of 16,381,470,720 bytes from the same index. It equals 8,190,735,360 parameters × 2 bytes, which is exactly the sum of the shapes used in this post. The five computed file sizes (4.00, 3.99, 3.96, 3.19 and 1.24 GB) agree with the file listing.
 
-- *Why* the designers chose 36 layers, 8 key/value heads or a 3× wider MLP. I explain the trade-offs, but I cannot know their reasoning.
-- What the heads and layers of Qwen3-8B specifically do. Statements such as "early layers tend to capture local patterns" or "some heads follow the previous word" come from research on transformer models in general.
-- The decode speeds in the map and in the builder are estimates for memory effects only: 60% of peak A100 bandwidth, INT4 weights of about 5 GB (0.61 bytes per parameter), 6 users with 8,000 tokens each. Quality is not computed.
+**What follows from the config but I did not read directly:**
+
+- The shape of each individual tensor. I did not open the file headers. Because the sum of all shapes reproduces the total byte count exactly, a wrong shape would have to be compensated by another wrong shape, which is unlikely. The snippets in section 9 settle it in a minute.
+- The order and the details of the operations (norm of query and key before RoPE, the pairing of number `i` with `i + 64`, query head `h` reading key/value head `⌊h / 4⌋`). They follow the Hugging Face `transformers` implementation of Qwen3 as I know it. Other inference engines may store weights in a permuted layout, but they compute the same function.
+- The vocabulary has 151,936 rows in the embedding table. As far as I know the tokenizer itself defines somewhat fewer tokens and the table is padded up to a multiple of 128.
+
+**What is an estimate:** the FLOPs of the element-wise operations (norms, RoPE, softmax, SiLU) are rough counts, marked with `≈`. The matrix products are exact.
+
+**What is not known:** *why* the designers chose 36 layers, 8 key/value heads or a 3× wider MLP, and what the individual heads and layers of this model do. Statements about this come from research on transformer models in general.
 
 **Sources**
 
-- Qwen3-8B `config.json`: [huggingface.co/Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)
-- Grouped-query attention: Ainslie et al., [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245) (EMNLP 2023). It reports quality close to multi-head attention at a speed comparable to multi-query attention.
+- Model configuration: [Qwen3-8B `config.json`](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)
+- Weight index: [`model.safetensors.index.json`](https://huggingface.co/Qwen/Qwen3-8B/blob/main/model.safetensors.index.json) and the [file listing](https://huggingface.co/Qwen/Qwen3-8B/tree/main) of the repository
+- The file format: [safetensors](https://github.com/huggingface/safetensors)
+- Grouped-query attention: Ainslie et al., [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245) (EMNLP 2023)
 - The transformer: Vaswani et al., [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - Rotary position embedding: Su et al., [RoFormer](https://arxiv.org/abs/2104.09864)
 - RMSNorm: Zhang and Sennrich, [Root Mean Square Layer Normalization](https://arxiv.org/abs/1910.07467)
 - SwiGLU: Shazeer, [GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202)
-
-*Next: the same network on a GPU, and what happens when we serve it to ten users at once (post #127).*
