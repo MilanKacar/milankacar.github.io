@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "#127 CUDA Indexing Explained: Threads, Blocks and Grids You Can Play With 🧩"
+title: "#128 CUDA Indexing Explained: Threads, Blocks and Grids You Can Play With 🧩"
 categories: [AI, Software Engineering, GPU]
 tags: [CUDA, GPU, Parallel Programming, Visualization, Algorithms]
 difficulty: Medium
