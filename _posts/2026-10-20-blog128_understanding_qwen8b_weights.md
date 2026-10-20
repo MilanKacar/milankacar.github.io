@@ -6,6 +6,8 @@ tags: [LLM, Qwen3, GPU, CUDA, vLLM, Quantization, Visualization]
 difficulty: Medium
 ---
 
+I wrote this while moving a JSON-extraction service (a quantized 8B model on a single T4, around ten concurrent users) to a bigger GPU on Azure. The question "which GPU, and how fast will it be?" turned out to be answerable with arithmetic you can do on paper. The numbers in the widgets all come from the model's config, so you can check every one of them.
+
 <style>
 .lq{--lq-line:rgba(128,128,128,.4);--lq-soft:rgba(128,128,128,.12);--lq-acc:#2a78d6;--lq-grn:#1baf7a;--lq-org:#eb6834;--lq-vio:#8a7bea;border:1px solid var(--lq-line);border-radius:12px;padding:16px;margin:24px 0;font-size:15px;line-height:1.5;color:inherit;background:transparent;overflow-x:auto}
 .lq *{box-sizing:border-box}
@@ -52,9 +54,6 @@ difficulty: Medium
 
 > **TL;DR**: A GPU does not run "a model". It runs thousands of tiny threads that each compute a few multiplications and additions. In this post we follow one token through **Qwen3-8B**, starting at its real `config.json`, count every weight, FLOP and byte, find out why generating text is *memory-bound*, compare an NVIDIA T4 with an A100, and finally see how **CUDA indexing** (`threadIdx`, `blockIdx`, `blockDim`, grids) maps the matrix-vector products onto the hardware. Everything has a widget you can play with.
 
-I wrote this while moving a JSON-extraction service (a quantized 8B model on a single T4, around ten concurrent users) to a bigger GPU on Azure. The question "which GPU, and how fast will it be?" turned out to be answerable with arithmetic you can do on paper. The numbers in the widgets all come from the model's config, so you can check every one of them.
-
-**All interactive widgets work in the light and the dark theme**: they inherit your text color and use transparent backgrounds.
 
 ## Contents
 
